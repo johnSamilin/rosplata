@@ -29,10 +29,11 @@ export class BudgetListItem extends Component {
         return content
     }
     
-    update(target) {        
+    update(target) {
         const container = target ?? this.getContainer()
         container.querySelector('.budget-title').textContent = this.data.title
-        container.querySelector('.budget-list-item')?.setAttribute('id', this.containerId)        
+        container.querySelector('.budget-list-item')?.setAttribute('id', this.containerId)
+        container.querySelector('.budget-list-item')?.setAttribute('data-id', this.id)
     }
 
 }

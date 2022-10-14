@@ -1,9 +1,12 @@
 // @ts-check
 import { Component } from '../../utils/Component.mjs'
 import { debounce, getListDataDiff } from '../../utils/listDataHelpers.mjs'
+import { BudgetDetails } from '../BudgetDetails/BudgetDetails.mjs'
 
 let instance
 const template = document.querySelector('template#budget-list-template')
+
+const detailsController = new BudgetDetails()
 
 export class Menu extends Component {
     #data = []
@@ -19,14 +22,19 @@ export class Menu extends Component {
     }
 
     #handleItemClick = (event) => {
-        const clickedItemId = event.target.closest('.budget-list-item')?.id
-        const clickedItem = this.#children.find(item => item.containerId === clickedItemId)
+        const clickedItemId = parseInt(event.target.closest('.budget-list-item')?.dataset.id, 10)
+        const clickedItem = this.#data.find(item => item.id === clickedItemId)
         if (!clickedItem) {
             return
         }
-        // clickedItem?.exterminate()
-        clickedItem.data.title = 'test'
-        clickedItem.update()
+        detailsController.data = {
+            id: clickedItem.id,
+            title: clickedItem.title,
+            brand: clickedItem.brand
+        }
+        detailsController.update()
+        detailsController.show()
+        detailsController.sync()
     }
 
     #handleItemRightClick = (event) => {
@@ -96,10 +104,12 @@ export class Menu extends Component {
     //@ts-ignore
     listeners = new Set([
         {
+            selector: '#budget-list-items',
             event: 'click',
             handler: this.#handleItemClick,
         },
         {
+            selector: '#budget-list-items',
             event: 'contextmenu',
             handler: this.#handleItemRightClick,
         },

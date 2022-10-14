@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modules test</title>
     <link rel="stylesheet" async href="./styles/App.css" />
-    <link rel="stylesheet" async href="./src/components/Menu/Menu.css" />
+    <link rel="stylesheet" async href="./src/containers/BudgetDetails/BudgetDetails.css" />
+    <link rel="stylesheet" async href="./src/containers/Menu/Menu.css" />
 
     <script src="./src/App.mjs" type="module"></script>
-    <script src="./src/components/Menu/Menu.mjs" type="module"></script>
+    <script src="./src/containers/Menu/Menu.mjs" type="module"></script>
     <script src="./src/utils/Component.mjs" type="module"></script>
-    
+
     <template id="budget-list-item-template">
         <li class="budget-list-item">
             <div>Название:</div><span class="budget-title"></span>
@@ -22,9 +24,23 @@
         <input type="text" name="filter" id="budget-list-filter-input" />
         <nav id="budget-list-items"></nav>
     </template>
+
+    <template id="budget-details-template">
+        <h1 id="budget-details-title"></h1>
+        <h2 id="budget-details-brand"></h2>
+        <strong>category: <span id="budget-details-category"></span></strong>
+        <div>thumbnail: <img id="budget-details-thumbnail" /></div>
+        <blockquote>description: <span id="budget-details-description"></span></blockquote>
+        <div>discountPercentage: <span id="budget-details-discount"></span></div>
+        <div>price: <span id="budget-details-price"></span></div>
+        <div>rating: <span id="budget-details-rating"></span></div>
+        <div>stock: <span id="budget-details-stock"></span></div>
+    </template>
 </head>
+
 <body>
     <aside id="budgets-list"></aside>
-    <section id="budget-details"></section>
+    <section id="budget-details" class="exit hidden"></section>
 </body>
+
 </html>

@@ -76,4 +76,22 @@ export class Component {
         await this.hide()
         this.getContainer()?.remove()        
     }
+
+    setAttr(container, selector, attribute, value, hideIfEmpty = false) {
+        if (value) {
+            switch (attribute) {
+                case 'textContent':
+                    container.querySelector(selector).textContent = value
+                    break;
+                default:
+                    container.querySelector(selector).setAttribute(attribute, value)
+            }
+            container.querySelector(selector).classList.remove('hidden')
+            return true            
+        }
+
+        if (hideIfEmpty) {
+            container.querySelector(selector).classList.add('hidden')
+        }
+    }
 }

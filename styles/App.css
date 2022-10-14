@@ -8,13 +8,38 @@ body, html {
 }
 body {
     display: flex;
+    justify-content: space-between;
 }
 * {
     box-sizing: border-box;
 }
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .loading::before {
-    content: 'Loading...';
+    content: '';
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    border-left: 5px solid burlywood;
+    border-bottom: 5px solid burlywood;
+    border-bottom-left-radius: 85%;
+    animation: rotate 1s linear 0s infinite;
+    transform-origin: right top;
+}
+
+.hidden {
+    visibility: hidden;
 }
