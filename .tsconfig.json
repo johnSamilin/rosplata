@@ -1,0 +1,14 @@
+{
+    "include": [
+      "src/**/*"
+    ],
+    "compilerOptions": {
+      "module": "esnext",
+      "esModuleInterop": true,
+      "target": "esnext",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "dist"
+    },
+    "lib": ["es2015"]
+  }

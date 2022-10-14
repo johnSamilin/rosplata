@@ -1,0 +1,5 @@
+{
+    "name": "my-package",
+    "type": "module",
+    "main": "./commonjs/index.cjs"
+}

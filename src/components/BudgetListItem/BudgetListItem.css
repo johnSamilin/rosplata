@@ -1,0 +1,20 @@
+.budget-list-item {
+    margin: 0 0.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid lightblue;
+    will-change: transform, height;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+    transform: unset;
+}
+
+.budget-list-item.exit {
+    transform: translateX(-125%);
+}
+
+.budget-list-item.hidden {
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    border-bottom: none;
+}
