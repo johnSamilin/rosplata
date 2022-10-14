@@ -3,3 +3,5 @@ This is an experiment on whether you can create relatively big functional web ap
 
 ## Demo
 Currently demo can be found [here](http://85.193.85.133/)
+
+[Drop me a line](mailto:a_salt@lenta.ru) if you have anything in mind!
