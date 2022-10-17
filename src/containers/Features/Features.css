@@ -1,0 +1,18 @@
+.feature-detector-feature-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.feature-detector-feature-value {
+    display: inline-block;
+}
+.feature-detector-feature-value::before {
+    display: inline;
+}
+.feature-detector-feature-value.yes::before {
+    content: 'yes';
+    color: cadetblue;
+}
+.feature-detector-feature-value.no::before {
+    content: 'no';
+    color: brown
+}

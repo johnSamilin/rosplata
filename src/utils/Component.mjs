@@ -78,20 +78,21 @@ export class Component {
     }
 
     setAttr(container, selector, attribute, value, hideIfEmpty = false) {
+        const node = container.querySelector(selector)
         if (value) {
             switch (attribute) {
                 case 'textContent':
-                    container.querySelector(selector).textContent = value
+                    node.textContent = value
                     break;
                 default:
-                    container.querySelector(selector).setAttribute(attribute, value)
+                    node.setAttribute(attribute, value)
             }
-            container.querySelector(selector).classList.remove('hidden')
+            node.classList.remove('hidden')
             return true            
         }
 
         if (hideIfEmpty) {
-            container.querySelector(selector).classList.add('hidden')
+            node.classList.add('hidden')
         }
     }
 }

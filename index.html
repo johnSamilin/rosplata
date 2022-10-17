@@ -36,11 +36,24 @@
         <div>rating: <span id="budget-details-rating"></span></div>
         <div>stock: <span id="budget-details-stock"></span></div>
     </template>
+
+    <template id="feature-detector-template">
+        <h3>Features</h3>
+        <p>That need to be supported for this app's work</p>
+    </template>
+
+    <template id="feature-detector-feature-template">
+        <div class="feature-detector-feature-wrapper">
+            <strong class="feature-detector-feature-name"></strong>
+            <span class="feature-detector-feature-value"></span>
+        </div>
+    </template>
 </head>
 
 <body>
     <aside id="budgets-list"></aside>
-    <section id="budget-details" class="exit hidden"></section>
+    <!-- <section id="budget-details" class="exit hidden"></section> -->
+    <section id="features"></section>
 </body>
 
 </html>
