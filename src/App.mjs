@@ -1,6 +1,8 @@
 // @ts-check
-// import AppStyle from "../styles/App.css" assert { type: 'css' }
-import { Features } from './containers/Features/Features.mjs'
+import { BudgetList } from './containers/BudgetList/BudgetList.mjs'
+import { BudgetDetails } from './containers/BudgetDetails/BudgetDetails.mjs'
 
-const featuresController = new Features()
-document.querySelector('#features')?.appendChild(featuresController.render())
+const budgetListController = new BudgetList()
+document.querySelector('#budget-list')?.appendChild(await budgetListController.render())
+const budgetDetailsController = new BudgetDetails()
+document.querySelector('#budget-details')?.appendChild(budgetDetailsController.render())

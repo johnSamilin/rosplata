@@ -78,7 +78,7 @@ export class Component {
     }
 
     setAttr(container, selector, attribute, value, hideIfEmpty = false) {
-        const node = container.querySelector(selector)
+        const node = selector ? container.querySelector(selector) : container
         if (value) {
             switch (attribute) {
                 case 'textContent':

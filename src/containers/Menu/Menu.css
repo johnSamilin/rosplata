@@ -1,9 +1,0 @@
-#budgets-list {
-    padding: 1rem;
-    flex-basis: 25%;
-    max-width: 300px;
-    min-width: 100px;
-    overflow: auto;
-    max-height: 100%;
-    flex-shrink: 0;
-}

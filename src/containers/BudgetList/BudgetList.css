@@ -1,0 +1,42 @@
+#budgets-list {
+    padding: 1rem;
+    flex-basis: 25%;
+    max-width: 300px;
+    min-width: 100px;
+    overflow: auto;
+    max-height: 100%;
+    flex-shrink: 0;
+}
+.budget-list__actions {
+    display: flex;
+    padding: 0.5rem;
+}
+#budget-list__menu-button {
+    background: none;
+    width: 1.5rem;
+    height: 1rem;
+    border: none;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+    margin: 0.25rem;
+    outline: none;
+    position: relative;
+}
+#budget-list__menu-button::after {
+    display: block;
+    content: '';
+    height: 3px;
+    width: 1.5rem;
+    position: relative;
+    left: -0.4rem;
+    background: black;
+}
+#budget-list__menu-button.loading {
+    opacity: 0.5;
+}
+#budget-list__menu-button.loading::before {
+    position: absolute;
+    left: -0.25rem;    
+    width: 0.75rem;
+    height: 0.75rem;
+}

@@ -8,21 +8,24 @@
     <title>Modules test</title>
     <link rel="stylesheet" async href="./styles/App.css" />
     <link rel="stylesheet" async href="./src/containers/BudgetDetails/BudgetDetails.css" />
-    <link rel="stylesheet" async href="./src/containers/Menu/Menu.css" />
+    <link rel="stylesheet" async href="./src/containers/BudgetList/BudgetList.css" />
 
     <script src="./src/App.mjs" type="module"></script>
-    <script src="./src/containers/Menu/Menu.mjs" type="module"></script>
+    <script src="./src/containers/BudgetList/BudgetList.mjs" type="module"></script>
     <script src="./src/utils/Component.mjs" type="module"></script>
+
+    <template id="budget-list-template">
+        <div class="budget-list__actions">
+            <input type="text" name="filter" id="budget-list-filter-input" />
+            <button id="budget-list__menu-button"></button>
+        </div>
+        <nav id="budget-list-items"></nav>
+    </template>
 
     <template id="budget-list-item-template">
         <li class="budget-list-item">
             <div>Название:</div><span class="budget-title"></span>
         </li>
-    </template>
-
-    <template id="budget-list-template">
-        <input type="text" name="filter" id="budget-list-filter-input" />
-        <nav id="budget-list-items"></nav>
     </template>
 
     <template id="budget-details-template">
@@ -37,23 +40,24 @@
         <div>stock: <span id="budget-details-stock"></span></div>
     </template>
 
-    <template id="feature-detector-template">
-        <h3>Features</h3>
-        <p>That need to be supported for this app's work</p>
+    <template id="feature-detector__template">
+        <header>Features</header>
+        <p>That need to be supported for this app to work</p>
     </template>
 
-    <template id="feature-detector-feature-template">
-        <div class="feature-detector-feature-wrapper">
-            <strong class="feature-detector-feature-name"></strong>
-            <span class="feature-detector-feature-value"></span>
+    <template id="feature-detector__feature-template">
+        <div class="feature-detector__feature-wrapper">
+            <strong class="feature-detector__feature-name"></strong>
+            <span class="feature-detector__feature-value"></span>
         </div>
     </template>
 </head>
 
 <body>
-    <aside id="budgets-list"></aside>
-    <!-- <section id="budget-details" class="exit hidden"></section> -->
+    <aside id="budget-list"></aside>
+    <section id="budget-details" class="exit hidden"></section>
     <section id="features"></section>
+    <dialog id="modal-window"></dialog>
 </body>
 
 </html>

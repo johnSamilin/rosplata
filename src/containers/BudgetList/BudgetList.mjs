@@ -8,9 +8,10 @@ const template = document.querySelector('template#budget-list-template')
 
 const detailsController = new BudgetDetails()
 
-export class Menu extends Component {
+export class BudgetList extends Component {
     #data = []
     #children = []
+    containerId = 'budget-list'
 
     constructor() {
         super()
@@ -18,7 +19,6 @@ export class Menu extends Component {
             return instance
         }
         instance = this
-        this.containerId = 'budgets-list'
     }
 
     #handleItemClick = (event) => {
@@ -42,6 +42,18 @@ export class Menu extends Component {
         const clickedItemId = event.target.closest('.budget-list-item')?.id
         const clickedItem = this.#children.find(item => item.containerId === clickedItemId)
         clickedItem?.exterminate()
+    }
+
+    #handleMenuBtnClick = async (event) => {
+        event.preventDefault()
+        event.target.classList.add('loading')
+        const { Dialog } = await import('../Dialog/Dialog.mjs')
+        const { Features } = await import('../Features/Features.mjs')
+        const featuresController = new Features()
+        Dialog.render(featuresController.render())
+        Dialog.show()
+        Dialog.getContainer()?.classList.add('feature-detector')
+        event.target.classList.remove('loading')
     }
 
     #handleFilterChange = debounce((event) => {
@@ -95,13 +107,12 @@ export class Menu extends Component {
     }
 
     update(target) {
-        const container = target ?? this.getContainer()
+        const container = target ?? this.getContainer()?.querySelector('#budget-list-items')
         this.#children.map(item => {
-            container.querySelector('#budget-list-items').appendChild(item.render())
+            container.appendChild(item.render())
         })
     }
 
-    //@ts-ignore
     listeners = new Set([
         {
             selector: '#budget-list-items',
@@ -117,6 +128,11 @@ export class Menu extends Component {
             selector: 'input#budget-list-filter-input',
             event: 'keyup',
             handler: this.#handleFilterChange,
+        },
+        {
+            selector: 'button#budget-list__menu-button',
+            event: 'click',
+            handler: this.#handleMenuBtnClick,
         }
     ])
 }

@@ -23,8 +23,8 @@ class CFeatureDetector {
 
     [Symbol.iterator] = function *() {
         yield *[
-            ['transitionApi', this.#transitionApi],
-            ['importMaps', this.#importMaps],
+            ['Transition Api', this.#transitionApi],
+            ['Import Maps', this.#importMaps],
         ];
     }
 }
