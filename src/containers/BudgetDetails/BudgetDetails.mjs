@@ -1,5 +1,6 @@
 //@ts-check
 
+import { FeatureDetector } from "../../helpers/FeatureDetector.mjs";
 import { Component } from "../../utils/Component.mjs";
 
 const template = document.querySelector('template#budget-details-template')
@@ -41,6 +42,7 @@ export class BudgetDetails extends Component {
         this.setAttr(container, '#budget-details-price', 'textContent', this.data?.price ?? 'loading...')
         this.setAttr(container, '#budget-details-rating', 'textContent', this.data?.rating ?? 'loading...')
         this.setAttr(container, '#budget-details-stock', 'textContent', this.data?.stock ?? 'loading...')
-        this.setAttr(container, '#budget-details-thumbnail', 'src', this.data?.thumbnail, true)
+        const isBandwidthHigh = ['3g', '4g'].includes(FeatureDetector.connectionSpeed)
+        this.setAttr(container, '#budget-details-thumbnail', 'src', isBandwidthHigh && this.data?.thumbnail, true)
     }
 }
