@@ -3,6 +3,7 @@
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
+#budget-details.exit,
 #budget-details.hidden {
     transform: translateY(1rem);
     opacity: 0;

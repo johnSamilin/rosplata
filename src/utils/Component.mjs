@@ -73,6 +73,7 @@ export class Component {
     }
 
     async exterminate() {
+        this.stopListeners()
         await this.hide()
         this.getContainer()?.remove()        
     }

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modules test</title>
+    <link rel="stylesheet" async href="https://unpkg.com/open-props@1.4.16/open-props.min.css" />
     <link rel="stylesheet" async href="./styles/App.css" />
     <link rel="stylesheet" async href="./src/containers/BudgetDetails/BudgetDetails.css" />
     <link rel="stylesheet" async href="./src/containers/BudgetList/BudgetList.css" />
@@ -14,6 +15,13 @@
     <script src="./src/App.mjs" type="module"></script>
     <script src="./src/containers/BudgetList/BudgetList.mjs" type="module"></script>
     <script src="./src/utils/Component.mjs" type="module"></script>
+
+    <template id="layout-main-template">
+        <div id="layout-main">
+            <aside id="budget-list"></aside>
+            <section id="budget-details" class="exit hidden"></section>
+        </div>
+    </template>
 
     <template id="budget-list-template">
         <div class="budget-list__actions">
@@ -55,10 +63,8 @@
 </head>
 
 <body>
-    <aside id="budget-list"></aside>
-    <section id="budget-details" class="exit hidden"></section>
-    <section id="features"></section>
     <dialog id="modal-window"></dialog>
+    <div id="layout"></div>
 </body>
 
 </html>

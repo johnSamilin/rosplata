@@ -1,0 +1,11 @@
+#layout-main {
+    display: flex;
+    justify-content: space-between;
+    opacity: 1;
+    will-change: opacity;
+    transition: opacity 0.1s ease;
+}
+
+#layout-main.exit {
+    opacity: 0;
+}
