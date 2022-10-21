@@ -9,6 +9,10 @@
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
+#budget-list__items {    
+    display: flex;
+    flex-direction: column;
+}
 #budget-list.exit,
 #budget-list.hidden {
     transform: translateX(-1rem);

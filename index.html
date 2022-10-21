@@ -12,6 +12,7 @@
     <link rel="stylesheet" async href="./src/containers/BudgetList/BudgetList.css" />
 
     <script src="./src/helpers/FeatureDetector.mjs" type="module" async></script>
+    <script src="./src/utils/Store.mjs" type="module" async></script>
     <script src="./src/App.mjs" type="module"></script>
     <script src="./src/containers/BudgetList/BudgetList.mjs" type="module"></script>
     <script src="./src/utils/Component.mjs" type="module"></script>
@@ -28,7 +29,7 @@
             <input type="text" name="filter" id="budget-list-filter-input" />
             <button id="budget-list__menu-button"></button>
         </div>
-        <nav id="budget-list-items"></nav>
+        <nav id="budget-list__items"></nav>
     </template>
 
     <template id="budget-list-item-template">
@@ -38,15 +39,16 @@
     </template>
 
     <template id="budget-details-template">
-        <h1 id="budget-details-title"></h1>
-        <h2 id="budget-details-brand"></h2>
-        <strong>category: <span id="budget-details-category"></span></strong>
-        <div>thumbnail: <img id="budget-details-thumbnail" /></div>
-        <blockquote>description: <span id="budget-details-description"></span></blockquote>
-        <div>discountPercentage: <span id="budget-details-discount"></span></div>
-        <div>price: <span id="budget-details-price"></span></div>
-        <div>rating: <span id="budget-details-rating"></span></div>
-        <div>stock: <span id="budget-details-stock"></span></div>
+        <h1 id="budget-details__title"></h1>
+        <h2 id="budget-details__brand"></h2>
+        <strong>category: <span id="budget-details__category"></span></strong>
+        <div>thumbnail: <img id="budget-details__thumbnail" /></div>
+        <blockquote>description: <span id="budget-details__description"></span></blockquote>
+        <div>discountPercentage: <span id="budget-details__discount"></span></div>
+        <div>price: <span id="budget-details__price"></span></div>
+        <div>rating: <span id="budget-details__rating"></span></div>
+        <div>stock: <span id="budget-details__stock"></span></div>
+        <button id="budget-details__delete">Delete this</button>
     </template>
 
     <template id="feature-detector__template">

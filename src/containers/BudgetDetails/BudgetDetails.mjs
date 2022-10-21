@@ -2,6 +2,7 @@
 
 import { FeatureDetector } from "../../helpers/FeatureDetector.mjs";
 import { Component } from "../../utils/Component.mjs";
+import { Store } from "../../utils/Store.mjs";
 
 const template = document.querySelector('template#budget-details-template')
 let instance
@@ -9,6 +10,7 @@ let instance
 export class BudgetDetails extends Component {
     containerId = 'budget-details'
     data = {}
+    abort = new AbortController()
 
     constructor(data) {
         super()
@@ -17,12 +19,39 @@ export class BudgetDetails extends Component {
         }
         this.data = data
         instance = this
+        Store.subscribe('selectedBudgetId', this.sync)
     }
 
-    async sync() {
-        const data = await (await fetch(`https://dummyjson.com/products/${this.data.id}`)).json()
+    sync = async (id) => {
+        this.abort.abort()
+        if (id === -1) {
+            this.hide()
+            return
+        }
+        this.abort = new AbortController()
+        const budget = Store.get('budgets')?.find(budget => budget.id === id)
+        this.data = budget
+        this.update()
+        this.show()
+        const data = await (await fetch(`https://dummyjson.com/products/${id}`, { signal: this.abort.signal })).json()
         this.data = data
         this.update()
+    }
+
+    async show() {
+        this.attachListeners()
+        super.show()
+    }
+
+    async hide() {
+        this.stopListeners()
+        super.hide()
+    }
+
+    delete = () => {
+        Store.set('selectedBudgetId', -1)
+        const budgets = Store.get('budgets')
+        Store.set('budgets', budgets?.filter(budget => budget.id !== this.data.id))
     }
 
     render() {
@@ -34,15 +63,23 @@ export class BudgetDetails extends Component {
 
     update(target) {
         const container = target ?? this.getContainer()
-        this.setAttr(container, '#budget-details-title', 'textContent', this.data?.title)
-        this.setAttr(container, '#budget-details-brand', 'textContent', this.data?.brand)
-        this.setAttr(container, '#budget-details-category', 'textContent', this.data?.category ?? 'loading...')
-        this.setAttr(container, '#budget-details-description', 'textContent', this.data?.description ?? 'loading...')
-        this.setAttr(container, '#budget-details-discount', 'textContent', this.data?.discountPercentage ?? 'loading...')
-        this.setAttr(container, '#budget-details-price', 'textContent', this.data?.price ?? 'loading...')
-        this.setAttr(container, '#budget-details-rating', 'textContent', this.data?.rating ?? 'loading...')
-        this.setAttr(container, '#budget-details-stock', 'textContent', this.data?.stock ?? 'loading...')
+        this.setAttr(container, '#budget-details__title', 'textContent', this.data?.title)
+        this.setAttr(container, '#budget-details__brand', 'textContent', this.data?.brand)
+        this.setAttr(container, '#budget-details__category', 'textContent', this.data?.category ?? 'loading...')
+        this.setAttr(container, '#budget-details__description', 'textContent', this.data?.description ?? 'loading...')
+        this.setAttr(container, '#budget-details__discount', 'textContent', this.data?.discountPercentage ?? 'loading...')
+        this.setAttr(container, '#budget-details__price', 'textContent', this.data?.price ?? 'loading...')
+        this.setAttr(container, '#budget-details__rating', 'textContent', this.data?.rating ?? 'loading...')
+        this.setAttr(container, '#budget-details__stock', 'textContent', this.data?.stock ?? 'loading...')
         const isBandwidthHigh = ['3g', '4g'].includes(FeatureDetector.connectionSpeed)
-        this.setAttr(container, '#budget-details-thumbnail', 'src', isBandwidthHigh && this.data?.thumbnail, true)
+        this.setAttr(container, '#budget-details__thumbnail', 'src', isBandwidthHigh && this.data?.thumbnail, true)
     }
+
+    listeners = new Set([
+        {
+            selector: 'button#budget-details__delete',
+            event: 'click',
+            handler: this.delete,
+        },
+    ])
 }

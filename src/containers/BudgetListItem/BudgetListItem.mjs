@@ -2,6 +2,7 @@
 // @ts-ignore
 import BudgetListItemStyles from './BudgetListItem.css' assert { type: 'css' }
 import { Component } from '../../utils/Component.mjs'
+import { Store } from '../../utils/Store.mjs'
 
 document.adoptedStyleSheets.push(BudgetListItemStyles)
 
@@ -16,6 +17,7 @@ export class BudgetListItem extends Component {
         this.data = data
         this.containerId = `budget-${this.data.id}`
         this.id = data.id
+        Store.subscribe('selectedBudgetId', this.updateSelectedState)
     }
 
     render() {
@@ -25,15 +27,28 @@ export class BudgetListItem extends Component {
         }
         // @ts-ignore
         const content = template.content.cloneNode(true)
-        this.update(content)
+        this.update(content.querySelector('.budget-list-item'))
         return content
     }
     
-    update(target) {
+    update = (target) => {
         const container = target ?? this.getContainer()
         container.querySelector('.budget-title').textContent = this.data.title
-        container.querySelector('.budget-list-item')?.setAttribute('id', this.containerId)
-        container.querySelector('.budget-list-item')?.setAttribute('data-id', this.id)
+        container?.setAttribute('id', this.containerId)
+        container?.setAttribute('data-id', this.id)
+    }
+
+    updateSelectedState = (selectedBudgetId) => {
+        if (this.id === selectedBudgetId) {
+            this.getContainer()?.classList.add('budget-list-item--selected')
+        } else {
+            this.getContainer()?.classList.remove('budget-list-item--selected')
+        }
+    }
+
+    exterminate = async () =>  {
+        Store.unsubscribe('selectedBudgetId', this.updateSelectedState)
+        await super.exterminate()
     }
 
 }

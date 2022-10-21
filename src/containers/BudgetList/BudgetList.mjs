@@ -1,16 +1,13 @@
 // @ts-check
 import { Component } from '../../utils/Component.mjs'
 import { debounce, getListDataDiff } from '../../utils/listDataHelpers.mjs'
-import { BudgetDetails } from '../BudgetDetails/BudgetDetails.mjs'
+import { Store } from '../../utils/Store.mjs'
 
 let instance
 const template = document.querySelector('template#budget-list-template')
 
-const detailsController = new BudgetDetails()
-
 export class BudgetList extends Component {
-    #data = []
-    #children = []
+    #children = new Map()
     containerId = 'budget-list'
 
     constructor() {
@@ -19,29 +16,24 @@ export class BudgetList extends Component {
             return instance
         }
         instance = this
+        Store.subscribe('budgets', this.updateList)
     }
 
     #handleItemClick = (event) => {
         const clickedItemId = parseInt(event.target.closest('.budget-list-item')?.dataset.id, 10)
-        const clickedItem = this.#data.find(item => item.id === clickedItemId)
+        const clickedItem = this.#children.get(clickedItemId)
         if (!clickedItem) {
             return
         }
-        detailsController.data = {
-            id: clickedItem.id,
-            title: clickedItem.title,
-            brand: clickedItem.brand
-        }
-        detailsController.update()
-        detailsController.show()
-        detailsController.sync()
+        Store.set('selectedBudgetId', clickedItemId)
     }
 
     #handleItemRightClick = (event) => {
         event.preventDefault()
         const clickedItemId = event.target.closest('.budget-list-item')?.id
-        const clickedItem = this.#children.find(item => item.containerId === clickedItemId)
+        const clickedItem = this.#children.get(clickedItemId)
         clickedItem?.exterminate()
+        this.#children.delete(clickedItemId)
     }
 
     #handleMenuBtnClick = async (event) => {
@@ -58,9 +50,9 @@ export class BudgetList extends Component {
 
     #handleFilterChange = debounce((event) => {
         const search = event.target.value.trim()
-        const { enter, exit, update } = getListDataDiff(
+        const { exit, update } = getListDataDiff(
             this.#children,
-            this.#data.filter(({ title }) => title.includes(search))
+            [...this.#children.values()].filter(({ data }) => data.title.includes(search))
         )
         
         for (const [, child] of exit) {
@@ -90,37 +82,53 @@ export class BudgetList extends Component {
         this.getContainer()?.classList.add('loading')
 
         Promise.all(asyncOps).then(
-            async ([products, { BudgetListItem }]) => {
+            async ([products]) => {
                 const container = this.getContainer()
                 container?.classList.remove('loading')
 
                 this.attachListeners()
 
                 const data = (await products.json()).products
-                this.#data = data
-                this.#children = data.map(budget => new BudgetListItem(budget))
-                this.update()
+                Store.set('budgets', data)
             }
         ).catch((er) => console.error(er))
 
         return container
     }
 
-    update(target) {
-        const container = target ?? this.getContainer()?.querySelector('#budget-list-items')
-        this.#children.map(item => {
-            container.appendChild(item.render())
-        })
+    updateList = async (newData) => {
+        const { enter, exit, update } = getListDataDiff(this.#children, newData)
+        const container = this.getContainer()?.querySelector('#budget-list__items')
+        const { BudgetListItem } = await import('../BudgetListItem/BudgetListItem.mjs')
+        
+        for (const [id, child] of exit) {
+            child.exterminate()
+            this.#children.delete(id)
+        }
+        for (const [id, item] of enter) {
+            const newItem = new BudgetListItem(item)
+            this.#children.set(id, newItem)
+            container?.appendChild(newItem.render())
+        }
+        for (const [id, child] of update) {
+            this.#children.get(id).data = child
+            this.#children.get(id).update()
+        }
+    }
+
+    async exterminate() {        
+        Store.unsubscribe('budgets', this.updateList)
+        await super.exterminate()
     }
 
     listeners = new Set([
         {
-            selector: '#budget-list-items',
+            selector: '#budget-list__items',
             event: 'click',
             handler: this.#handleItemClick,
         },
         {
-            selector: '#budget-list-items',
+            selector: '#budget-list__items',
             event: 'contextmenu',
             handler: this.#handleItemRightClick,
         },

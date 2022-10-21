@@ -5,7 +5,7 @@ function defaultKeyAcessor(item) {
 }
 
 export function getListDataDiff(oldData, newData, keyAccessor = defaultKeyAcessor) {
-    const oldDataKeys = new Map(oldData.map(item => [keyAccessor(item), item]))
+    const oldDataKeys = new Map(oldData.entries())
     const { enter, update } = newData.reduce((acc, item) => {
         const key = keyAccessor(item)
         if (oldDataKeys.has(key)) {

@@ -6,6 +6,8 @@
     display: block;
     transition: transform 0.3s ease-in-out;
     transform: unset;
+    position: relative;
+    order: attr(data-id);
 }
 
 .budget-list-item.exit {
@@ -17,4 +19,9 @@
     height: 0;
     padding: 0;
     border-bottom: none;
+}
+
+.budget-list-item--selected {
+    /* order: -1; */
+    border-right: 3px solid salmon;
 }

@@ -34,12 +34,4 @@ export class MainLayout extends Component {
         ])
         super.exterminate()
     }
-
-    listeners = new Set([
-        {
-            selector: 'button#budget-list__menu-button',
-            event: 'click',
-            handler: this.exterminate,
-        }
-    ])
 }
