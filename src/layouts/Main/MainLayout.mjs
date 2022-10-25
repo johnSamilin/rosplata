@@ -5,11 +5,9 @@ import { BudgetList } from '../../containers/BudgetList/BudgetList.mjs'
 import { BudgetDetails } from '../../containers/BudgetDetails/BudgetDetails.mjs'
 import { Store } from '../../utils/Store.mjs'
 import { Router } from '../../utils/Router.mjs'
+import { importStyle } from '../../utils/importAsset.mjs'
 
-//@ts-ignore
-import('./MainLayout.css', { assert: { type: 'css' } }).then(MainLayoutStyles => {
-    document.adoptedStyleSheets.push(MainLayoutStyles.default)
-})
+importStyle('/src/layouts/Main/MainLayout.css')
 
 let budgetListController
 let budgetDetailsController

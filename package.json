@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "http-server-pwa": "^2.1.0",
     "serve": "^14.0.1"
   }
 }

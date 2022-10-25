@@ -2,7 +2,10 @@
 
 import { FeatureDetector } from "../../helpers/FeatureDetector.mjs";
 import { Component } from "../../utils/Component.mjs";
+import { importStyle } from "../../utils/importAsset.mjs";
 import { Store } from "../../utils/Store.mjs";
+
+importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
 let instance

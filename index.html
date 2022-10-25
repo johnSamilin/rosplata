@@ -8,14 +8,11 @@
     <title>Modules test</title>
     <link rel="stylesheet" async href="https://unpkg.com/open-props@1.4.16/open-props.min.css" />
     <link rel="stylesheet" async href="/styles/App.css" />
-    <link rel="stylesheet" async href="/src/containers/BudgetDetails/BudgetDetails.css" />
-    <link rel="stylesheet" async href="/src/containers/BudgetList/BudgetList.css" />
 
     <script src="/src/utils/Router.mjs" type="module"></script>
     <script src="/src/helpers/FeatureDetector.mjs" type="module" async></script>
     <script src="/src/utils/Store.mjs" type="module" async></script>
     <script src="/src/App.mjs" type="module"></script>
-    <script src="/src/containers/BudgetList/BudgetList.mjs" type="module"></script>
     <script src="/src/utils/Component.mjs" type="module"></script>
 
 
@@ -34,11 +31,7 @@
         <nav id="budget-list__items"></nav>
     </template>
 
-    <template id="budget-list-item-template">
-        <li class="budget-list-item">
-            <div>Название:</div><span class="budget-title"></span>
-        </li>
-    </template>
+    
 
     <template id="budget-details-template">
         <h1 id="budget-details__title"></h1>

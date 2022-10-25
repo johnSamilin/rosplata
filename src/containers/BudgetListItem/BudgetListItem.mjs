@@ -3,8 +3,11 @@
 import BudgetListItemStyles from './BudgetListItem.css' assert { type: 'css' }
 import { Component } from '../../utils/Component.mjs'
 import { Store } from '../../utils/Store.mjs'
+import { importTemplate } from '../../utils/importAsset.mjs'
 
 document.adoptedStyleSheets.push(BudgetListItemStyles)
+
+await importTemplate('/src/containers/BudgetListItem/BudgetListItem.html')
 
 const template = document.querySelector('template#budget-list-item-template')
 
