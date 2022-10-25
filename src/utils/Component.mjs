@@ -75,7 +75,7 @@ export class Component {
     async exterminate() {
         this.stopListeners()
         await this.hide()
-        this.getContainer()?.remove()        
+        this.getContainer()?.remove()
     }
 
     setAttr(container, selector, attribute, value, hideIfEmpty = false) {

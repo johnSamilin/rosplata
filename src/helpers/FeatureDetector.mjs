@@ -7,6 +7,7 @@ class CFeatureDetector {
     #transitionApi = !!document.createDocumentTransition
     #importMaps = HTMLScriptElement.supports && HTMLScriptElement.supports('importmap')
     #connectionSpeed = navigator.connection.effectiveType
+    #URLPattern = 'URLPattern' in window
 
     get transtionApi() {
         return this.#transitionApi;
@@ -16,6 +17,9 @@ class CFeatureDetector {
     }
     get connectionSpeed() {
         return this.#connectionSpeed
+    }
+    get URLPattern() {
+        return this.#URLPattern
     }
 
     updateNetworkInformation = () => {
@@ -38,7 +42,8 @@ class CFeatureDetector {
         yield *[
             ['Transition Api', this.#transitionApi],
             ['Import Maps', this.#importMaps],
-            ['Connection Speed Estimation', this.#connectionSpeed]
+            ['Connection Speed Estimation', this.#connectionSpeed],
+            ['URL pattern matching', this.#URLPattern],
         ];
     }
 }

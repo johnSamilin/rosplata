@@ -3,28 +3,39 @@
 import { Component } from '../../utils/Component.mjs'
 import { BudgetList } from '../../containers/BudgetList/BudgetList.mjs'
 import { BudgetDetails } from '../../containers/BudgetDetails/BudgetDetails.mjs'
+import { Store } from '../../utils/Store.mjs'
+import { Router } from '../../utils/Router.mjs'
 
 //@ts-ignore
 import('./MainLayout.css', { assert: { type: 'css' } }).then(MainLayoutStyles => {
     document.adoptedStyleSheets.push(MainLayoutStyles.default)
 })
 
-const budgetListController = new BudgetList()
-const budgetDetailsController = new BudgetDetails()
+let budgetListController
+let budgetDetailsController
 
 const template = document.querySelector('template#layout-main-template')
 
 export class MainLayout extends Component {
-    containerId = 'layout'
+    containerId = 'layout-main'
 
     async render() {
+        budgetListController = new BudgetList()
+        budgetDetailsController = new BudgetDetails()
         //@ts-ignore
         const content = template.content.cloneNode(true)
-        const container = this.getContainer()
-        container?.appendChild(content)
-        container?.querySelector('#budget-details')?.appendChild(budgetDetailsController.render())
-        container?.querySelector('#budget-list')?.appendChild(await budgetListController.render())
+        const layoutContainer = document.querySelector('#layout')
+        layoutContainer?.appendChild(content)
+        const contentContainer = layoutContainer?.querySelector(`#${this.containerId}`)
+        contentContainer?.querySelector('#budget-details')?.appendChild(budgetDetailsController.render())
+        contentContainer?.querySelector('#budget-list')?.appendChild(await budgetListController.render())
         this.attachListeners()
+        this.update()
+    }
+
+    update() {
+        const { id } = Router.routeParams
+        Store.set('selectedBudgetId', id ? parseInt(id, 10) : -1)
     }
 
     exterminate = async () => {

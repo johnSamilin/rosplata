@@ -16,16 +16,17 @@ export class BudgetList extends Component {
             return instance
         }
         instance = this
-        Store.subscribe('budgets', this.updateList)
+        Store.subscribe('budgets', this.update)
     }
 
-    #handleItemClick = (event) => {
+    #handleItemClick = async (event) => {
         const clickedItemId = parseInt(event.target.closest('.budget-list-item')?.dataset.id, 10)
         const clickedItem = this.#children.get(clickedItemId)
         if (!clickedItem) {
             return
         }
-        Store.set('selectedBudgetId', clickedItemId)
+        const { Router } = await import('../../utils/Router.mjs')
+        Router.navigate(`/budgets/${clickedItem.id}`)
     }
 
     #handleItemRightClick = (event) => {
@@ -66,7 +67,6 @@ export class BudgetList extends Component {
     }, 300)
 
     async render() {
-        console.log('create menu');
         if (!template) {
             throw new Error('#budget-list must be present in the HTML!')
         }
@@ -96,7 +96,7 @@ export class BudgetList extends Component {
         return container
     }
 
-    updateList = async (newData) => {
+    update = async (newData) => {
         const { enter, exit, update } = getListDataDiff(this.#children, newData)
         const container = this.getContainer()?.querySelector('#budget-list__items')
         const { BudgetListItem } = await import('../BudgetListItem/BudgetListItem.mjs')
@@ -117,7 +117,7 @@ export class BudgetList extends Component {
     }
 
     async exterminate() {        
-        Store.unsubscribe('budgets', this.updateList)
+        Store.unsubscribe('budgets', this.update)
         await super.exterminate()
     }
 
