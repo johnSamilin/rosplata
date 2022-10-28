@@ -1,0 +1,9 @@
+#menu {
+    padding: 0.5rem;
+    font-size: var(--font-size-3);
+    line-height: var(--font-lineheight-5);
+}
+#menu .menu-item {
+    display: block;
+    text-decoration: none;
+}

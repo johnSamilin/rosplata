@@ -1,12 +1,11 @@
 //@ts-check
-// @ts-ignore
-import BudgetListItemStyles from './BudgetListItem.css' assert { type: 'css' }
-import { Component } from '../../utils/Component.mjs'
-import { Store } from '../../utils/Store.mjs'
+import { Component } from '../../core/Component.mjs'
+import { Store } from '../../core/Store.mjs'
+import { importStyle } from '../../utils/imports.js'
 
-document.adoptedStyleSheets.push(BudgetListItemStyles)
+importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
-const template = document.querySelector('template#budget-list-item-template')
+const template = document.querySelector('template#budgets-list-item-template')
 
 export class BudgetListItem extends Component {
     data
@@ -20,15 +19,14 @@ export class BudgetListItem extends Component {
         Store.subscribe('selectedBudgetId', this.updateSelectedState)
     }
 
-    render() {
-        this.stopListeners()
+    renderTo(parent) {
         if (!template) {
-            throw new Error('Template for budget-list-item not found!')
+            throw new Error('Template for budgets-list-item not found!')
         }
         // @ts-ignore
         const content = template.content.cloneNode(true)
-        this.update(content.querySelector('.budget-list-item'))
-        return content
+        this.update(content.querySelector('.budgets-list-item'))
+        parent.appendChild(content)
     }
     
     update = (target) => {
@@ -40,9 +38,9 @@ export class BudgetListItem extends Component {
 
     updateSelectedState = (selectedBudgetId) => {
         if (this.id === selectedBudgetId) {
-            this.getContainer()?.classList.add('budget-list-item--selected')
+            this.getContainer()?.classList.add('budgets-list-item--selected')
         } else {
-            this.getContainer()?.classList.remove('budget-list-item--selected')
+            this.getContainer()?.classList.remove('budgets-list-item--selected')
         }
     }
 

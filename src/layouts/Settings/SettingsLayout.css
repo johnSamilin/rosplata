@@ -1,0 +1,18 @@
+#layout-settings {
+    max-width: 50%;
+    margin: auto;
+}
+#layout-settings #menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#layout-settings #menu .menu-item {
+    margin-right: 1rem;
+}
+#layout-settings #menu .menu-item.active {
+    box-shadow: var(--shadow-2);
+    background: white;
+    border-radius: var(--radius-3);
+    padding: 0 0.5rem;
+}

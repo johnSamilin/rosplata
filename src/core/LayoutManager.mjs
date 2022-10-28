@@ -18,7 +18,7 @@ class CLayoutManager {
             this.#active = newLayout
             this.#layout?.exterminate()
             this.#layout = await this.#getLayout(newLayout)
-            this.#layout?.render()
+            this.#layout?.renderTo(document.querySelector('#layout'))
         }
     }
 
@@ -29,6 +29,9 @@ class CLayoutManager {
                 const { MainLayout } = await import('../layouts/Main/MainLayout.mjs')
                 layout = new MainLayout()
                 break
+            case 'settings':
+                const { SettingsLayout } = await import('../layouts/Settings/SettingsLayout.mjs')
+                layout = new SettingsLayout()
         }
 
         return layout

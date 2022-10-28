@@ -1,8 +1,11 @@
 //@ts-check
 
 import { FeatureDetector } from "../../helpers/FeatureDetector.mjs";
-import { Component } from "../../utils/Component.mjs";
-import { Store } from "../../utils/Store.mjs";
+import { Component } from "../../core/Component.mjs";
+import { Store } from "../../core/Store.mjs";
+import { importStyle } from "../../utils/imports.js";
+
+importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
 let instance
@@ -54,11 +57,11 @@ export class BudgetDetails extends Component {
         Store.set('budgets', budgets?.filter(budget => budget.id !== this.data.id))
     }
 
-    render() {
+    renderTo(parent) {
         //@ts-ignore
         const container = template.content.cloneNode(true)
         this.update(container)
-        return container
+        parent.appendChild(container)
     }
 
     update(target) {

@@ -19,6 +19,10 @@ body, html {
     }
 }
 
+#layout {
+    height: 100%;
+}
+
 .loading::before {
     content: '';
     display: flex;
@@ -38,4 +42,13 @@ body, html {
 
 .hidden {
     visibility: hidden;
+}
+
+.exit-disappear {
+    transition: opacity 0.1s ease;
+    opacity: 1;
+}
+
+.exit-disappear.exit {
+    opacity: 0;
 }

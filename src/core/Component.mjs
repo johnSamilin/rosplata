@@ -9,20 +9,22 @@ export class Component {
     }
 
     stopListeners() {
+        const container = this.getContainer()
         for (const listener of this.listeners) {
-            const target = listener.selector
-                ? this.getContainer()?.querySelector(listener.selector)
-                : this.getContainer()
-            target?.removeEventListener(listener.event, listener.handler)
+            const targets = listener.selector
+                ? container?.querySelectorAll(listener.selector)
+                : [container]
+            targets?.forEach(target => target?.removeEventListener(listener.event, listener.handler))
         }
     }
 
     attachListeners() {
+        const container = this.getContainer()
         for (const listener of this.listeners) {
-            const target = listener.selector
-                ? this.getContainer()?.querySelector(listener.selector)
-                : this.getContainer()
-            target?.addEventListener(listener.event, listener.handler, listener.options)
+            const targets = listener.selector
+                ? container?.querySelectorAll(listener.selector)
+                : [container]
+            targets?.forEach(target => target.addEventListener(listener.event, listener.handler))
         }
     }
     

@@ -1,18 +1,16 @@
-import { Component } from '../../utils/Component.mjs'
+import { Component } from '../../core/Component.mjs'
+import { importStyle } from '../../utils/imports.js';
+
+importStyle('/src/containers/Dialog/Dialog.css')
 
 export class CDialog extends Component {
     containerId = 'modal-window'
 
     handleClick = (event) => {
-        console.log(event.target, event.currentTarget);
         if (event.target === event.currentTarget) {
             // backdrop click
             this.hide()
         }
-    }
-
-    render(content) {
-        this.getContainer().append(content)
     }
 
     show() {

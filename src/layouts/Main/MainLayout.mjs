@@ -1,15 +1,13 @@
 //@ts-check
 // import MainLayoutStyles from './MainLayout.css' assert { type: 'css' } // static import will cause delay in execution
-import { Component } from '../../utils/Component.mjs'
+import { Component } from '../../core/Component.mjs'
 import { BudgetList } from '../../containers/BudgetList/BudgetList.mjs'
 import { BudgetDetails } from '../../containers/BudgetDetails/BudgetDetails.mjs'
-import { Store } from '../../utils/Store.mjs'
-import { Router } from '../../utils/Router.mjs'
+import { Store } from '../../core/Store.mjs'
+import { Router } from '../../core/Router.mjs'
+import { importStyle } from '../../utils/imports.js'
 
-//@ts-ignore
-import('./MainLayout.css', { assert: { type: 'css' } }).then(MainLayoutStyles => {
-    document.adoptedStyleSheets.push(MainLayoutStyles.default)
-})
+importStyle('/src/layouts/Main/MainLayout.css')
 
 let budgetListController
 let budgetDetailsController
@@ -19,16 +17,15 @@ const template = document.querySelector('template#layout-main-template')
 export class MainLayout extends Component {
     containerId = 'layout-main'
 
-    async render() {
+    renderTo(parent) {
         budgetListController = new BudgetList()
         budgetDetailsController = new BudgetDetails()
         //@ts-ignore
         const content = template.content.cloneNode(true)
-        const layoutContainer = document.querySelector('#layout')
-        layoutContainer?.appendChild(content)
-        const contentContainer = layoutContainer?.querySelector(`#${this.containerId}`)
-        contentContainer?.querySelector('#budget-details')?.appendChild(budgetDetailsController.render())
-        contentContainer?.querySelector('#budget-list')?.appendChild(await budgetListController.render())
+        parent?.appendChild(content)
+        const contentContainer = parent?.querySelector(`#${this.containerId}`)
+        budgetDetailsController.renderTo(contentContainer?.querySelector('#budget-details'))
+        budgetListController.renderTo(contentContainer?.querySelector('#budgets-list'))
         this.attachListeners()
         this.update()
     }

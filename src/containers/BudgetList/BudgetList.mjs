@@ -1,14 +1,17 @@
 // @ts-check
-import { Component } from '../../utils/Component.mjs'
+import { Component } from '../../core/Component.mjs'
 import { debounce, getListDataDiff } from '../../utils/listDataHelpers.mjs'
-import { Store } from '../../utils/Store.mjs'
+import { Store } from '../../core/Store.mjs'
+import { importStyle } from '../../utils/imports.js'
+
+importStyle('/src/containers/BudgetList/BudgetList.css')
 
 let instance
-const template = document.querySelector('template#budget-list-template')
+const template = document.querySelector('template#budgets-list-template')
 
 export class BudgetList extends Component {
     #children = new Map()
-    containerId = 'budget-list'
+    containerId = 'budgets-list'
 
     constructor() {
         super()
@@ -20,18 +23,18 @@ export class BudgetList extends Component {
     }
 
     #handleItemClick = async (event) => {
-        const clickedItemId = parseInt(event.target.closest('.budget-list-item')?.dataset.id, 10)
+        const clickedItemId = parseInt(event.target.closest('.budgets-list-item')?.dataset.id, 10)
         const clickedItem = this.#children.get(clickedItemId)
         if (!clickedItem) {
             return
         }
-        const { Router } = await import('../../utils/Router.mjs')
+        const { Router } = await import('../../core/Router.mjs')
         Router.navigate(`/budgets/${clickedItem.id}`)
     }
 
     #handleItemRightClick = (event) => {
         event.preventDefault()
-        const clickedItemId = event.target.closest('.budget-list-item')?.id
+        const clickedItemId = event.target.closest('.budgets-list-item')?.id
         const clickedItem = this.#children.get(clickedItemId)
         clickedItem?.exterminate()
         this.#children.delete(clickedItemId)
@@ -40,12 +43,14 @@ export class BudgetList extends Component {
     #handleMenuBtnClick = async (event) => {
         event.preventDefault()
         event.target.classList.add('loading')
-        const { Dialog } = await import('../Dialog/Dialog.mjs')
-        const { Features } = await import('../Features/Features.mjs')
-        const featuresController = new Features()
-        Dialog.render(featuresController.render())
+        const [{ Dialog }, { Menu }] = await Promise.all([
+            import('../Dialog/Dialog.mjs'),
+            import('../Menu/Menu.mjs'),
+        ])
+        const menuController = new Menu()
+        menuController.renderTo(Dialog.getContainer())
         Dialog.show()
-        Dialog.getContainer()?.classList.add('feature-detector')
+        Dialog.getContainer()?.classList.add('menu')
         event.target.classList.remove('loading')
     }
 
@@ -55,7 +60,7 @@ export class BudgetList extends Component {
             this.#children,
             [...this.#children.values()].filter(({ data }) => data.title.includes(search))
         )
-        
+
         for (const [, child] of exit) {
             child.hide()
         }
@@ -66,79 +71,84 @@ export class BudgetList extends Component {
         })
     }, 300)
 
-    async render() {
+    async renderTo(parent) {
         if (!template) {
-            throw new Error('#budget-list must be present in the HTML!')
+            throw new Error('#budgets-list must be present in the HTML!')
         }
 
         //@ts-ignore
         const container = template.content.cloneNode(true)
 
-        const asyncOps = [
-            fetch('https://dummyjson.com/products?limit=100'),
-            import('../BudgetListItem/BudgetListItem.mjs')
-        ]
-
         this.getContainer()?.classList.add('loading')
+        parent.appendChild(container)
+        this.attachListeners()
+        await this.#addItems(new Map(Store.get('budgets')?.map(budget => [budget.id, budget])))
 
-        Promise.all(asyncOps).then(
-            async ([products]) => {
-                const container = this.getContainer()
-                container?.classList.remove('loading')
-
-                this.attachListeners()
-
-                const data = (await products.json()).products
-                Store.set('budgets', data)
-            }
-        ).catch((er) => console.error(er))
-
-        return container
+        try {
+            const { products } = await (await fetch('https://dummyjson.com/products?limit=100')).json()
+            Store.set('budgets', products)
+        } catch (er) {
+            console.error(er)
+        } finally {
+            this.getContainer()?.classList.remove('loading')
+        }
     }
 
     update = async (newData) => {
         const { enter, exit, update } = getListDataDiff(this.#children, newData)
-        const container = this.getContainer()?.querySelector('#budget-list__items')
+
+        this.#removeItems(exit)
+        this.#updateItems(update)
+        await this.#addItems(enter)
+    }
+
+    async #addItems(items) {
+        const container = this.getContainer()?.querySelector('#budgets-list__items')
         const { BudgetListItem } = await import('../BudgetListItem/BudgetListItem.mjs')
-        
-        for (const [id, child] of exit) {
-            child.exterminate()
-            this.#children.delete(id)
-        }
-        for (const [id, item] of enter) {
+        for (const [id, item] of items) {
             const newItem = new BudgetListItem(item)
             this.#children.set(id, newItem)
-            container?.appendChild(newItem.render())
+            newItem.renderTo(container)
         }
-        for (const [id, child] of update) {
+    }
+
+    #updateItems(items) {
+        for (const [id, child] of items) {
             this.#children.get(id).data = child
             this.#children.get(id).update()
         }
     }
 
-    async exterminate() {        
+    #removeItems(items) {
+        for (const [id, child] of items) {
+            child.exterminate()
+            this.#children.delete(id)
+        }
+    }
+
+    async exterminate() {
         Store.unsubscribe('budgets', this.update)
         await super.exterminate()
     }
 
     listeners = new Set([
         {
-            selector: '#budget-list__items',
+            selector: '#budgets-list__items',
             event: 'click',
             handler: this.#handleItemClick,
         },
         {
-            selector: '#budget-list__items',
+            selector: '#budgets-list__items',
             event: 'contextmenu',
             handler: this.#handleItemRightClick,
         },
         {
-            selector: 'input#budget-list-filter-input',
+            selector: 'input#budgets-list-filter-input',
             event: 'keyup',
             handler: this.#handleFilterChange,
         },
         {
-            selector: 'button#budget-list__menu-button',
+            selector: 'button#budgets-list__menu-button',
             event: 'click',
             handler: this.#handleMenuBtnClick,
         }

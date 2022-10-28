@@ -4,6 +4,7 @@
     opacity: 1;
     will-change: opacity;
     transition: opacity 0.1s ease;
+    height: 100%;
 }
 
 #layout-main.exit {

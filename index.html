@@ -8,34 +8,37 @@
     <title>Modules test</title>
     <link rel="stylesheet" async href="https://unpkg.com/open-props@1.4.16/open-props.min.css" />
     <link rel="stylesheet" async href="/styles/App.css" />
-    <link rel="stylesheet" async href="/src/containers/BudgetDetails/BudgetDetails.css" />
-    <link rel="stylesheet" async href="/src/containers/BudgetList/BudgetList.css" />
 
-    <script src="/src/utils/Router.mjs" type="module"></script>
-    <script src="/src/helpers/FeatureDetector.mjs" type="module" async></script>
-    <script src="/src/utils/Store.mjs" type="module" async></script>
+    <script src="/src/core/Router.mjs" type="module"></script>
+    <script src="/src/core/Component.mjs" type="module"></script>
+    <script src="/src/core/Store.mjs" type="module" async></script>
     <script src="/src/App.mjs" type="module"></script>
-    <script src="/src/containers/BudgetList/BudgetList.mjs" type="module"></script>
-    <script src="/src/utils/Component.mjs" type="module"></script>
 
 
     <template id="layout-main-template">
         <div id="layout-main">
-            <aside id="budget-list"></aside>
+            <aside id="budgets-list"></aside>
             <section id="budget-details" class="exit hidden"></section>
         </div>
     </template>
 
-    <template id="budget-list-template">
-        <div class="budget-list__actions">
-            <input type="text" name="filter" id="budget-list-filter-input" />
-            <button id="budget-list__menu-button"></button>
+    <template id="layout-settings-template">
+        <div id="layout-settings" class="exit-disappear">
+            <aside id="menu" class="exit-disappear"></aside>
+            <section id="settings"></section>
         </div>
-        <nav id="budget-list__items"></nav>
     </template>
 
-    <template id="budget-list-item-template">
-        <li class="budget-list-item">
+    <template id="budgets-list-template">
+        <div class="budgets-list__actions">
+            <input type="text" name="filter" id="budgets-list-filter-input" />
+            <button id="budgets-list__menu-button"></button>
+        </div>
+        <div id="budgets-list__items"></div>
+    </template>
+
+    <template id="budgets-list-item-template">
+        <li class="budgets-list-item">
             <div>Название:</div><span class="budget-title"></span>
         </li>
     </template>
@@ -54,8 +57,10 @@
     </template>
 
     <template id="feature-detector__template">
-        <header>Features</header>
-        <p>That need to be supported for this app to work</p>
+        <div class="exit-disappear" id="feature-detector">
+            <header>Features</header>
+            <p>That need to be supported for this app to work</p>
+        </div>
     </template>
 
     <template id="feature-detector__feature-template">
@@ -63,6 +68,14 @@
             <strong class="feature-detector__feature-name"></strong>
             <span class="feature-detector__feature-value"></span>
         </div>
+    </template>
+
+    <template id="menu-template">
+        <nav id="menu"></nav>
+    </template>
+
+    <template id="menu-item-template">
+        <a href="" class="menu-item"></a>
     </template>
 </head>
 

@@ -1,4 +1,4 @@
-.budget-list-item {
+.budgets-list-item {
     margin: 0 0.5rem;
     padding: 1rem 0;
     border-bottom: 1px solid lightblue;
@@ -10,18 +10,18 @@
     order: attr(data-id);
 }
 
-.budget-list-item.exit {
+.budgets-list-item.exit {
     transform: translateX(-125%);
 }
 
-.budget-list-item.hidden {
+.budgets-list-item.hidden {
     visibility: hidden;
     height: 0;
     padding: 0;
     border-bottom: none;
 }
 
-.budget-list-item--selected {
+.budgets-list-item--selected {
     /* order: -1; */
     border-right: 3px solid salmon;
 }
