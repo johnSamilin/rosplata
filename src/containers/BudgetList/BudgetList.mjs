@@ -1,6 +1,6 @@
 // @ts-check
 import { Component } from '../../core/Component.mjs'
-import { debounce, getListDataDiff } from '../../utils/listDataHelpers.mjs'
+import { debounce, getListDataDiff } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 
@@ -42,7 +42,7 @@ export class BudgetList extends Component {
 
     #handleMenuBtnClick = async (event) => {
         event.preventDefault()
-        event.target.classList.add('loading')
+        event.target.classList.add('loading-rotate')
         const [{ Dialog }, { Menu }] = await Promise.all([
             import('../Dialog/Dialog.mjs'),
             import('../Menu/Menu.mjs'),
@@ -51,7 +51,7 @@ export class BudgetList extends Component {
         menuController.renderTo(Dialog.getContainer())
         Dialog.show()
         Dialog.getContainer()?.classList.add('menu')
-        event.target.classList.remove('loading')
+        event.target.classList.remove('loading-rotate')
     }
 
     #handleFilterChange = debounce((event) => {

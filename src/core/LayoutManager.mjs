@@ -2,6 +2,8 @@
 
 import { Store } from './Store.mjs'
 
+const topContainer = document.querySelector('#layout')
+
 class CLayoutManager {
     #active
     #layout
@@ -17,8 +19,10 @@ class CLayoutManager {
         } else {
             this.#active = newLayout
             this.#layout?.exterminate()
+            topContainer?.classList.add('loading')
             this.#layout = await this.#getLayout(newLayout)
-            this.#layout?.renderTo(document.querySelector('#layout'))
+            this.#layout?.renderTo(topContainer)
+            topContainer?.classList.remove('loading')
         }
     }
 

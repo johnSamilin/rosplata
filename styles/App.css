@@ -23,7 +23,7 @@ body, html {
     height: 100%;
 }
 
-.loading::before {
+.loading-rotate::before {
     content: '';
     display: flex;
     align-items: center;
@@ -38,6 +38,32 @@ body, html {
     border-bottom-left-radius: 85%;
     animation: rotate 1s linear 0s infinite;
     transform-origin: right top;
+}
+
+@keyframes loading {
+	0% {
+		background-position: left;
+	}
+	50% {
+		background-position: right;
+	}
+}
+
+.loading {
+    position: relative;
+}
+
+.loading::before {
+    content: '';
+    display: flex;
+    position: absolute;
+    height: 3px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, #23a6d5, transparent);
+	background-size: 200% 200%;
+	animation: loading 1s ease 0s infinite;
 }
 
 .hidden {

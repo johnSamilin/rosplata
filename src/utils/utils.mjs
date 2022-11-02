@@ -24,7 +24,7 @@ export function getListDataDiff(oldData, newData, keyAccessor = defaultKeyAcesso
         enter,
         exit: oldDataKeys,
         update,
-    }    
+    }
 }
 
 export function debounce(fn, time = 300) {

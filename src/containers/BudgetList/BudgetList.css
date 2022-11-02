@@ -42,10 +42,10 @@
     left: -0.4rem;
     background: black;
 }
-#budgets-list__menu-button.loading {
+#budgets-list__menu-button.loading-rotate {
     opacity: 0.5;
 }
-#budgets-list__menu-button.loading::before {
+#budgets-list__menu-button.loading-rotate::before {
     position: absolute;
     left: -0.25rem;    
     width: 0.75rem;
