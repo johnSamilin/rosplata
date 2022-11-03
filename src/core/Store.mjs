@@ -1,13 +1,16 @@
 //@ts-check
 
+import { FeatureDetector } from "./FeatureDetector.mjs"
+
 class CStore {
     #listeners = new Map()
 
     // TODO: use proxy
     data = {
         selectedBudgetId: -1,
-        budgets: [] ,
+        budgets: [],
         layout: '',
+        isMobile: FeatureDetector.isMobile,
     }
 
     subscribe(field, callback) {
@@ -33,7 +36,6 @@ class CStore {
     }
 
     get(fieldName) {
-        // console.time(`getter ${fieldName}`)
         const accessors = `data.${fieldName}`.split('.')
         let value = this
         for (let index = 0; index < accessors.length; index++) {
@@ -45,12 +47,10 @@ class CStore {
 
         }
 
-        // console.timeEnd(`getter ${fieldName}`)
         return value
     }
 
     has(fieldName) {
-        // console.time(`has ${fieldName}`)
         let value = this
         const accessors = `data.${fieldName}`.split('.')
         for (let index = 0; index < accessors.length; index++) {
@@ -61,7 +61,6 @@ class CStore {
             value = value[acc]
         }
 
-        // console.timeEnd(`has ${fieldName}`)
         return true
     }
 

@@ -49,9 +49,21 @@ class CRouter {
         Store.set('layout', activeLayout.layout)
     }
 
-    navigate(url, params, title) {
-        history.pushState({}, title, BASE_URL + url)
+    navigate(url, force = false) {
+        if (force) {
+            history.replaceState({}, '', BASE_URL + url)
+        } else {
+            history.pushState({}, '', BASE_URL + url)
+        }
         window.dispatchEvent(new PopStateEvent('popstate'))
+    }
+
+    back() {
+        if (history.length > 1) {
+            history.back()
+            return true
+        }
+        return false
     }
 }
 

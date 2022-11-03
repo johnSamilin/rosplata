@@ -6,6 +6,7 @@ import { BudgetDetails } from '../../containers/BudgetDetails/BudgetDetails.mjs'
 import { Store } from '../../core/Store.mjs'
 import { Router } from '../../core/Router.mjs'
 import { importStyle } from '../../utils/imports.js'
+import { FeatureDetector } from '../../core/FeatureDetector.mjs'
 
 importStyle('/src/layouts/Main/MainLayout.css')
 
@@ -32,7 +33,15 @@ export class MainLayout extends Component {
 
     update() {
         const { id } = Router.routeParams
-        Store.set('selectedBudgetId', id ? parseInt(id, 10) : -1)
+        const selectedBudgetId = id ? parseInt(id, 10) : -1
+        Store.set('selectedBudgetId', selectedBudgetId)
+        if (selectedBudgetId > -1) {
+            budgetDetailsController.show()
+            FeatureDetector.isMobile ? budgetListController.hide() : budgetListController.show()
+        } else {
+            budgetDetailsController.hide()
+            budgetListController.show()
+        }
     }
 
     exterminate = async () => {

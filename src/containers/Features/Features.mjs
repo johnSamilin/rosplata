@@ -1,5 +1,5 @@
 // @ts-check
-import { FeatureDetector } from '../../helpers/FeatureDetector.mjs'
+import { FeatureDetector } from '../../core/FeatureDetector.mjs'
 import { Component } from '../../core/Component.mjs'
 import { importStyle } from '../../utils/imports.js'
 

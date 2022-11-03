@@ -1,6 +1,6 @@
 //@ts-check
 
-import { FeatureDetector } from "../../helpers/FeatureDetector.mjs";
+import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Component } from "../../core/Component.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
@@ -28,14 +28,12 @@ export class BudgetDetails extends Component {
     sync = async (id) => {
         this.abort.abort()
         if (id === -1) {
-            this.hide()
             return
         }
         this.abort = new AbortController()
         const budget = Store.get('budgets')?.find(budget => budget.id === id)
         this.data = budget
         this.update()
-        this.show()
         const data = await (await fetch(`https://dummyjson.com/products/${id}`, { signal: this.abort.signal })).json()
         this.data = data
         this.update()

@@ -51,3 +51,13 @@
     width: 0.75rem;
     height: 0.75rem;
 }
+
+@media screen and (max-width: 425px) {
+    #budgets-list {
+        max-width: 100%;
+        flex-basis: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+}

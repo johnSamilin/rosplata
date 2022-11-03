@@ -2,6 +2,10 @@
     flex-grow: 1;
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    padding: var(--size-5);
+}
+#budget-details__thumbnail {
+    max-width: 100%;
 }
 #budget-details.exit,
 #budget-details.hidden {

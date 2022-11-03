@@ -5,10 +5,17 @@ import { importStyle } from "./utils/imports.js"
 
 importStyle('/styles/App.css')
 
-document.body.addEventListener('click', async (event) => {
+document.body.addEventListener('click', (event) => {
     if (event.target.tagName === 'A') {
         event.preventDefault()
         event.stopImmediatePropagation()
-        Router.navigate(event.target.getAttribute('href'))
+        let didgoback = true
+        if ('goback' in event.target.dataset) {
+            didgoback = Router.back()
+            if (didgoback) {
+                return
+            }
+        }
+        Router.navigate(event.target.getAttribute('href'), !didgoback)
     }
 })

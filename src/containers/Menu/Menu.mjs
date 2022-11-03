@@ -2,8 +2,8 @@
 // @ts-ignore
 import MenuStyles from './Menu.css' assert { type: 'css' }
 import { Component } from '../../core/Component.mjs'
-import { BASE_URL } from '../../constants/routes.mjs'
 import { Router } from '../../core/Router.mjs'
+import { BASE_URL } from '../../constants/routes.mjs'
 
 document.adoptedStyleSheets.push(MenuStyles)
 
@@ -15,11 +15,11 @@ export class Menu extends Component {
     data = [
         {
             title: 'Budgets',
-            link: BASE_URL + '/',
+            link: '/',
         },
         {
             title: 'Settings',
-            link: BASE_URL + '/settings',
+            link: '/settings',
         },
     ]
 
@@ -38,7 +38,7 @@ export class Menu extends Component {
             const itemContainer = itemContent.querySelector('.menu-item')
             itemContainer.setAttribute('href', item.link)
             itemContainer.text = item.title
-            if (Router.currentRoute === item.link) {
+            if (Router.currentRoute === BASE_URL + item.link) {
                 itemContainer.classList.add('active')
             }
             content.appendChild(itemContainer)

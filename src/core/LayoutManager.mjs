@@ -10,6 +10,7 @@ class CLayoutManager {
 
     constructor() {
         Store.subscribe('layout', this.#onChange)
+        Store.subscribe('isMobile', () => this.#onChange(this.#active))
         this.#onChange(Store.get('layout'))
     }
 
