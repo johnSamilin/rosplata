@@ -1,6 +1,6 @@
 //@ts-check
 // import MainLayoutStyles from './MainLayout.css' assert { type: 'css' } // static import will cause delay in execution
-import { Component } from '../../core/Component.mjs'
+import { AnimatedComponent } from '../../core/Component.mjs'
 import { BudgetList } from '../../containers/BudgetList/BudgetList.mjs'
 import { BudgetDetails } from '../../containers/BudgetDetails/BudgetDetails.mjs'
 import { Store } from '../../core/Store.mjs'
@@ -15,7 +15,7 @@ let budgetDetailsController
 
 const template = document.querySelector('template#layout-main-template')
 
-export class MainLayout extends Component {
+export class MainLayout extends AnimatedComponent {
     containerId = 'layout-main'
 
     renderTo(parent) {

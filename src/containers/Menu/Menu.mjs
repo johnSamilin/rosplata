@@ -1,11 +1,10 @@
 //@ts-check
-// @ts-ignore
-import MenuStyles from './Menu.css' assert { type: 'css' }
 import { Component } from '../../core/Component.mjs'
 import { Router } from '../../core/Router.mjs'
 import { BASE_URL } from '../../constants/routes.mjs'
+import { importStyle } from '../../utils/imports.js'
 
-document.adoptedStyleSheets.push(MenuStyles)
+importStyle('/src/containers/Menu/Menu.css')
 
 const menuTemplate = document.querySelector('template#menu-template')
 const itemTemplate = document.querySelector('template#menu-item-template')
@@ -20,6 +19,10 @@ export class Menu extends Component {
         {
             title: 'Settings',
             link: '/settings',
+        },
+        {
+            title: 'Features support',
+            link: '/settings/features',
         },
     ]
 
@@ -50,6 +53,14 @@ export class Menu extends Component {
 
     update = (target) => {
         const container = target ?? this.getContainer()
+        this.data.forEach(item => {
+            const itemContainer = container.querySelector(`a[href="${item.link}"]`)
+            if (Router.currentRoute === BASE_URL + item.link) {
+                itemContainer.classList.add('active')
+            } else {
+                itemContainer.classList.remove('active')
+            }
+        })
     }
 
     #onItemClick = async () => {

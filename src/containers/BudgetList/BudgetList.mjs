@@ -1,5 +1,5 @@
 // @ts-check
-import { Component } from '../../core/Component.mjs'
+import { AnimatedComponent } from '../../core/Component.mjs'
 import { debounce, getListDataDiff } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
@@ -9,7 +9,7 @@ importStyle('/src/containers/BudgetList/BudgetList.css')
 let instance
 const template = document.querySelector('template#budgets-list-template')
 
-export class BudgetList extends Component {
+export class BudgetList extends AnimatedComponent {
     #children = new Map()
     containerId = 'budgets-list'
 

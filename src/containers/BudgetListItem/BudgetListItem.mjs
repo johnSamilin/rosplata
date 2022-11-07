@@ -1,5 +1,5 @@
 //@ts-check
-import { Component } from '../../core/Component.mjs'
+import { AnimatedComponent } from '../../core/Component.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 
@@ -7,7 +7,7 @@ importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
 const template = document.querySelector('template#budgets-list-item-template')
 
-export class BudgetListItem extends Component {
+export class BudgetListItem extends AnimatedComponent {
     data
     id
 

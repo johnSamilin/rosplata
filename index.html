@@ -24,8 +24,8 @@
 
     <template id="layout-settings-template">
         <div id="layout-settings" class="exit-disappear">
-            <aside id="menu" class="exit-disappear"></aside>
-            <section id="settings"></section>
+            <aside id="layout-settings__menu" class="exit-disappear"></aside>
+            <section id="layout-settings__settings"></section>
         </div>
     </template>
 
@@ -79,6 +79,13 @@
 
     <template id="menu-item-template">
         <a href="" class="menu-item"></a>
+    </template>
+
+    <template id="settings-section-item-template">
+        <div class="settings-item">
+            <label class="settings-item__name"></label>
+            <input class="settings-item__value" />
+        </div>
     </template>
 </head>
 

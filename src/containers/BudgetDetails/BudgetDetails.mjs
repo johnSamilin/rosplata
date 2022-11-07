@@ -1,7 +1,7 @@
 //@ts-check
 
 import { FeatureDetector } from "../../core/FeatureDetector.mjs";
-import { Component } from "../../core/Component.mjs";
+import { AnimatedComponent } from "../../core/Component.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 
@@ -10,7 +10,7 @@ importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 const template = document.querySelector('template#budget-details-template')
 let instance
 
-export class BudgetDetails extends Component {
+export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
     data = {}
     abort = new AbortController()

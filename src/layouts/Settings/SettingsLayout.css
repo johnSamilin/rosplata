@@ -16,3 +16,14 @@
     border-radius: var(--radius-3);
     padding: 0 0.5rem;
 }
+
+@media screen and (max-width: 425px) {
+    #layout-settings {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    #layout-settings__menu {        
+        overflow: auto;
+    }
+}
