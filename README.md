@@ -2,7 +2,7 @@
 This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, no polyfills)
 
 ## Demo
-Currently demo can be found [here](http://ros-plata.ru/)
+Currently demo can be found [here](https://ros-plata.ru/)
 
 [Drop me a line](mailto:a_salt@lenta.ru) if you have anything in mind!
 
