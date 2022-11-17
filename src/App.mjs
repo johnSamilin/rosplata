@@ -1,4 +1,5 @@
 // @ts-check
+import { AuthManager } from "./core/AuthManager.mjs"
 import { LayoutManager } from "./core/LayoutManager.mjs"
 import { Router } from "./core/Router.mjs"
 import { importStyle } from "./utils/imports.js"

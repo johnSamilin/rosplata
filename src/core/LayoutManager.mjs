@@ -37,6 +37,11 @@ class CLayoutManager {
             case 'settings':
                 const { SettingsLayout } = await import('../layouts/Settings/SettingsLayout.mjs')
                 layout = new SettingsLayout()
+                break
+            case 'login':
+                const { LoginLayout } = await import('../layouts/Login/LoginLayout.mjs')
+                layout = new LoginLayout()
+                break
         }
 
         return layout

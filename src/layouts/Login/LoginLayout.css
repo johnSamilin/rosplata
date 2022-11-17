@@ -1,0 +1,17 @@
+#layout-login {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    justify-content: center;
+    font: var(--font-serif);
+}
+#layout-login .layout-login__prompt {
+    font-weight: var(--font-weight-3);
+}
+#layout-login .layout-login__prompt-detail {
+    font-weight: var(--font-weight-3);
+}

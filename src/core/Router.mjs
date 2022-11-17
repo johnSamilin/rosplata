@@ -1,6 +1,7 @@
 //@ts-check
 
 import { BASE_URL, ROUTES } from "../constants/routes.mjs"
+import { AuthManager } from "./AuthManager.mjs"
 import { Store } from "./Store.mjs"
 
 class CRouter {
@@ -33,7 +34,12 @@ class CRouter {
             ...matcher,
             pattern: new URLPattern({ pathname: matcher.pattern, baseUrl: origin })
         }))
-        this.#onRouteChange()
+        if (AuthManager.isLoggedIn) {
+            this.#onRouteChange()
+        } else {
+            Store.set('layout', 'login')
+            AuthManager.onLogin = this.#onRouteChange
+        }
     }
 
     #onRouteChange = () => {
