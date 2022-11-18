@@ -48,7 +48,7 @@ class CAuthManager {
 
     async #storeCredentials(profile) {
         const c = new FederatedCredential({
-            id: profile.iat,
+            id: profile.email,
             provider: 'https://accounts.google.com',
             name: profile.name,
             iconURL: profile.picture
