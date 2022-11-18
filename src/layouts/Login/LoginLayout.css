@@ -15,3 +15,11 @@
 #layout-login .layout-login__prompt-detail {
     font-weight: var(--font-weight-3);
 }
+
+@media screen and (max-width: 425px) {
+    #layout-login {
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
