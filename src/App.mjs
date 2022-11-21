@@ -20,3 +20,8 @@ document.body.addEventListener('click', (event) => {
         Router.navigate(event.target.getAttribute('href'), !didgoback)
     }
 })
+
+window.addEventListener('load', async () => {
+    await AuthManager.start()
+    Router.start()
+})

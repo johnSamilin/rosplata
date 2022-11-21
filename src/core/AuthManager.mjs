@@ -14,25 +14,52 @@ class CAuthManager {
     }
 
     onLogin() {
-        throw new Exception('onLogin is not implemented')
+        throw new Error('onLogin is not implemented')
+    }
+    
+    onLogout() {
+        throw new Error('onLogout is not implemented')
     }
 
     start = async () => {
         if (FeatureDetector.federatedLogin) {
             const profile = await navigator.credentials.get({
                 federated: {
-                    provider: [
-                        'https://accounts.google.com'
-                    ]
+                    providers: [
+                        'https://accounts.google.com',
+                    ],
                 },
                 mediation: 'silent'
             });
+            if (profile && await this.#verify(profile)) {
+                this.#isLoggedIn = true
+                this.#data = profile
+                this.onLogin()
+                return
+            }
         }
         google.accounts.id.initialize({
             client_id: '1094687239432-p5670t7mfte768qtssg70koaf11vgp34.apps.googleusercontent.com',
-            callback: this.#handleCredentialResponse
+            callback: this.#handleCredentialResponse,
+            itp_support: false,
         })
+        this.#initLoginBtn()
+    }
+
+    #initLoginBtn() {
         google.accounts.id.prompt(this.#handleGoogleUI)
+    }
+
+    async #verify(profile) {
+        return true 
+    }
+
+    logout = async () => {
+        this.onLogout()
+        this.#isLoggedIn = false
+        this.#data = null
+        await navigator.credentials.preventSilentAccess()
+        this.#initLoginBtn()
     }
 
     #handleGoogleUI = (notification) => {
@@ -47,12 +74,16 @@ class CAuthManager {
     }
 
     async #storeCredentials(profile) {
-        const c = new FederatedCredential({
-            id: profile.email,
-            provider: 'https://accounts.google.com',
-            name: profile.name,
-            iconURL: profile.picture
+        const c = await navigator.credentials.create({
+            federated: {
+                id: profile.email,
+                provider: 'https://accounts.google.com',
+                name: profile.name,
+                iconURL: profile.picture,
+                protocol: 'openidconnect',
+            },
         });
+        console.log({ c });
         return navigator.credentials.store(c);
     }
 
@@ -79,5 +110,3 @@ class CAuthManager {
 }
 
 export const AuthManager = new CAuthManager()
-
-window.addEventListener('load', AuthManager.start)

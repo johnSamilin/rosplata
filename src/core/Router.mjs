@@ -34,11 +34,15 @@ class CRouter {
             ...matcher,
             pattern: new URLPattern({ pathname: matcher.pattern, baseUrl: origin })
         }))
+        AuthManager.onLogin = this.#onRouteChange
+        AuthManager.onLogout = () => Store.set('layout', 'login')
+    }
+
+    start() {
         if (AuthManager.isLoggedIn) {
             this.#onRouteChange()
         } else {
             Store.set('layout', 'login')
-            AuthManager.onLogin = this.#onRouteChange
         }
     }
 
