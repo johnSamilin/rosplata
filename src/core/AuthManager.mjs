@@ -1,6 +1,8 @@
 import { parseJwt } from "../utils/utils.mjs"
 import { FeatureDetector } from "./FeatureDetector.mjs"
 
+const mediation = localStorage.getItem('mediation')
+
 class CAuthManager {
     #isLoggedIn = false
     #data
@@ -29,19 +31,19 @@ class CAuthManager {
                         'https://accounts.google.com',
                     ],
                 },
-                mediation: 'silent'
+                mediation: mediation ? mediation : 'optional'
             });
             if (profile && await this.#verify(profile)) {
                 this.#isLoggedIn = true
                 this.#data = profile
                 this.onLogin()
+                localStorage.setItem('mediation', 'silent')
                 return
             }
         }
         google.accounts.id.initialize({
             client_id: '1094687239432-p5670t7mfte768qtssg70koaf11vgp34.apps.googleusercontent.com',
             callback: this.#handleCredentialResponse,
-            itp_support: false,
         })
         this.#initLoginBtn()
     }
@@ -83,7 +85,6 @@ class CAuthManager {
                 protocol: 'openidconnect',
             },
         });
-        console.log({ c });
         return navigator.credentials.store(c);
     }
 
