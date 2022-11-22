@@ -1,4 +1,5 @@
 // @ts-check
+import { AuthManager } from "./core/AuthManager.mjs"
 import { LayoutManager } from "./core/LayoutManager.mjs"
 import { Router } from "./core/Router.mjs"
 import { importStyle } from "./utils/imports.js"
@@ -18,4 +19,9 @@ document.body.addEventListener('click', (event) => {
         }
         Router.navigate(event.target.getAttribute('href'), !didgoback)
     }
+})
+
+window.addEventListener('load', async () => {
+    await AuthManager.start()
+    Router.start()
 })

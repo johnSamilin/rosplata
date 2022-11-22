@@ -8,6 +8,8 @@
     <title>Modules test</title>
     <link rel="stylesheet" async href="https://unpkg.com/open-props@1.4.16/open-props.min.css" />
     <link rel="stylesheet" async href="/styles/App.css" />
+    <link rel="canonical" href="https://ros-plata.ru" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script src="/src/core/Router.mjs" type="module"></script>
     <script src="/src/core/Component.mjs" type="module"></script>
@@ -85,6 +87,14 @@
         <div class="settings-item">
             <label class="settings-item__name"></label>
             <input class="settings-item__value" />
+        </div>
+    </template>
+
+    <template id="layout-login-template">
+        <div id="layout-login">
+            <h1 class="layout-login__prompt">Enter Rosplata</h1>
+            <h2 class="layout-login__prompt-detail">Use your google account to start using shared budgets</h2>
+            <div id="login__google"></div>
         </div>
     </template>
 </head>

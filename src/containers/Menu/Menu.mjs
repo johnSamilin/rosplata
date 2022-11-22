@@ -3,6 +3,7 @@ import { Component } from '../../core/Component.mjs'
 import { Router } from '../../core/Router.mjs'
 import { BASE_URL } from '../../constants/routes.mjs'
 import { importStyle } from '../../utils/imports.js'
+import { AuthManager } from '../../core/AuthManager.mjs'
 
 importStyle('/src/containers/Menu/Menu.css')
 
@@ -24,6 +25,11 @@ export class Menu extends Component {
             title: 'Features support',
             link: '/settings/features',
         },
+        {
+            title: 'Log out',
+            link: '/login',
+            onclick: AuthManager.logout
+        }
     ]
 
     constructor() {
@@ -40,6 +46,9 @@ export class Menu extends Component {
             const itemContent = itemTemplate.content.cloneNode(true)
             const itemContainer = itemContent.querySelector('.menu-item')
             itemContainer.setAttribute('href', item.link)
+            if (item.onclick) {
+                itemContainer.addEventListener('click', item.onclick)
+            }
             itemContainer.text = item.title
             if (Router.currentRoute === BASE_URL + item.link) {
                 itemContainer.classList.add('active')

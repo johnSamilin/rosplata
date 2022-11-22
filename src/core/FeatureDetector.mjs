@@ -7,16 +7,12 @@ let instance
 const mobileMediaQuery = window.matchMedia('(max-width: 425px)')
 
 class CFeatureDetector {
-    // @ts-ignore
-    #transitionApi = !!document.createDocumentTransition
     #importMaps = HTMLScriptElement.supports && HTMLScriptElement.supports('importmap')
     #connectionSpeed = navigator.connection.effectiveType
     #URLPattern = 'URLPattern' in window
     #isMobile = mobileMediaQuery.matches
+    #federatedLogin = navigator.credentials && 'FederatedCredential' in window
 
-    get transtionApi() {
-        return this.#transitionApi;
-    }
     get importMaps() {
         return this.#importMaps
     }
@@ -28,6 +24,9 @@ class CFeatureDetector {
     }
     get isMobile() {
         return this.#isMobile
+    }
+    get federatedLogin() {
+        return this.#federatedLogin
     }
 
     updateNetworkInformation = () => {
@@ -52,10 +51,10 @@ class CFeatureDetector {
 
     [Symbol.iterator] = function *() {
         yield *[
-            ['Transition Api', this.#transitionApi],
             ['Import Maps', this.#importMaps],
             ['Connection Speed Estimation', this.#connectionSpeed],
             ['URL pattern matching', this.#URLPattern],
+            ['WebAuthn: federated login', this.#federatedLogin],
         ];
     }
 }
