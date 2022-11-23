@@ -1,7 +1,5 @@
-import { parseJwt } from "../utils/utils.mjs"
+import { getFromLs, isOverridden, parseJwt } from "../utils/utils.mjs"
 import { FeatureDetector } from "./FeatureDetector.mjs"
-
-const mediation = localStorage.getItem('mediation')
 
 class CAuthManager {
     #isLoggedIn = false
@@ -18,9 +16,20 @@ class CAuthManager {
     onLogin() {
         throw new Error('onLogin is not implemented')
     }
-    
+
     onLogout() {
         throw new Error('onLogout is not implemented')
+    }
+
+    get mediation() {
+        let isSilent = true
+        if (isOverridden('autoLoginEnabled')) {
+            isSilent = getFromLs('autoLoginEnabled')
+        } else {
+            isSilent = getFromLs('silentMediation')
+        }
+
+        return isSilent ? 'silent' : 'required'
     }
 
     start = async () => {
@@ -31,13 +40,15 @@ class CAuthManager {
                         'https://accounts.google.com',
                     ],
                 },
-                mediation: mediation ? mediation : 'optional'
+                mediation: this.mediation
             });
             if (profile && await this.#verify(profile)) {
                 this.#isLoggedIn = true
                 this.#data = profile
                 this.onLogin()
-                localStorage.setItem('mediation', 'silent')
+                if (!isOverridden('autoLoginEnabled')) {
+                    localStorage.setItem('silentMediation', 'true')
+                }
                 return
             }
         }
@@ -53,14 +64,15 @@ class CAuthManager {
     }
 
     async #verify(profile) {
-        return true 
+        return true
     }
 
     logout = async () => {
         this.onLogout()
         this.#isLoggedIn = false
         this.#data = null
-        await navigator.credentials.preventSilentAccess()
+        navigator.credentials.preventSilentAccess()
+        localStorage.removeItem('silentMediation')
         this.#initLoginBtn()
     }
 

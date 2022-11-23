@@ -18,23 +18,35 @@ export class Settings extends Component {
         if (!itemTemplate) {
             throw new Error('Template for settings not found!')
         }
-        const animationsContainer = itemTemplate.content.cloneNode(true)
-        const animationsName = animationsContainer.querySelector('.settings-item__name')
-        animationsName.textContent = 'Enable animations'
-        animationsName.setAttribute('for', 'animations')
-        const animations = animationsContainer.querySelector('.settings-item__value')
-        animations.setAttribute('type', 'checkbox')
-        animations.setAttribute('id', 'animations-setting') 
-        animations.setAttribute('checked', SettingsManager.animationsEnabled)
-        animations.setAttribute('name', 'animations')
+        const animationsContainer = this.createSetting('Enable animations', SettingsManager.animationsEnabled, 'animations')
+        const autoLoginContainer = this.createSetting('Enable auto login', SettingsManager.autoLoginEnabled, 'autologin')
         parentContainer.appendChild(animationsContainer)
+        parentContainer.appendChild(autoLoginContainer)
         this.attachListeners()
+    }
+
+    createSetting(title, initialValue, name) {
+        const settingContainer = itemTemplate.content.cloneNode(true)
+        const settingName = settingContainer.querySelector('.settings-item__name')
+        settingName.textContent = title
+        settingName.setAttribute('for', name)
+        const setting = settingContainer.querySelector('.settings-item__value')
+        setting.setAttribute('type', 'checkbox')
+        setting.setAttribute('id', `${name}-setting`)
+        setting.checked = initialValue
+        setting.setAttribute('name', name)
+
+        return settingContainer
     }
 
     #toggleAnimations = (evt) => {
         const isEnabled = evt.target.checked
-        SettingsManager.animationsOverridden = true
-        SettingsManager.animationsEnabled = isEnabled
+        SettingsManager.override('animationsEnabled', isEnabled)
+    }
+
+    #toggleAutologin = (evt) => {
+        const isEnabled = evt.target.checked
+        SettingsManager.override('autoLoginEnabled', isEnabled)
     }
 
     listeners = new Set([
@@ -42,6 +54,11 @@ export class Settings extends Component {
             selector: '#animations-setting',
             event: 'change',
             handler: this.#toggleAnimations,
+        },
+        {
+            selector: '#autologin-setting',
+            event: 'change',
+            handler: this.#toggleAutologin,
         }
     ])
 }

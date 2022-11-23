@@ -1,11 +1,13 @@
 //@ts-check
 
+import { getFromLs, isOverridden } from "../utils/utils.mjs"
+
 const reducedMotionMedia = matchMedia('(prefers-reduced-motion)')
 
 class CSettingsManager {
     #battery
-    #animationsOverridden = false
-    #animationsEnabled = true
+    #animationsEnabled = getFromLs('animationsEnabled')
+    #autoLoginEnabled = getFromLs('autoLoginEnabled')
 
     get animationsEnabled() {
         return this.#animationsEnabled
@@ -20,18 +22,33 @@ class CSettingsManager {
         }
     }
 
-    set animationsOverridden(value) {
-        reducedMotionMedia.removeEventListener('change', this.#onAnimationDepsChange)
-        this.#battery.removeEventListener('levelchange', this.#onAnimationDepsChange)
+    get autoLoginEnabled() {
+        return this.#autoLoginEnabled
+    }
+
+    override(name, value) {
+        if (!(name in this)) {
+            return false
+        }
+        this[`#${name}`] = value
+        localStorage.setItem(name, value)
+        switch (name) {
+            case 'animationsEnabled':
+                reducedMotionMedia.removeEventListener('change', this.#onAnimationDepsChange)
+                this.#battery.removeEventListener('levelchange', this.#onAnimationDepsChange)
+                break
+        }
     }
 
     constructor() {
-        navigator.getBattery().then(battery => {
-            this.#battery = battery
-            this.#onAnimationDepsChange()
-            reducedMotionMedia.addEventListener('change', this.#onAnimationDepsChange)
-            this.#battery.addEventListener('levelchange', this.#onAnimationDepsChange)
-        })
+        if (!isOverridden('animationsEnabled')) {
+            navigator.getBattery().then(battery => {
+                this.#battery = battery
+                this.#onAnimationDepsChange()
+                reducedMotionMedia.addEventListener('change', this.#onAnimationDepsChange)
+                this.#battery.addEventListener('levelchange', this.#onAnimationDepsChange)
+            })
+        }
     }
 
     #onAnimationDepsChange = () => {
