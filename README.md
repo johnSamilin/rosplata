@@ -16,6 +16,7 @@ Besides, it uses:
 * [HTML templates](https://caniuse.com/template) as templating mechanism
 * [Battery API](https://caniuse.com/battery-status) and [matchMedia](https://caniuse.com/matchmedia) to decide whether to turn off animations
 * Static and dynamic [ES6 imports](https://caniuse.com/es6-module-dynamic-import)
+* [Federated Credential API](https://caniuse.com/mdn-api_federatedcredential)
 
 ## Start
 Basically, startup process is described [here](https://github.com/johnSamilin/rosplata-back)
