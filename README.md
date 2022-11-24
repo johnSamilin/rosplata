@@ -20,3 +20,6 @@ Besides, it uses:
 
 ## Start
 Basically, startup process is described [here](https://github.com/johnSamilin/rosplata-back)
+
+## Concept
+TDB
