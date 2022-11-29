@@ -1,5 +1,4 @@
 #budgets-list {
-    padding: 1rem;
     flex-basis: 25%;
     max-width: 300px;
     min-width: 100px;
@@ -8,10 +7,26 @@
     flex-shrink: 0;
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.budgets-list--empty #budgets-list__items::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-3);
+    content: 'Nothing here...';
+    height: 100%;
+    color: var(--gray-6);
+    z-index: 1;
 }
 #budgets-list__items {    
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    padding: 1rem;
 }
 #budgets-list.exit,
 #budgets-list.hidden {
@@ -20,7 +35,10 @@
 }
 .budgets-list__actions {
     display: flex;
-    padding: 0.5rem;
+    width: 100%;
+}
+#budgets-list__create-button {
+    flex-grow: 1;
 }
 #budgets-list__menu-button {
     background: none;
@@ -29,9 +47,10 @@
     border: none;
     border-top: 3px solid;
     border-bottom: 3px solid;
-    margin: 0.25rem;
+    margin: 0.65rem;
     outline: none;
     position: relative;
+    align-self: center;
 }
 #budgets-list__menu-button::after {
     display: block;
@@ -59,5 +78,10 @@
         position: absolute;
         left: 0;
         right: 0;
+        height: 100%;
+    }
+    .budgets-list--empty #budgets-list__items::after {
+        width: 50%;
+        left: 25%;
     }
 }

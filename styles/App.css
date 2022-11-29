@@ -88,6 +88,16 @@ body, html {
     display: none;
 }
 
+.button {
+    background: var(--gradient-7);
+    border: none;
+    font-weight: var(--font-weight-1);
+    color: var(--gray-1);
+    font-size: var(--font-size-1);
+    padding: 0.75rem 0.75rem 0.6rem;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 425px) {
     .visible-on-mobile {
         display: initial;

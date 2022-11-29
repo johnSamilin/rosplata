@@ -85,8 +85,8 @@ export class BudgetList extends AnimatedComponent {
         await this.#addItems(new Map(Store.get('budgets')?.map(budget => [budget.id, budget])))
 
         try {
-            const { products } = await (await fetch('https://dummyjson.com/products?limit=100')).json()
-            Store.set('budgets', products)
+            const data = await (await fetch('/api/budgets')).json()
+            Store.set('budgets', data)
         } catch (er) {
             console.error(er)
         } finally {
@@ -95,11 +95,15 @@ export class BudgetList extends AnimatedComponent {
     }
 
     update = async (newData) => {
+        this.getContainer()?.classList.remove('budgets-list--empty')
         const { enter, exit, update } = getListDataDiff(this.#children, newData)
 
         this.#removeItems(exit)
         this.#updateItems(update)
         await this.#addItems(enter)
+        if (this.#children.size === 0) {
+            this.getContainer()?.classList.add('budgets-list--empty')
+        }
     }
 
     async #addItems(items) {
