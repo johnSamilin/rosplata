@@ -1,12 +1,12 @@
 // @ts-check
 import { AnimatedComponent } from '../../core/Component.mjs'
-import { debounce, getListDataDiff } from '../../utils/utils.mjs'
+import { getListDataDiff } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
+import { RequestManager } from '../../core/RequestManager.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
-let instance
 const template = document.querySelector('template#budgets-list-template')
 
 export class BudgetList extends AnimatedComponent {
@@ -15,10 +15,6 @@ export class BudgetList extends AnimatedComponent {
 
     constructor() {
         super()
-        if (instance) {
-            return instance
-        }
-        instance = this
         Store.subscribe('budgets', this.update)
     }
 
@@ -54,23 +50,6 @@ export class BudgetList extends AnimatedComponent {
         event.target.classList.remove('loading-rotate')
     }
 
-    #handleFilterChange = debounce((event) => {
-        const search = event.target.value.trim()
-        const { exit, update } = getListDataDiff(
-            this.#children,
-            [...this.#children.values()].filter(({ data }) => data.title.includes(search))
-        )
-
-        for (const [, child] of exit) {
-            child.hide()
-        }
-        this.#children.forEach(child => {
-            if (update.has(child.id)) {
-                child.show()
-            }
-        })
-    }, 300)
-
     async renderTo(parent) {
         if (!template) {
             throw new Error('#budgets-list must be present in the HTML!')
@@ -85,7 +64,7 @@ export class BudgetList extends AnimatedComponent {
         await this.#addItems(new Map(Store.get('budgets')?.map(budget => [budget.id, budget])))
 
         try {
-            const data = await (await fetch('/api/budgets')).json()
+            const data = await RequestManager.make('budgets-list', 'GET', 'budgets')
             Store.set('budgets', data)
         } catch (er) {
             console.error(er)
@@ -145,11 +124,6 @@ export class BudgetList extends AnimatedComponent {
             selector: '#budgets-list__items',
             event: 'contextmenu',
             handler: this.#handleItemRightClick,
-        },
-        {
-            selector: 'input#budgets-list-filter-input',
-            event: 'keyup',
-            handler: this.#handleFilterChange,
         },
         {
             selector: 'button#budgets-list__menu-button',

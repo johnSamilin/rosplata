@@ -8,7 +8,6 @@ import { importStyle } from "../../utils/imports.js";
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
-let instance
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
@@ -17,11 +16,7 @@ export class BudgetDetails extends AnimatedComponent {
 
     constructor(data) {
         super()
-        if (instance) {
-            return instance
-        }
         this.data = data
-        instance = this
         Store.subscribe('selectedBudgetId', this.sync)
     }
 
