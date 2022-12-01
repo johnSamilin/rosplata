@@ -9,6 +9,8 @@ importStyle('/src/containers/BudgetList/BudgetList.css')
 
 const template = document.querySelector('template#budgets-list-template')
 
+const Api = new RequestManager('budgets')
+
 export class BudgetList extends AnimatedComponent {
     #children = new Map()
     containerId = 'budgets-list'
@@ -61,10 +63,9 @@ export class BudgetList extends AnimatedComponent {
         this.getContainer()?.classList.add('loading')
         parent.appendChild(container)
         this.attachListeners()
-        await this.#addItems(new Map(Store.get('budgets')?.map(budget => [budget.id, budget])))
 
         try {
-            const data = await RequestManager.make('budgets-list', 'GET', 'budgets')
+            const data = await Api.get('list', 'budgets')
             Store.set('budgets', data)
         } catch (er) {
             console.error(er)

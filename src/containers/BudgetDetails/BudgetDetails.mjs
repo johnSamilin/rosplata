@@ -4,10 +4,13 @@ import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { AnimatedComponent } from "../../core/Component.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
+import { RequestManager } from "../../core/RequestManager.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
+
+const Api = new RequestManager('budget')
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
@@ -29,7 +32,7 @@ export class BudgetDetails extends AnimatedComponent {
         const budget = Store.get('budgets')?.find(budget => budget.id === id)
         this.data = budget
         this.update()
-        const data = await (await fetch(`https://dummyjson.com/products/${id}`, { signal: this.abort.signal })).json()
+        const data = await Api.get('details', `budgets/${id}`)
         this.data = data
         this.update()
     }
