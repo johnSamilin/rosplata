@@ -14,11 +14,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-size-3);
-    font-weight: var(--font-weight-3);
+    font-size: 1rem;
+    font-weight: 300;
     content: 'Nothing here...';
     height: 100%;
-    color: var(--gray-6);
+    color: gray;
     z-index: 1;
 }
 #budgets-list__items {    
@@ -26,7 +26,6 @@
     flex-direction: column;
     flex-grow: 1;
     position: relative;
-    padding: 1rem;
 }
 #budgets-list.exit,
 #budgets-list.hidden {
@@ -47,7 +46,8 @@
     border: none;
     border-top: 3px solid;
     border-bottom: 3px solid;
-    margin: 0.65rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
     outline: none;
     position: relative;
     align-self: center;
@@ -58,7 +58,7 @@
     height: 3px;
     width: 1.5rem;
     position: relative;
-    left: -0.4rem;
+    left: -0.75rem;
     background: black;
 }
 #budgets-list__menu-button.loading-rotate {

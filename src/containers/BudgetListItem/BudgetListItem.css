@@ -1,13 +1,14 @@
 .budgets-list-item {
     margin: 0 0.5rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid lightblue;
+    padding: 1rem 0.5rem;
     will-change: transform, height;
     display: block;
     transition: transform 0.3s ease-in-out;
     transform: unset;
     position: relative;
     order: attr(data-id);
+    border-color: transparent;
+    border-bottom-color: black;
 }
 
 .budgets-list-item.exit {
@@ -23,5 +24,5 @@
 
 .budgets-list-item--selected {
     /* order: -1; */
-    border-right: 3px solid salmon;
+    border-bottom-color: salmon;
 }

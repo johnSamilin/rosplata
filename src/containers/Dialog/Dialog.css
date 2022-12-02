@@ -1,5 +1,9 @@
 #modal-window {
     border: none;
-    border-radius: var(--radius-3);
-    box-shadow: var(--shadow-3);
+    border-radius: none;
+    background: none;
+}
+#modal-window nav {
+    display: flex;
+    flex-direction: column;
 }

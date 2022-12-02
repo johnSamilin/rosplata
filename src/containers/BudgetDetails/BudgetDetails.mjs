@@ -62,16 +62,7 @@ export class BudgetDetails extends AnimatedComponent {
 
     update(target) {
         const container = target ?? this.getContainer()
-        this.setAttr(container, '#budget-details__title', 'textContent', this.data?.title)
-        this.setAttr(container, '#budget-details__brand', 'textContent', this.data?.brand)
-        this.setAttr(container, '#budget-details__category', 'textContent', this.data?.category ?? 'loading...')
-        this.setAttr(container, '#budget-details__description', 'textContent', this.data?.description ?? 'loading...')
-        this.setAttr(container, '#budget-details__discount', 'textContent', this.data?.discountPercentage ?? 'loading...')
-        this.setAttr(container, '#budget-details__price', 'textContent', this.data?.price ?? 'loading...')
-        this.setAttr(container, '#budget-details__rating', 'textContent', this.data?.rating ?? 'loading...')
-        this.setAttr(container, '#budget-details__stock', 'textContent', this.data?.stock ?? 'loading...')
-        const isBandwidthHigh = ['3g', '4g'].includes(FeatureDetector.connectionSpeed)
-        this.setAttr(container, '#budget-details__thumbnail', 'src', isBandwidthHigh && this.data?.thumbnail, true)
+        this.setAttr(container, '#budget-details__title', 'textContent', this.data?.name)
     }
 
     listeners = new Set([

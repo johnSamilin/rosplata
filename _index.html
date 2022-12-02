@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modules test</title>
-    <link rel="stylesheet" async href="https://unpkg.com/open-props@1.4.16/open-props.min.css" />
+    <link rel="stylesheet" async href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css" />
     <link rel="stylesheet" async href="/styles/App.css" />
     <link rel="canonical" href="https://ros-plata.ru" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -36,7 +36,7 @@
             <button id="budgets-list__create-button" class="button">Create new</button>
             <button id="budgets-list__menu-button"></button>
         </div>
-        <div id="budgets-list__items"></div>
+        <div id="budgets-list__items" class="child-borders"></div>
     </template>
 
     <template id="budgets-list-item-template">
@@ -50,14 +50,6 @@
             <a href="/" data-goback>Назад</a>
         </div>
         <h1 id="budget-details__title"></h1>
-        <h2 id="budget-details__brand"></h2>
-        <strong>category: <span id="budget-details__category"></span></strong>
-        <div>thumbnail: <img id="budget-details__thumbnail" /></div>
-        <blockquote>description: <span id="budget-details__description"></span></blockquote>
-        <div>discountPercentage: <span id="budget-details__discount"></span></div>
-        <div>price: <span id="budget-details__price"></span></div>
-        <div>rating: <span id="budget-details__rating"></span></div>
-        <div>stock: <span id="budget-details__stock"></span></div>
         <button id="budget-details__delete">Delete this</button>
     </template>
 
@@ -76,7 +68,7 @@
     </template>
 
     <template id="menu-template">
-        <nav id="menu"></nav>
+        <nav id="menu" class="paper border-1"></nav>
     </template>
 
     <template id="menu-item-template">

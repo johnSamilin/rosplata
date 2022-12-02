@@ -25,8 +25,9 @@ export class RequestManager {
             try {
                 const response = await fetch(`/api/${url}`, {
                     method,
-                    body: params?.body,
                     credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(params?.body),
                     signal: this.#handles.get(reqId).signal,
                 })
                 return await response.json()
