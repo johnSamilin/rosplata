@@ -52,9 +52,10 @@ class CRouter {
             console.error('Suitable layout not found');
             return false
         }
+        const additionalParams = activeLayout.params ?? {}
         this.#currentRoute = location.pathname
         this.#queryParams = location.search.replace('?', '').split('&').map(param => param.split('='))
-        this.#routeParams = activeLayout.pattern.exec(location.href).pathname.groups
+        this.#routeParams = { ...activeLayout.pattern.exec(location.href).pathname.groups, ...additionalParams }
         this.#hash = location.hash
         Store.set('layout', activeLayout.layout)
     }

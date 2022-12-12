@@ -34,6 +34,7 @@ export class Component {
         const container = this.getContainer()
         return new Promise((resolve) => {
             container?.classList.add('exit')
+            container?.classList.add('hidden')
             resolve(true)
         })
     }

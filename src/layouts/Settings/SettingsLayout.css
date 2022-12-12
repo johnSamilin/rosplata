@@ -11,9 +11,8 @@
     margin-right: 1rem;
 }
 #layout-settings #menu .menu-item.active {
-    box-shadow: var(--shadow-2);
     background: white;
-    border-radius: var(--radius-3);
+    color: brown;
     padding: 0 0.5rem;
 }
 

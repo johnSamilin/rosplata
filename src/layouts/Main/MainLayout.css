@@ -10,3 +10,9 @@
 #layout-main.exit {
     opacity: 0;
 }
+
+@media screen and (max-width: 425px) {
+    #layout-main #create-form {
+        width: 100%;
+    }
+}

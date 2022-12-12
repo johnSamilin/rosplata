@@ -1,12 +1,12 @@
 #menu {
     padding: 0.5rem;
-    font-size: var(--font-size-3);
-    line-height: var(--font-lineheight-5);
-
+    font-size: 1rem;
+    line-height: 1.5;
+    border-color: black;
 }
 #menu .menu-item {
-    display: block;
-    text-decoration: none;
+    white-space: pre;
+    border: none;
 }
 
 @media screen and (max-width: 425px) {

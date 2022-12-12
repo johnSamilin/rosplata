@@ -96,8 +96,9 @@ class CAuthManager {
                 iconURL: profile.picture,
                 protocol: 'openidconnect',
             },
-        });
-        return navigator.credentials.store(c);
+        })
+        this.#data = c
+        return navigator.credentials.store(c)
     }
 
     #handleCredentialResponse = async (evt) => {

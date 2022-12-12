@@ -31,7 +31,7 @@ export class BudgetListItem extends AnimatedComponent {
     
     update = (target) => {
         const container = target ?? this.getContainer()
-        container.querySelector('.budget-title').textContent = this.data.title
+        container.querySelector('.budget-title').textContent = this.data.name
         container?.setAttribute('id', this.containerId)
         container?.setAttribute('data-id', this.id)
     }

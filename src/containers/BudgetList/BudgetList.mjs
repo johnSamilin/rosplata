@@ -1,13 +1,16 @@
 // @ts-check
 import { AnimatedComponent } from '../../core/Component.mjs'
-import { debounce, getListDataDiff } from '../../utils/utils.mjs'
+import { getListDataDiff } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
+import { RequestManager } from '../../core/RequestManager.mjs'
+import { Router } from '../../core/Router.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
-let instance
 const template = document.querySelector('template#budgets-list-template')
+
+const Api = new RequestManager('budgets')
 
 export class BudgetList extends AnimatedComponent {
     #children = new Map()
@@ -15,10 +18,6 @@ export class BudgetList extends AnimatedComponent {
 
     constructor() {
         super()
-        if (instance) {
-            return instance
-        }
-        instance = this
         Store.subscribe('budgets', this.update)
     }
 
@@ -32,12 +31,9 @@ export class BudgetList extends AnimatedComponent {
         Router.navigate(`/budgets/${clickedItem.id}`)
     }
 
-    #handleItemRightClick = (event) => {
-        event.preventDefault()
-        const clickedItemId = event.target.closest('.budgets-list-item')?.id
-        const clickedItem = this.#children.get(clickedItemId)
-        clickedItem?.exterminate()
-        this.#children.delete(clickedItemId)
+    #handleCreateBudget = async (event) => {
+        event.preventDefault()        
+        Router.navigate('/create')
     }
 
     #handleMenuBtnClick = async (event) => {
@@ -54,23 +50,6 @@ export class BudgetList extends AnimatedComponent {
         event.target.classList.remove('loading-rotate')
     }
 
-    #handleFilterChange = debounce((event) => {
-        const search = event.target.value.trim()
-        const { exit, update } = getListDataDiff(
-            this.#children,
-            [...this.#children.values()].filter(({ data }) => data.title.includes(search))
-        )
-
-        for (const [, child] of exit) {
-            child.hide()
-        }
-        this.#children.forEach(child => {
-            if (update.has(child.id)) {
-                child.show()
-            }
-        })
-    }, 300)
-
     async renderTo(parent) {
         if (!template) {
             throw new Error('#budgets-list must be present in the HTML!')
@@ -82,11 +61,10 @@ export class BudgetList extends AnimatedComponent {
         this.getContainer()?.classList.add('loading')
         parent.appendChild(container)
         this.attachListeners()
-        await this.#addItems(new Map(Store.get('budgets')?.map(budget => [budget.id, budget])))
 
         try {
-            const { products } = await (await fetch('https://dummyjson.com/products?limit=100')).json()
-            Store.set('budgets', products)
+            const data = await Api.get('list', 'budgets')
+            Store.set('budgets', data)
         } catch (er) {
             console.error(er)
         } finally {
@@ -95,11 +73,15 @@ export class BudgetList extends AnimatedComponent {
     }
 
     update = async (newData) => {
+        this.getContainer()?.classList.remove('budgets-list--empty')
         const { enter, exit, update } = getListDataDiff(this.#children, newData)
 
         this.#removeItems(exit)
         this.#updateItems(update)
         await this.#addItems(enter)
+        if (this.#children.size === 0) {
+            this.getContainer()?.classList.add('budgets-list--empty')
+        }
     }
 
     async #addItems(items) {
@@ -138,14 +120,9 @@ export class BudgetList extends AnimatedComponent {
             handler: this.#handleItemClick,
         },
         {
-            selector: '#budgets-list__items',
-            event: 'contextmenu',
-            handler: this.#handleItemRightClick,
-        },
-        {
-            selector: 'input#budgets-list-filter-input',
-            event: 'keyup',
-            handler: this.#handleFilterChange,
+            selector: 'button#budgets-list__create-button',
+            event: 'click',
+            handler: this.#handleCreateBudget,
         },
         {
             selector: 'button#budgets-list__menu-button',

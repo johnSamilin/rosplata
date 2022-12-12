@@ -1,0 +1,20 @@
+#new-budget__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-width: 300px;
+}
+.new-budget__fields {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0.5rem;
+}
+.new-budget__buttons {
+    display: flex;
+    justify-content: space-between;
+}
+.new-budget__buttons button {
+    width: 45%;
+}
