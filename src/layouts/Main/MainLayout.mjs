@@ -7,11 +7,13 @@ import { Store } from '../../core/Store.mjs'
 import { Router } from '../../core/Router.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { FeatureDetector } from '../../core/FeatureDetector.mjs'
+import { NewBudget } from '../../containers/NewBudget/NewBudget.mjs'
 
 importStyle('/src/layouts/Main/MainLayout.css')
 
 let budgetListController
 let budgetDetailsController
+let newBudgetController
 
 const template = document.querySelector('template#layout-main-template')
 
@@ -21,33 +23,39 @@ export class MainLayout extends AnimatedComponent {
     renderTo(parent) {
         budgetListController = new BudgetList()
         budgetDetailsController = new BudgetDetails()
+        newBudgetController = new NewBudget()
         //@ts-ignore
         const content = template.content.cloneNode(true)
         parent?.appendChild(content)
         const contentContainer = parent?.querySelector(`#${this.containerId}`)
         budgetDetailsController.renderTo(contentContainer?.querySelector('#budget-details'))
         budgetListController.renderTo(contentContainer?.querySelector('#budgets-list'))
+        newBudgetController.renderTo(contentContainer?.querySelector('#create-form'))
         this.attachListeners()
         this.update()
     }
 
     update() {
-        const { id } = Router.routeParams
+        const { id, create } = Router.routeParams
         const selectedBudgetId = id ? parseInt(id, 10) : -1
         Store.set('selectedBudgetId', selectedBudgetId)
-        if (selectedBudgetId > -1) {
-            budgetDetailsController.show()
-            FeatureDetector.isMobile ? budgetListController.hide() : budgetListController.show()
+        if (FeatureDetector.isMobile && (
+            selectedBudgetId > -1
+            || create
+        )) {
+            budgetListController.hide()
         } else {
-            budgetDetailsController.hide()
             budgetListController.show()
         }
+        selectedBudgetId > -1 ? budgetDetailsController.show() : budgetDetailsController.hide()
+        create ? newBudgetController.show() : newBudgetController.hide()
     }
 
     exterminate = async () => {
         await Promise.all([
             budgetDetailsController.exterminate(),
             budgetListController.exterminate(),
+            newBudgetController.exterminate(),
         ])
         super.exterminate()
     }

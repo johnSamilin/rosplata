@@ -23,17 +23,20 @@ export class RequestManager {
             }
             this.#handles.set(reqId, new AbortController())
             try {
+                const headers = params?.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }
+                const body = params?.body instanceof FormData ? params?.body : JSON.stringify(params?.body)
                 const response = await fetch(`/api/${url}`, {
                     method,
                     credentials: 'same-origin',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(params?.body),
+                    headers,
+                    body,
                     signal: this.#handles.get(reqId).signal,
                 })
                 return await response.json()
             } catch (er) {
                 if (er.name !== 'AbortError') {
                     console.error('Request failed', er);
+                    throw er;
                 }
             } finally {
                 this.#handles.delete(reqId)

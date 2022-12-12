@@ -26,11 +26,15 @@
     flex-direction: column;
     flex-grow: 1;
     position: relative;
+    overflow: auto;
 }
 #budgets-list.exit,
 #budgets-list.hidden {
     transform: translateX(-1rem);
     opacity: 0;
+}
+#budgets-list.hidden {
+    display: none;
 }
 .budgets-list__actions {
     display: flex;

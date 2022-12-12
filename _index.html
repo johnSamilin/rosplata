@@ -20,6 +20,7 @@
     <template id="layout-main-template">
         <div id="layout-main">
             <aside id="budgets-list"></aside>
+            <aside id="create-form"></aside>
             <section id="budget-details" class="exit hidden"></section>
         </div>
     </template>
@@ -85,9 +86,22 @@
     <template id="layout-login-template">
         <div id="layout-login">
             <h1 class="layout-login__prompt">Enter Rosplata</h1>
-            <h2 class="layout-login__prompt-detail">Use your google account to start using shared budgets</h2>
+            <h2 class="layout-login__prompt-detail">Sign in with your google account to start using shared budgets</h2>
             <div id="login__google"></div>
         </div>
+    </template>
+
+    <template id="new-budget-template">
+        <form id="new-budget__form">
+            <div class="new-budget__fields">
+                <input type="text" name="name" autocomplete="off" autofocus required minlength="3" maxlength="20"
+                    title="Only letters, digits and a space" placeholder="Budget's name" pattern="[\w\d ]*" />
+            </div>
+            <div class="new-budget__buttons">
+                <button type="submit">Go</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
     </template>
 </head>
 

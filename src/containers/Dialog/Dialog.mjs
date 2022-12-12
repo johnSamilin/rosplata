@@ -25,7 +25,7 @@ export class CDialog extends Component {
         this.stopListeners()
         this.listeners.clear()
         container.innerHTML = ''
-        this.setAttr(container, undefined, 'class', ' ')
+        this.setAttr(container, undefined, 'class', 'border-1')
     }
 
     #defaultListeners = [

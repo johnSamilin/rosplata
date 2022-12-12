@@ -72,7 +72,7 @@ body, html {
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .exit-disappear {

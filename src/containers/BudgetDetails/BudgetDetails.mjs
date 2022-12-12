@@ -15,7 +15,6 @@ const Api = new RequestManager('budget')
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
     data = {}
-    abort = new AbortController()
 
     constructor(data) {
         super()
@@ -24,11 +23,9 @@ export class BudgetDetails extends AnimatedComponent {
     }
 
     sync = async (id) => {
-        this.abort.abort()
         if (id === -1) {
             return
         }
-        this.abort = new AbortController()
         const budget = Store.get('budgets')?.find(budget => budget.id === id)
         this.data = budget
         this.update()

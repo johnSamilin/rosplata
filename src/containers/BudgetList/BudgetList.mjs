@@ -4,6 +4,7 @@ import { getListDataDiff } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { RequestManager } from '../../core/RequestManager.mjs'
+import { Router } from '../../core/Router.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
@@ -30,12 +31,9 @@ export class BudgetList extends AnimatedComponent {
         Router.navigate(`/budgets/${clickedItem.id}`)
     }
 
-    #handleItemRightClick = (event) => {
-        event.preventDefault()
-        const clickedItemId = event.target.closest('.budgets-list-item')?.id
-        const clickedItem = this.#children.get(clickedItemId)
-        clickedItem?.exterminate()
-        this.#children.delete(clickedItemId)
+    #handleCreateBudget = async (event) => {
+        event.preventDefault()        
+        Router.navigate('/create')
     }
 
     #handleMenuBtnClick = async (event) => {
@@ -122,9 +120,9 @@ export class BudgetList extends AnimatedComponent {
             handler: this.#handleItemClick,
         },
         {
-            selector: '#budgets-list__items',
-            event: 'contextmenu',
-            handler: this.#handleItemRightClick,
+            selector: 'button#budgets-list__create-button',
+            event: 'click',
+            handler: this.#handleCreateBudget,
         },
         {
             selector: 'button#budgets-list__menu-button',
