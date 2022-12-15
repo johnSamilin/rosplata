@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules test</title>
+    <title>Rosplata</title>
+
     <link rel="stylesheet" async href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css" />
     <link rel="stylesheet" async href="/styles/App.css" />
     <link rel="canonical" href="https://ros-plata.ru" />
+
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script src="/src/core/Router.mjs" type="module"></script>
     <script src="/src/core/Component.mjs" type="module"></script>
     <script src="/src/core/Store.mjs" type="module" async></script>
     <script src="/src/App.mjs" type="module"></script>
-
 
     <template id="layout-main-template">
         <div id="layout-main">
@@ -87,7 +88,7 @@
         <div id="layout-login">
             <h1 class="layout-login__prompt">Enter Rosplata</h1>
             <h2 class="layout-login__prompt-detail">Sign in with your google account to start using shared budgets</h2>
-            <div id="login__google"></div>
+            <button id="login__google">Enter</button>
         </div>
     </template>
 

@@ -1,4 +1,5 @@
 //@ts-check
+import { AuthManager } from '../../core/AuthManager.mjs'
 import { Component } from '../../core/Component.mjs'
 import { importStyle } from '../../utils/imports.js'
 
@@ -13,5 +14,18 @@ export class LoginLayout extends Component {
         //@ts-ignore
         const content = template.content.cloneNode(true)
         parent?.appendChild(content)
+        this.attachListeners()
     }
+
+    handleLogin = () => {
+        AuthManager.login()
+    }
+
+    listeners = new Set([
+        {
+            selector: 'button#login__google',
+            event: 'click',
+            handler: this.handleLogin,
+        }
+    ])
 }
