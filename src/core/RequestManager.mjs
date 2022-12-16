@@ -1,3 +1,5 @@
+import { AuthManager } from "./AuthManager.mjs"
+
 export class RequestManager {
     // deduping
     #handles = new Map()
@@ -23,12 +25,18 @@ export class RequestManager {
             }
             this.#handles.set(reqId, new AbortController())
             try {
+                const authHeaders = {
+                    'Authorization': `Bearer ${AuthManager.data.token}`,
+                }
                 const headers = params?.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }
                 const body = params?.body instanceof FormData ? params?.body : JSON.stringify(params?.body)
                 const response = await fetch(`/api/${url}`, {
                     method,
-                    credentials: 'same-origin',
-                    headers,
+                    credentials: 'omit',
+                    headers: {
+                        ...headers,
+                        ...authHeaders,
+                    },
                     body,
                     signal: this.#handles.get(reqId).signal,
                 })

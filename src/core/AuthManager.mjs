@@ -1,5 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
 import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, setPersistence, browserSessionPersistence } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
+import { RequestManager } from './RequestManager.mjs';
 import { SettingsManager } from './SettingsManager.mjs';
 
 const firebaseConfig = {
@@ -11,6 +12,7 @@ const firebaseConfig = {
     appId: "1:1094687239432:web:cbeac235d80daee660d0bd"
 };
 
+const UsersApi = new RequestManager('users')
 class CAuthManager {
     #isLoggedIn = false
     #data
@@ -52,9 +54,14 @@ class CAuthManager {
             this.#gApp = initializeApp(firebaseConfig)
             this.#gAuth = getAuth(this.#gApp)
             if (SettingsManager.autoLoginEnabled) {
-                this.#gAuth.onAuthStateChanged(() => {
+                this.#gAuth.onAuthStateChanged(async () => {
                     if (this.#gAuth.currentUser?.uid) {
                         this.isLoggedIn = true
+                        this.#data = {
+                            id: this.#gAuth.currentUser.uid,
+                            name: this.#gAuth.currentUser.displayName,
+                            token: await this.#gAuth.currentUser.getIdToken(),
+                        }
                     }
                     resolve()
                 })
@@ -69,13 +76,27 @@ class CAuthManager {
             this.#gProvider = new GoogleAuthProvider()
             await setPersistence(this.#gAuth, browserSessionPersistence)
             const result = await signInWithPopup(this.#gAuth, this.#gProvider)
-            const credential = GoogleAuthProvider.credentialFromResult(result)
-            const token = credential.accessToken
-            const user = result.user
-            this.isLoggedIn = true
+            this.#data = {
+                id: result.user.uid,
+                name: result.user.displayName,
+                token: result.user.accessToken,
+            }
+            if (await this.validate()) {
+                this.isLoggedIn = true
+            }
         } catch (error) {
             console.error(error)
         }
+    }
+
+    validate() {
+        try {
+            UsersApi.post('validate', 'users/validate')
+        } catch (er) {
+            this.isLoggedIn = false
+            return false
+        }
+        return true
     }
 
     logout = async () => {
