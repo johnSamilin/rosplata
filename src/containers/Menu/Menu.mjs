@@ -27,7 +27,7 @@ export class Menu extends Component {
         },
         {
             title: 'Log out',
-            link: '/login',
+            link: '#',
             onclick: AuthManager.logout
         }
     ]

@@ -23,5 +23,7 @@ document.body.addEventListener('click', (event) => {
 
 window.addEventListener('load', async () => {
     await AuthManager.start()
-    Router.start()
+    if (await AuthManager.validate()) {
+        Router.start()
+    }
 })

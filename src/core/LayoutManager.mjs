@@ -16,7 +16,7 @@ class CLayoutManager {
 
     #onChange = async (newLayout) => {
         if (newLayout === this.#active) {
-            this.#layout.update()
+            this.#layout?.update()
         } else {
             this.#active = newLayout
             this.#layout?.exterminate()
