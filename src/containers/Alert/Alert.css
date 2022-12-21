@@ -1,0 +1,8 @@
+#alerts {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    display: flex;
+    flex-direction: column-reverse;
+    z-index: 100;
+}

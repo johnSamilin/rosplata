@@ -43,7 +43,7 @@
 
     <template id="budgets-list-item-template">
         <li class="budgets-list-item">
-            <div>Название:</div><span class="budget-title"></span>
+            <span class="budget-title"></span>
         </li>
     </template>
 
@@ -52,7 +52,6 @@
             <a href="/" data-goback>Назад</a>
         </div>
         <h1 id="budget-details__title"></h1>
-        <button id="budget-details__delete">Delete this</button>
     </template>
 
     <template id="feature-detector__template">
@@ -104,9 +103,20 @@
             </div>
         </form>
     </template>
+
+    <template id="alert-template">
+        <div class="app-alert">
+            <input class="alert-state" id="alert" type="checkbox">
+            <div class="alert dismissible">
+                <span class="app-alert__text"></span>
+                <label class="btn-close" for="alert">X</label>
+            </div>
+        </div>
+    </template>
 </head>
 
 <body>
+    <div id="alerts"></div>
     <dialog id="modal-window"></dialog>
     <div id="layout"></div>
 </body>
