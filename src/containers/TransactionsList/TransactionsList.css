@@ -1,0 +1,7 @@
+.transactions-list__new {
+    display: flex;
+    margin: 1rem 0;
+}
+.transactions-list__new input {
+    flex-grow: 1;
+}

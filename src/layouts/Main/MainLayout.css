@@ -1,6 +1,6 @@
 #layout-main {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     opacity: 1;
     will-change: opacity;
     transition: opacity 0.1s ease;

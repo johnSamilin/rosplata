@@ -1,6 +1,6 @@
 // @ts-check
 import { AnimatedComponent } from '../../core/Component.mjs'
-import { getListDataDiff } from '../../utils/utils.mjs'
+import { getListDataDiff, mapArrayToObjectId } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { RequestManager } from '../../core/RequestManager.mjs'
@@ -64,7 +64,7 @@ export class BudgetList extends AnimatedComponent {
 
         try {
             const data = await Api.get('list', 'budgets')
-            Store.set('budgets', data)
+            Store.set('budgets', mapArrayToObjectId(data))
         } catch (er) {
             console.error(er)
         } finally {
@@ -74,7 +74,7 @@ export class BudgetList extends AnimatedComponent {
 
     update = async (newData) => {
         this.getContainer()?.classList.remove('budgets-list--empty')
-        const { enter, exit, update } = getListDataDiff(this.#children, newData)
+        const { enter, exit, update } = getListDataDiff(this.#children, Object.values(newData))
 
         this.#removeItems(exit)
         this.#updateItems(update)

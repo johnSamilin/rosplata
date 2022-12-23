@@ -53,3 +53,10 @@ export function getFromLs(itemName) {
 export function isOverridden(itemName) {
     return (typeof localStorage.getItem(itemName)) === 'string'
 }
+
+export function mapArrayToObjectId(array) {
+    return array.reduce((acc, el) => {
+        acc[el.id] = el
+        return acc
+    }, {})
+}

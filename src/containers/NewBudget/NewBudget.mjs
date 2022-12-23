@@ -5,6 +5,7 @@ import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { Router } from "../../core/Router.mjs";
+import { mapArrayToObjectId } from "../../utils/utils.mjs";
 
 importStyle('/src/containers/NewBudget/NewBudget.css')
 
@@ -44,7 +45,7 @@ export class NewBudget extends Component {
             this.isInProgress = true
             await Api.put('create', 'budgets', { body: data })
             const budgets = await Api.get('list', 'budgets')
-            Store.set('budgets', budgets)
+            Store.set('budgets', mapArrayToObjectId(budgets))
             form.reset()
         } catch(er) {
             console.error('Can\'t create budget', { er })
@@ -54,9 +55,7 @@ export class NewBudget extends Component {
     }
 
     handleReset = () => {
-        if (!Router.back()) {
-            Router.navigate('/')
-        }
+        Router.navigate('/')
     }
 
     listeners = new Set([

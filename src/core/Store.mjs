@@ -8,7 +8,7 @@ class CStore {
     // TODO: use proxy
     data = {
         selectedBudgetId: -1,
-        budgets: [],
+        budgets: {},
         layout: '',
         isMobile: FeatureDetector.isMobile,
     }

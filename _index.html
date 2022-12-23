@@ -51,7 +51,35 @@
         <div class="visible-on-mobile">
             <a href="/" data-goback>Назад</a>
         </div>
-        <h1 id="budget-details__title"></h1>
+        <div class="budget-details__counters">
+            <div class="budget-details__counter-wrapper">
+                <span class="budget-details__counter budget-details__counter--my"></span>
+                <span>My balance</span>
+            </div>
+            <div class="budget-details__counter-wrapper">
+                <span class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
+                <span>Total sum</span>
+            </div>
+        </div>
+        <div class="budget-details__transactions"></div>
+    </template>
+
+    <template id="transactions-list-template">
+        <div id="transactions-list">
+            <form class="transactions-list__new">
+                <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0" title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
+                <button type="submit" class="transactions-list__ok-btn">mkay</button>
+            </form>
+            <div class="transactions-list__items"></div>
+        </div>
+    </template>
+
+    <template id="transactions-list-item-template">
+        <div class="transactions-list-item">
+            <img src="" alt="" class="transactions-list-item__image" width="20px" height="20px" />
+            <span class="transactions-list-item__name"></span>
+            <span class="transactions-list-item__amount"></span>
+        </div>
     </template>
 
     <template id="feature-detector__template">

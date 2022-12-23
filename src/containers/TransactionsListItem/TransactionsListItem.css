@@ -1,0 +1,8 @@
+.transactions-list-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25rem 0;
+}
+.transactions-list-item__name {
+    flex-grow: 1;
+}
