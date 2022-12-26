@@ -2,6 +2,22 @@
 
 import { SettingsManager } from "./SettingsManager.mjs"
 
+function seal(element) {
+    if (element) {
+        element.classList.add('exit')
+        element.classList.add('hidden')
+        element.inert = true
+    }
+}
+
+function unseal(element) {
+    if (element) {
+        element.classList.remove('exit')
+        element.classList.remove('hidden')
+        element.inert = false
+    }
+}
+
 export class Component {
     containerId
     listeners = new Set()
@@ -33,8 +49,7 @@ export class Component {
     hide() {
         const container = this.getContainer()
         return new Promise((resolve) => {
-            container?.classList.add('exit')
-            container?.classList.add('hidden')
+            seal(container)
             resolve(true)
         })
     }
@@ -42,8 +57,7 @@ export class Component {
     show() {
         const container = this.getContainer()
         return new Promise((resolve) => {
-            container?.classList.remove('exit')
-            container?.classList.remove('hidden')
+            unseal(container)
             resolve(true)
         })
     }
@@ -56,9 +70,8 @@ export class Component {
 
     async clear() {
         this.stopListeners()
-        await this.hide()
-        //@ts-ignore
-        this.getContainer().innerHTML = ''
+        const container = this.getContainer()
+        container ? container.innerHTML = '' : null
     }
 
     setAttr(container, selector, attribute, value, hideIfEmpty = false) {
@@ -71,12 +84,12 @@ export class Component {
                 default:
                     node.setAttribute(attribute, value)
             }
-            node.classList.remove('hidden')
+            unseal(node)
             return true
         }
 
         if (hideIfEmpty) {
-            node.classList.add('hidden')
+            seal(node)
         }
     }
 }
@@ -87,7 +100,7 @@ export class AnimatedComponent extends Component {
         const container = this.getContainer()
         return new Promise((resolve) => {
             const onTransitionEnd = () => {
-                container?.classList.add('hidden')
+                seal(container)
                 clearEvents()
                 resolve(true)
             }
@@ -123,8 +136,7 @@ export class AnimatedComponent extends Component {
                 container?.removeEventListener('transitioncancel', onTransitionEnd)
             }
             if (!SettingsManager.animationsEnabled) {
-                container?.classList.remove('exit')
-                container?.classList.remove('hidden')
+                unseal(container)
                 resolve(true)
                 return
             }
@@ -133,11 +145,9 @@ export class AnimatedComponent extends Component {
                 resolve(false)
                 return
             }
-            console.log('attach')
             container?.addEventListener('transitionend', onTransitionEnd, { once: true })
             container?.addEventListener('transitioncancel', onTransitionEnd)
-            container?.classList.remove('exit')
-            container?.classList.remove('hidden')
+            unseal(container)
         })
     }
 }
