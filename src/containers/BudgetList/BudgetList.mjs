@@ -16,6 +16,10 @@ export class BudgetList extends AnimatedComponent {
     #children = new Map()
     containerId = 'budgets-list'
 
+    set isInProgress(val) {
+        this.addCssClassConditionally(val, 'loading')
+    }
+
     constructor() {
         super()
         Store.subscribe('budgets', this.update)
@@ -46,7 +50,7 @@ export class BudgetList extends AnimatedComponent {
         const menuController = new Menu()
         menuController.renderTo(Dialog.getContainer())
         Dialog.show()
-        Dialog.getContainer()?.classList.add('menu')
+        Dialog.addCssClass('menu')
         event.target.classList.remove('loading-rotate')
     }
 
@@ -58,7 +62,7 @@ export class BudgetList extends AnimatedComponent {
         //@ts-ignore
         const container = template.content.cloneNode(true)
 
-        this.getContainer()?.classList.add('loading')
+        this.isInProgress = true
         parent.appendChild(container)
         this.attachListeners()
 
@@ -68,19 +72,19 @@ export class BudgetList extends AnimatedComponent {
         } catch (er) {
             console.error(er)
         } finally {
-            this.getContainer()?.classList.remove('loading')
+            this.isInProgress = false
         }
     }
 
     update = async (newData) => {
-        this.getContainer()?.classList.remove('budgets-list--empty')
+        this.getContainer()?.classList.remove(this.getCssClass(null, 'empty'))
         const { enter, exit, update } = getListDataDiff(this.#children, Object.values(newData))
 
         this.#removeItems(exit)
         this.#updateItems(update)
         await this.#addItems(enter)
         if (this.#children.size === 0) {
-            this.getContainer()?.classList.add('budgets-list--empty')
+            this.addCssClass(this.getBemClass(null, 'empty'))
         }
     }
 

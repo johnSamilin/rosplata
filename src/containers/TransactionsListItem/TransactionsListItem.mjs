@@ -10,6 +10,11 @@ const template = document.querySelector('template#transactions-list-item-templat
 export class TransactionsListItem extends Component {
     containerId = 'transaction'
     #data
+    baseCssClass = 'transactions-list-item'
+
+    set syncronized(val) {
+        this.addCssClassConditionally(!val, this.getCssClass('', 'local'))
+    }
 
     constructor(data) {
         super()
@@ -29,12 +34,11 @@ export class TransactionsListItem extends Component {
         this.update()
     }
     
-    update() {
+    update = () => {
         const container = this.getContainer()
-        this.setAttr(container, '.transactions-list-item__image', 'src', this.#data.user.picture)
-        this.setAttr(container, '.transactions-list-item__image', 'alt', this.#data.user.name)
-        this.setAttr(container, '.transactions-list-item__name', 'textContent', this.#data.user.name)
-        this.setAttr(container, '.transactions-list-item__amount', 'textContent', this.#data.amount)
+        this.setAttr(container, `.${this.getCssClass('image')}`, 'src', this.#data.user.picture)
+        this.setAttr(container, `.${this.getCssClass('name')}`, 'textContent', this.#data.user.name)
+        this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', this.#data.amount)
     }
 
     listeners = new Set([])

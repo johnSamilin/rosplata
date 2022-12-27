@@ -3,6 +3,7 @@
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     padding: 1rem;
+    overflow: auto;
 }
 #budget-details.exit,
 #budget-details.hidden {
@@ -12,6 +13,7 @@
 .budget-details__counters {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .budget-details__counter-wrapper {
     display: flex;
@@ -26,7 +28,7 @@
 }
 .budget-details__counter::before {
     display: inline-block;
-    background-color: aquamarine;
+    background-color: lightgreen;
     content: '+';
     border-radius: 50%;
     width: 1.15rem;

@@ -5,6 +5,45 @@ import { SettingsManager } from "./SettingsManager.mjs"
 export class Component {
     containerId
     listeners = new Set()
+    baseCssClass = ''
+
+    getCssClass(block, modifiers) {
+        let className = `${this.baseCssClass}`
+        if (block) {
+            className += `__${block}`
+        }
+        if (Array.isArray(modifiers)) {
+            className += modifiers.map(mod => `${className}--${mod}`).join(' ')
+        } else if (modifiers?.length) {
+            className += `--${modifiers}`
+        }
+
+        return className
+    }
+
+    getBemClass(block, modifiers) {
+        let className = this.getCssClass(block)
+        if (modifiers) {
+            className += ' '
+            className += this.getCssClass(block, modifiers)
+        }
+
+        return className
+    }
+
+    addCssClassConditionally(condition, className, node) {
+        const container = node ? node : this.getContainer()
+        const classNames = className.split(' ')
+        if (condition) {
+            classNames.forEach(name => container?.classList.add(name))
+        } else {
+            classNames.forEach(name => container?.classList.remove(name))
+        }
+    }
+
+    addCssClass(className, node) {
+        this.addCssClassConditionally(true, className, node)
+    }
 
     getContainer() {
         return document.getElementById(this.containerId)

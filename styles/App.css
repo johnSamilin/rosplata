@@ -87,6 +87,14 @@ body, html {
 .visible-on-mobile {
     display: none;
 }
+button {
+    box-shadow: none;
+    margin: 0;
+}
+button:hover {
+    transform: none;
+    box-shadow: none;
+}
 
 @media screen and (max-width: 425px) {
     .visible-on-mobile {

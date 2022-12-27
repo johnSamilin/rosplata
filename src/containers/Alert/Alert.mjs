@@ -27,7 +27,7 @@ export class Alert extends Component {
         const content = template.content.cloneNode(true)
         this.setAttr(content, '.alert-state', 'id', this.id)
         this.setAttr(content, '.btn-close', 'for', this.id)
-        content.querySelector('.alert')?.classList.add(`alert-${type}`)
+        this.addCssClass(`alert-${type}`, content.querySelector('.alert'))
         this.setAttr(content, '.app-alert__text', 'textContent', text)
 
         this.getContainer()?.appendChild(content)

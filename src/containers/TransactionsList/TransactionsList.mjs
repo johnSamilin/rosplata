@@ -1,5 +1,6 @@
 //@ts-check
 
+import { AuthManager } from "../../core/AuthManager.mjs";
 import { Component } from "../../core/Component.mjs";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { Store } from "../../core/Store.mjs";
@@ -13,8 +14,10 @@ const Api = new RequestManager('transactions')
 
 export class TransactionsList extends Component {
     containerId = 'transactions-list'
+    baseCssClass = 'transactions-list'
     #data = []
     #children = new Map()
+    #isInProgress = false
 
     constructor() {
         super()
@@ -52,18 +55,19 @@ export class TransactionsList extends Component {
         //@ts-ignore
         const container = template.content.cloneNode(true)
         parent.appendChild(container)
+        this.attachListeners()
         this.update()
     }
 
     update = async () => {
-        this.getContainer()?.classList.remove('transactions-list--empty')
+        this.getContainer()?.classList.remove()
         const { enter, exit, update } = getListDataDiff(this.#children, this.#data)
 
         this.#removeItems(exit)
         this.#updateItems(update)
         await this.#addItems(enter)
         if (this.#children.size === 0) {
-            this.getContainer()?.classList.add('transactions-list--empty')
+            this.addCssClass(this.getBemClass(null, 'empty'))
         }
     }
 
@@ -91,5 +95,41 @@ export class TransactionsList extends Component {
         }
     }
 
-    listeners = new Set([])
+    #addTransaction = async (event) => {
+        event.preventDefault()
+        if (this.#isInProgress) {
+            return false
+        }
+        const form = this.getContainer()?.querySelector('form.transactions-list__new')
+        const data = new FormData(form)
+        // @ts-ignore
+        data.append('budgetId', Store.get('selectedBudgetId'))
+        const id = Date.now()
+        try {
+            this.#isInProgress = true
+            // @ts-ignore
+            this.#addItems(new Map([
+                [id, {
+                    id,
+                    amount: data.get('amount'),
+                    user: AuthManager.data,
+                }]
+            ]))
+            form.reset()
+            await Api.post('create', 'transactions', { body: data })
+        } catch (er) {
+            console.error('Can\'t create transaction', { er })
+            this.#children.get(id).syncronized = false
+        } finally {
+            this.#isInProgress = false
+        }
+    }
+
+    listeners = new Set([
+        {
+            selector: 'form.transactions-list__new',
+            event: 'submit',
+            handler: this.#addTransaction,
+        }
+    ])
 }

@@ -5,6 +5,7 @@ import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
+import { AuthManager } from "../../core/AuthManager.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -14,6 +15,7 @@ let transactionsController
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
+    baseCssClass = 'budget-details'
     data
 
     constructor(data) {
@@ -63,11 +65,21 @@ export class BudgetDetails extends AnimatedComponent {
         if (!this.data) {
             return
         }
-        const myBalance = 0
-        const totalBalance = this.data.transactions?.reduce((acc, t) => acc + parseFloat(t.amount), 0) ?? 0
-        this.setAttr(container, '.budget-details__counter--my', 'textContent', Math.abs(myBalance).toString(10))
-        container.querySelector('.budget-details__counter--my')?.classList.add(`budget-details__counter${myBalance < 0 ? '--negative' : (myBalance === 0 && '--zero')}`)
-        this.setAttr(container, '.budget-details__counter--total', 'textContent', Math.abs(totalBalance).toString(10))
+        const { myBalance, totalBalance } = this.data.transactions?.reduce((acc, t) => {
+            acc.totalBalance += parseFloat(t.amount)
+            if (t.user.id === AuthManager.data.id) {
+                acc.myBalance += parseFloat(t.amount)
+            }
+
+            return acc
+        }, { myBalance: 0, totalBalance: 0 })
+        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', Math.abs(myBalance).toString(10))
+        const modifiers = []
+        if (myBalance <= 0) {
+            modifiers.push(myBalance < 0 ? 'negative' : 'zero')
+        }
+        this.addCssClass(this.getBemClass('counter', modifiers), container.querySelector(`.${this.getCssClass('counter', 'my')}`))
+        this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', Math.abs(totalBalance).toString(10))
     }
 
     listeners = new Set([])

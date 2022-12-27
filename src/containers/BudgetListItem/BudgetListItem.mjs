@@ -37,11 +37,7 @@ export class BudgetListItem extends AnimatedComponent {
     }
 
     updateSelectedState = (selectedBudgetId) => {
-        if (this.id === selectedBudgetId) {
-            this.getContainer()?.classList.add('budgets-list-item--selected')
-        } else {
-            this.getContainer()?.classList.remove('budgets-list-item--selected')
-        }
+        this.addCssClassConditionally(this.id === selectedBudgetId, this.getCssClass(null, 'selected'))
     }
 
     exterminate = async () =>  {
