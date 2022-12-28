@@ -40,7 +40,11 @@ export class RequestManager {
                     body,
                     signal: this.#handles.get(reqId).signal,
                 })
-                return await response.json()
+                if (response.status === 401) {
+                    AuthManager.isLoggedIn = false
+                } else {
+                    return await response.json()
+                }
             } catch (er) {
                 if (er.name !== 'AbortError') {
                     console.error('Request failed', er);
