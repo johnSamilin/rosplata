@@ -1,6 +1,6 @@
 // @ts-check
 import { AnimatedComponent } from '../../core/Component.mjs'
-import { getListDataDiff } from '../../utils/utils.mjs'
+import { getListDataDiff, mapArrayToObjectId } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { RequestManager } from '../../core/RequestManager.mjs'
@@ -15,6 +15,10 @@ const Api = new RequestManager('budgets')
 export class BudgetList extends AnimatedComponent {
     #children = new Map()
     containerId = 'budgets-list'
+
+    set isInProgress(val) {
+        this.addCssClassConditionally(val, 'loading')
+    }
 
     constructor() {
         super()
@@ -46,7 +50,7 @@ export class BudgetList extends AnimatedComponent {
         const menuController = new Menu()
         menuController.renderTo(Dialog.getContainer())
         Dialog.show()
-        Dialog.getContainer()?.classList.add('menu')
+        Dialog.addCssClass('menu')
         event.target.classList.remove('loading-rotate')
     }
 
@@ -58,29 +62,29 @@ export class BudgetList extends AnimatedComponent {
         //@ts-ignore
         const container = template.content.cloneNode(true)
 
-        this.getContainer()?.classList.add('loading')
+        this.isInProgress = true
         parent.appendChild(container)
         this.attachListeners()
 
         try {
             const data = await Api.get('list', 'budgets')
-            Store.set('budgets', data)
+            Store.set('budgets', mapArrayToObjectId(data))
         } catch (er) {
             console.error(er)
         } finally {
-            this.getContainer()?.classList.remove('loading')
+            this.isInProgress = false
         }
     }
 
     update = async (newData) => {
-        this.getContainer()?.classList.remove('budgets-list--empty')
-        const { enter, exit, update } = getListDataDiff(this.#children, newData)
+        this.getContainer()?.classList.remove(this.getCssClass(null, 'empty'))
+        const { enter, exit, update } = getListDataDiff(this.#children, Object.values(newData))
 
         this.#removeItems(exit)
         this.#updateItems(update)
         await this.#addItems(enter)
         if (this.#children.size === 0) {
-            this.getContainer()?.classList.add('budgets-list--empty')
+            this.addCssClass(this.getBemClass(null, 'empty'))
         }
     }
 

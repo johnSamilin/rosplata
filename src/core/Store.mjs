@@ -8,7 +8,7 @@ class CStore {
     // TODO: use proxy
     data = {
         selectedBudgetId: -1,
-        budgets: [],
+        budgets: {},
         layout: '',
         isMobile: FeatureDetector.isMobile,
     }
@@ -76,6 +76,23 @@ class CStore {
                 this.data[last] = value
             }
             this.#notify(fieldName, value)
+        }
+    }
+
+    push(fieldName, value) {
+        const accessors = fieldName.split('.')
+        if (this.has(fieldName)) {
+            const last = accessors.pop()
+            let finalValue = []
+            if (accessors.length > 0) {
+                const lastVal = this.get(accessors.join('.'))
+                finalValue = lastVal[last].concat(value)
+                lastVal[last] = finalValue
+            } else {
+                finalValue = this.data[last].concat(value)
+                this.data[last] = finalValue
+            }
+            this.#notify(fieldName, finalValue)
         }
     }
 }

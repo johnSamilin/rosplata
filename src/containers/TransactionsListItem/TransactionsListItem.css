@@ -1,0 +1,21 @@
+.transactions-list-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25rem 0;
+}
+.transactions-list-item__name {
+    flex-grow: 1;
+    margin-left: 0.25rem;
+}
+.transactions-list-item--local {
+    margin-left: calc(-10px - 0.25rem);
+}
+.transactions-list-item--local::before {
+    content: '';
+    display: inline-block;
+    height: 0.25rem;
+    width: 0.25rem;
+    border-radius: 50%;
+    background-color: brown;
+    margin: 10px 10px 10px 0;
+}

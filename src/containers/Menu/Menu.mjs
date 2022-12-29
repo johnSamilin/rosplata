@@ -51,7 +51,7 @@ export class Menu extends Component {
             }
             itemContainer.text = item.title
             if (Router.currentRoute === BASE_URL + item.link) {
-                itemContainer.classList.add('active')
+                this.addCssClass('active', itemContainer)
             }
             content.appendChild(itemContainer)
 
@@ -65,7 +65,7 @@ export class Menu extends Component {
         this.data.forEach(item => {
             const itemContainer = container.querySelector(`a[href="${item.link}"]`)
             if (Router.currentRoute === BASE_URL + item.link) {
-                itemContainer.classList.add('active')
+                this.addCssClass('active', itemContainer)
             } else {
                 itemContainer.classList.remove('active')
             }

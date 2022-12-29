@@ -2,6 +2,7 @@
 import { AnimatedComponent } from '../../core/Component.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
+import { getBudgetBalanceFromTransactions } from '../../utils/utils.mjs'
 
 importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
@@ -9,6 +10,7 @@ const template = document.querySelector('template#budgets-list-item-template')
 
 export class BudgetListItem extends AnimatedComponent {
     data
+    baseCssClass = 'budgets-list-item'
     id
 
     constructor(data) {
@@ -17,6 +19,7 @@ export class BudgetListItem extends AnimatedComponent {
         this.containerId = `budget-${this.data.id}`
         this.id = data.id
         Store.subscribe('selectedBudgetId', this.updateSelectedState)
+        Store.subscribe(`budgets.${data.id}.transactions`, this.#onTransactionsChanged)
     }
 
     renderTo(parent) {
@@ -31,21 +34,28 @@ export class BudgetListItem extends AnimatedComponent {
     
     update = (target) => {
         const container = target ?? this.getContainer()
-        container.querySelector('.budget-title').textContent = this.data.name
+        container.querySelector(`.${this.getCssClass('title')}`).textContent = this.data.name
         container?.setAttribute('id', this.containerId)
+        const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
+        const balanceContainer = container.querySelector(`.${this.getCssClass('my-balance')}`)
+        this.setAttr(balanceContainer, null, 'textContent', myBalance)
+        this.addCssClassConditionally(myBalance < 0, this.getBemClass('counter', 'negative'), balanceContainer)
+        this.addCssClassConditionally(myBalance > 0, this.getBemClass('counter', 'positive'), balanceContainer)
         container?.setAttribute('data-id', this.id)
     }
 
+    #onTransactionsChanged = (transactions) => {
+        this.data.transactions = transactions
+        this.update()
+    }
+
     updateSelectedState = (selectedBudgetId) => {
-        if (this.id === selectedBudgetId) {
-            this.getContainer()?.classList.add('budgets-list-item--selected')
-        } else {
-            this.getContainer()?.classList.remove('budgets-list-item--selected')
-        }
+        this.addCssClassConditionally(this.id === selectedBudgetId, this.getCssClass(null, 'selected'))
     }
 
     exterminate = async () =>  {
-        Store.unsubscribe('selectedBudgetId', this.updateSelectedState)
+        Store.unsubscribe('selectedBudgetId', this.updateSelectedState)        
+        Store.unsubscribe(`budgets.${this.id}.transactions`, this.#onTransactionsChanged)
         await super.exterminate()
     }
 
