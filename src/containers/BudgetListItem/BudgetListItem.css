@@ -9,6 +9,8 @@
     order: attr(data-id);
     border-color: transparent;
     border-bottom-color: black;
+    display: flex;
+    justify-content: space-between;
 }
 
 .budgets-list-item.exit {
@@ -25,4 +27,33 @@
 .budgets-list-item--selected {
     /* order: -1; */
     border-bottom-color: salmon;
+}
+
+.budgets-list-item__my-balance {
+    font-style: italic;
+}
+
+.budgets-list-item__my-balance::after {
+    content: '₽';
+    display: inline-block;
+    font-size: 50%;
+}
+.budgets-list-item__counter {
+    display: flex;
+    align-items: flex-end;
+}
+.budgets-list-item__counter::before {
+    display: inline-block;
+    background-color: lightgreen;
+    content: '+';
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    align-self: center;
+    font-size: 0.5rem;
+    letter-spacing: 1.5px;
+}
+.budgets-list-item__counter--negative::before {
+    background-color: indianred;
+    content: '-';
 }

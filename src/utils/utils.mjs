@@ -1,5 +1,7 @@
 //@ts-check
 
+import { AuthManager } from "../core/AuthManager.mjs"
+
 function defaultKeyAcessor(item) {
     return item.id
 }
@@ -59,4 +61,15 @@ export function mapArrayToObjectId(array) {
         acc[el.id] = el
         return acc
     }, {})
+}
+
+export function getBudgetBalanceFromTransactions(transactions = []) {
+    return transactions.reduce((acc, t) => {
+        acc.totalBalance += parseFloat(t.amount)
+        if (t.user.id === AuthManager.data.id) {
+            acc.myBalance += parseFloat(t.amount)
+        }
+
+        return acc
+    }, { myBalance: 0, totalBalance: 0 })
 }

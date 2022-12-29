@@ -18,6 +18,7 @@ export class TransactionsList extends Component {
     #data = []
     #children = new Map()
     #isInProgress = false
+    #budgetId
 
     constructor() {
         super()
@@ -28,11 +29,19 @@ export class TransactionsList extends Component {
         if (id === -1) {
             return
         }
+        Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
+        this.#budgetId = id
         this.#removeItems(this.#children)
         this.#data = Store.get(`budgets.${id}.transactions`) ?? []
         this.update()
         const data = await Api.get('list', `transactions/${id}`)
         this.#data = data
+        this.update()
+    }
+
+    #onTransactionsChanged = (transactions) => {
+        this.#data = transactions
         this.update()
     }
 
@@ -48,6 +57,7 @@ export class TransactionsList extends Component {
 
     exterminate() {
         Store.unsubscribe('selectedBudgetId')
+        Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
         return super.exterminate()
     }
 
@@ -107,16 +117,18 @@ export class TransactionsList extends Component {
         const id = Date.now()
         try {
             this.#isInProgress = true
+            const transaction = {
+                id,
+                amount: data.get('amount'),
+                user: AuthManager.data,
+            }
             // @ts-ignore
             this.#addItems(new Map([
-                [id, {
-                    id,
-                    amount: data.get('amount'),
-                    user: AuthManager.data,
-                }]
+                [id, transaction]
             ]))
             form.reset()
             await Api.post('create', 'transactions', { body: data })
+            Store.push(`budgets.${this.#budgetId}.transactions`, transaction)
         } catch (er) {
             console.error('Can\'t create transaction', { er })
             this.#children.get(id).syncronized = false

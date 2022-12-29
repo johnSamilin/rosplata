@@ -6,6 +6,7 @@ import { importStyle } from "../../utils/imports.js";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
 import { AuthManager } from "../../core/AuthManager.mjs";
+import { getBudgetBalanceFromTransactions } from "../../utils/utils.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -29,11 +30,20 @@ export class BudgetDetails extends AnimatedComponent {
         if (id === -1) {
             return
         }
+        if (this.data) {
+            Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
+        }
+        Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
         this.update()
         const data = await Api.get('details', `budgets/${id}`)
         this.data = data
+        this.update()
+    }
+
+    #onTransactionsChanged = (transactions) => {
+        this.data.transactions = transactions
         this.update()
     }
 
@@ -49,6 +59,7 @@ export class BudgetDetails extends AnimatedComponent {
     
     exterminate() {
         Store.unsubscribe('selectedBudgetId')
+        Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
         return super.exterminate()
     }
 
@@ -65,14 +76,7 @@ export class BudgetDetails extends AnimatedComponent {
         if (!this.data) {
             return
         }
-        const { myBalance, totalBalance } = this.data.transactions?.reduce((acc, t) => {
-            acc.totalBalance += parseFloat(t.amount)
-            if (t.user.id === AuthManager.data.id) {
-                acc.myBalance += parseFloat(t.amount)
-            }
-
-            return acc
-        }, { myBalance: 0, totalBalance: 0 })
+        const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
         this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', Math.abs(myBalance).toString(10))
         const modifiers = []
         if (myBalance <= 0) {
