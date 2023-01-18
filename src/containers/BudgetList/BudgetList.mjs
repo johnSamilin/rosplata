@@ -15,6 +15,7 @@ const Api = new RequestManager('budgets')
 export class BudgetList extends AnimatedComponent {
     #children = new Map()
     containerId = 'budgets-list'
+    baseCssClass = 'budgets-list'
 
     set isInProgress(val) {
         this.addCssClassConditionally(val, 'loading')
