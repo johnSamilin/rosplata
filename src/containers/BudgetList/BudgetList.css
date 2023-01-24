@@ -28,6 +28,16 @@
     position: relative;
     overflow: auto;
 }
+.budgets-list__items--empty {
+    display: none;
+}
+.budgets-list__items--status0::before {
+    display: block;
+    content: "You are invited:";
+    padding: 2.5rem 0.75rem 0;
+    font-size: 1.2rem;
+}
+
 #budgets-list.exit,
 #budgets-list.hidden {
     transform: translateX(-1rem);

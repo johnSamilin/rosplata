@@ -1,5 +1,6 @@
 //@ts-check
 
+import { allowedUserStatuses } from "../../constants/userStatuses.mjs";
 import { AuthManager } from "../../core/AuthManager.mjs";
 import { Component } from "../../core/Component.mjs";
 import { RequestManager } from "../../core/RequestManager.mjs";
@@ -30,14 +31,17 @@ export class TransactionsList extends Component {
             return
         }
         Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
-        Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
+        const budget = Store.get(`budgets.${id}`)
         this.#budgetId = id
         this.#removeItems(this.#children)
-        this.#data = Store.get(`budgets.${id}.transactions`) ?? []
-        this.update()
-        const data = await Api.get('list', `transactions/${id}`)
-        this.#data = data
-        this.update()
+        if (allowedUserStatuses.includes(budget?.currentUserStatus)) {
+            Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
+            this.#data = Store.get(`budgets.${id}.transactions`) ?? []
+            this.update()
+            const data = await Api.get('list', `transactions/${id}`)
+            this.#data = data
+            this.update()
+        }
     }
 
     #onTransactionsChanged = (transactions) => {

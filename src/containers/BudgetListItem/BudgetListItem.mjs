@@ -42,6 +42,8 @@ export class BudgetListItem extends AnimatedComponent {
         this.addCssClassConditionally(myBalance < 0, this.getBemClass('counter', 'negative'), balanceContainer)
         this.addCssClassConditionally(myBalance > 0, this.getBemClass('counter', 'positive'), balanceContainer)
         container?.setAttribute('data-id', this.id)
+        this.setAttr(container, null, 'data-status', this.data.currentUserStatus.toString())
+        container.style.order = this.data.currentUserStatus
     }
 
     #onTransactionsChanged = (transactions) => {

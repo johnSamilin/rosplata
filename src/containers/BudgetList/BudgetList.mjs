@@ -92,10 +92,17 @@ export class BudgetList extends AnimatedComponent {
     async #addItems(items) {
         const container = this.getContainer()?.querySelector('#budgets-list__items')
         const { BudgetListItem } = await import('../BudgetListItem/BudgetListItem.mjs')
+        let currentStatus = '-1'
+        let statusContainer = container
         for (const [id, item] of items) {
+            if (currentStatus !== item.currentUserStatus) {
+                currentStatus = item.currentUserStatus
+                statusContainer = container?.querySelector(`.budgets-list__items--status${currentStatus}`)
+                statusContainer?.classList.remove('budgets-list__items--empty')
+            }
             const newItem = new BudgetListItem(item)
             this.#children.set(id, newItem)
-            newItem.renderTo(container)
+            newItem.renderTo(statusContainer)
         }
     }
 
