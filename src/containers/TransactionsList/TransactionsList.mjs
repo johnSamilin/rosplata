@@ -136,6 +136,8 @@ export class TransactionsList extends Component {
         } catch (er) {
             console.error('Can\'t create transaction', { er })
             this.#children.get(id).syncronized = false
+            const { Alert } = await import('../Alert/Alert.mjs')
+            new Alert('warning', er)
         } finally {
             this.#isInProgress = false
         }
