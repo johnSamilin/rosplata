@@ -29,7 +29,7 @@ export class Component {
             className += `__${block}`
         }
         if (Array.isArray(modifiers)) {
-            className += modifiers.map(mod => `${className}--${mod}`).join(' ')
+            className += modifiers.map(mod => ` ${className}--${mod}`).join(' ')
         } else if (modifiers?.length) {
             className += `--${modifiers}`
         }

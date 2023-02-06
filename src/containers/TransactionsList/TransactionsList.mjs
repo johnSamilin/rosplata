@@ -30,8 +30,13 @@ export class TransactionsList extends Component {
         if (id === -1) {
             return
         }
-        Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
         const budget = Store.get(`budgets.${id}`)
+        this.addCssClassConditionally(
+            !allowedUserStatuses.includes(budget?.currentUserStatus),
+            'hidden',
+            this.getContainer().querySelector(`.${this.getCssClass('new')}`)
+        )
+        Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
         this.#budgetId = id
         this.#removeItems(this.#children)
         if (allowedUserStatuses.includes(budget?.currentUserStatus)) {

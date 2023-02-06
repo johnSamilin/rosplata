@@ -7,6 +7,7 @@ import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
 import { AuthManager } from "../../core/AuthManager.mjs";
 import { getBudgetBalanceFromTransactions } from "../../utils/utils.mjs";
+import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -84,6 +85,17 @@ export class BudgetDetails extends AnimatedComponent {
         }
         this.addCssClass(this.getBemClass('counter', modifiers), container.querySelector(`.${this.getCssClass('counter', 'my')}`))
         this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', Math.abs(totalBalance).toString(10))
+        
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.INVITED,
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'invite')}`)
+        )
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.UNKNOWN,
+            this.getCssClass('action', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'ask')}`)
+        )
     }
 
     listeners = new Set([])

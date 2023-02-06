@@ -4,6 +4,8 @@
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     padding: 1rem;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 #budget-details.exit,
 #budget-details.hidden {
@@ -57,6 +59,21 @@
 .budget-details__transactions {
     max-width: 50%;
     margin: auto;
+}
+.budget-details__transactions {
+    flex-grow: 1;
+}
+.budget-details__actions {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: none;
+}
+.budget-details__actions--visible {
+    display: flex;
+}
+.budget-details__action {
+    margin: 0 0.5rem;
 }
 @media screen and (max-width: 425px) {
     .budget-details__counters,

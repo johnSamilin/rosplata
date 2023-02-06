@@ -64,17 +64,28 @@
                 <span>My balance</span>
             </div>
             <div class="budget-details__counter-wrapper">
-                <span class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
+                <span
+                    class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
                 <span>Total sum</span>
             </div>
         </div>
         <div class="budget-details__transactions"></div>
+        <div class="budget-details__actions budget-details__actions--invite">
+            You are invited to participate
+            <button class="budget-details__action btn-success" id="accept-invite">Accept</button>
+            <button class="budget-details__action btn-warning" id="decline-invite">Decline</button>
+        </div>
+        <div class="budget-details__actions budget-details__actions--ask">
+            You can ask for invite
+            <button class="budget-details__action btn-secondary" id="ask-invite">Send request</button>
+        </div>
     </template>
 
     <template id="transactions-list-template">
         <div id="transactions-list">
             <form class="transactions-list__new">
-                <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0" title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
+                <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0"
+                    title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
                 <button type="submit" class="transactions-list__ok-btn">mkay</button>
             </form>
             <div class="transactions-list__items"></div>
