@@ -5,6 +5,7 @@ import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { RequestManager } from '../../core/RequestManager.mjs'
 import { Router } from '../../core/Router.mjs'
+import { PARTICIPANT_STATUSES } from '../../constants/userStatuses.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
@@ -92,13 +93,16 @@ export class BudgetList extends AnimatedComponent {
     async #addItems(items) {
         const container = this.getContainer()?.querySelector('#budgets-list__items')
         const { BudgetListItem } = await import('../BudgetListItem/BudgetListItem.mjs')
-        let currentStatus = '-1'
+        let currentStatus = PARTICIPANT_STATUSES.UNKNOWN
         let statusContainer = container
         for (const [id, item] of items) {
+            if (item.currentUserStatus === PARTICIPANT_STATUSES.UNKNOWN) {
+                continue
+            }
             if (currentStatus !== item.currentUserStatus) {
                 currentStatus = item.currentUserStatus
-                statusContainer = container?.querySelector(`.budgets-list__items--status${currentStatus}`)
-                statusContainer?.classList.remove('budgets-list__items--empty')
+                statusContainer = container?.querySelector(`.budgets-list__items-container--status${currentStatus}`)
+                statusContainer?.classList.remove('budgets-list__items-container--empty')
             }
             const newItem = new BudgetListItem(item)
             this.#children.set(id, newItem)

@@ -39,11 +39,12 @@
             <button id="budgets-list__menu-button"></button>
         </div>
         <div id="budgets-list__items">
-            <div class="budgets-list__items--status4 budgets-list__items--empty child-borders"></div>
-            <div class="budgets-list__items--status3 budgets-list__items--empty child-borders"></div>
-            <div class="budgets-list__items--status2 budgets-list__items--empty child-borders"></div>
-            <div class="budgets-list__items--status1 budgets-list__items--empty child-borders"></div>
-            <div class="budgets-list__items--status0 budgets-list__items--empty child-borders"></div>
+            <div class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders"></div>
+            <div class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders"></div>
+            <div class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders"></div>
+            <div class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders"></div>
+            <div class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders"></div>
+            <div class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders"></div>
         </div>
     </template>
 
@@ -78,6 +79,9 @@
         <div class="budget-details__actions budget-details__actions--ask">
             You can ask for invite
             <button class="budget-details__action btn-secondary" id="ask-invite">Send request</button>
+        </div>
+        <div class="budget-details__actions budget-details__actions--wait">
+            Budget owner have to approve your request
         </div>
     </template>
 
