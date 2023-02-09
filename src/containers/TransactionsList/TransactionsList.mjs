@@ -23,11 +23,6 @@ export class TransactionsList extends ListComponent {
         return TransactionsListItem
     }
 
-    constructor() {
-        super()
-        Store.subscribe('selectedBudgetId', this.sync)
-    }
-
     sync = async (id) => {
         if (id === -1) {
             return
@@ -41,7 +36,6 @@ export class TransactionsList extends ListComponent {
         Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
         this.#budgetId = id
         if (allowedUserStatuses.includes(budget?.currentUserStatus)) {
-            Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
             this.data = Store.get(`budgets.${id}.transactions`) ?? []
             const data = await Api.get('list', `transactions/${id}`)
             this.data = data ?? []
@@ -54,18 +48,14 @@ export class TransactionsList extends ListComponent {
 
     async show() {
         this.attachListeners()
+        Store.subscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
         super.show()
     }
 
     async hide() {
         this.stopListeners()
-        super.hide()
-    }
-
-    exterminate() {
-        Store.unsubscribe('selectedBudgetId')
         Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
-        return super.exterminate()
+        super.hide()
     }
 
     renderTo(parent) {
@@ -77,7 +67,7 @@ export class TransactionsList extends ListComponent {
 
     #addTransaction = async (event) => {
         event.preventDefault()
-        if (this.#isInProgress) {
+        if (this.#isInProgress || !this.isActive) {
             return false
         }
         const form = this.getContainer()?.querySelector('form.transactions-list__new')

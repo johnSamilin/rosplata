@@ -34,7 +34,6 @@ export class ListComponent extends Component {
     updateItems(items) {
         for (const [id, child] of items) {
             this.children.get(id).data = child
-            this.children.get(id).update()
         }
     }
 

@@ -9,13 +9,14 @@ importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 const template = document.querySelector('template#budgets-list-item-template')
 
 export class BudgetListItem extends AnimatedComponent {
-    data
     baseCssClass = 'budgets-list-item'
     id
 
     constructor(data) {
         super()
+        this.isReady = false
         this.data = data
+        this.isReady = true
         this.containerId = `budget-${this.data.id}`
         this.id = data.id
         Store.subscribe('selectedBudgetId', this.updateSelectedState)

@@ -5,7 +5,7 @@ import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
-import { getBudgetBalanceFromTransactions } from "../../utils/utils.mjs";
+import { getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
 import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 import { Alert } from "../Alert/Alert.mjs";
 
@@ -18,7 +18,6 @@ let transactionsController
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
     baseCssClass = 'budget-details'
-    data
     #isInProgress = false
 
     constructor(data) {
@@ -38,10 +37,10 @@ export class BudgetDetails extends AnimatedComponent {
         Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
-        this.update()
+        transactionsController.data = mapArrayToObjectId(budget?.transactions ?? [])
         const data = await Api.get('details', `budgets/${id}`)
         this.data = data
-        this.update()
+        transactionsController.data = mapArrayToObjectId(data.transactions ?? [])
     }
 
     #onTransactionsChanged = (transactions) => {
@@ -53,7 +52,6 @@ export class BudgetDetails extends AnimatedComponent {
         this.data.currentUserStatus = userStatus
         if (allowedUserStatuses.includes(userStatus)) {
             this.sync(this.data.id)
-            transactionsController.renderTo(this.getContainer()?.querySelector('.budget-details__transactions'))
         } else {
             this.update()
         }
@@ -70,7 +68,7 @@ export class BudgetDetails extends AnimatedComponent {
     }
 
     exterminate() {
-        Store.unsubscribe('selectedBudgetId')
+        Store.unsubscribe('selectedBudgetId', this.sync)
         Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
         return super.exterminate()
     }
@@ -88,6 +86,13 @@ export class BudgetDetails extends AnimatedComponent {
         if (!this.data) {
             return
         }
+        
+        if (allowedUserStatuses.includes(this.data?.currentUserStatus)) {
+            transactionsController.show()
+        } else {
+            transactionsController.hide()
+        }
+
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
         this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', Math.abs(myBalance).toString(10))
         const modifiers = []

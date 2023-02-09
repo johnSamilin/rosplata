@@ -29,6 +29,22 @@ export class Component {
      */
     listeners = new Set()
     baseCssClass = ''
+    #data
+    isReady = true
+    isActive = true
+    
+    set data(val) {
+        this.#data = val
+        if (this.isReady) {
+            this.update()
+        }
+    }
+
+    get data() {
+        return this.#data
+    }
+
+    update() {}
 
     getCssClass(block, modifiers) {
         let className = `${this.baseCssClass}`
@@ -93,6 +109,7 @@ export class Component {
     }
 
     hide() {
+        this.isActive = true
         const container = this.getContainer()
         return new Promise((resolve) => {
             seal(container)
@@ -101,6 +118,7 @@ export class Component {
     }
 
     show() {
+        this.isActive = false
         const container = this.getContainer()
         return new Promise((resolve) => {
             unseal(container)
