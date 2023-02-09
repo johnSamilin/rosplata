@@ -20,6 +20,13 @@ function unseal(element) {
 
 export class Component {
     containerId
+    /**
+     * Set<{
+            selector: string,
+            event: string,
+            handler: Function,
+        }>
+     */
     listeners = new Set()
     baseCssClass = ''
 
