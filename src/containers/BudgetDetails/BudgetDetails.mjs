@@ -8,12 +8,14 @@ import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
 import { getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
 import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 import { Alert } from "../Alert/Alert.mjs";
+import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
 const Api = new RequestManager('budget')
-let transactionsController
+const transactionsController = new TransactionsList()
+const participantsController = new ParticipantsList()
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
@@ -24,7 +26,6 @@ export class BudgetDetails extends AnimatedComponent {
         super()
         this.data = data
         Store.subscribe('selectedBudgetId', this.sync)
-        transactionsController = new TransactionsList()
     }
 
     sync = async (id) => {
@@ -35,16 +36,26 @@ export class BudgetDetails extends AnimatedComponent {
             Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
         }
         Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
-        transactionsController.data = mapArrayToObjectId(budget?.transactions ?? [])
+        transactionsController.budgetId = this.data?.id
+        participantsController.budgetId = this.data?.id
+        transactionsController.data = mapArrayToObjectId(this.data?.transactions ?? [])
+        participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
         this.data = data
-        transactionsController.data = mapArrayToObjectId(data.transactions ?? [])
+        transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
+        participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
     }
 
     #onTransactionsChanged = (transactions) => {
         this.data.transactions = transactions
+        this.update()
+    }
+
+    #onParticipantsChanged = (participants) => {
+        this.data.participants = participants
         this.update()
     }
 
@@ -70,6 +81,7 @@ export class BudgetDetails extends AnimatedComponent {
     exterminate() {
         Store.unsubscribe('selectedBudgetId', this.sync)
         Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
         return super.exterminate()
     }
 
@@ -79,6 +91,7 @@ export class BudgetDetails extends AnimatedComponent {
         this.update(container)
         parent.appendChild(container)
         transactionsController.renderTo(this.getContainer()?.querySelector('.budget-details__transactions'))
+        participantsController.renderTo(this.getContainer()?.querySelector('.budget-details__participants'))
     }
 
     update = (target) => {
@@ -89,8 +102,10 @@ export class BudgetDetails extends AnimatedComponent {
         
         if (allowedUserStatuses.includes(this.data?.currentUserStatus)) {
             transactionsController.show()
+            participantsController.show()
         } else {
             transactionsController.hide()
+            participantsController.hide()
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)

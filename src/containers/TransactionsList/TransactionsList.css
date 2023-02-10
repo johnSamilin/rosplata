@@ -4,6 +4,7 @@
 }
 .transactions-list__new input {
     flex-grow: 1;
+    display: block;
 }
 .transactions-list__items {
     display: flex;

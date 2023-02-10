@@ -39,12 +39,24 @@
             <button id="budgets-list__menu-button"></button>
         </div>
         <div id="budgets-list__items">
-            <div class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders"></div>
-            <div class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders"></div>
-            <div class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders"></div>
-            <div class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders"></div>
-            <div class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders"></div>
-            <div class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders"></div>
+            <div
+                class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders">
+            </div>
+            <div
+                class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders">
+            </div>
+            <div
+                class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders">
+            </div>
+            <div
+                class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders">
+            </div>
+            <div
+                class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders">
+            </div>
+            <div
+                class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders">
+            </div>
         </div>
     </template>
 
@@ -70,7 +82,20 @@
                 <span>Total sum</span>
             </div>
         </div>
-        <div class="budget-details__transactions"></div>
+        <div class="tabs">
+            <input id="tab1" type="radio" name="tabs" checked>
+            <label for="tab1">Transactions</label>
+
+            <input id="tab2" type="radio" name="tabs">
+            <label for="tab2">Participants</label>
+
+            <div class="content" id="content1">
+                <div class="budget-details__transactions"></div>
+            </div>
+            <div class="content" id="content2">
+                <div class="budget-details__participants"></div>
+            </div>
+        </div>
         <div class="budget-details__actions budget-details__actions--invite">
             You are invited to participate
             <button class="budget-details__action btn-success" id="accept-invite">Accept</button>
@@ -160,6 +185,19 @@
             <div class="alert dismissible">
                 <span class="app-alert__text"></span>
                 <label class="btn-close" for="alert">X</label>
+            </div>
+        </div>
+    </template>
+
+    <template id="participants-list-template">
+        <div id="participants-list" class="participants-list"></div>
+    </template>
+
+    <template id="participants-list-item-template">
+        <div id="participants-list-item" class="participants-list-item">
+            <div class="participants-list-item__info">
+                <span class="participants-list-item__name"></span>
+                <span class="participants-list-item__status"></span>
             </div>
         </div>
     </template>

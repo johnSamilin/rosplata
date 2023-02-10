@@ -48,8 +48,10 @@ export class BudgetListItem extends AnimatedComponent {
     }
 
     #onTransactionsChanged = (transactions) => {
-        this.data.transactions = transactions
-        this.update()
+        this.data = {
+            ...this.data,
+            transactions,
+        }
     }
 
     updateSelectedState = (selectedBudgetId) => {

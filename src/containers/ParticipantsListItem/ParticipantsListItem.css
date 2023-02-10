@@ -1,0 +1,14 @@
+.participants-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.participants-list-item__info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.participants-list-item__status {
+    font-size: 0.75rem;
+    opacity: 0.75;
+}

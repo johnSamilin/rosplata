@@ -1,5 +1,5 @@
 // @ts-check
-import { getListDataDiff } from '../utils/utils.mjs'
+import { defaultKeyAcessor, getListDataDiff } from '../utils/utils.mjs'
 import { Component } from './Component.mjs'
 
 export class ListComponent extends Component {
@@ -10,9 +10,11 @@ export class ListComponent extends Component {
      */
     async importListItemComponent() { }
 
+    keyAccessor = defaultKeyAcessor
+
     async update() {
         this.getContainer()?.classList.remove(this.getCssClass(null, 'empty'))
-        const { enter, exit, update } = getListDataDiff(this.children, Object.values(this.data))
+        const { enter, exit, update } = getListDataDiff(this.children, Object.values(this.data), this.keyAccessor)
         
         this.removeItems(exit)
         this.updateItems(update)

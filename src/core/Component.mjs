@@ -109,7 +109,7 @@ export class Component {
     }
 
     hide() {
-        this.isActive = true
+        this.isActive = false
         const container = this.getContainer()
         return new Promise((resolve) => {
             seal(container)
@@ -118,7 +118,7 @@ export class Component {
     }
 
     show() {
-        this.isActive = false
+        this.isActive = true
         const container = this.getContainer()
         return new Promise((resolve) => {
             unseal(container)

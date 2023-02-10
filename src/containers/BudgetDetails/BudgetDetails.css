@@ -54,14 +54,10 @@
     margin: 0 0.25rem;
 }
 
-
 .budget-details__counters,
-.budget-details__transactions {
+#budget-details .tabs {
     max-width: 50%;
     margin: auto;
-}
-.budget-details__transactions {
-    flex-grow: 1;
 }
 .budget-details__actions {
     justify-content: center;
@@ -75,6 +71,7 @@
 .budget-details__action {
     margin: 0 0.5rem;
 }
+
 @media screen and (max-width: 425px) {
     .budget-details__counters,
     .budget-details__transactions {
@@ -82,3 +79,31 @@
     }
 }
 
+@media screen and (max-width: 1023px) {
+    #budget-details .tabs {
+        max-width: 100%;
+        text-align: center;
+        flex-grow: 1;
+    }
+    #budget-details .tabs .content {
+        flex-grow: 1;
+    }
+    #budget-details label {
+        height: fit-content;
+    }
+}
+
+@media screen and (min-width: 1024px) {    
+    #budget-details .tabs {
+        max-width: 50%;
+        text-align: center;
+    }
+    #budget-details .tabs,
+    #budget-details .tabs .content {
+        display: flex;
+        flex-basis: 50%;
+    }
+    #budget-details label {
+        display: none;
+    }
+}

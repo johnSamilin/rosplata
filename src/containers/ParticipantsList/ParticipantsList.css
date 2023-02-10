@@ -1,0 +1,6 @@
+.participants-list--empty {
+    padding: 5rem 1rem;
+}
+.participants-list--empty::before {
+    content: 'No participants yet';
+}

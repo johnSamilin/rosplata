@@ -22,6 +22,7 @@ export class RequestManager {
             const reqId = `${this.#tag}.${id}`
             if (this.#handles.has(reqId)) {
                 this.#handles.get(reqId).abort()
+                this.#handles.delete(reqId)
             }
             this.#handles.set(reqId, new AbortController())
             try {
@@ -30,6 +31,9 @@ export class RequestManager {
                 }
                 const headers = params?.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }
                 const body = params?.body instanceof FormData ? params?.body : JSON.stringify(params?.body)
+                if (this.#handles.get(reqId).signal.aborted) {
+                    throw new AbortError()
+                }
                 const response = await fetch(`/api/${url}`, {
                     method,
                     credentials: 'omit',
@@ -53,8 +57,6 @@ export class RequestManager {
                     console.error('Request failed', er);
                     throw er;
                 }
-            } finally {
-                this.#handles.delete(reqId)
             }
         }
     }

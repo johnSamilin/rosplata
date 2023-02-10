@@ -2,7 +2,7 @@
 
 import { AuthManager } from "../core/AuthManager.mjs"
 
-function defaultKeyAcessor(item) {
+export function defaultKeyAcessor(item) {
     return item.id
 }
 

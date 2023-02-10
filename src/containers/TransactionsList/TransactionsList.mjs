@@ -16,30 +16,11 @@ export class TransactionsList extends ListComponent {
     containerId = 'transactions-list'
     baseCssClass = 'transactions-list'
     #isInProgress = false
-    #budgetId
+    budgetId
 
     async importListItemComponent() {
         const { TransactionsListItem } = await import('../TransactionsListItem/TransactionsListItem.mjs')
         return TransactionsListItem
-    }
-
-    sync = async (id) => {
-        if (id === -1) {
-            return
-        }
-        const budget = Store.get(`budgets.${id}`)
-        this.addCssClassConditionally(
-            !allowedUserStatuses.includes(budget?.currentUserStatus),
-            'hidden',
-            this.getContainer().querySelector(`.${this.getCssClass('new')}`)
-        )
-        Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
-        this.#budgetId = id
-        if (allowedUserStatuses.includes(budget?.currentUserStatus)) {
-            this.data = Store.get(`budgets.${id}.transactions`) ?? []
-            const data = await Api.get('list', `transactions/${id}`)
-            this.data = data ?? []
-        }
     }
 
     #onTransactionsChanged = (transactions) => {
@@ -48,13 +29,13 @@ export class TransactionsList extends ListComponent {
 
     async show() {
         this.attachListeners()
-        Store.subscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${this.budgetId}.transactions`, this.#onTransactionsChanged)
         super.show()
     }
 
     async hide() {
         this.stopListeners()
-        Store.unsubscribe(`budgets.${this.#budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.unsubscribe(`budgets.${this.budgetId}.transactions`, this.#onTransactionsChanged)
         super.hide()
     }
 
@@ -88,7 +69,7 @@ export class TransactionsList extends ListComponent {
             ]))
             form.reset()
             await Api.post('create', 'transactions', { body: data })
-            Store.push(`budgets.${this.#budgetId}.transactions`, transaction)
+            Store.push(`budgets.${this.budgetId}.transactions`, transaction)
         } catch (er) {
             console.error('Can\'t create transaction', { er })
             this.children.get(id).syncronized = false
