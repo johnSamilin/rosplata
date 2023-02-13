@@ -20,7 +20,6 @@ const participantsController = new ParticipantsList()
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
     baseCssClass = 'budget-details'
-    #isInProgress = false
 
     constructor(data) {
         super()
@@ -99,7 +98,7 @@ export class BudgetDetails extends AnimatedComponent {
         if (!this.data) {
             return
         }
-        
+
         if (allowedUserStatuses.includes(this.data?.currentUserStatus)) {
             transactionsController.show()
             participantsController.show()
@@ -135,22 +134,22 @@ export class BudgetDetails extends AnimatedComponent {
     }
 
     onAcceptInvite = async () => {
-        if (this.#isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.INVITED) {
+        if (this.isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.INVITED) {
             return false;
         }
-        this.#isInProgress = true
+        this.isInProgress = true
         try {
             const { newStatus } = await Api.post('accept-invite', `budgets/${this.data.id}/participant/invite`)
             this.#onUserStatusChanged(newStatus)
         } catch (er) {
             new Alert('warning', er)
         } finally {
-            this.#isInProgress = false
-        }        
+            this.isInProgress = false
+        }
     }
 
     onDeclineInvite = async () => {
-        if (this.#isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.INVITED) {
+        if (this.isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.INVITED) {
             return false;
         }
         try {
@@ -159,12 +158,12 @@ export class BudgetDetails extends AnimatedComponent {
         } catch (er) {
             new Alert('warning', er)
         } finally {
-            this.#isInProgress = false
+            this.isInProgress = false
         }
     }
 
     onAskInvite = async () => {
-        if (this.#isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.UNKNOWN) {
+        if (this.isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.UNKNOWN) {
             return false;
         }
         try {
@@ -174,7 +173,51 @@ export class BudgetDetails extends AnimatedComponent {
         } catch (er) {
             new Alert('warning', er)
         } finally {
-            this.#isInProgress = false
+            this.isInProgress = false
+        }
+    }
+
+    onSendInvite = async () => {
+        if (this.isInProgress) {
+            return false
+        }
+        this.isInProgress = true
+        try {
+            const { AuthManager } = await import('../../core/AuthManager.mjs')
+            if (this.data.userId !== AuthManager.data.id) {
+                return false
+            }
+            const { FeatureDetector } = await import('../../core/FeatureDetector.mjs')
+            if (FeatureDetector.isMobile) {
+                const { importWasm: loadWasm } = await import('../../utils/importWasm.mjs')
+                await loadWasm('/src/utils/go-qr-code-generator.wasm')
+                const { Dialog } = await import('../Dialog/Dialog.mjs')
+                // TODO: use separate view
+                const img = document.createElement('img')
+                img.style.width = '300px'
+                img.style.height = '300px'
+                img.style.display = 'block'
+                Dialog.getContainer()?.appendChild(img)
+                img.setAttribute('src', `data:image/png;base64,${window.generateQrCode('test')}`)
+                Dialog.show()
+            } else {
+                const dataToShare = {
+                    url: 'test',
+                    text: 'Share a budget with me!',
+                    title: this.data.title
+                }
+                if (navigator.canShare(dataToShare)) {
+                    await navigator.share(dataToShare)
+                } else {
+                    const { Alert } = await import('../Alert/Alert.mjs')
+                    new Alert('danger', 'Hmm, seems like you cannot share')
+                }
+            }
+        } catch (er) {
+            const { Alert } = await import('../Alert/Alert.mjs')
+            new Alert('danger', `Hmm, seems like you cannot share ${er}`)
+        } finally {
+            this.isInProgress = false
         }
     }
 
@@ -193,6 +236,11 @@ export class BudgetDetails extends AnimatedComponent {
             selector: '#ask-invite',
             event: 'click',
             handler: this.onAskInvite,
+        },
+        {
+            selector: '#send-invite',
+            event: 'click',
+            handler: this.onSendInvite,
         },
     ])
 }

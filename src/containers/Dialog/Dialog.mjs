@@ -15,7 +15,6 @@ export class CDialog extends Component {
 
     show() {
         this.getContainer().showModal()
-        this.listeners = new Set(this.#defaultListeners)
         this.attachListeners()
     }
 
@@ -23,12 +22,11 @@ export class CDialog extends Component {
         const container = this.getContainer()
         container.close()
         this.stopListeners()
-        this.listeners.clear()
         container.innerHTML = ''
         this.setAttr(container, undefined, 'class', 'border-1')
     }
 
-    #defaultListeners = [
+    listeners = new Set([
         {
             event: 'close',
             handler: this.hide,
@@ -37,7 +35,7 @@ export class CDialog extends Component {
             event: 'click',
             handler: this.handleClick,
         }
-    ]
+    ])
 }
 
 export const Dialog = new CDialog()

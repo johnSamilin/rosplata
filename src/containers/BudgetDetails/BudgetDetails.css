@@ -59,6 +59,15 @@
     max-width: 50%;
     margin: auto;
 }
+#budget-details .tabs .content {
+    flex-direction: column;
+    justify-content: space-between;
+}
+#budget-details #send-invite {
+    align-self: center;
+    position: sticky;
+    bottom: 0.5rem;
+}
 .budget-details__actions {
     justify-content: center;
     align-items: center;
@@ -102,6 +111,9 @@
     #budget-details .tabs .content {
         display: flex;
         flex-basis: 50%;
+    }
+    #budget-details .tabs .content {
+        margin: 0 5rem;
     }
     #budget-details label {
         display: none;
