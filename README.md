@@ -23,3 +23,6 @@ Basically, startup process is described [here](https://github.com/johnSamilin/ro
 
 ## Concept
 TDB
+
+## Look ma, I'm on TV
+[How do I make webapps nowadays?](https://medium.com/@alex.saltykov/how-do-they-make-web-apps-nowadays-pt-1-c1a36acc7dd8)
