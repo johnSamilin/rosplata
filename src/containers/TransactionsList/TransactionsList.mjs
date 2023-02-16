@@ -16,7 +16,6 @@ export class TransactionsList extends ListComponent {
     containerId = 'transactions-list'
     baseCssClass = 'transactions-list'
     #isInProgress = false
-    budgetId
 
     async importListItemComponent() {
         const { TransactionsListItem } = await import('../TransactionsListItem/TransactionsListItem.mjs')
@@ -28,14 +27,16 @@ export class TransactionsList extends ListComponent {
     }
 
     async show() {
+        const budgetId = Store.get('selectedBudgetId')
         this.attachListeners()
-        Store.subscribe(`budgets.${this.budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${budgetId}.transactions`, this.#onTransactionsChanged)
         super.show()
     }
 
     async hide() {
+        const budgetId = Store.get('selectedBudgetId')
         this.stopListeners()
-        Store.unsubscribe(`budgets.${this.budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.unsubscribe(`budgets.${budgetId}.transactions`, this.#onTransactionsChanged)
         super.hide()
     }
 
@@ -53,8 +54,9 @@ export class TransactionsList extends ListComponent {
         }
         const form = this.getContainer()?.querySelector('form.transactions-list__new')
         const data = new FormData(form)
+        const budgetId = Store.get('selectedBudgetId')
         // @ts-ignore
-        data.append('budgetId', Store.get('selectedBudgetId'))
+        data.append('budgetId', budgetId)
         const id = Date.now()
         try {
             this.#isInProgress = true
@@ -69,7 +71,7 @@ export class TransactionsList extends ListComponent {
             ]))
             form.reset()
             await Api.post('create', 'transactions', { body: data })
-            Store.push(`budgets.${this.budgetId}.transactions`, transaction)
+            Store.push(`budgets.${budgetId}.transactions`, transaction)
         } catch (er) {
             console.error('Can\'t create transaction', { er })
             this.children.get(id).syncronized = false

@@ -29,7 +29,7 @@ export class ListComponent extends Component {
         for (const [id, item] of items) {
             const newItem = new ListItemComponent(item)
             this.children.set(id, newItem)
-            newItem.renderTo(this.getContainer())
+            newItem.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('items')}`))
         }
     }
 

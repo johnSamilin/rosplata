@@ -38,8 +38,6 @@ export class BudgetDetails extends AnimatedComponent {
         Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
-        transactionsController.budgetId = this.data?.id
-        participantsController.budgetId = this.data?.id
         transactionsController.data = mapArrayToObjectId(this.data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
@@ -131,6 +129,11 @@ export class BudgetDetails extends AnimatedComponent {
             this.getCssClass('actions', 'visible'),
             container.querySelector(`.${this.getCssClass('actions', 'wait')}`)
         )
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.OWNER,
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'send-invite')}`)
+        )
     }
 
     onAcceptInvite = async () => {
@@ -183,39 +186,16 @@ export class BudgetDetails extends AnimatedComponent {
         }
         this.isInProgress = true
         try {
-            const { AuthManager } = await import('../../core/AuthManager.mjs')
-            if (this.data.userId !== AuthManager.data.id) {
+            if (this.data?.currentUserStatus !== PARTICIPANT_STATUSES.OWNER) {
                 return false
             }
-            const { FeatureDetector } = await import('../../core/FeatureDetector.mjs')
-            if (FeatureDetector.isMobile) {
-                const { importWasm: loadWasm } = await import('../../utils/importWasm.mjs')
-                await loadWasm('/src/utils/go-qr-code-generator.wasm')
-                const { Dialog } = await import('../Dialog/Dialog.mjs')
-                // TODO: use separate view
-                const img = document.createElement('img')
-                img.style.width = '300px'
-                img.style.height = '300px'
-                img.style.display = 'block'
-                Dialog.getContainer()?.appendChild(img)
-                img.setAttribute('src', `data:image/png;base64,${window.generateQrCode('test')}`)
-                Dialog.show()
-            } else {
-                const dataToShare = {
-                    url: 'test',
-                    text: 'Share a budget with me!',
-                    title: this.data.title
-                }
-                if (navigator.canShare(dataToShare)) {
-                    await navigator.share(dataToShare)
-                } else {
-                    const { Alert } = await import('../Alert/Alert.mjs')
-                    new Alert('danger', 'Hmm, seems like you cannot share')
-                }
+            const { InviteDialog } = await import('../../components/InviteDialog/InviteDialog.mjs')
+            InviteDialog.data = {
+                url: `${location.origin}${location.pathname}`,
+                title: 'Share a budget',
+                text: 'Hey, share a budget with me!',
             }
-        } catch (er) {
-            const { Alert } = await import('../Alert/Alert.mjs')
-            new Alert('danger', `Hmm, seems like you cannot share ${er}`)
+            InviteDialog.show()
         } finally {
             this.isInProgress = false
         }

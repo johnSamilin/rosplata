@@ -68,47 +68,41 @@
     </template>
 
     <template id="budget-details-template">
-        <div class="visible-on-mobile">
-            <a href="/">Назад</a>
-        </div>
-        <div class="budget-details__counters">
-            <div class="budget-details__counter-wrapper">
-                <span class="budget-details__counter budget-details__counter--my"></span>
-                <span>My balance</span>
+        <div class="budget-details__main">
+            <div class="visible-on-mobile">
+                <a href="/">Back</a>
             </div>
-            <div class="budget-details__counter-wrapper">
-                <span
-                    class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
-                <span>Total sum</span>
+            <div class="budget-details__counters">
+                <div class="budget-details__counter-wrapper">
+                    <span class="budget-details__counter budget-details__counter--my"></span>
+                    <span>My balance</span>
+                </div>
+                <div class="budget-details__counter-wrapper">
+                    <span
+                        class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
+                    <span>Total sum</span>
+                </div>
+            </div>
+            <div class="budget-details__transactions"></div>
+            <div class="budget-details__actions budget-details__actions--invite">
+                You are invited to participate
+                <button class="budget-details__action btn-success" id="accept-invite">Accept</button>
+                <button class="budget-details__action btn-warning" id="decline-invite">Decline</button>
+            </div>
+            <div class="budget-details__actions budget-details__actions--ask">
+                You can ask for invite
+                <button class="budget-details__action btn-secondary" id="ask-invite">Send request</button>
+            </div>
+            <div class="budget-details__actions budget-details__actions--wait">
+                Budget owner have to approve your request
             </div>
         </div>
-        <div class="tabs">
-            <input id="tab1" type="radio" name="tabs" checked>
-            <label for="tab1">Transactions</label>
-
-            <input id="tab2" type="radio" name="tabs">
-            <label for="tab2">Participants</label>
-
-            <div class="content" id="content1">
-                <div class="budget-details__transactions"></div>
+        <aside class="budget-details__aside">
+            <div class="budget-details__participants"></div>
+            <div class="budget-details__actions budget-details__actions--send-invite">
+                <button id="send-invite" class="budget-details__action button">Add people</button>
             </div>
-            <div class="content" id="content2">
-                <div class="budget-details__participants"></div>
-                <button id="send-invite" class="budget-details__action btn-success">Add people</button>
-            </div>
-        </div>
-        <div class="budget-details__actions budget-details__actions--invite">
-            You are invited to participate
-            <button class="budget-details__action btn-success" id="accept-invite">Accept</button>
-            <button class="budget-details__action btn-warning" id="decline-invite">Decline</button>
-        </div>
-        <div class="budget-details__actions budget-details__actions--ask">
-            You can ask for invite
-            <button class="budget-details__action btn-secondary" id="ask-invite">Send request</button>
-        </div>
-        <div class="budget-details__actions budget-details__actions--wait">
-            Budget owner have to approve your request
-        </div>
+        </aside>
     </template>
 
     <template id="transactions-list-template">
@@ -191,7 +185,9 @@
     </template>
 
     <template id="participants-list-template">
-        <div id="participants-list" class="participants-list"></div>
+        <div id="participants-list" class="participants-list">
+            <div class="participants-list__items"></div>
+        </div>
     </template>
 
     <template id="participants-list-item-template">
@@ -200,6 +196,16 @@
                 <span class="participants-list-item__name"></span>
                 <span class="participants-list-item__status"></span>
             </div>
+        </div>
+    </template>
+
+    <template id="invite-dialog-template">
+        <div class="invite-dialog paper border-2">
+            <img src="" alt="QR Code" class="invite-dialog__qr-code" />
+            <p>
+                Scan this QR code to open this budget on your device.
+            </p>
+            <button id="send-invite-link" class="button btn-secondary">Share link instead</button>
         </div>
     </template>
 </head>

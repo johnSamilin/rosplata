@@ -1,9 +1,18 @@
 #budget-details {
+    display: flex;
     flex-grow: 1;
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.budget-details__main {
+    flex-grow: 1;
     padding: 1rem;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.budget-details__aside {
+    flex-basis: 25%;
     display: flex;
     flex-direction: column;
 }
@@ -55,18 +64,15 @@
 }
 
 .budget-details__counters,
-#budget-details .tabs {
+.budget-details__transactions {
     max-width: 50%;
-    margin: auto;
+    margin: 0 auto;
 }
-#budget-details .tabs .content {
-    flex-direction: column;
-    justify-content: space-between;
+.budget-details__participants {
+    flex-grow: 1;
 }
 #budget-details #send-invite {
-    align-self: center;
-    position: sticky;
-    bottom: 0.5rem;
+    width: 100%;
 }
 .budget-details__actions {
     justify-content: center;
@@ -85,37 +91,5 @@
     .budget-details__counters,
     .budget-details__transactions {
         max-width: 100%;
-    }
-}
-
-@media screen and (max-width: 1023px) {
-    #budget-details .tabs {
-        max-width: 100%;
-        text-align: center;
-        flex-grow: 1;
-    }
-    #budget-details .tabs .content {
-        flex-grow: 1;
-    }
-    #budget-details label {
-        height: fit-content;
-    }
-}
-
-@media screen and (min-width: 1024px) {    
-    #budget-details .tabs {
-        max-width: 50%;
-        text-align: center;
-    }
-    #budget-details .tabs,
-    #budget-details .tabs .content {
-        display: flex;
-        flex-basis: 50%;
-    }
-    #budget-details .tabs .content {
-        margin: 0 5rem;
-    }
-    #budget-details label {
-        display: none;
     }
 }
