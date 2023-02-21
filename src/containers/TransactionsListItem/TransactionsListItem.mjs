@@ -8,7 +8,6 @@ importStyle('/src/containers/TransactionsListItem/TransactionsListItem.css')
 const template = document.querySelector('template#transactions-list-item-template')
 
 export class TransactionsListItem extends Component {
-    containerId = 'transaction'
     baseCssClass = 'transactions-list-item'
 
     set syncronized(val) {

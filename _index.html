@@ -191,10 +191,20 @@
     </template>
 
     <template id="participants-list-item-template">
-        <div id="participants-list-item" class="participants-list-item">
+        <div class="participants-list-item">
             <div class="participants-list-item__info">
                 <span class="participants-list-item__name"></span>
                 <span class="participants-list-item__status"></span>
+            </div>
+            <div class="participants-list-item__actions participants-list-item__actions--status1">
+                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger">Ban</button>
+            </div>
+            <div class="participants-list-item__actions participants-list-item__actions--status2">
+                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success">Revert</button>
+            </div>
+            <div class="participants-list-item__actions participants-list-item__actions--status5">
+                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success">Approve</button>
+                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger">Ban</button>
             </div>
         </div>
     </template>

@@ -32,6 +32,7 @@ export class Component {
     #data
     isReady = true
     isActive = true
+    isInProgress = false
     
     set data(val) {
         this.#data = val

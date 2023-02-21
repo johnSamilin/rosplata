@@ -15,7 +15,6 @@ const Api = new RequestManager('transactions')
 export class TransactionsList extends ListComponent {
     containerId = 'transactions-list'
     baseCssClass = 'transactions-list'
-    #isInProgress = false
 
     async importListItemComponent() {
         const { TransactionsListItem } = await import('../TransactionsListItem/TransactionsListItem.mjs')
@@ -49,7 +48,7 @@ export class TransactionsList extends ListComponent {
 
     #addTransaction = async (event) => {
         event.preventDefault()
-        if (this.#isInProgress || !this.isActive) {
+        if (this.isInProgress || !this.isActive) {
             return false
         }
         const form = this.getContainer()?.querySelector('form.transactions-list__new')
@@ -59,7 +58,7 @@ export class TransactionsList extends ListComponent {
         data.append('budgetId', budgetId)
         const id = Date.now()
         try {
-            this.#isInProgress = true
+            this.isInProgress = true
             const transaction = {
                 id,
                 amount: data.get('amount'),
@@ -78,7 +77,7 @@ export class TransactionsList extends ListComponent {
             const { Alert } = await import('../Alert/Alert.mjs')
             new Alert('warning', er)
         } finally {
-            this.#isInProgress = false
+            this.isInProgress = false
         }
     }
 

@@ -15,6 +15,13 @@ const firebaseConfig = {
 const UsersApi = new RequestManager('users')
 class CAuthManager {
     #isLoggedIn = false
+    /**
+     * @type{{
+            id: string;
+            name: string;
+            token: await string;
+        }}
+     */
     #data
 
     #gApp

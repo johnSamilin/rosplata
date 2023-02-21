@@ -15,7 +15,6 @@ const Api = new RequestManager('new-budget')
 
 export class NewBudget extends Component {
     containerId = 'create-form'
-    isInProgress = false
 
     renderTo(parent) {
         //@ts-ignore
