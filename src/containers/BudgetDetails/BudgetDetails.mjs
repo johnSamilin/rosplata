@@ -9,6 +9,7 @@ import { getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../util
 import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 import { Alert } from "../Alert/Alert.mjs";
 import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
+import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -16,6 +17,8 @@ const template = document.querySelector('template#budget-details-template')
 const Api = new RequestManager('budget')
 const transactionsController = new TransactionsList()
 const participantsController = new ParticipantsList()
+
+const isMobile = FeatureDetector.isMobile
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
@@ -103,6 +106,13 @@ export class BudgetDetails extends AnimatedComponent {
         } else {
             transactionsController.hide()
             participantsController.hide()
+        }
+        if (isMobile) {
+            this.addCssClassConditionally(
+                !allowedUserStatuses.includes(this.data?.currentUserStatus),
+                'hidden',
+                container.querySelector('#participants-list-btn')
+            )
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
@@ -201,6 +211,22 @@ export class BudgetDetails extends AnimatedComponent {
         }
     }
 
+    onShowParticipants = (e) => {
+        e.stopPropagation()
+        this.addCssClassConditionally(
+            isMobile,
+            this.getCssClass('aside', 'visible'),
+            this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)
+        )
+    }
+
+    onHideParticipants = (e) => {
+        e.stopPropagation()
+        this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)?.classList.remove(
+            this.getCssClass('aside', 'visible')
+        )
+    }
+
     listeners = new Set([
         {
             selector: '#accept-invite',
@@ -221,6 +247,16 @@ export class BudgetDetails extends AnimatedComponent {
             selector: '#send-invite',
             event: 'click',
             handler: this.onSendInvite,
+        },
+        {
+            selector: '#participants-list-btn',
+            event: 'click',
+            handler: this.onShowParticipants,
+        },
+        {
+            selector: '#participants-list-close-btn',
+            event: 'click',
+            handler: this.onHideParticipants,
         },
     ])
 }

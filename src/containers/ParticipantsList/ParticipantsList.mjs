@@ -80,7 +80,6 @@ export class ParticipantsList extends ListComponent {
         }
     }
 
-
     listeners = new Set([
         {
             selector: '.participants-list__items',

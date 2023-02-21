@@ -69,8 +69,13 @@
 
     <template id="budget-details-template">
         <div class="budget-details__main">
-            <div class="visible-on-mobile">
-                <a href="/">Back</a>
+            <div class="budget-details__header">
+                <div class="visible-on-mobile">
+                    <a href="/">Back</a>
+                </div>
+                <div class="visible-on-mobile">
+                    <a id="participants-list-btn">Participants</a>
+                </div>
             </div>
             <div class="budget-details__counters">
                 <div class="budget-details__counter-wrapper">
@@ -98,6 +103,9 @@
             </div>
         </div>
         <aside class="budget-details__aside">
+            <div class="visible-on-mobile">
+                <a id="participants-list-close-btn">Close</a>
+            </div>
             <div class="budget-details__participants"></div>
             <div class="budget-details__actions budget-details__actions--send-invite">
                 <button id="send-invite" class="budget-details__action button">Add people</button>
