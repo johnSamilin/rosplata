@@ -6,7 +6,6 @@
     transition: transform 0.3s ease-in-out;
     transform: unset;
     position: relative;
-    order: attr(data-id);
     border-color: transparent;
     border-bottom-color: black;
     display: flex;

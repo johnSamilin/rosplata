@@ -9,13 +9,14 @@ importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 const template = document.querySelector('template#budgets-list-item-template')
 
 export class BudgetListItem extends AnimatedComponent {
-    data
     baseCssClass = 'budgets-list-item'
     id
 
     constructor(data) {
         super()
+        this.isReady = false
         this.data = data
+        this.isReady = true
         this.containerId = `budget-${this.data.id}`
         this.id = data.id
         Store.subscribe('selectedBudgetId', this.updateSelectedState)
@@ -42,11 +43,15 @@ export class BudgetListItem extends AnimatedComponent {
         this.addCssClassConditionally(myBalance < 0, this.getBemClass('counter', 'negative'), balanceContainer)
         this.addCssClassConditionally(myBalance > 0, this.getBemClass('counter', 'positive'), balanceContainer)
         container?.setAttribute('data-id', this.id)
+        this.setAttr(container, null, 'data-status', this.data.currentUserStatus.toString())
+        container.style.order = this.data.currentUserStatus
     }
 
     #onTransactionsChanged = (transactions) => {
-        this.data.transactions = transactions
-        this.update()
+        this.data = {
+            ...this.data,
+            transactions,
+        }
     }
 
     updateSelectedState = (selectedBudgetId) => {

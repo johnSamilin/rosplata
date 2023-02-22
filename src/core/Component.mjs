@@ -20,8 +20,32 @@ function unseal(element) {
 
 export class Component {
     containerId
+    /**
+     * Set<{
+            selector: string,
+            event: string,
+            handler: Function,
+        }>
+     */
     listeners = new Set()
     baseCssClass = ''
+    #data
+    isReady = true
+    isActive = true
+    isInProgress = false
+    
+    set data(val) {
+        this.#data = val
+        if (this.isReady) {
+            this.update()
+        }
+    }
+
+    get data() {
+        return this.#data
+    }
+
+    update() {}
 
     getCssClass(block, modifiers) {
         let className = `${this.baseCssClass}`
@@ -29,7 +53,7 @@ export class Component {
             className += `__${block}`
         }
         if (Array.isArray(modifiers)) {
-            className += modifiers.map(mod => `${className}--${mod}`).join(' ')
+            className += modifiers.map(mod => ` ${className}--${mod}`).join(' ')
         } else if (modifiers?.length) {
             className += `--${modifiers}`
         }
@@ -86,6 +110,7 @@ export class Component {
     }
 
     hide() {
+        this.isActive = false
         const container = this.getContainer()
         return new Promise((resolve) => {
             seal(container)
@@ -94,6 +119,7 @@ export class Component {
     }
 
     show() {
+        this.isActive = true
         const container = this.getContainer()
         return new Promise((resolve) => {
             unseal(container)

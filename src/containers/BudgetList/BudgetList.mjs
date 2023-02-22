@@ -1,10 +1,11 @@
 // @ts-check
-import { AnimatedComponent } from '../../core/Component.mjs'
 import { getListDataDiff, mapArrayToObjectId } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { RequestManager } from '../../core/RequestManager.mjs'
 import { Router } from '../../core/Router.mjs'
+import { PARTICIPANT_STATUSES } from '../../constants/userStatuses.mjs'
+import { ListComponent } from '../../core/ListComponent.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
@@ -12,9 +13,9 @@ const template = document.querySelector('template#budgets-list-template')
 
 const Api = new RequestManager('budgets')
 
-export class BudgetList extends AnimatedComponent {
-    #children = new Map()
+export class BudgetList extends ListComponent {
     containerId = 'budgets-list'
+    baseCssClass = 'budgets-list'
 
     set isInProgress(val) {
         this.addCssClassConditionally(val, 'loading')
@@ -22,17 +23,21 @@ export class BudgetList extends AnimatedComponent {
 
     constructor() {
         super()
-        Store.subscribe('budgets', this.update)
+        Store.subscribe('budgets', this.#onBudgetsUpdated)
     }
 
     #handleItemClick = async (event) => {
         const clickedItemId = parseInt(event.target.closest('.budgets-list-item')?.dataset.id, 10)
-        const clickedItem = this.#children.get(clickedItemId)
+        const clickedItem = this.children.get(clickedItemId)
         if (!clickedItem) {
             return
         }
         const { Router } = await import('../../core/Router.mjs')
         Router.navigate(`/budgets/${clickedItem.id}`)
+    }
+
+    #onBudgetsUpdated = (newData) => {
+        this.data = newData
     }
 
     #handleCreateBudget = async (event) => {
@@ -76,39 +81,23 @@ export class BudgetList extends AnimatedComponent {
         }
     }
 
-    update = async (newData) => {
-        this.getContainer()?.classList.remove(this.getCssClass(null, 'empty'))
-        const { enter, exit, update } = getListDataDiff(this.#children, Object.values(newData))
-
-        this.#removeItems(exit)
-        this.#updateItems(update)
-        await this.#addItems(enter)
-        if (this.#children.size === 0) {
-            this.addCssClass(this.getBemClass(null, 'empty'))
-        }
-    }
-
-    async #addItems(items) {
+    async addItems(items) {
         const container = this.getContainer()?.querySelector('#budgets-list__items')
         const { BudgetListItem } = await import('../BudgetListItem/BudgetListItem.mjs')
+        let currentStatus = PARTICIPANT_STATUSES.UNKNOWN
+        let statusContainer = container
         for (const [id, item] of items) {
+            if (item.currentUserStatus === PARTICIPANT_STATUSES.UNKNOWN) {
+                continue
+            }
+            if (currentStatus !== item.currentUserStatus) {
+                currentStatus = item.currentUserStatus
+                statusContainer = container?.querySelector(`.budgets-list__items-container--status${currentStatus}`)
+                statusContainer?.classList.remove('budgets-list__items-container--empty')
+            }
             const newItem = new BudgetListItem(item)
-            this.#children.set(id, newItem)
-            newItem.renderTo(container)
-        }
-    }
-
-    #updateItems(items) {
-        for (const [id, child] of items) {
-            this.#children.get(id).data = child
-            this.#children.get(id).update()
-        }
-    }
-
-    #removeItems(items) {
-        for (const [id, child] of items) {
-            child.exterminate()
-            this.#children.delete(id)
+            this.children.set(id, newItem)
+            newItem.renderTo(statusContainer)
         }
     }
 

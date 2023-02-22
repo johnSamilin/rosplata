@@ -5,25 +5,29 @@ import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
-import { AuthManager } from "../../core/AuthManager.mjs";
-import { getBudgetBalanceFromTransactions } from "../../utils/utils.mjs";
+import { getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
+import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
+import { Alert } from "../Alert/Alert.mjs";
+import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
+import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
 const Api = new RequestManager('budget')
-let transactionsController
+const transactionsController = new TransactionsList()
+const participantsController = new ParticipantsList()
+
+const isMobile = FeatureDetector.isMobile
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
     baseCssClass = 'budget-details'
-    data
 
     constructor(data) {
         super()
         this.data = data
         Store.subscribe('selectedBudgetId', this.sync)
-        transactionsController = new TransactionsList()
     }
 
     sync = async (id) => {
@@ -34,17 +38,34 @@ export class BudgetDetails extends AnimatedComponent {
             Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
         }
         Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
-        this.update()
+        transactionsController.data = mapArrayToObjectId(this.data?.transactions ?? [])
+        participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
         this.data = data
-        this.update()
+        transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
+        participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
     }
 
     #onTransactionsChanged = (transactions) => {
         this.data.transactions = transactions
         this.update()
+    }
+
+    #onParticipantsChanged = (participants) => {
+        this.data.participants = participants
+        this.update()
+    }
+
+    #onUserStatusChanged = (userStatus) => {
+        this.data.currentUserStatus = userStatus
+        if (allowedUserStatuses.includes(userStatus)) {
+            this.sync(this.data.id)
+        } else {
+            this.update()
+        }
     }
 
     async show() {
@@ -56,10 +77,11 @@ export class BudgetDetails extends AnimatedComponent {
         this.stopListeners()
         super.hide()
     }
-    
+
     exterminate() {
-        Store.unsubscribe('selectedBudgetId')
+        Store.unsubscribe('selectedBudgetId', this.sync)
         Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
         return super.exterminate()
     }
 
@@ -69,6 +91,7 @@ export class BudgetDetails extends AnimatedComponent {
         this.update(container)
         parent.appendChild(container)
         transactionsController.renderTo(this.getContainer()?.querySelector('.budget-details__transactions'))
+        participantsController.renderTo(this.getContainer()?.querySelector('.budget-details__participants'))
     }
 
     update = (target) => {
@@ -76,6 +99,22 @@ export class BudgetDetails extends AnimatedComponent {
         if (!this.data) {
             return
         }
+
+        if (allowedUserStatuses.includes(this.data?.currentUserStatus)) {
+            transactionsController.show()
+            participantsController.show()
+        } else {
+            transactionsController.hide()
+            participantsController.hide()
+        }
+        if (isMobile) {
+            this.addCssClassConditionally(
+                !allowedUserStatuses.includes(this.data?.currentUserStatus),
+                'hidden',
+                container.querySelector('#participants-list-btn')
+            )
+        }
+
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
         this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', Math.abs(myBalance).toString(10))
         const modifiers = []
@@ -84,7 +123,140 @@ export class BudgetDetails extends AnimatedComponent {
         }
         this.addCssClass(this.getBemClass('counter', modifiers), container.querySelector(`.${this.getCssClass('counter', 'my')}`))
         this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', Math.abs(totalBalance).toString(10))
+
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.INVITED,
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'invite')}`)
+        )
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.UNKNOWN,
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'ask')}`)
+        )
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.WAIT_APPROVAL,
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'wait')}`)
+        )
+        this.addCssClassConditionally(
+            this.data?.currentUserStatus === PARTICIPANT_STATUSES.OWNER,
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'send-invite')}`)
+        )
     }
 
-    listeners = new Set([])
+    onAcceptInvite = async () => {
+        if (this.isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.INVITED) {
+            return false;
+        }
+        this.isInProgress = true
+        try {
+            const { newStatus } = await Api.post('accept-invite', `budgets/${this.data.id}/participant/invite`)
+            this.#onUserStatusChanged(newStatus)
+        } catch (er) {
+            new Alert('warning', er)
+        } finally {
+            this.isInProgress = false
+        }
+    }
+
+    onDeclineInvite = async () => {
+        if (this.isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.INVITED) {
+            return false;
+        }
+        try {
+            const { newStatus } = await Api.delete('decline-invite', `budgets/${this.data.id}/participant/invite`)
+            this.#onUserStatusChanged(newStatus)
+        } catch (er) {
+            new Alert('warning', er)
+        } finally {
+            this.isInProgress = false
+        }
+    }
+
+    onAskInvite = async () => {
+        if (this.isInProgress || this.data?.currentUserStatus !== PARTICIPANT_STATUSES.UNKNOWN) {
+            return false;
+        }
+        try {
+            const { newStatus } = await Api.put('ask-invite', `budgets/${this.data.id}/participant/invite`)
+            this.#onUserStatusChanged(newStatus)
+            this.update()
+        } catch (er) {
+            new Alert('warning', er)
+        } finally {
+            this.isInProgress = false
+        }
+    }
+
+    onSendInvite = async () => {
+        if (this.isInProgress) {
+            return false
+        }
+        this.isInProgress = true
+        try {
+            if (this.data?.currentUserStatus !== PARTICIPANT_STATUSES.OWNER) {
+                return false
+            }
+            const { InviteDialog } = await import('../../components/InviteDialog/InviteDialog.mjs')
+            InviteDialog.data = {
+                url: `${location.origin}${location.pathname}`,
+                title: 'Share a budget',
+                text: 'Hey, share a budget with me!',
+            }
+            InviteDialog.show()
+        } finally {
+            this.isInProgress = false
+        }
+    }
+
+    onShowParticipants = (e) => {
+        e.stopPropagation()
+        this.addCssClassConditionally(
+            isMobile,
+            this.getCssClass('aside', 'visible'),
+            this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)
+        )
+    }
+
+    onHideParticipants = (e) => {
+        e.stopPropagation()
+        this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)?.classList.remove(
+            this.getCssClass('aside', 'visible')
+        )
+    }
+
+    listeners = new Set([
+        {
+            selector: '#accept-invite',
+            event: 'click',
+            handler: this.onAcceptInvite,
+        },
+        {
+            selector: '#decline-invite',
+            event: 'click',
+            handler: this.onDeclineInvite,
+        },
+        {
+            selector: '#ask-invite',
+            event: 'click',
+            handler: this.onAskInvite,
+        },
+        {
+            selector: '#send-invite',
+            event: 'click',
+            handler: this.onSendInvite,
+        },
+        {
+            selector: '#participants-list-btn',
+            event: 'click',
+            handler: this.onShowParticipants,
+        },
+        {
+            selector: '#participants-list-close-btn',
+            event: 'click',
+            handler: this.onHideParticipants,
+        },
+    ])
 }

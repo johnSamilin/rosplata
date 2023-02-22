@@ -22,6 +22,7 @@ export class RequestManager {
             const reqId = `${this.#tag}.${id}`
             if (this.#handles.has(reqId)) {
                 this.#handles.get(reqId).abort()
+                this.#handles.delete(reqId)
             }
             this.#handles.set(reqId, new AbortController())
             try {
@@ -30,6 +31,9 @@ export class RequestManager {
                 }
                 const headers = params?.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }
                 const body = params?.body instanceof FormData ? params?.body : JSON.stringify(params?.body)
+                if (this.#handles.get(reqId).signal.aborted) {
+                    throw new AbortError()
+                }
                 const response = await fetch(`/api/${url}`, {
                     method,
                     credentials: 'omit',
@@ -42,16 +46,17 @@ export class RequestManager {
                 })
                 if (response.status === 401) {
                     AuthManager.isLoggedIn = false
-                } else {
+                }
+                if (response.status >= 200 && response.status < 300) {
                     return await response.json()
+                } else {
+                    throw await response.text()
                 }
             } catch (er) {
                 if (er.name !== 'AbortError') {
                     console.error('Request failed', er);
                     throw er;
                 }
-            } finally {
-                this.#handles.delete(reqId)
             }
         }
     }

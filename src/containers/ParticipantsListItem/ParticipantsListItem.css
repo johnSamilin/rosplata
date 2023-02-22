@@ -1,0 +1,16 @@
+.participants-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 0.5rem;
+}
+.participants-list-item__info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 1rem;
+}
+.participants-list-item__status {
+    font-size: 0.75rem;
+    opacity: 0.75;
+}

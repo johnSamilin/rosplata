@@ -8,8 +8,6 @@ importStyle('/src/containers/TransactionsListItem/TransactionsListItem.css')
 const template = document.querySelector('template#transactions-list-item-template')
 
 export class TransactionsListItem extends Component {
-    containerId = 'transaction'
-    #data
     baseCssClass = 'transactions-list-item'
 
     set syncronized(val) {
@@ -18,7 +16,9 @@ export class TransactionsListItem extends Component {
 
     constructor(data) {
         super()
-        this.#data = data
+        this.isReady = false
+        this.data = data
+        this.isReady = true
         this.containerId = `transaction-${data.id}`
     }
 
@@ -36,9 +36,9 @@ export class TransactionsListItem extends Component {
     
     update = () => {
         const container = this.getContainer()
-        this.setAttr(container, `.${this.getCssClass('image')}`, 'src', this.#data.user.picture)
-        this.setAttr(container, `.${this.getCssClass('name')}`, 'textContent', this.#data.user.name)
-        this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', this.#data.amount)
+        this.setAttr(container, `.${this.getCssClass('image')}`, 'src', this.data.user.picture)
+        this.setAttr(container, `.${this.getCssClass('name')}`, 'textContent', this.data.user.name)
+        this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', this.data.amount)
     }
 
     listeners = new Set([])

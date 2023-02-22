@@ -28,6 +28,24 @@
     position: relative;
     overflow: auto;
 }
+.budgets-list__items-container::before {
+    display: block;
+    padding: 2.5rem 0.75rem 0;
+    font-size: 1.2rem;
+}
+.budgets-list__items-container--empty {
+    display: none;
+}
+.budgets-list__items-container--status0::before {
+    content: "You are invited:";
+}
+.budgets-list__items-container--status2::before {
+    content: "You are banned:";
+}
+.budgets-list__items-container--status5::before {
+    content: "Waiting for approval:";
+}
+
 #budgets-list.exit,
 #budgets-list.hidden {
     transform: translateX(-1rem);

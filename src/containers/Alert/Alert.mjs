@@ -11,6 +11,12 @@ export class Alert extends Component {
     containerId = 'alerts'
     id
 
+    /**
+     * Shows an alert
+     * @param {'primary' | 'secondary' | 'success' | 'warning' | 'danger'} type 
+     * @param {string} text 
+     * @param {number} timeout 
+     */
     constructor(type, text, timeout = 5000) {
         super()
         if (!template) {

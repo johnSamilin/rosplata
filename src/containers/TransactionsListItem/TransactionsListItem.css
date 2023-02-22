@@ -6,9 +6,11 @@
 .transactions-list-item__name {
     flex-grow: 1;
     margin-left: 0.25rem;
+    text-align: left;
 }
 .transactions-list-item--local {
     margin-left: calc(-10px - 0.25rem);
+    opacity: 0.75;
 }
 .transactions-list-item--local::before {
     content: '';

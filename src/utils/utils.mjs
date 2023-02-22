@@ -2,7 +2,7 @@
 
 import { AuthManager } from "../core/AuthManager.mjs"
 
-function defaultKeyAcessor(item) {
+export function defaultKeyAcessor(item) {
     return item.id
 }
 
@@ -56,9 +56,9 @@ export function isOverridden(itemName) {
     return (typeof localStorage.getItem(itemName)) === 'string'
 }
 
-export function mapArrayToObjectId(array) {
+export function mapArrayToObjectId(array, idGetter = (el) => el.id) {
     return array.reduce((acc, el) => {
-        acc[el.id] = el
+        acc[idGetter(el)] = el
         return acc
     }, {})
 }
