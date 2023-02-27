@@ -1,11 +1,12 @@
 //@ts-check
 
-import { Component } from "../../core/Component.mjs";
-import { Store } from "../../core/Store.mjs";
-import { importStyle } from "../../utils/imports.js";
-import { RequestManager } from "../../core/RequestManager.mjs";
-import { Router } from "../../core/Router.mjs";
-import { mapArrayToObjectId } from "../../utils/utils.mjs";
+import { Component } from "../../core/Component.mjs"
+import { Store } from "../../core/Store.mjs"
+import { importStyle } from "../../utils/imports.js"
+import { RequestManager } from "../../core/RequestManager.mjs"
+import { Router } from "../../core/Router.mjs"
+import { mapArrayToObjectId } from "../../utils/utils.mjs"
+import DOMPurify from 'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js'
 
 importStyle('/src/containers/NewBudget/NewBudget.css')
 
@@ -40,6 +41,7 @@ export class NewBudget extends Component {
         }
         const form = this.getContainer()?.querySelector('form#new-budget__form')
         const data = new FormData(form)
+        data.set('name', DOMPurify.sanitize(data.get('name')))
         try {
             this.isInProgress = true
             await Api.put('create', 'budgets', { body: data })
@@ -47,6 +49,8 @@ export class NewBudget extends Component {
             Store.set('budgets', mapArrayToObjectId(budgets))
             form.reset()
         } catch(er) {
+            const { Alert } = await import('../Alert/Alert.mjs')
+            new Alert('danger', er)
             console.error('Can\'t create budget', { er })
         } finally {
             this.isInProgress = false

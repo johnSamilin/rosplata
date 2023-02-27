@@ -47,15 +47,15 @@ export class RequestManager {
                 if (response.status === 401) {
                     AuthManager.isLoggedIn = false
                 }
-                if (response.status >= 200 && response.status < 300) {
-                    return await response.json()
+                if (response.status >= 300) {
+                    throw new Error((await response.json()).error)
                 } else {
-                    throw await response.text()
+                    return await response.json()
                 }
             } catch (er) {
                 if (er.name !== 'AbortError') {
                     console.error('Request failed', er);
-                    throw er;
+                    throw er.message;
                 }
             }
         }
