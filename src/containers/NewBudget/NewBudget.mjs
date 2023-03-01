@@ -42,6 +42,7 @@ export class NewBudget extends Component {
         const form = this.getContainer()?.querySelector('form#new-budget__form')
         const data = new FormData(form)
         data.set('name', DOMPurify.sanitize(data.get('name')))
+        data.set('id', crypto.randomUUID())
         try {
             this.isInProgress = true
             await Api.put('create', 'budgets', { body: data })
