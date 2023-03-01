@@ -37,17 +37,17 @@ export class MainLayout extends AnimatedComponent {
 
     update() {
         const { id, create } = Router.routeParams
-        const selectedBudgetId = id ? parseInt(id, 10) : -1
+        const selectedBudgetId = id ? id : -1
         Store.set('selectedBudgetId', selectedBudgetId)
         if (FeatureDetector.isMobile && (
-            selectedBudgetId > -1
+            selectedBudgetId !== -1
             || create
         )) {
             budgetListController.hide()
         } else {
             budgetListController.show()
         }
-        selectedBudgetId > -1 ? budgetDetailsController.show() : budgetDetailsController.hide()
+        selectedBudgetId !== -1 ? budgetDetailsController.show() : budgetDetailsController.hide()
         create ? newBudgetController.show() : newBudgetController.hide()
     }
 

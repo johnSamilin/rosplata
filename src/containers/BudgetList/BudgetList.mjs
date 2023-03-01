@@ -27,7 +27,7 @@ export class BudgetList extends ListComponent {
     }
 
     #handleItemClick = async (event) => {
-        const clickedItemId = parseInt(event.target.closest('.budgets-list-item')?.dataset.id, 10)
+        const clickedItemId = event.target.closest('.budgets-list-item')?.dataset.id
         const clickedItem = this.children.get(clickedItemId)
         if (!clickedItem) {
             return
