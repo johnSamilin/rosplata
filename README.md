@@ -17,6 +17,7 @@ Besides, it uses:
 * [Battery API](https://caniuse.com/battery-status) and [matchMedia](https://caniuse.com/matchmedia) to decide whether to turn off animations
 * Static and dynamic [ES6 imports](https://caniuse.com/es6-module-dynamic-import)
 * [Inert attribute](https://caniuse.com/mdn-html_global_attributes_inert)
+* [WebAssembly](https://caniuse.com/wasm)
 
 ## Start
 Basically, startup process is described [here](https://github.com/johnSamilin/rosplata-back)
