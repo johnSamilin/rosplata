@@ -6,6 +6,7 @@ import { importStyle } from '../../utils/imports.js'
 importStyle('/src/containers/Settings/Settings.css')
 
 const itemTemplate = document.querySelector('template#settings-section-item-template')
+const staticItemTemplate = document.querySelector('template#settings-section-static-item-template')
 
 export class Settings extends Component {
     containerId = 'layout-settings__settings'
@@ -18,14 +19,17 @@ export class Settings extends Component {
         if (!itemTemplate) {
             throw new Error('Template for settings not found!')
         }
-        const animationsContainer = this.createSetting('Enable animations', SettingsManager.animationsEnabled, 'animations')
-        const autoLoginContainer = this.createSetting('Enable auto login', SettingsManager.autoLoginEnabled, 'autologin')
+        const animationsContainer = this.createCheckboxSetting('Enable animations', SettingsManager.animationsEnabled, 'animations')
+        const autoLoginContainer = this.createCheckboxSetting('Enable auto login', SettingsManager.autoLoginEnabled, 'autologin')
+        const appVersionContainer = this.createStaticSetting('App version', SettingsManager.appVersion)
+        
+        parentContainer.appendChild(appVersionContainer)
         parentContainer.appendChild(animationsContainer)
         parentContainer.appendChild(autoLoginContainer)
         this.attachListeners()
     }
 
-    createSetting(title, initialValue, name) {
+    createCheckboxSetting(title, initialValue, name) {
         const settingContainer = itemTemplate.content.cloneNode(true)
         const settingName = settingContainer.querySelector('.settings-item__name')
         settingName.textContent = title
@@ -35,6 +39,14 @@ export class Settings extends Component {
         setting.setAttribute('id', `${name}-setting`)
         setting.checked = initialValue
         setting.setAttribute('name', name)
+
+        return settingContainer
+    }
+
+    createStaticSetting(title, value) {
+        const settingContainer = staticItemTemplate.content.cloneNode(true)
+        this.setAttr(settingContainer, '.settings-item__name', 'textContent', title)
+        this.setAttr(settingContainer, '.settings-item__value', 'textContent', value)
 
         return settingContainer
     }

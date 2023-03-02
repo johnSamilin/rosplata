@@ -1,4 +1,5 @@
 #layout-settings__settings .settings-item {
     display: flex;
     justify-content: space-between;
+    margin: 0.5rem 0;
 }

@@ -80,8 +80,8 @@ export class BudgetDetails extends AnimatedComponent {
 
     exterminate() {
         Store.unsubscribe('selectedBudgetId', this.sync)
-        Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
-        Store.subscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
+        Store.unsubscribe(`budgets.${this.data?.id}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${this.data?.id}.participants`, this.#onParticipantsChanged)
         return super.exterminate()
     }
 

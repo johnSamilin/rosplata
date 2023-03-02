@@ -48,7 +48,7 @@ export class Component {
     update() {}
 
     getCssClass(block, modifiers) {
-        let className = `${this.baseCssClass}`
+        let className = `${this.baseCssClass || this.containerId}`
         if (block) {
             className += `__${block}`
         }

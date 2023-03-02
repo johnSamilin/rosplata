@@ -5,15 +5,23 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    height: 100%;
+    height: 90vh;
     justify-content: center;
     /* font: var(--font-serif); */
 }
 #layout-login .layout-login__prompt {
     font-weight: 500;
+    font-size: 5vh;
 }
 #layout-login .layout-login__prompt-detail {
     font-weight: 500;
+    font-size: 4vh;
+}
+#layout-login .layout-login__version {
+    position: absolute;
+    bottom: 0.5rem;
+    color: darkslategray;
+    font-size: 1.75vh;
 }
 
 @media screen and (max-width: 425px) {

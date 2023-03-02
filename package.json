@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "serve": "^14.0.1"
-  },
-  "scripts": {
-    "dev": "http-server-pwa -p 3000 -f index.html"
-  }
-}
