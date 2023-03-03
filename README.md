@@ -21,6 +21,7 @@ Besides, it uses:
 
 ## Start
 Basically, startup process is described [here](https://github.com/johnSamilin/rosplata-back)
+Plus, edit `firebaseConfig` variable in `rosplata\src\core\AuthManager.mjs` (you'll obtain those credentials when setting up Firebase)
 
 ## How to use it?
 #### Login
