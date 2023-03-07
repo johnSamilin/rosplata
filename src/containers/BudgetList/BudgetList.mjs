@@ -102,7 +102,7 @@ export class BudgetList extends ListComponent {
     }
 
     async exterminate() {
-        Store.unsubscribe('budgets', this.update)
+        Store.unsubscribe('budgets', this.#onBudgetsUpdated)
         await super.exterminate()
     }
 

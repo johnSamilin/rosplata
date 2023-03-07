@@ -19,7 +19,7 @@ class CAuthManager {
      * @type{{
             id: string;
             name: string;
-            token: await string;
+            token: string;
         }}
      */
     #data

@@ -5,8 +5,9 @@ import { Store } from "../../core/Store.mjs"
 import { importStyle } from "../../utils/imports.js"
 import { RequestManager } from "../../core/RequestManager.mjs"
 import { Router } from "../../core/Router.mjs"
-import { mapArrayToObjectId } from "../../utils/utils.mjs"
 import DOMPurify from 'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js'
+import { AuthManager } from "../../core/AuthManager.mjs"
+import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs"
 
 importStyle('/src/containers/NewBudget/NewBudget.css')
 
@@ -41,15 +42,32 @@ export class NewBudget extends Component {
         }
         const form = this.getContainer()?.querySelector('form#new-budget__form')
         const data = new FormData(form)
-        data.set('name', DOMPurify.sanitize(data.get('name')))
-        data.set('id', crypto.randomUUID())
+        const id = crypto.randomUUID()
+        const name = DOMPurify.sanitize(data.get('name'))
+        data.set('name', name)
+        data.set('id', id)
         try {
             this.isInProgress = true
+            const budgets = Store.get('budgets') ?? {}
+            budgets[id] = {
+                id,
+                name,
+                userId: AuthManager.data.id,
+                transactions: [],
+                participants: [{
+                    id: AuthManager.data.id,
+                    status: PARTICIPANT_STATUSES.OWNER,
+                    user: {
+                        id: AuthManager.data.id,
+                        name: AuthManager.data.name,
+                    }
+                }],
+                currentUserStatus: PARTICIPANT_STATUSES.OWNER,
+            }
             await Api.put('create', 'budgets', { body: data })
-            const budgets = await Api.get('list', 'budgets')
-            Store.set('budgets', mapArrayToObjectId(budgets))
+            Store.set('budgets', budgets)
             form.reset()
-        } catch(er) {
+        } catch (er) {
             const { Alert } = await import('../Alert/Alert.mjs')
             new Alert('danger', er)
             console.error('Can\'t create budget', { er })
