@@ -3,14 +3,15 @@ This is an experiment on whether you can create relatively big functional web ap
 
 ## Demo
 Currently demo can be found [here](https://ros-plata.ru/)
-*Supported browsers: Chrome, Edge*
 
-## Alternatives
-[Splitwise](https://www.splitwise.com/)
-[Kittysplit](https://www.kittysplit.com/)
-[Tricount](https://www.tricount.com/en/organizing-group-expenses-among-friends)
+**Supported browsers: Chrome, Edge**
 
 [Drop me a line](mailto:a_salt@lenta.ru) if you have anything in mind!
+
+## Alternatives
+* [Splitwise](https://www.splitwise.com/)
+* [Kittysplit](https://www.kittysplit.com/)
+* [Tricount](https://www.tricount.com/en/organizing-group-expenses-among-friends)
 
 ## Dependencies
 There are several features that your browser must support to run the demo:
