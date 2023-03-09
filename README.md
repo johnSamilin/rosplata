@@ -12,6 +12,7 @@ Currently demo can be found [here](https://ros-plata.ru/)
 * [Splitwise](https://www.splitwise.com/)
 * [Kittysplit](https://www.kittysplit.com/)
 * [Tricount](https://www.tricount.com/en/organizing-group-expenses-among-friends)
+* [IHateMoney](https://github.com/spiral-project/ihatemoney/)
 
 ## Dependencies
 There are several features that your browser must support to run the demo:
