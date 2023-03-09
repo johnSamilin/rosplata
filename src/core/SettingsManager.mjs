@@ -5,7 +5,7 @@ import { getFromLs, isOverridden } from "../utils/utils.mjs"
 const reducedMotionMedia = matchMedia('(prefers-reduced-motion)')
 
 class CSettingsManager {
-    #appVersion = '0.0.2'
+    #appVersion = '0.0.3'
     #battery
     #animationsEnabled = getFromLs('animationsEnabled')
     #autoLoginEnabled = getFromLs('autoLoginEnabled')
