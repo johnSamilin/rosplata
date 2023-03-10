@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rosplata</title>
-    <meta name="description" content="Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"/>
+    <meta name="description"
+        content="Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills" />
     <meta name="keywords" content="opensource, collaborative, finance, budget, split, bill" />
     <link rel="canonical" href="https://ros-plata.ru" />
-    
+
     <link rel="stylesheet" async href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css" />
     <script src="/src/App.mjs" type="module"></script>
 
@@ -207,14 +208,18 @@
                 <span class="participants-list-item__status"></span>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status1">
-                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger">Ban</button>
+                <button
+                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger">Ban</button>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status2">
-                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success">Revert</button>
+                <button
+                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success">Revert</button>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status5">
-                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success">Approve</button>
-                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger">Ban</button>
+                <button
+                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success">Approve</button>
+                <button
+                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger">Ban</button>
             </div>
         </div>
     </template>
@@ -234,6 +239,110 @@
     <div id="alerts"></div>
     <dialog id="modal-window"></dialog>
     <div id="layout"></div>
+
+    <div id="features-support-checkup">
+        <style>
+            #features-support-checkup {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+                width: 25%;
+                margin: 2rem auto;
+            }
+
+            .feature-checkup {
+                margin: 0.5rem 0;
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+        <strong>Your browser must support these features</strong>
+        <div class="feature-checkup feature-checkup--dialog">
+            <span class="feature-checkup__name">Dialog element</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--url-pattern">
+            <span class="feature-checkup__name">URL pattern API</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--import-assertion">
+            <span class="feature-checkup__name">Import assertions</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--html-templates">
+            <span class="feature-checkup__name">HTML templates</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--import">
+            <span class="feature-checkup__name">ES6 imports</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--battery">
+            <span class="feature-checkup__name">Battery API</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--matchmedia">
+            <span class="feature-checkup__name">Match media</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--wasm">
+            <span class="feature-checkup__name">WebAssembly</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--inert">
+            <span class="feature-checkup__name">Inert attribute</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <strong>
+            Sorry for inconvenience. Try opening this app in Chrome or Edge.
+        </strong>
+        <script type="text/javascript">
+            const checks = [
+                {
+                    modifier: 'dialog',
+                    check: () => 'HTMLDialogElement' in window,
+                },
+                {
+                    modifier: 'url',
+                    check: () => 'URLPattern' in window,
+                },
+                {
+                    modifier: 'html-templates',
+                    check: () => 'HTMLTemplateElement' in window,
+                },
+                {
+                    modifier: 'import',
+                    check: () => 'noModule' in HTMLScriptElement.prototype,
+                },
+                {
+                    modifier: 'battery',
+                    check: () => 'getBattery' in navigator,
+                },
+                {
+                    modifier: 'matchmedia',
+                    check: () => 'matchMedia' in window,
+                },
+                {
+                    modifier: 'wasm',
+                    check: () => 'WebAssembly' in window,
+                },
+                {
+                    modifier: 'inert',
+                    check: () => 'inert' in document.querySelector('div'),
+                }
+            ]
+            checks.forEach(({ check, modifier }) => {
+                try {
+                    if (check()) {
+                        document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
+                    }
+                } catch (er) {
+                    console.error(er)
+                }
+            })
+        </script>
+    </div>
 </body>
 
 </html>

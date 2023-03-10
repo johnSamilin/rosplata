@@ -7,15 +7,11 @@ let instance
 const mobileMediaQuery = window.matchMedia('(max-width: 425px)')
 
 class CFeatureDetector {
-    #importMaps = HTMLScriptElement.supports && HTMLScriptElement.supports('importmap')
     #connectionSpeed = navigator.connection.effectiveType
     #URLPattern = 'URLPattern' in window
     #isMobile = mobileMediaQuery.matches
     #federatedLogin = navigator.credentials && 'FederatedCredential' in window
 
-    get importMaps() {
-        return this.#importMaps
-    }
     get connectionSpeed() {
         return this.#connectionSpeed
     }
@@ -51,7 +47,6 @@ class CFeatureDetector {
 
     [Symbol.iterator] = function *() {
         yield *[
-            ['Import Maps', this.#importMaps],
             ['Connection Speed Estimation', this.#connectionSpeed],
             ['URL pattern matching', this.#URLPattern],
             ['WebAuthn: federated login', this.#federatedLogin],

@@ -6,6 +6,8 @@ import { importStyle } from "./utils/imports.js"
 
 importStyle('/styles/App.css')
 
+document.querySelector('#features-support-checkup')?.remove()
+
 document.body.addEventListener('click', (event) => {
     if (event.target.tagName === 'A') {
         event.preventDefault()
