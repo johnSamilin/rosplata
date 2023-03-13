@@ -32,7 +32,8 @@
     font-style: italic;
 }
 
-.budgets-list-item__my-balance::after {
+.budgets-list-item__my-balance--positive::after,
+.budgets-list-item__my-balance--negative::after {
     content: '₽';
     display: inline-block;
     font-size: 50%;
@@ -43,14 +44,16 @@
 }
 .budgets-list-item__counter::before {
     display: inline-block;
-    background-color: lightgreen;
-    content: '+';
     border-radius: 50%;
     width: 0.5rem;
     height: 0.5rem;
     align-self: center;
     font-size: 0.5rem;
     letter-spacing: 1.5px;
+}
+.budgets-list-item__counter--positive::before {
+    background-color: lightgreen;
+    content: '+';
 }
 .budgets-list-item__counter--negative::before {
     background-color: indianred;

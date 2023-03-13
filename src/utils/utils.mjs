@@ -1,4 +1,5 @@
 //@ts-check
+import { allowedUserStatuses } from "../constants/userStatuses.mjs";
 import { AuthManager } from "../core/AuthManager.mjs"
 
 export function defaultKeyAcessor(item) {
@@ -129,13 +130,27 @@ export function mapArrayToObjectId(array, idGetter = (el) => el.id) {
     }, {})
 }
 
-export function getBudgetBalanceFromTransactions(transactions = []) {
-    return transactions.reduce((acc, t) => {
-        acc.totalBalance += parseFloat(t.amount)
-        if (t.user.id === AuthManager.data.id) {
-            acc.myBalance += parseFloat(t.amount)
+export function getBudgetBalanceFromTransactions(transactions = [], participants = []) {
+    let totalBalance = 0
+    let mySpends = 0
+    let participantCount = participants.filter(p => allowedUserStatuses.includes(p.status)).length
+    if (participantCount === 0) {
+        return {
+            totalBalance,
+            myBalance: 0,
         }
+    }
+    transactions.forEach((t) => {
+        totalBalance += parseFloat(t.amount)
+        if (t.user.id === AuthManager.data.id) {
+            mySpends += parseFloat(t.amount)
+        }
+    })
 
-        return acc
-    }, { myBalance: 0, totalBalance: 0 })
+    const commonShare = totalBalance / participantCount
+
+    return {
+        totalBalance,
+        myBalance: mySpends - commonShare
+    }
 }

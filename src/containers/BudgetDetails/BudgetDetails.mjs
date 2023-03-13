@@ -36,6 +36,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
         if (this.data) {
             Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
+            Store.unsubscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
         }
         Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
         Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
@@ -115,13 +116,18 @@ export class BudgetDetails extends AnimatedComponent {
             )
         }
 
-        const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
+        const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
         this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', Math.abs(myBalance).toString(10))
-        const modifiers = []
-        if (myBalance <= 0) {
-            modifiers.push(myBalance < 0 ? 'negative' : 'zero')
-        }
-        this.addCssClass(this.getBemClass('counter', modifiers), container.querySelector(`.${this.getCssClass('counter', 'my')}`))
+        this.addCssClassConditionally(
+            myBalance > 0,
+            this.getCssClass('counter', 'positive'),
+            container.querySelector(`.${this.getCssClass('counter', 'my')}`)
+        )
+        this.addCssClassConditionally(
+            myBalance < 0,
+            this.getCssClass('counter', 'negative'),
+            container.querySelector(`.${this.getCssClass('counter', 'my')}`)
+        )
         this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', Math.abs(totalBalance).toString(10))
 
         this.addCssClassConditionally(

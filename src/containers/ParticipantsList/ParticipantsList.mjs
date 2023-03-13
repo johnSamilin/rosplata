@@ -71,6 +71,13 @@ export class ParticipantsList extends ListComponent {
                 status,
             }
             this.update()
+            const newParticipants = (Store.get(`budgets.${budgetId}.participants`) ?? []).map(p => {
+                if (p.userId === targetUserId) {
+                    p.status = status
+                }
+                return p
+            })
+            Store.set(`budgets.${budgetId}.participants`, newParticipants)
         } catch (er) {
             const { Alert } = await import('../Alert/Alert.mjs')
             new Alert('danger', 'Hmm, seems like you cannot do this')

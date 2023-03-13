@@ -21,6 +21,7 @@ export class BudgetListItem extends AnimatedComponent {
         this.id = data.id
         Store.subscribe('selectedBudgetId', this.updateSelectedState)
         Store.subscribe(`budgets.${data.id}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`budgets.${data.id}.participants`, this.#onParticipantsChanged)
     }
 
     renderTo(parent) {
@@ -37,11 +38,17 @@ export class BudgetListItem extends AnimatedComponent {
         const container = target ?? this.getContainer()
         container.querySelector(`.${this.getCssClass('title')}`).textContent = this.data.name
         container?.setAttribute('id', this.containerId)
-        const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions)
+        const { myBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
         const balanceContainer = container.querySelector(`.${this.getCssClass('my-balance')}`)
-        this.setAttr(balanceContainer, null, 'textContent', myBalance)
-        this.addCssClassConditionally(myBalance < 0, this.getBemClass('counter', 'negative'), balanceContainer)
-        this.addCssClassConditionally(myBalance > 0, this.getBemClass('counter', 'positive'), balanceContainer)
+        if (myBalance !== 0) {
+            this.setAttr(balanceContainer, null, 'textContent', Math.abs(myBalance))
+            this.addCssClassConditionally(myBalance < 0, this.getCssClass('counter', 'negative'), balanceContainer)
+            this.addCssClassConditionally(myBalance > 0, this.getCssClass('counter', 'positive'), balanceContainer)
+        } else {
+            balanceContainer.classList.remove(this.getCssClass('counter', 'negative'))
+            balanceContainer.classList.remove(this.getCssClass('counter', 'positive'))
+            this.setAttr(balanceContainer, null, 'textContent', ' ')
+        }
         container?.setAttribute('data-id', this.id)
         this.setAttr(container, null, 'data-status', this.data.currentUserStatus.toString())
         container.style.order = this.data.currentUserStatus
@@ -53,14 +60,22 @@ export class BudgetListItem extends AnimatedComponent {
             transactions,
         }
     }
+    
+    #onParticipantsChanged = (participants) => {
+        this.data = {
+            ...this.data,
+            participants,
+        }
+    }
 
     updateSelectedState = (selectedBudgetId) => {
         this.addCssClassConditionally(this.id === selectedBudgetId, this.getCssClass(null, 'selected'))
     }
 
-    exterminate = async () =>  {
-        Store.unsubscribe('selectedBudgetId', this.updateSelectedState)        
+    exterminate = async () => {
+        Store.unsubscribe('selectedBudgetId', this.updateSelectedState)
         Store.unsubscribe(`budgets.${this.id}.transactions`, this.#onTransactionsChanged)
+        Store.unsubscribe(`budgets.${this.id}.participants`, this.#onParticipantsChanged)
         await super.exterminate()
     }
 
