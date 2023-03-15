@@ -30,10 +30,9 @@ export class Component {
     listeners = new Set()
     baseCssClass = ''
     #data
+    #isInProgress = false
     isReady = true
     isActive = true
-    isInProgress = false
-    
     set data(val) {
         this.#data = val
         if (this.isReady) {
@@ -45,7 +44,19 @@ export class Component {
         return this.#data
     }
 
-    update() {}
+    set isInProgress(val) {
+        if (val) {
+            this.getContainer()?.classList.add('loading')
+        } else {
+            this.getContainer()?.classList.remove('loading')
+        }
+    }
+
+    get isInProgress() {
+        return this.#isInProgress
+    }
+
+    update() { }
 
     getCssClass(block, modifiers) {
         let className = `${this.baseCssClass || this.containerId}`

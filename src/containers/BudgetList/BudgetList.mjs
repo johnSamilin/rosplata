@@ -17,10 +17,6 @@ export class BudgetList extends ListComponent {
     containerId = 'budgets-list'
     baseCssClass = 'budgets-list'
 
-    set isInProgress(val) {
-        this.addCssClassConditionally(val, 'loading')
-    }
-
     constructor() {
         super()
         Store.subscribe('budgets', this.#onBudgetsUpdated)
