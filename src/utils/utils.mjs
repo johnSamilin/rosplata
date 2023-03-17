@@ -115,8 +115,8 @@ export function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-export function getFromLs(itemName) {
-    return isOverridden(itemName) ? localStorage.getItem(itemName) === 'true' : true
+export function getFromLs(itemName, fallbackValue) {
+    return isOverridden(itemName) ? localStorage.getItem(itemName) : fallbackValue
 }
 
 export function isOverridden(itemName) {

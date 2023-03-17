@@ -8,21 +8,13 @@ const mobileMediaQuery = window.matchMedia('(max-width: 425px)')
 
 class CFeatureDetector {
     #connectionSpeed = navigator.connection.effectiveType
-    #URLPattern = 'URLPattern' in window
     #isMobile = mobileMediaQuery.matches
-    #federatedLogin = navigator.credentials && 'FederatedCredential' in window
 
     get connectionSpeed() {
         return this.#connectionSpeed
     }
-    get URLPattern() {
-        return this.#URLPattern
-    }
     get isMobile() {
         return this.#isMobile
-    }
-    get federatedLogin() {
-        return this.#federatedLogin
     }
 
     updateNetworkInformation = () => {
@@ -48,8 +40,6 @@ class CFeatureDetector {
     [Symbol.iterator] = function *() {
         yield *[
             ['Connection Speed Estimation', this.#connectionSpeed],
-            ['URL pattern matching', this.#URLPattern],
-            ['WebAuthn: federated login', this.#federatedLogin],
         ];
     }
 }

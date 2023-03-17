@@ -1,11 +1,25 @@
-body, html {
-    font-family: Neucha, sans-serif;;
+html {
+    font-family: Neucha, sans-serif;
     min-height: 1px;
     height: 100%;
     background-color: beige;
+    color: inherit;
     padding: 0;
     margin: 0;
 }
+
+html.dark {
+    background-color: #41403e;
+    color: beige;
+}
+
+@media all and (prefers-color-scheme: dark) {
+    html:not(.theme-selected) {
+        background-color: #41403e;
+        color: beige;
+    }
+}
+
 * {
     box-sizing: border-box;
 }

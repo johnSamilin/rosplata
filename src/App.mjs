@@ -2,6 +2,7 @@
 import { AuthManager } from "./core/AuthManager.mjs"
 import { LayoutManager } from "./core/LayoutManager.mjs"
 import { Router } from "./core/Router.mjs"
+import { SettingsManager } from "./core/SettingsManager.mjs"
 import { importStyle } from "./utils/imports.js"
 
 importStyle('/styles/App.css')
@@ -24,6 +25,7 @@ document.body.addEventListener('click', (event) => {
 })
 
 window.addEventListener('load', async () => {
+    // SettingsManager.changeTheme(SettingsManager.theme)
     await AuthManager.start()
     if (await AuthManager.validate()) {
         Router.start()

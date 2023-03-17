@@ -15,6 +15,15 @@
     <link rel="stylesheet" async href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css" />
     <script src="/src/App.mjs" type="module"></script>
 
+    <style type="text/css">
+        @media all and (prefers-color-scheme: dark) {
+            html:not(.theme-selected) {
+                background-color: #41403e;
+                color: beige;
+            }
+        }
+    </style>
+
     <template id="layout-main-template">
         <div id="layout-main">
             <aside id="budgets-list"></aside>
@@ -144,7 +153,7 @@
     </template>
 
     <template id="menu-template">
-        <nav id="menu" class="paper border-1"></nav>
+        <nav id="menu" class="paper border-1 background-primary"></nav>
     </template>
 
     <template id="menu-item-template">
@@ -305,7 +314,7 @@
                     check: () => 'HTMLDialogElement' in window,
                 },
                 {
-                    modifier: 'url',
+                    modifier: 'url-pattern',
                     check: () => 'URLPattern' in window,
                 },
                 {
@@ -339,7 +348,7 @@
                         document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
                     }
                 } catch (er) {
-                    console.error(er)
+                    console.error(modifier, er)
                 }
             })
         </script>
