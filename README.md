@@ -8,28 +8,14 @@ Currently demo can be found [here](https://ros-plata.ru/)
 
 [Drop me a line](mailto:a_salt@lenta.ru) if you have anything in mind!
 
+## When would you need it?
+Imagine a situation: you and your friends go to a bar (possibly abroad with no internet available). You order something, have fun. In the end you get the check and no one remembers what did they order and who spent how much. This is exactly the problem Rosplata is here to solve.
+
 ## Alternatives
 * [Splitwise](https://www.splitwise.com/)
 * [Kittysplit](https://www.kittysplit.com/)
 * [Tricount](https://www.tricount.com/en/organizing-group-expenses-among-friends)
 * [IHateMoney](https://github.com/spiral-project/ihatemoney/)
-
-## Dependencies
-There are several features that your browser must support to run the demo:
-* [Dialog element](https://caniuse.com/dialog)
-* [URL pattern API](https://caniuse.com/mdn-api_urlpattern)
-* [Import assertions](https://github.com/tc39/proposal-import-assertions)
-
-Besides, it uses:
-* [HTML templates](https://caniuse.com/template) as templating mechanism
-* [Battery API](https://caniuse.com/battery-status) and [matchMedia](https://caniuse.com/matchmedia) to decide whether to turn off animations
-* Static and dynamic [ES6 imports](https://caniuse.com/es6-module-dynamic-import)
-* [Inert attribute](https://caniuse.com/mdn-html_global_attributes_inert)
-* [WebAssembly](https://caniuse.com/wasm)
-
-## Start
-Basically, startup process is described [here](https://github.com/johnSamilin/rosplata-back)
-Plus, edit `firebaseConfig` variable in `rosplata\src\core\AuthManager.mjs` (you'll obtain those credentials when setting up Firebase)
 
 ## How to use it?
 #### Login
@@ -51,6 +37,23 @@ Let them scan QR code of just send them the link
 
 #### That's all!
 Pay the bill, and no one will have questions how much do they owe you
+
+## Dependencies
+There are several features that your browser must support to run the demo:
+* [Dialog element](https://caniuse.com/dialog)
+* [URL pattern API](https://caniuse.com/mdn-api_urlpattern)
+* [Import assertions](https://github.com/tc39/proposal-import-assertions)
+
+Besides, it uses:
+* [HTML templates](https://caniuse.com/template) as templating mechanism
+* [Battery API](https://caniuse.com/battery-status) and [matchMedia](https://caniuse.com/matchmedia) to decide whether to turn off animations
+* Static and dynamic [ES6 imports](https://caniuse.com/es6-module-dynamic-import)
+* [Inert attribute](https://caniuse.com/mdn-html_global_attributes_inert)
+* [WebAssembly](https://caniuse.com/wasm)
+
+## Start
+Basically, startup process is described [here](https://github.com/johnSamilin/rosplata-back)
+Plus, edit `firebaseConfig` variable in `rosplata\src\core\AuthManager.mjs` (you'll obtain those credentials when setting up Firebase)
 
 ## Look ma, I'm on TV
 [How do I make webapps nowadays?](https://medium.com/@alex.saltykov/how-do-they-make-web-apps-nowadays-pt-1-c1a36acc7dd8)
