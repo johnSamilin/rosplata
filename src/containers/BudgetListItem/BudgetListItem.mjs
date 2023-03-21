@@ -2,7 +2,7 @@
 import { AnimatedComponent } from '../../core/Component.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
-import { getBudgetBalanceFromTransactions } from '../../utils/utils.mjs'
+import { currencyFormatter, getBudgetBalanceFromTransactions } from '../../utils/utils.mjs'
 
 importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
@@ -41,7 +41,7 @@ export class BudgetListItem extends AnimatedComponent {
         const { myBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
         const balanceContainer = container.querySelector(`.${this.getCssClass('my-balance')}`)
         if (myBalance !== 0) {
-            this.setAttr(balanceContainer, null, 'textContent', Math.abs(myBalance))
+            this.setAttr(balanceContainer, null, 'textContent', currencyFormatter.format(Math.abs(myBalance)))
             this.addCssClassConditionally(myBalance < 0, this.getCssClass('counter', 'negative'), balanceContainer)
             this.addCssClassConditionally(myBalance > 0, this.getCssClass('counter', 'positive'), balanceContainer)
         } else {

@@ -58,12 +58,6 @@
     background-color: lightgreen;
     content: '+';
 }
-.budget-details__counter::after {
-    display: inline-block;
-    content: '₽';
-    font-size: 50%;
-    margin: 0 0.25rem;
-}
 
 .budget-details__transactions {
     flex-grow: 1;

@@ -32,12 +32,6 @@
     font-style: italic;
 }
 
-.budgets-list-item__my-balance--positive::after,
-.budgets-list-item__my-balance--negative::after {
-    content: '₽';
-    display: inline-block;
-    font-size: 50%;
-}
 .budgets-list-item__counter {
     display: flex;
     align-items: flex-end;

@@ -154,3 +154,14 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
         myBalance: mySpends - commonShare
     }
 }
+
+export const currencyFormatter = new Intl.NumberFormat(
+    'en-US',
+    {
+        style: 'currency',
+        currency: 'EUR',
+        maximumSignificantDigits: 10,
+        currencyDisplay: 'symbol',
+        minimumFractionDigits: 0,
+    }
+)
