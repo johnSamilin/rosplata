@@ -6,7 +6,7 @@ const reducedMotionMedia = matchMedia('(prefers-reduced-motion)')
 const darkThemeMedia = matchMedia('(prefers-color-scheme: dark)')
 
 class CSettingsManager {
-    #appVersion = '0.0.6'
+    #appVersion = '0.0.7'
     #battery
     #animationsEnabled = Boolean(getFromLs('animationsEnabled', true))
     #autoLoginEnabled = Boolean(getFromLs('autoLoginEnabled', true))
