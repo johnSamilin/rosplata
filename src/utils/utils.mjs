@@ -134,18 +134,18 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
     let totalBalance = 0
     let mySpends = 0
     let participantCount = participants.filter(p => allowedUserStatuses.includes(p.status)).length
-    if (participantCount === 0) {
-        return {
-            totalBalance,
-            myBalance: 0,
-        }
-    }
     transactions.forEach((t) => {
         totalBalance += parseFloat(t.amount)
         if (t.user.id === AuthManager.data.id) {
             mySpends += parseFloat(t.amount)
         }
     })
+    if (participantCount <= 1) {
+        return {
+            totalBalance,
+            myBalance: 0,
+        }
+    }
 
     const commonShare = totalBalance / participantCount
 
