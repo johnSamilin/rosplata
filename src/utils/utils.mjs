@@ -134,7 +134,7 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
     let totalBalance = 0
     let mySpends = 0
     let participantCount = participants.filter(p => allowedUserStatuses.includes(p.status)).length
-    if (participantCount === 0) {
+    if (participantCount <= 1) {
         return {
             totalBalance,
             myBalance: 0,
