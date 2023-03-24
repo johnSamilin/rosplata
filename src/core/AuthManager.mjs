@@ -20,6 +20,7 @@ class CAuthManager {
             id: string;
             name: string;
             token: string;
+            picture: string;
         }}
      */
     #data
@@ -83,10 +84,12 @@ class CAuthManager {
             this.#gProvider = new GoogleAuthProvider()
             await setPersistence(this.#gAuth, browserSessionPersistence)
             const result = await signInWithPopup(this.#gAuth, this.#gProvider)
+            console.log(result);
             this.#data = {
                 id: result.user.uid,
                 name: result.user.displayName,
                 token: result.user.accessToken,
+                picture: result.user.photoURL,
             }
             if (await this.validate()) {
                 this.isLoggedIn = true

@@ -1,5 +1,6 @@
 //@ts-check
 
+import { AuthManager } from "../../core/AuthManager.mjs";
 import { Component } from "../../core/Component.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { currencyFormatter } from "../../utils/utils.mjs";
@@ -37,7 +38,7 @@ export class TransactionsListItem extends Component {
     
     update = () => {
         const container = this.getContainer()
-        this.setAttr(container, `.${this.getCssClass('image')}`, 'src', this.data.user.picture)
+        this.setAttr(container, `.${this.getCssClass('image')}`, 'src', AuthManager.data.picture)
         this.setAttr(container, `.${this.getCssClass('name')}`, 'textContent', this.data.user.name)
         this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', currencyFormatter.format(this.data.amount))
     }
