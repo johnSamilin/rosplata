@@ -16,14 +16,24 @@ export class CDialog extends Component {
     show() {
         this.getContainer().showModal()
         this.attachListeners()
+        window.history.pushState({ dialogOpened: true }, null, location.href)
+        window.addEventListener('popstate', this.#onPopstate)
     }
 
-    hide = () => {
+    hide = (removeHistoryState = true) => {
         const container = this.getContainer()
         container.close()
         this.stopListeners()
         container.innerHTML = ''
         this.setAttr(container, undefined, 'class', 'border-1')
+        if (removeHistoryState) {
+            window.history.back()
+        }
+    }
+
+    #onPopstate = (e) => {
+        this.hide(false)
+        window.removeEventListener('popstate', this.#onPopstate)
     }
 
     listeners = new Set([
