@@ -1,3 +1,5 @@
+<a href="https://www.producthunt.com/posts/rosplata-collaborative-finance-manager?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-rosplata&#0045;collaborative&#0045;finance&#0045;manager" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=385668&theme=light" alt="Rosplata&#0058;&#0032;collaborative&#0032;finance&#0032;manager - opensource&#0044;&#0032;finance&#0032;management&#0044;&#0032;expense&#0032;tracker&#0044;&#0032;collaborate | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 # rosplata
 This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, no polyfills)
 
