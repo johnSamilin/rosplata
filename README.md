@@ -57,4 +57,5 @@ Plus, edit `firebaseConfig` variable in `rosplata\src\core\AuthManager.mjs` (you
 
 ## Look ma, I'm on TV
 [How do I make webapps nowadays?](https://medium.com/@alex.saltykov/how-do-they-make-web-apps-nowadays-pt-1-c1a36acc7dd8)
+
 [ProductHunt](https://www.producthunt.com/posts/rosplata-collaborative-finance-manager)
