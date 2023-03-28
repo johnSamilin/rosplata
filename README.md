@@ -19,6 +19,14 @@ Imagine a situation: you and your friends go to a bar (possibly abroad with no i
 * [Tricount](https://www.tricount.com/en/organizing-group-expenses-among-friends)
 * [IHateMoney](https://github.com/spiral-project/ihatemoney/)
 
+## Currently available currencies
+*  Russian Rouble
+*  Indian Rupee
+*  US Dollar
+*  Euro
+*  Chinese Yuan
+*  Jordanian Dinar
+
 ## How to use it?
 #### Login
 ![msg71066564-85607](https://user-images.githubusercontent.com/5821894/222373663-2d3e7708-c233-4f01-b43e-764f698cbe8f.jpg)
