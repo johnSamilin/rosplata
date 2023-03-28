@@ -5,7 +5,7 @@ import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
-import { currencyFormatter, getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
+import { currencyFormatters, getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
 import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 import { Alert } from "../Alert/Alert.mjs";
 import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
@@ -117,7 +117,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
-        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatter.format(Math.abs(myBalance)))
+        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance)))
         this.addCssClassConditionally(
             myBalance > 0,
             this.getCssClass('counter', 'positive'),
@@ -128,7 +128,7 @@ export class BudgetDetails extends AnimatedComponent {
             this.getCssClass('counter', 'negative'),
             container.querySelector(`.${this.getCssClass('counter', 'my')}`)
         )
-        this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', currencyFormatter.format(totalBalance))
+        this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(totalBalance))
 
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.INVITED,
