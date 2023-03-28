@@ -54,9 +54,11 @@ export class TransactionsList extends ListComponent {
         const form = this.getContainer()?.querySelector('form.transactions-list__new')
         const data = new FormData(form)
         const budgetId = Store.get('selectedBudgetId')
+        const { currency } = Store.get(`budgets.${budgetId}`)
         // @ts-ignore
         data.append('budgetId', budgetId)
         data.append('id', crypto.randomUUID())
+        data.append('currency', currency)
         const id = Date.now()
         try {
             this.isInProgress = true
@@ -64,6 +66,7 @@ export class TransactionsList extends ListComponent {
                 id,
                 amount: data.get('amount'),
                 user: AuthManager.data,
+                currency,
             }
             // @ts-ignore
             this.addItems(new Map([

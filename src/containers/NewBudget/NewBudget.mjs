@@ -44,6 +44,7 @@ export class NewBudget extends Component {
         const data = new FormData(form)
         const id = crypto.randomUUID()
         const name = DOMPurify.sanitize(data.get('name'))
+        const currency = data.get('currency')
         data.set('name', name)
         data.set('id', id)
         try {
@@ -63,6 +64,7 @@ export class NewBudget extends Component {
                     }
                 }],
                 currentUserStatus: PARTICIPANT_STATUSES.OWNER,
+                currency,
             }
             await Api.put('create', 'budgets', { body: data })
             Store.set('budgets', budgets)

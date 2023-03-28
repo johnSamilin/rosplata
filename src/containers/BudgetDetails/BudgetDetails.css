@@ -3,6 +3,7 @@
     flex-grow: 1;
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    max-height: 100vh;
 }
 .budget-details__header {
     display: flex;

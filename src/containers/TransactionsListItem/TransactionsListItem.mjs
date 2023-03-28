@@ -3,7 +3,7 @@
 import { AuthManager } from "../../core/AuthManager.mjs";
 import { Component } from "../../core/Component.mjs";
 import { importStyle } from "../../utils/imports.js";
-import { currencyFormatter } from "../../utils/utils.mjs";
+import { currencyFormatters } from "../../utils/utils.mjs";
 
 importStyle('/src/containers/TransactionsListItem/TransactionsListItem.css')
 
@@ -40,7 +40,7 @@ export class TransactionsListItem extends Component {
         const container = this.getContainer()
         this.setAttr(container, `.${this.getCssClass('image')}`, 'src', AuthManager.data.picture)
         this.setAttr(container, `.${this.getCssClass('name')}`, 'textContent', this.data.user.name)
-        this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', currencyFormatter.format(this.data.amount))
+        this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(this.data.amount))
     }
 
     listeners = new Set([])

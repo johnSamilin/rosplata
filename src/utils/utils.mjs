@@ -1,4 +1,5 @@
 //@ts-check
+import { CURRENCIES } from "../constants/currencies.mjs";
 import { allowedUserStatuses } from "../constants/userStatuses.mjs";
 import { AuthManager } from "../core/AuthManager.mjs"
 
@@ -155,13 +156,26 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
     }
 }
 
-export const currencyFormatter = new Intl.NumberFormat(
-    'en-US',
-    {
-        style: 'currency',
-        currency: 'EUR',
-        maximumSignificantDigits: 10,
-        currencyDisplay: 'symbol',
-        minimumFractionDigits: 0,
-    }
-)
+export const currencyFormatters = new Map(CURRENCIES.map(code => (
+    [
+        code,
+        new Intl.NumberFormat(
+            'en-US',
+            {
+                style: 'currency',
+                currency: code,
+                maximumSignificantDigits: 10,
+                currencyDisplay: 'symbol',
+                minimumFractionDigits: 0,
+            }
+        )
+    ]
+)))
+// export const currencyFormatter = (currency) => {
+//     if (!currencyFormatters.has(currency)) {
+//         currencyFormatters.set(
+//             currency,
+//             )
+//     }
+//     return currencyFormatters.get(currency)
+// }

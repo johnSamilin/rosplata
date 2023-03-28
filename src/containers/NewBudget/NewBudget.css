@@ -18,3 +18,7 @@
 .new-budget__buttons button {
     width: 45%;
 }
+.new-budget__fields strong {
+    display: inline-block;
+    margin: 1rem 0 0.25rem;
+}
