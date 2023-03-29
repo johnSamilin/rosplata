@@ -72,3 +72,5 @@ https://rosplata-docs.readthedocs.io/en/latest/
 [How do I make webapps nowadays?](https://medium.com/@alex.saltykov/how-do-they-make-web-apps-nowadays-pt-1-c1a36acc7dd8)
 
 [ProductHunt](https://www.producthunt.com/posts/rosplata-collaborative-finance-manager)
+
+[How do I work on opensource project Rosplata](https://www.linkedin.com/posts/asaltykov_github-johnsamilinrosplata-opensource-activity-7046472455246225408-LZ9H)
