@@ -22,6 +22,11 @@
                 color: beige;
             }
         }
+        #telegram-post-rosplata-3 {
+            position: relative;
+            transform: scale(80%);
+            top: 25vh;
+        }
     </style>
 
     <template id="layout-main-template">
@@ -185,6 +190,7 @@
             <h1 class="layout-login__prompt">Enter Rosplata</h1>
             <h2 class="layout-login__prompt-detail">Sign in with your google account to start using shared budgets</h2>
             <button id="login__google">Enter</button>
+            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
             <span class="layout-login__version"></span>
         </div>
     </template>
