@@ -1,5 +1,5 @@
 //@ts-check
-
+import DOMPurify from 'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js'
 import { AuthManager } from "../../core/AuthManager.mjs";
 import { Component } from "../../core/Component.mjs";
 import { importStyle } from "../../utils/imports.js";
@@ -35,12 +35,15 @@ export class TransactionsListItem extends Component {
         parent.appendChild(container)
         this.update()
     }
-    
+
     update = () => {
         const container = this.getContainer()
         this.setAttr(container, `.${this.getCssClass('image')}`, 'src', AuthManager.data.picture)
         this.setAttr(container, `.${this.getCssClass('name')}`, 'textContent', this.data.user.name)
         this.setAttr(container, `.${this.getCssClass('amount')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(this.data.amount))
+        if (this.data.comment) {
+            this.setAttr(container, `.${this.getCssClass('comment')}`, 'textContent', DOMPurify.sanitize(this.data.comment))
+        }
     }
 
     listeners = new Set([])

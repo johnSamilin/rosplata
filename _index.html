@@ -122,9 +122,13 @@
     <template id="transactions-list-template">
         <div id="transactions-list">
             <form class="transactions-list__new">
-                <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0"
-                    title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
-                <button type="submit" class="transactions-list__ok-btn">mkay</button>
+                <div class="transactions-list__amount-wrapper">
+                    <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0"
+                        title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
+                    <button type="submit" class="transactions-list__ok-btn">mkay</button>
+                </div>
+                <input type="text" name="comment" class="transactions-list__comment"
+                    placeholder="Add optional comment" />
             </form>
             <div class="transactions-list__items"></div>
         </div>
@@ -133,7 +137,10 @@
     <template id="transactions-list-item-template">
         <div class="transactions-list-item">
             <img src="" alt="" class="transactions-list-item__image" width="20px" height="20px" />
-            <span class="transactions-list-item__name"></span>
+            <div class="transactions-list-item__name-and-comment">
+                <span class="transactions-list-item__name"></span>
+                <span class="transactions-list-item__comment text-muted"></span>
+            </div>
             <span class="transactions-list-item__amount"></span>
         </div>
     </template>
