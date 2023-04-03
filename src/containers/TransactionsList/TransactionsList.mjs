@@ -67,6 +67,7 @@ export class TransactionsList extends ListComponent {
                 amount: data.get('amount'),
                 user: AuthManager.data,
                 currency,
+                comment: data.get('comment'),
             }
             // @ts-ignore
             this.addItems(new Map([
