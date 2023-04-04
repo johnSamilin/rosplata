@@ -1,0 +1,202 @@
+{
+    "page-title": {
+        "value": "Росплата",
+        "prop": "text",
+        "defaultValue": "Rosplata"
+    },
+    "description": {
+        "value": "Росплата - это менеджер общих финансов с открытым исходным кодом. Создавайте общие бюджеты, подключайте друзей и с легкостью делите затраты",
+        "prop": "content",
+        "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
+    },
+    "keywords": {
+        "value": "opensource, совместные, финансы, бюджет, счет, делить",
+        "prop": "content",
+        "defaultValue": "opensource, collaborative, finance, budget, split, bill"
+    },
+    "feature-checkup-title": {
+        "value": "Ваш браузер должен поддерживать эти фичи",
+        "prop": "text",
+        "defaultValue": "Your browser must support these features"
+    },
+    "feature-checkup-description": {
+        "value": "Простите за неудобства. Попробуйте открыть приложение в Chome или Edge",
+        "prop": "text",
+        "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
+    },
+    "budgets-list-new": {
+        "value": "Создать",
+        "prop": "text",
+        "defaultValue": "Create new"
+    },
+    "back": {
+        "value": "Назад",
+        "prop": "text",
+        "defaultValue": "Back"
+    },
+    "participants-list-button": {
+        "value": "Участники",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "budget-details-my-balance": {
+        "value": "Мой баланс",
+        "prop": "text",
+        "defaultValue": "My balance"
+    },
+    "budget-details-total-sum": {
+        "value": "Всего",
+        "prop": "text",
+        "defaultValue": "Total sum"
+    },
+    "budget-details-actions-invite": {
+        "value": "Вы приглашены",
+        "prop": "text",
+        "defaultValue": "You are invited to participate"
+    },
+    "budget-details-actions-accept": {
+        "value": "Принять",
+        "prop": "text",
+        "defaultValue": "Accept"
+    },
+    "budget-details-actions-decline": {
+        "value": "Отклонить",
+        "prop": "text",
+        "defaultValue": "Decline"
+    },
+    "budget-details-actions-ask": {
+        "value": "Вы можете вступить",
+        "prop": "text",
+        "defaultValue": "You can ask for invite"
+    },
+    "budget-details-actions-send-request": {
+        "value": "Отправить запрос",
+        "prop": "text",
+        "defaultValue": "Send request"
+    },
+    "budget-details-actions-wait": {
+        "value": "Создатель должен подтвердить ваш запрос",
+        "prop": "text",
+        "defaultValue": "Budget owner have to approve your request"
+    },
+    "close": {
+        "value": "Закрыть",
+        "prop": "text",
+        "defaultValue": "Close"
+    },
+    "budget-details-add-people": {
+        "value": "Добавить участников",
+        "prop": "text",
+        "defaultValue": "Add people"
+    },
+    "transactions-list-ok": {
+        "value": "ок",
+        "prop": "text",
+        "defaultValue": "mkay"
+    },
+    "transactions-list-comment": {
+        "value": "Комментарий",
+        "prop": "placeholder",
+        "defaultValue": "Add optional comment"
+    },
+    "feature-detector-title": {
+        "value": "Фичи",
+        "prop": "text",
+        "defaultValue": "Features"
+    },
+    "feature-detector-description": {
+        "value": "Которые ваш браузер должен поддерживать",
+        "prop": "text",
+        "defaultValue": "That need to be supported for this app to work"
+    },
+    "layout-login-title": {
+        "value": "Войти в Росплату",
+        "prop": "text",
+        "defaultValue": "Enter Rosplata"
+    },
+    "layout-login-description": {
+        "value": "Используйте ваш Google аккаунт чтобы начать пользоваться общими бюджетами",
+        "prop": "text",
+        "defaultValue": "Sign in with your google account to start using shared budgets"
+    },
+    "layout-login-enter": {
+        "value": "Войти",
+        "prop": "text",
+        "defaultValue": "Enter"
+    },
+    "new-budget-title": {
+        "value": "Название бюджета",
+        "prop": "text",
+        "defaultValue": ""
+    },
+    "new-budget-currency": {
+        "value": "Валюта",
+        "prop": "text",
+        "defaultValue": "Select currency"
+    },
+    "currency-rub": {
+        "value": "Российский рубль",
+        "prop": "text",
+        "defaultValue": "Russian Rouble"
+    },
+    "currency-inr": {
+        "value": "Индийская рупия",
+        "prop": "text",
+        "defaultValue": "Indian Rupee"
+    },
+    "currency-usd": {
+        "value": "Доллар США",
+        "prop": "text",
+        "defaultValue": "US Dollar"
+    },
+    "currency-eur": {
+        "value": "Евро",
+        "prop": "text",
+        "defaultValue": "Euro"
+    },
+    "currency-cny": {
+        "value": "Китайский юань",
+        "prop": "text",
+        "defaultValue": "Chinese Yuan"
+    },
+    "currency-jrd": {
+        "value": "Иорданский динар",
+        "prop": "text",
+        "defaultValue": "Jordanian Dinar"
+    },
+    "new-budget-go": {
+        "value": "Поехали",
+        "prop": "text",
+        "defaultValue": "Go"
+    },
+    "new-budget-reset": {
+        "value": "Сбросить",
+        "prop": "text",
+        "defaultValue": "Reset"
+    },
+    "participants-list-ban": {
+        "value": "Убрать",
+        "prop": "text",
+        "defaultValue": "Ban"
+    },
+    "participants-list-revert": {
+        "value": "Вернуть",
+        "prop": "text",
+        "defaultValue": "Revert"
+    },
+    "participants-list-approve": {
+        "value": "Подтвердить",
+        "prop": "text",
+        "defaultValue": "Approve"
+    },
+    "invite-dialog-description": {
+        "value": "Сканируйте QR код чтобы открыть бюджет на своем устройстве",
+        "prop": "text",
+        "defaultValue": "Scan this QR code to open this budget on your device."
+    },
+    "invite-dialog-share-link": {
+        "value": "Отправить ссылку",
+        "prop": "text",
+        "defaultValue": "Share link instead"
+    }
+}

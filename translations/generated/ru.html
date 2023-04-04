@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate-id="page-title">Rosplata</title>
-    <meta data-translate-id="description" data-translate-prop="content" name="description"
-        content="Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills" />
-    <meta data-translate-id="keywords" data-translate-prop="content" name="keywords" content="opensource, collaborative, finance, budget, split, bill" />
-    <link rel="canonical" href="https://ros-plata.ru" />
+    <title data-translate-id="page-title">Росплата</title>
+    <meta data-translate-id="description" data-translate-prop="content" name="description" content="Росплата - это менеджер общих финансов с открытым исходным кодом. Создавайте общие бюджеты, подключайте друзей и с легкостью делите затраты">
+    <meta data-translate-id="keywords" data-translate-prop="content" name="keywords" content="opensource, совместные, финансы, бюджет, счет, делить">
+    <link rel="canonical" href="https://ros-plata.ru">
     <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" async href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css" />
+    <link rel="stylesheet" async="" href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css">
     <script src="/src/App.mjs" type="module"></script>
 
     <style type="text/css">
@@ -29,119 +25,101 @@
         }
     </style>
 
-    <template id="layout-main-template">
-        <div id="layout-main">
+    <template id="layout-main-template"><div id="layout-main">
             <aside id="budgets-list"></aside>
             <aside id="create-form"></aside>
             <section id="budget-details" class="exit hidden"></section>
         </div>
     </template>
 
-    <template id="layout-settings-template">
-        <div id="layout-settings" class="exit-disappear">
+    <template id="layout-settings-template"><div id="layout-settings" class="exit-disappear">
             <aside id="layout-settings__menu" class="exit-disappear"></aside>
             <section id="layout-settings__settings"></section>
         </div>
     </template>
 
-    <template id="budgets-list-template">
-        <div class="budgets-list__actions">
-            <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new">Create new</button>
+    <template id="budgets-list-template"><div class="budgets-list__actions">
+            <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new">إنشاء ميزانية جديدة</button>
             <button id="budgets-list__menu-button"></button>
         </div>
         <div id="budgets-list__items">
-            <div
-                class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders">
+            <div class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders">
             </div>
-            <div
-                class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders">
+            <div class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders">
             </div>
-            <div
-                class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders">
+            <div class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders">
             </div>
-            <div
-                class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders">
+            <div class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders">
             </div>
-            <div
-                class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders">
+            <div class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders">
             </div>
-            <div
-                class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders">
+            <div class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders">
             </div>
         </div>
     </template>
 
-    <template id="budgets-list-item-template">
-        <li class="budgets-list-item">
+    <template id="budgets-list-item-template"><li class="budgets-list-item">
             <span class="budgets-list-item__title"></span>
             <span class="budgets-list-item__my-balance budgets-list-item__counter"></span>
         </li>
     </template>
 
-    <template id="budget-details-template">
-        <div class="budget-details__main">
+    <template id="budget-details-template"><div class="budget-details__main">
             <div class="budget-details__header">
                 <div class="visible-on-mobile">
-                    <a href="/" data-translate-id="back">Back</a>
+                    <a href="/" data-translate-id="back"></a>
                 </div>
                 <div class="visible-on-mobile">
-                    <a id="participants-list-btn" data-translate-id="participants-list-button">Participants</a>
+                    <a id="participants-list-btn" data-translate-id="participants-list-button"></a>
                 </div>
             </div>
             <div class="budget-details__counters">
                 <div class="budget-details__counter-wrapper">
                     <span class="budget-details__counter budget-details__counter--my"></span>
-                    <span data-translate-id="budget-details-my-balance">My balance</span>
+                    <span data-translate-id="budget-details-my-balance"></span>
                 </div>
                 <div class="budget-details__counter-wrapper">
-                    <span
-                        class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
-                    <span data-translate-id="budget-details-total-sum">Total sum</span>
+                    <span class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
+                    <span data-translate-id="budget-details-total-sum"></span>
                 </div>
             </div>
             <div class="budget-details__transactions"></div>
             <div class="budget-details__actions budget-details__actions--invite">
-                <span data-translate-id="budget-details-actions-invite">You are invited to participate</span>
-                <button class="budget-details__action btn-success" id="accept-invite" data-translate-id="budget-details-actions-accept">Accept</button>
-                <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">Decline</button>
+                <span data-translate-id="budget-details-actions-invite"></span>
+                <button class="budget-details__action btn-success" id="accept-invite" data-translate-id="budget-details-actions-accept"></button>
+                <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline"></button>
             </div>
             <div class="budget-details__actions budget-details__actions--ask">
-                <span data-translate-id="budget-details-actions-ask">You can ask for invite</span>                
-                <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">Send request</button>
+                <span data-translate-id="budget-details-actions-ask"></span>                
+                <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request"></button>
             </div>
-            <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait">
-                Budget owner have to approve your request
-            </div>
+            <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait"></div>
         </div>
         <aside class="budget-details__aside">
             <div class="visible-on-mobile">
-                <a id="participants-list-close-btn" data-translate-id="close">Close</a>
+                <a id="participants-list-close-btn" data-translate-id="close"></a>
             </div>
             <div class="budget-details__participants"></div>
             <div class="budget-details__actions budget-details__actions--send-invite">
-                <button id="send-invite" class="budget-details__action button" data-translate-id="budget-details-add-people">Add people</button>
+                <button id="send-invite" class="budget-details__action button" data-translate-id="budget-details-add-people"></button>
             </div>
         </aside>
     </template>
 
-    <template id="transactions-list-template">
-        <div id="transactions-list">
+    <template id="transactions-list-template"><div id="transactions-list">
             <form class="transactions-list__new">
                 <div class="transactions-list__amount-wrapper">
-                    <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0"
-                        title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
-                    <button type="submit" class="transactions-list__ok-btn" data-translate-id="transactions-list-ok">mkay</button>
+                    <input type="number" required="" autocomplete="off" placeholder="100,00" step="0.1" min="0" title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount">
+                    <button type="submit" class="transactions-list__ok-btn" data-translate-id="transactions-list-ok"></button>
                 </div>
-                <input type="text" name="comment" class="transactions-list__comment"
-                    placeholder="Add optional comment" data-translate-id="transactions-list-comment" data-translate-prop="placeholder" />
+                <input type="text" name="comment" class="transactions-list__comment" placeholder="" data-translate-id="transactions-list-comment" data-translate-prop="placeholder">
             </form>
             <div class="transactions-list__items"></div>
         </div>
     </template>
 
-    <template id="transactions-list-item-template">
-        <div class="transactions-list-item">
-            <img src="" alt="" class="transactions-list-item__image" width="20px" height="20px" />
+    <template id="transactions-list-item-template"><div class="transactions-list-item">
+            <img src="" alt="" class="transactions-list-item__image" width="20px" height="20px">
             <div class="transactions-list-item__name-and-comment">
                 <span class="transactions-list-item__name"></span>
                 <span class="transactions-list-item__comment text-muted"></span>
@@ -150,75 +128,65 @@
         </div>
     </template>
 
-    <template id="feature-detector__template">
-        <div class="exit-disappear" id="feature-detector">
-            <header data-translate-id="feature-detector-title">Features</header>
-            <p data-translate-id="feature-detector-description">That need to be supported for this app to work</p>
+    <template id="feature-detector__template"><div class="exit-disappear" id="feature-detector">
+            <header data-translate-id="feature-detector-title"></header>
+            <p data-translate-id="feature-detector-description"></p>
         </div>
     </template>
 
-    <template id="feature-detector__feature-template">
-        <div class="feature-detector__feature-wrapper">
+    <template id="feature-detector__feature-template"><div class="feature-detector__feature-wrapper">
             <strong class="feature-detector__feature-name"></strong>
             <span class="feature-detector__feature-value"></span>
         </div>
     </template>
 
-    <template id="menu-template">
-        <nav id="menu" class="paper border-1 background-primary"></nav>
+    <template id="menu-template"><nav id="menu" class="paper border-1 background-primary"></nav>
     </template>
 
-    <template id="menu-item-template">
-        <a href="" class="menu-item"></a>
+    <template id="menu-item-template"><a href="" class="menu-item"></a>
     </template>
 
-    <template id="settings-section-item-template">
-        <div class="settings-item">
+    <template id="settings-section-item-template"><div class="settings-item">
             <label class="settings-item__name"></label>
-            <input class="settings-item__value" />
+            <input class="settings-item__value">
         </div>
     </template>
-    <template id="settings-section-static-item-template">
-        <div class="settings-item">
+    <template id="settings-section-static-item-template"><div class="settings-item">
             <label class="settings-item__name"></label>
             <span class="settings-item__value"></span>
         </div>
     </template>
 
-    <template id="layout-login-template">
-        <div id="layout-login">
-            <h1 class="layout-login__prompt" data-translate-id="layout-login-title">Enter Rosplata</h1>
-            <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">Sign in with your google account to start using shared budgets</h2>
-            <button id="login__google" data-translate-id="layout-login-enter">Enter</button>
-            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
+    <template id="layout-login-template"><div id="layout-login">
+            <h1 class="layout-login__prompt" data-translate-id="layout-login-title"></h1>
+            <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description"></h2>
+            <button id="login__google" data-translate-id="layout-login-enter"></button>
+            <script async="" src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
             <span class="layout-login__version"></span>
         </div>
     </template>
 
-    <template id="new-budget-template">
-        <form id="new-budget__form">
+    <template id="new-budget-template"><form id="new-budget__form">
             <div class="new-budget__fields">
-                <input type="text" name="name" autocomplete="off" autofocus required minlength="3" maxlength="20"
-                    title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title" />
-                <strong data-translate-id="new-budget-currency">Select currency</strong>
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title">
+                <strong data-translate-id="new-budget-currency"></strong>
                 <select name="currency" id="currency">
-                    <option value="RUB" data-translate-id="currency-rub">Russian Rouble</option>
-                    <option value="INR" data-translate-id="currency-inr">Indian Rupee</option>
-                    <option value="USD" data-translate-id="currency-usd">US Dollar</option>
-                    <option value="EUR" data-translate-id="currency-eur">Euro</option>
-                    <option value="CNY" data-translate-id="currency-cny">Chinese Yuan</option>
-                    <option value="JRD" data-translate-id="currency-jrd">Jordanian Dinar</option>
+                    <option value="RUB" data-translate-id="currency-rub"></option>
+                    <option value="INR" data-translate-id="currency-inr"></option>
+                    <option value="USD" data-translate-id="currency-usd"></option>
+                    <option value="EUR" data-translate-id="currency-eur"></option>
+                    <option value="CNY" data-translate-id="currency-cny"></option>
+                    <option value="JRD" data-translate-id="currency-jrd"></option>
                 </select>
             </div>
             <div class="new-budget__buttons">
-                <button type="submit" data-translate-id="new-budget-go">Go</button>
-                <button type="reset" data-translate-id="new-budget-reset">Reset</button>
+                <button type="submit" data-translate-id="new-budget-go"></button>
+                <button type="reset" data-translate-id="new-budget-reset"></button>
             </div>
         </form>
     </template>
 
-    <template id="alert-template">
-        <div class="app-alert">
+    <template id="alert-template"><div class="app-alert">
             <input class="alert-state" id="alert" type="checkbox">
             <div class="alert dismissible">
                 <span class="app-alert__text"></span>
@@ -227,42 +195,33 @@
         </div>
     </template>
 
-    <template id="participants-list-template">
-        <div id="participants-list" class="participants-list">
+    <template id="participants-list-template"><div id="participants-list" class="participants-list">
             <div class="participants-list__items"></div>
         </div>
     </template>
 
-    <template id="participants-list-item-template">
-        <div class="participants-list-item">
+    <template id="participants-list-item-template"><div class="participants-list-item">
             <div class="participants-list-item__info">
                 <span class="participants-list-item__name"></span>
                 <span class="participants-list-item__status"></span>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status1">
-                <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban">Ban</button>
+                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban"></button>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status2">
-                <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-revert">Revert</button>
+                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-revert"></button>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status5">
-                <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-approve">Approve</button>
-                <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban">Ban</button>
+                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-approve"></button>
+                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban"></button>
             </div>
         </div>
     </template>
 
-    <template id="invite-dialog-template">
-        <div class="invite-dialog paper border-2">
-            <img src="" alt="QR Code" class="invite-dialog__qr-code" />
-            <p data-translate-id="invite-dialog-description">
-                Scan this QR code to open this budget on your device.
-            </p>
-            <button id="send-invite-link" class="button btn-secondary" data-translate-id="invite-dialog-share-link">Share link instead</button>
+    <template id="invite-dialog-template"><div class="invite-dialog paper border-2">
+            <img src="" alt="QR Code" class="invite-dialog__qr-code">
+            <p data-translate-id="invite-dialog-description"></p>
+            <button id="send-invite-link" class="button btn-secondary" data-translate-id="invite-dialog-share-link"></button>
         </div>
     </template>
 </head>
@@ -289,7 +248,7 @@
                 justify-content: space-between;
             }
         </style>
-        <strong data-translate-id="feature-checkup-title">Your browser must support these features</strong>
+        <strong data-translate-id="feature-checkup-title">Ваш браузер должен поддерживать эти фичи</strong>
         <div class="feature-checkup feature-checkup--dialog">
             <span class="feature-checkup__name">Dialog element</span>
             <span class="feature-checkup__value">Not supported</span>
@@ -326,9 +285,7 @@
             <span class="feature-checkup__name">Inert attribute</span>
             <span class="feature-checkup__value">Not supported</span>
         </div>
-        <strong data-translate-id="feature-checkup-description">
-            Sorry for inconvenience. Try opening this app in Chrome or Edge.
-        </strong>
+        <strong data-translate-id="feature-checkup-description">Простите за неудобства. Попробуйте открыть приложение в Chome или Edge</strong>
         <script type="text/javascript">
             const checks = [
                 {
@@ -375,6 +332,6 @@
             })
         </script>
     </div>
-</body>
 
-</html>
+
+</body>
