@@ -38,6 +38,32 @@
         </div>
     </template>
 
+    <template id="settings-section-template"><div class="settings-item">
+            <label class="settings-item__name" data-translate-id="settings-item-app-version"></label>
+            <span class="settings-item__value" id="app-version"></span>
+        </div>
+        <div class="settings-item">
+            <label class="settings-item__name" for="autologin" data-translate-id="settings-item-autologin"></label>
+            <input class="settings-item__value" type="checkbox" id="autologin-setting">
+        </div>
+        <div class="settings-item">
+            <label class="settings-item__name" for="theme-setting" data-translate-id="settings-item-theme"></label>
+            <select class="settings-item__value" id="theme-setting">
+                <option value="system" data-translate-id="settings-item-theme-system"></option>
+                <option value="light" data-translate-id="settings-item-theme-light"></option>
+                <option value="dark" data-translate-id="settings-item-theme-dark"></option>
+            </select>
+        </div>
+        <div class="settings-item">
+            <label class="settings-item__name" for="language-setting" data-translate-id="settings-item-language"></label>
+            <select class="settings-item__value" id="language-setting">
+                <option value="system" data-translate-id="settings-item-language-system"></option>
+                <option value="ru" data-translate-id="settings-item-language-ru"></option>
+                <option value="en" data-translate-id="settings-item-language-en"></option>
+            </select>
+        </div>
+    </template>
+
     <template id="budgets-list-template"><div class="budgets-list__actions">
             <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new"></button>
             <button id="budgets-list__menu-button"></button>
@@ -144,17 +170,6 @@
     </template>
 
     <template id="menu-item-template"><a href="" class="menu-item"></a>
-    </template>
-
-    <template id="settings-section-item-template"><div class="settings-item">
-            <label class="settings-item__name"></label>
-            <input class="settings-item__value">
-        </div>
-    </template>
-    <template id="settings-section-static-item-template"><div class="settings-item">
-            <label class="settings-item__name"></label>
-            <span class="settings-item__value"></span>
-        </div>
     </template>
 
     <template id="layout-login-template"><div id="layout-login">
