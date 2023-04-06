@@ -72,7 +72,7 @@ Basically, startup process is described [here](https://github.com/johnSamilin/ro
 Plus, edit `firebaseConfig` variable in `rosplata\src\core\AuthManager.mjs` (you'll obtain those credentials when setting up Firebase)
 
 ## Docs
-https://rosplata-docs.readthedocs.io/en/latest/
+https://github.com/johnSamilin/rosplata/wiki
 
 ## Look ma, I'm on TV
 [How do I make webapps nowadays?](https://medium.com/@alex.saltykov/how-do-they-make-web-apps-nowadays-pt-1-c1a36acc7dd8)
