@@ -14,7 +14,7 @@ Currently demo can be found [here](https://ros-plata.ru/)
 
 **Supported browsers: Chrome, Edge**
 
-[Drop me a line](mailto:a_salt@lenta.ru) if you have anything in mind!
+[Drop me a line](mailto:rosplataapp@mail.ru) if you have anything in mind!
 
 ## When would you need it?
 Imagine a situation: you and your friends go to a bar (possibly abroad with no internet available). You order something, have fun. In the end you get the check and no one remembers what did they order and who spent how much. This is exactly the problem Rosplata is here to solve.
