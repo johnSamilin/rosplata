@@ -5,62 +5,62 @@
         "defaultValue": "Rosplata"
     },
     "description": {
-        "value": "",
+        "value": "Rosplata هو مدير مالي تعاوني مفتوح المصدر ومستضاف ذاتيًا. قم بإنشاء الميزانيات ومشاركتها مع الأصدقاء وتقسيم الفواتير بسهولة",
         "prop": "content",
         "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
     },
     "keywords": {
-        "value": "",
+        "value": "مفتوح المصدر ، تعاوني ، مالي ، ميزانية ، مقسم ، فاتورة",
         "prop": "content",
-        "defaultValue": "opensource, collaborative, finance, budget, split, bill"
+        "defaultValue": "مفتوح المصدر ، تعاوني ، مالي ، ميزانية ، مقسم ، فاتورة"
     },
     "feature-checkup-title": {
-        "value": "",
+        "value": "يجب أن يدعم متصفحك هذه الميزات",
         "prop": "text",
         "defaultValue": "Your browser must support these features"
     },
     "feature-checkup-description": {
-        "value": "",
+        "value": "آسف على الإزعاج. حاول فتح هذا التطبيق في Chrome أو Edge.",
         "prop": "text",
         "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
     },
     "settings-item-app-version": {
-        "value": "",
+        "value": "نسخة التطبيق",
         "prop": "text",
         "defaultValue": "App version"
     },
     "settings-item-autologin": {
-        "value": "",
+        "value": "تسجيل تلقائى",
         "prop": "text",
         "defaultValue": "Autologin"
     },
     "settings-item-theme": {
-        "value": "",
+        "value": "موضوع اللون",
         "prop": "text",
         "defaultValue": "Theme"
     },
     "settings-item-theme-system": {
-        "value": "",
+        "value": "النظام الأول",
         "prop": "text",
         "defaultValue": "System"
     },
     "settings-item-theme-light": {
-        "value": "",
+        "value": "موضوع خفيف",
         "prop": "text",
         "defaultValue": "Light"
     },
     "settings-item-theme-dark": {
-        "value": "",
+        "value": "مظهر داكن",
         "prop": "text",
         "defaultValue": "Dark"
     },
     "settings-item-language": {
-        "value": "",
+        "value": "لغة",
         "prop": "text",
         "defaultValue": "Language"
     },
     "settings-item-language-system": {
-        "value": "",
+        "value": "دع المتصفح يقرر",
         "prop": "text",
         "defaultValue": "Let browser decide"
     },
@@ -80,172 +80,172 @@
         "defaultValue": "Create new"
     },
     "back": {
-        "value": "",
+        "value": "عُد",
         "prop": "text",
         "defaultValue": "Back"
     },
     "participants-list-button": {
-        "value": "",
+        "value": "مشاركون",
         "prop": "text",
         "defaultValue": "Participants"
     },
     "budget-details-my-balance": {
-        "value": "",
+        "value": "رصيدي",
         "prop": "text",
         "defaultValue": "My balance"
     },
     "budget-details-total-sum": {
-        "value": "",
+        "value": "المجموع الكلي",
         "prop": "text",
         "defaultValue": "Total sum"
     },
     "budget-details-actions-invite": {
-        "value": "",
+        "value": "أنت مدعو للمشاركة",
         "prop": "text",
         "defaultValue": "You are invited to participate"
     },
     "budget-details-actions-accept": {
-        "value": "",
+        "value": "لبي",
         "prop": "text",
         "defaultValue": "Accept"
     },
     "budget-details-actions-decline": {
-        "value": "",
+        "value": "فقد أهميته",
         "prop": "text",
         "defaultValue": "Decline"
     },
     "budget-details-actions-ask": {
-        "value": "",
+        "value": "يمكنك طلب دعوة",
         "prop": "text",
         "defaultValue": "You can ask for invite"
     },
     "budget-details-actions-send-request": {
-        "value": "",
+        "value": "ارسل طلب",
         "prop": "text",
         "defaultValue": "Send request"
     },
     "budget-details-actions-wait": {
-        "value": "",
+        "value": "يجب على مالك الميزانية الموافقة على طلبك",
         "prop": "text",
         "defaultValue": "Budget owner have to approve your request"
     },
     "close": {
-        "value": "",
+        "value": "يغلق",
         "prop": "text",
         "defaultValue": "Close"
     },
     "budget-details-add-people": {
-        "value": "",
+        "value": "أضف أشخاصا",
         "prop": "text",
         "defaultValue": "Add people"
     },
     "transactions-list-ok": {
-        "value": "",
+        "value": "نعم",
         "prop": "text",
         "defaultValue": "mkay"
     },
     "transactions-list-comment": {
-        "value": "",
+        "value": "أضف تعليق",
         "prop": "placeholder",
         "defaultValue": "Add optional comment"
     },
     "feature-detector-title": {
-        "value": "",
+        "value": "سمات",
         "prop": "text",
         "defaultValue": "Features"
     },
     "feature-detector-description": {
-        "value": "",
+        "value": "الميزات التي يجب دعمها حتى يعمل هذا التطبيق",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
     },
     "layout-login-title": {
-        "value": "",
+        "value": "أدخل Rosplata",
         "prop": "text",
         "defaultValue": "Enter Rosplata"
     },
     "layout-login-description": {
-        "value": "",
+        "value": "قم بتسجيل الدخول باستخدام حساب جوجل الخاص بك لبدء استخدام الميزانيات المشتركة",
         "prop": "text",
         "defaultValue": "Sign in with your google account to start using shared budgets"
     },
     "layout-login-enter": {
-        "value": "",
+        "value": "يدخل",
         "prop": "text",
         "defaultValue": "Enter"
     },
     "new-budget-title": {
-        "value": "",
+        "value": "عنوان الميزانية الجديد",
         "prop": "text",
         "defaultValue": ""
     },
     "new-budget-currency": {
-        "value": "",
+        "value": "اختر العملة",
         "prop": "text",
         "defaultValue": "Select currency"
     },
     "currency-rub": {
-        "value": "",
+        "value": "روبل روسي",
         "prop": "text",
         "defaultValue": "Russian Rouble"
     },
     "currency-inr": {
-        "value": "",
+        "value": "الروبية الهندية",
         "prop": "text",
         "defaultValue": "Indian Rupee"
     },
     "currency-usd": {
-        "value": "",
+        "value": "الدولار الأمريكي",
         "prop": "text",
         "defaultValue": "US Dollar"
     },
     "currency-eur": {
-        "value": "",
+        "value": "اليورو",
         "prop": "text",
         "defaultValue": "Euro"
     },
     "currency-cny": {
-        "value": "",
+        "value": "اليوان الصيني",
         "prop": "text",
         "defaultValue": "Chinese Yuan"
     },
     "currency-jrd": {
-        "value": "",
+        "value": "دينار أردني",
         "prop": "text",
         "defaultValue": "Jordanian Dinar"
     },
     "new-budget-go": {
-        "value": "",
+        "value": "يخلق",
         "prop": "text",
         "defaultValue": "Go"
     },
     "new-budget-reset": {
-        "value": "",
+        "value": "إعادة ضبط",
         "prop": "text",
         "defaultValue": "Reset"
     },
     "participants-list-ban": {
-        "value": "",
+        "value": "المنع",
         "prop": "text",
         "defaultValue": "Ban"
     },
     "participants-list-revert": {
-        "value": "",
+        "value": "يرجع",
         "prop": "text",
         "defaultValue": "Revert"
     },
     "participants-list-approve": {
-        "value": "",
+        "value": "يعتمد",
         "prop": "text",
         "defaultValue": "Approve"
     },
     "invite-dialog-description": {
-        "value": "",
+        "value": "امسح رمز الاستجابة السريعة هذا لفتح هذه الميزانية على جهازك.",
         "prop": "text",
         "defaultValue": "Scan this QR code to open this budget on your device."
     },
     "invite-dialog-share-link": {
-        "value": "",
+        "value": "شارك الرابط بدلاً من ذلك",
         "prop": "text",
         "defaultValue": "Share link instead"
     }
