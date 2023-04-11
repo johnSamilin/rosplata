@@ -1,66 +1,66 @@
 {
     "page-title": {
-        "value": "",
+        "value": "Rosplata",
         "prop": "text",
         "defaultValue": "Rosplata"
     },
     "description": {
-        "value": "",
+        "value": "Rosplata הוא מנהל כספים שיתופי המארח במקור פתוח. צור תקציבים, שתף אותם עם חברים ופצל בקלות את החשבונות",
         "prop": "content",
         "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
     },
     "keywords": {
-        "value": "",
+        "value": "מקור פתוח, שיתופי, מימון, תקציב, פיצול, הצעת חוק",
         "prop": "content",
         "defaultValue": "opensource, collaborative, finance, budget, split, bill"
     },
     "feature-checkup-title": {
-        "value": "",
+        "value": "הדפדפן שלך חייב לתמוך בתכונות אלו",
         "prop": "text",
         "defaultValue": "Your browser must support these features"
     },
     "feature-checkup-description": {
-        "value": "",
+        "value": "מצטער על אי הנוחות. נסה לפתוח את האפליקציה הזו בכרום או ב-Edge.",
         "prop": "text",
         "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
     },
     "settings-item-app-version": {
-        "value": "",
+        "value": "גרסת האפליקציה",
         "prop": "text",
         "defaultValue": "App version"
     },
     "settings-item-autologin": {
-        "value": "",
+        "value": "כניסה אוטומטית",
         "prop": "text",
         "defaultValue": "Autologin"
     },
     "settings-item-theme": {
-        "value": "",
+        "value": "נושא צבע",
         "prop": "text",
         "defaultValue": "Theme"
     },
     "settings-item-theme-system": {
-        "value": "",
+        "value": "נושא המערכת",
         "prop": "text",
         "defaultValue": "System"
     },
     "settings-item-theme-light": {
-        "value": "",
+        "value": "נושא קליל",
         "prop": "text",
         "defaultValue": "Light"
     },
     "settings-item-theme-dark": {
-        "value": "",
+        "value": "ערכת נושא כהה",
         "prop": "text",
         "defaultValue": "Dark"
     },
     "settings-item-language": {
-        "value": "",
+        "value": "שפה",
         "prop": "text",
         "defaultValue": "Language"
     },
     "settings-item-language-system": {
-        "value": "",
+        "value": "תן לדפדפן להחליט",
         "prop": "text",
         "defaultValue": "Let browser decide"
     },
@@ -73,49 +73,54 @@
         "value": "",
         "prop": "text",
         "defaultValue": "English"
+    },    
+    "settings-item-language-he": {
+        "value": "עִברִית",
+        "prop": "text",
+        "defaultValue": "Hebrew"
     },
     "budgets-list-new": {
-        "value": "",
+        "value": "צור תקציב חדש",
         "prop": "text",
         "defaultValue": "Create new"
     },
     "back": {
-        "value": "",
+        "value": "תחזור",
         "prop": "text",
         "defaultValue": "Back"
     },
     "participants-list-button": {
-        "value": "",
+        "value": "משתתפים",
         "prop": "text",
         "defaultValue": "Participants"
     },
     "budget-details-my-balance": {
-        "value": "",
+        "value": "האיזון שלי",
         "prop": "text",
         "defaultValue": "My balance"
     },
     "budget-details-total-sum": {
-        "value": "",
+        "value": "סכום כולל",
         "prop": "text",
         "defaultValue": "Total sum"
     },
     "budget-details-actions-invite": {
-        "value": "",
+        "value": "אתם מוזמנים להשתתף",
         "prop": "text",
         "defaultValue": "You are invited to participate"
     },
     "budget-details-actions-accept": {
-        "value": "",
+        "value": "לְקַבֵּל",
         "prop": "text",
         "defaultValue": "Accept"
     },
     "budget-details-actions-decline": {
-        "value": "",
+        "value": "יְרִידָה",
         "prop": "text",
         "defaultValue": "Decline"
     },
     "budget-details-actions-ask": {
-        "value": "",
+        "value": "אתה יכול לבקש הזמנה",
         "prop": "text",
         "defaultValue": "You can ask for invite"
     },
@@ -130,122 +135,122 @@
         "defaultValue": "Budget owner have to approve your request"
     },
     "close": {
-        "value": "",
+        "value": "לִסְגוֹר",
         "prop": "text",
         "defaultValue": "Close"
     },
     "budget-details-add-people": {
-        "value": "",
+        "value": "הוסף אנשים",
         "prop": "text",
         "defaultValue": "Add people"
     },
     "transactions-list-ok": {
-        "value": "",
+        "value": "בסדר",
         "prop": "text",
         "defaultValue": "mkay"
     },
     "transactions-list-comment": {
-        "value": "",
+        "value": "הוסף הערה אופציונלית",
         "prop": "placeholder",
         "defaultValue": "Add optional comment"
     },
     "feature-detector-title": {
-        "value": "",
+        "value": "מאפיינים",
         "prop": "text",
         "defaultValue": "Features"
     },
     "feature-detector-description": {
-        "value": "",
+        "value": "תכונות שצריך לתמוך כדי שהאפליקציה הזו תעבוד",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
     },
     "layout-login-title": {
-        "value": "",
+        "value": "היכנס לרוספלטה",
         "prop": "text",
         "defaultValue": "Enter Rosplata"
     },
     "layout-login-description": {
-        "value": "",
+        "value": "היכנס עם חשבון Google שלך כדי להתחיל להשתמש בתקציבים משותפים",
         "prop": "text",
         "defaultValue": "Sign in with your google account to start using shared budgets"
     },
     "layout-login-enter": {
-        "value": "",
+        "value": "להיכנס",
         "prop": "text",
         "defaultValue": "Enter"
     },
     "new-budget-title": {
-        "value": "",
+        "value": "כותרת תקציב חדשה",
         "prop": "text",
         "defaultValue": ""
     },
     "new-budget-currency": {
-        "value": "",
+        "value": "תבחר מדינה",
         "prop": "text",
         "defaultValue": "Select currency"
     },
     "currency-rub": {
-        "value": "",
+        "value": "רובל רוסי",
         "prop": "text",
         "defaultValue": "Russian Rouble"
     },
     "currency-inr": {
-        "value": "",
+        "value": "רופי הודי",
         "prop": "text",
         "defaultValue": "Indian Rupee"
     },
     "currency-usd": {
-        "value": "",
+        "value": "דולר אמריקאי",
         "prop": "text",
         "defaultValue": "US Dollar"
     },
     "currency-eur": {
-        "value": "",
+        "value": "יוֹרוֹ",
         "prop": "text",
         "defaultValue": "Euro"
     },
     "currency-cny": {
-        "value": "",
+        "value": "יואן סיני",
         "prop": "text",
         "defaultValue": "Chinese Yuan"
     },
     "currency-jrd": {
-        "value": "",
+        "value": "דינר ירדני",
         "prop": "text",
         "defaultValue": "Jordanian Dinar"
     },
     "new-budget-go": {
-        "value": "",
+        "value": "ללכת",
         "prop": "text",
         "defaultValue": "Go"
     },
     "new-budget-reset": {
-        "value": "",
+        "value": "אִתחוּל",
         "prop": "text",
         "defaultValue": "Reset"
     },
     "participants-list-ban": {
-        "value": "",
+        "value": "לֶאֱסוֹר",
         "prop": "text",
         "defaultValue": "Ban"
     },
     "participants-list-revert": {
-        "value": "",
+        "value": "לַחֲזוֹר",
         "prop": "text",
         "defaultValue": "Revert"
     },
     "participants-list-approve": {
-        "value": "",
+        "value": "לְאַשֵׁר",
         "prop": "text",
         "defaultValue": "Approve"
     },
     "invite-dialog-description": {
-        "value": "",
+        "value": "סרוק את קוד ה-QR הזה כדי לפתוח את התקציב הזה במכשיר שלך.",
         "prop": "text",
         "defaultValue": "Scan this QR code to open this budget on your device."
     },
     "invite-dialog-share-link": {
-        "value": "",
+        "value": "שתף קישור במקום זאת",
         "prop": "text",
         "defaultValue": "Share link instead"
     }
