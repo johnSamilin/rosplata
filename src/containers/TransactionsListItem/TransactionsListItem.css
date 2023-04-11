@@ -26,3 +26,10 @@
     background-color: brown;
     margin: 10px 10px 10px 0;
 }
+.transactions-list-item__image{
+    height: auto;
+    min-width: 20px;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+}
