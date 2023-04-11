@@ -29,7 +29,7 @@
 .transactions-list-item__image{
     height: auto;
     min-width: 20px;
-    max-height: 100%;
+    max-height: 20px;
     display: block;
     margin: 0 auto;
 }
