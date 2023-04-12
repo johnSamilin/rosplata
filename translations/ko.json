@@ -64,20 +64,56 @@
         "prop": "text",
         "defaultValue": "Let browser decide"
     },
+    
+    "settings-item-language-ar": {
+        "value": "العربية",
+        "prop": "text",
+        "defaultValue": "Arabic"
+    },
+    "settings-item-language-es": {
+        "value": "Español",
+        "prop": "text",
+        "defaultValue": "Spanish"
+    },
+    "settings-item-language-fr": {
+        "value": "Français",
+        "prop": "text",
+        "defaultValue": "French"
+    },
+    "settings-item-language-ko": {
+        "value": "한국어",
+        "prop": "text",
+        "defaultValue": "Korean"
+    },
     "settings-item-language-ru": {
         "value": "Русский",
         "prop": "text",
-        "defaultValue": "Русский"
+        "defaultValue": "Russian"
     },
+    "settings-item-language-zn": {
+        "value": "中文",
+        "prop": "text",
+        "defaultValue": "Chinese"
+    },
+    "settings-item-language-hi": {
+        "value": "हिन्दी",
+        "prop": "text",
+        "defaultValue": "Hindi"
+    },
+    "settings-item-language-bn": {
+        "value": "বাংলা",
+        "prop": "text",
+        "defaultValue": "Bengali"
+    },
+    "settings-item-language-he": {
+        "value": "עברית",
+        "prop": "text",
+        "defaultValue": "Hebrew"
+    },    
     "settings-item-language-en": {
-        "value": "English",
+        "value": "Engligh",
         "prop": "text",
         "defaultValue": "English"
-    },
-    "settings-item-language-ko": {
-        "value": "한국인",
-        "prop": "text",
-        "defaultValue": "Korean"
     },
     "budgets-list-new": {
         "value": "새 예산 만들기",
