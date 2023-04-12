@@ -43,7 +43,9 @@ class CSettingsManager {
                 }
             break;
             case 'language':
-                await fetch(`lang/${value}`, { method: 'post' })
+                const { RequestManager } = await import('./RequestManager.mjs')
+                const api = new RequestManager('users')
+                await api.post('changeLang', `users/lang/${value}`)
                 window.location.reload()
             break;
         }

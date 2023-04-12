@@ -20,19 +20,16 @@ export class CDialog extends Component {
         window.addEventListener('popstate', this.#onPopstate)
     }
 
-    hide = (removeHistoryState = true) => {
+    hide = () => {
         const container = this.getContainer()
         container.close()
         this.stopListeners()
         container.innerHTML = ''
         this.setAttr(container, undefined, 'class', 'border-1')
-        if (removeHistoryState) {
-            window.history.back()
-        }
     }
 
     #onPopstate = (e) => {
-        this.hide(false)
+        this.hide()
         window.removeEventListener('popstate', this.#onPopstate)
     }
 
