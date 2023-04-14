@@ -104,6 +104,11 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
+    "settings-item-language-mr": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Marathi"
+    },
     "budgets-list-new": {
         "value": "새 예산 만들기",
         "prop": "text",

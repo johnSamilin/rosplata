@@ -1,55 +1,68 @@
 {
     "page-title": {
-        "value": "Rosplata",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Rosplata"
     },
     "description": {
-        "value": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills",
-        "prop": "content"
+        "value": "",
+        "prop": "content",
+        "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
     },
     "keywords": {
-        "value": "opensource, collaborative, finance, budget, split, bill",
-        "prop": "content"
+        "value": "",
+        "prop": "content",
+        "defaultValue": "opensource, collaborative, finance, budget, split, bill"
     },
     "feature-checkup-title": {
-        "value": "Your browser must support these features",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Your browser must support these features"
     },
     "feature-checkup-description": {
-        "value": "Sorry for inconvenience. Try opening this app in Chrome or Edge.",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
     },
     "settings-item-app-version": {
-        "value": "App version",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "App version"
     },
     "settings-item-autologin": {
-        "value": "Autologin",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Autologin"
     },
     "settings-item-theme": {
-        "value": "Theme",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Theme"
     },
     "settings-item-theme-system": {
-        "value": "System",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "System"
     },
     "settings-item-theme-light": {
-        "value": "Light",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Light"
     },
     "settings-item-theme-dark": {
-        "value": "Dark",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Dark"
     },
     "settings-item-language": {
-        "value": "Language",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Language"
     },
     "settings-item-language-system": {
-        "value": "Let browser decide",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Let browser decide"
     },
     "settings-item-language-ru": {
         "value": "Русский",
@@ -91,145 +104,184 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
+    "settings-item-language-mr": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Marathi"
+    },
     "budgets-list-new": {
-        "value": "Create new",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Create new"
     },
     "back": {
-        "value": "Back",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Back"
     },
     "participants-list-button": {
-        "value": "Participants",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Participants"
     },
     "budget-details-my-balance": {
-        "value": "My balance",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "My balance"
     },
     "budget-details-total-sum": {
-        "value": "Total sum",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Total sum"
     },
     "budget-details-actions-invite": {
-        "value": "You are invited to participate",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "You are invited to participate"
     },
     "budget-details-actions-accept": {
-        "value": "Accept",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Accept"
     },
     "budget-details-actions-decline": {
-        "value": "Decline",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Decline"
     },
     "budget-details-actions-ask": {
-        "value": "You can ask for invite",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "You can ask for invite"
     },
     "budget-details-actions-send-request": {
-        "value": "Send request",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Send request"
     },
     "budget-details-actions-wait": {
-        "value": "בעל התקציב צריך לאשר את בקשתך",
+        "value": "",
         "prop": "text",
         "defaultValue": "Budget owner have to approve your request"
     },
     "close": {
-        "value": "Close",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Close"
     },
     "budget-details-add-people": {
-        "value": "Add people",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Add people"
     },
     "transactions-list-ok": {
-        "value": "mkay",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "mkay"
     },
     "transactions-list-comment": {
-        "value": "Add optional comment",
-        "prop": "placeholder"
+        "value": "",
+        "prop": "placeholder",
+        "defaultValue": "Add optional comment"
     },
     "feature-detector-title": {
-        "value": "Features",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Features"
     },
     "feature-detector-description": {
-        "value": "That need to be supported for this app to work",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "That need to be supported for this app to work"
     },
     "layout-login-title": {
-        "value": "Enter Rosplata",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Enter Rosplata"
     },
     "layout-login-description": {
-        "value": "Sign in with your google account to start using shared budgets",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Sign in with your google account to start using shared budgets"
     },
     "layout-login-enter": {
-        "value": "Enter",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Enter"
     },
     "new-budget-title": {
         "value": "",
-        "prop": "text"
+        "prop": "text",
+        "defaultValue": ""
     },
     "new-budget-currency": {
-        "value": "Select currency",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Select currency"
     },
     "currency-rub": {
-        "value": "Russian Rouble",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Russian Rouble"
     },
     "currency-inr": {
-        "value": "Indian Rupee",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Indian Rupee"
     },
     "currency-usd": {
-        "value": "US Dollar",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "US Dollar"
     },
     "currency-eur": {
-        "value": "Euro",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Euro"
     },
     "currency-cny": {
-        "value": "Chinese Yuan",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Chinese Yuan"
     },
     "currency-jrd": {
-        "value": "Jordanian Dinar",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Jordanian Dinar"
     },
     "new-budget-go": {
-        "value": "Go",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Go"
     },
     "new-budget-reset": {
-        "value": "Reset",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Reset"
     },
     "participants-list-ban": {
-        "value": "Ban",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Ban"
     },
     "participants-list-revert": {
-        "value": "Revert",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Revert"
     },
     "participants-list-approve": {
-        "value": "Approve",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Approve"
     },
     "invite-dialog-description": {
-        "value": "Scan this QR code to open this budget on your device.",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Scan this QR code to open this budget on your device."
     },
     "invite-dialog-share-link": {
-        "value": "Share link instead",
-        "prop": "text"
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Share link instead"
     }
 }

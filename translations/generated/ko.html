@@ -66,6 +66,7 @@
                 <option value="ar" data-translate-id="settings-item-language-ar">العربية</option>
                 <option value="ko" data-translate-id="settings-item-language-ko">한국어</option>
                 <option value="he" data-translate-id="settings-item-language-he">עברית</option>
+                <option value="mr" data-translate-id="settings-item-language-mr"></option>
             </select>
         </div>
     </template>
@@ -151,7 +152,7 @@
     </template>
 
     <template id="transactions-list-item-template"><div class="transactions-list-item">
-            <img src="" alt="" class="transactions-list-item__image" width="20px" height="20px">
+            <img src="" alt="" class="transactions-list-item__image">
             <div class="transactions-list-item__name-and-comment">
                 <span class="transactions-list-item__name"></span>
                 <span class="transactions-list-item__comment text-muted"></span>
@@ -189,7 +190,7 @@
 
     <template id="new-budget-template"><form id="new-budget__form">
             <div class="new-budget__fields">
-                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title">
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title" data-translate-prop="placeholder">
                 <strong data-translate-id="new-budget-currency">통화 선택</strong>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">러시아 루블</option>

@@ -91,6 +91,11 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
+    "settings-item-language-mr": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Marathi"
+    },
     "budgets-list-new": {
         "value": "Create new",
         "prop": "text"
