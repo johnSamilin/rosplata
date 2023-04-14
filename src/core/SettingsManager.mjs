@@ -1,6 +1,6 @@
 //@ts-check
 
-import { getFromLs } from "../utils/utils.mjs"
+import { getFromLs, updateCurrencyFormatters } from "../utils/utils.mjs"
 
 const darkThemeMedia = matchMedia('(prefers-color-scheme: dark)')
 
@@ -24,6 +24,11 @@ class CSettingsManager {
 
     get language() {
         return this.#language
+    }
+
+    set language(val) {
+        this.#language = val
+        updateCurrencyFormatters(Intl.getCanonicalLocales(val))   
     }
 
     async override(name, value) {
@@ -58,6 +63,7 @@ class CSettingsManager {
         } else {
             this.#changeTheme(this.#theme)
         }
+        updateCurrencyFormatters(Intl.getCanonicalLocales(this.#language))  
     }
 
     onSystemThemeChange = () => {
@@ -72,6 +78,10 @@ class CSettingsManager {
             document.querySelector('html')?.classList.remove('dark')
             document.querySelector('html')?.classList.add('theme-selected')            
         }
+    }
+
+    reset() {
+        localStorage.clear()
     }
 }
 
