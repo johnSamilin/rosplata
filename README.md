@@ -10,11 +10,11 @@
 This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, no polyfills)
 
 ## Demo
-Currently demo can be found [here](https://ros-plata.ru/)
+Currently demo can be found [here](https://ros-plata.ru/budgets/f3af9c65-1c82-452d-8469-619480e78490)
 
 **Supported browsers: Chrome, Edge**
 
-[Drop me a line](mailto:a_salt@lenta.ru) if you have anything in mind!
+[Drop me a line](mailto:rosplataapp@mail.ru) if you have anything in mind!
 
 ## When would you need it?
 Imagine a situation: you and your friends go to a bar (possibly abroad with no internet available). You order something, have fun. In the end you get the check and no one remembers what did they order and who spent how much. This is exactly the problem Rosplata is here to solve.
@@ -72,7 +72,7 @@ Basically, startup process is described [here](https://github.com/johnSamilin/ro
 Plus, edit `firebaseConfig` variable in `rosplata\src\core\AuthManager.mjs` (you'll obtain those credentials when setting up Firebase)
 
 ## Docs
-https://rosplata-docs.readthedocs.io/en/latest/
+https://github.com/johnSamilin/rosplata/wiki
 
 ## Look ma, I'm on TV
 [How do I make webapps nowadays?](https://medium.com/@alex.saltykov/how-do-they-make-web-apps-nowadays-pt-1-c1a36acc7dd8)
