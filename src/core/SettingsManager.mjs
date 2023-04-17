@@ -1,32 +1,22 @@
 //@ts-check
 
-import { getFromLs, isOverridden } from "../utils/utils.mjs"
+import { getFromLs, updateCurrencyFormatters } from "../utils/utils.mjs"
 
-const reducedMotionMedia = matchMedia('(prefers-reduced-motion)')
 const darkThemeMedia = matchMedia('(prefers-color-scheme: dark)')
 
 class CSettingsManager {
-    #appVersion = '0.1.2'
-    #battery
-    #animationsEnabled = Boolean(getFromLs('animationsEnabled', true))
-    #autoLoginEnabled = Boolean(getFromLs('autoLoginEnabled', true))
+    #appVersion = '0.1.3'
+    #animationsEnabled = true
+    #autoLoginEnabled = getFromLs('autoLoginEnabled', 'true') === 'true'
     #theme = getFromLs('theme', 'system')
+    #language = getFromLs('language')
 
     get animationsEnabled() {
         return this.#animationsEnabled
     }
-
+    
     get appVersion() {
         return this.#appVersion
-    }
-
-    set animationsEnabled(value) {
-        this.#animationsEnabled = value
-        if (!value) {
-            document.body.classList.add('no-animations')
-        } else {
-            document.body.classList.remove('no-animations')
-        }
     }
 
     get autoLoginEnabled() {
@@ -37,23 +27,22 @@ class CSettingsManager {
         return this.#theme
     }
 
-    override(name, value) {
+    get language() {
+        return this.#language
+    }
+
+    set language(val) {
+        this.#language = val
+        updateCurrencyFormatters(Intl.getCanonicalLocales(val))   
+    }
+
+    async override(name, value) {
         if (!(name in this)) {
             return false
         }
         this[`#${name}`] = value
         localStorage.setItem(name, value)
         switch (name) {
-            case 'animationsEnabled':
-                if (value) {                    
-                    reducedMotionMedia.addEventListener('change', this.#onAnimationDepsChange)
-                    this.#battery?.addEventListener('levelchange', this.#onAnimationDepsChange)
-                } else {
-                    reducedMotionMedia.removeEventListener('change', this.#onAnimationDepsChange)
-                    this.#battery?.removeEventListener('levelchange', this.#onAnimationDepsChange)
-                }
-                this.#onAnimationDepsChange()
-                break
             case 'theme':
                 if (value === 'system') {
                     darkThemeMedia.addEventListener('change', this.onSystemThemeChange)
@@ -62,32 +51,24 @@ class CSettingsManager {
                     darkThemeMedia.removeEventListener('change', this.onSystemThemeChange)
                     this.#changeTheme(value)
                 }
+            break;
+            case 'language':
+                const { RequestManager } = await import('./RequestManager.mjs')
+                const api = new RequestManager('users')
+                await api.post('changeLang', `users/lang/${value}`)
+                window.location.reload()
+            break;
         }
     }
 
     constructor() {
-        if (this.#animationsEnabled) {
-            try {
-                navigator.getBattery().then(battery => {
-                    this.#battery = battery
-                    this.#onAnimationDepsChange()
-                    reducedMotionMedia.addEventListener('change', this.#onAnimationDepsChange)
-                    this.#battery.addEventListener('levelchange', this.#onAnimationDepsChange)
-                })
-            } catch (er) {
-                console.error('Your browser doesn\'t support Battery API. But should!');
-            }
-        }
         if (this.#theme === 'system') {
             darkThemeMedia.addEventListener('change', this.onSystemThemeChange)
             this.onSystemThemeChange()
         } else {
             this.#changeTheme(this.#theme)
         }
-    }
-
-    #onAnimationDepsChange = () => {
-        this.#animationsEnabled = !reducedMotionMedia.matches && this.#battery?.level > 0.15
+        updateCurrencyFormatters(Intl.getCanonicalLocales(this.#language))  
     }
 
     onSystemThemeChange = () => {
@@ -102,6 +83,10 @@ class CSettingsManager {
             document.querySelector('html')?.classList.remove('dark')
             document.querySelector('html')?.classList.add('theme-selected')            
         }
+    }
+
+    reset() {
+        localStorage.clear()
     }
 }
 

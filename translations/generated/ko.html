@@ -1,0 +1,361 @@
+<html lang="ko"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-id="page-title">Rosplata</title>
+    <meta data-translate-id="description" data-translate-prop="content" name="description" content="Rosplata는 오픈소스 자체 호스팅 협업 재무 관리자입니다. 예산을 만들고 친구와 공유하고 청구서를 쉽게 분할하세요.">
+    <meta data-translate-id="keywords" data-translate-prop="content" name="keywords" content="오픈소스, 협업, 재무, 예산, 분할, 청구서">
+    <link rel="canonical" href="https://ros-plata.ru">
+    <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" async="" href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css">
+    <script src="/src/App.mjs" type="module"></script>
+
+    <style type="text/css">
+        @media all and (prefers-color-scheme: dark) {
+            html:not(.theme-selected) {
+                background-color: #41403e;
+                color: beige;
+            }
+        }
+        #telegram-post-rosplata-3 {
+            position: relative;
+            transform: scale(80%);
+            top: 25vh;
+        }
+    </style>
+
+    <template id="layout-main-template"><div id="layout-main">
+            <aside id="budgets-list"></aside>
+            <aside id="create-form"></aside>
+            <section id="budget-details" class="exit hidden"></section>
+        </div>
+    </template>
+
+    <template id="layout-settings-template"><div id="layout-settings" class="exit-disappear">
+            <aside id="layout-settings__menu" class="exit-disappear"></aside>
+            <section id="layout-settings__settings"></section>
+        </div>
+    </template>
+
+    <template id="settings-section-template"><div class="settings-item">
+            <label class="settings-item__name" data-translate-id="settings-item-app-version">앱 버전</label>
+            <span class="settings-item__value" id="app-version"></span>
+        </div>
+        <div class="settings-item">
+            <label class="settings-item__name" for="autologin" data-translate-id="settings-item-autologin">자동 로그인</label>
+            <input class="settings-item__value" type="checkbox" id="autologin-setting">
+        </div>
+        <div class="settings-item">
+            <label class="settings-item__name" for="theme-setting" data-translate-id="settings-item-theme">색상 테마</label>
+            <select class="settings-item__value" id="theme-setting">
+                <option value="system" data-translate-id="settings-item-theme-system">시스템 테마</option>
+                <option value="light" data-translate-id="settings-item-theme-light">밝은 테마</option>
+                <option value="dark" data-translate-id="settings-item-theme-dark">어두운 테마</option>
+            </select>
+        </div>
+        <div class="settings-item">
+            <label class="settings-item__name" for="language-setting" data-translate-id="settings-item-language">언어</label>
+            <select class="settings-item__value" id="language-setting">
+                <option value="system" data-translate-id="settings-item-language-system">브라우저 결정</option>
+                <option value="ru" data-translate-id="settings-item-language-ru">Русский</option>
+                <option value="en" data-translate-id="settings-item-language-en">Engligh</option>
+                <option value="hi" data-translate-id="settings-item-language-hi">हिन्दी</option>
+                <option value="bn" data-translate-id="settings-item-language-bn">বাংলা</option>
+                <option value="zh" data-translate-id="settings-item-language-zn">中文</option>
+                <option value="ar" data-translate-id="settings-item-language-ar">العربية</option>
+                <option value="ko" data-translate-id="settings-item-language-ko">한국어</option>
+                <option value="he" data-translate-id="settings-item-language-he">עברית</option>
+            </select>
+        </div>
+    </template>
+
+    <template id="budgets-list-template"><div class="budgets-list__actions">
+            <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new">새 예산 만들기</button>
+            <button id="budgets-list__menu-button"></button>
+        </div>
+        <div id="budgets-list__items">
+            <div class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders">
+            </div>
+            <div class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders">
+            </div>
+            <div class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders">
+            </div>
+            <div class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders">
+            </div>
+            <div class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders">
+            </div>
+            <div class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders">
+            </div>
+        </div>
+    </template>
+
+    <template id="budgets-list-item-template"><li class="budgets-list-item">
+            <span class="budgets-list-item__title"></span>
+            <span class="budgets-list-item__my-balance budgets-list-item__counter"></span>
+        </li>
+    </template>
+
+    <template id="budget-details-template"><div class="budget-details__main">
+            <div class="budget-details__header">
+                <div class="visible-on-mobile">
+                    <a href="/" data-translate-id="back">돌아가기</a>
+                </div>
+                <div class="visible-on-mobile">
+                    <a id="participants-list-btn" data-translate-id="participants-list-button">참가자들</a>
+                </div>
+            </div>
+            <div class="budget-details__counters">
+                <div class="budget-details__counter-wrapper">
+                    <span class="budget-details__counter budget-details__counter--my"></span>
+                    <span data-translate-id="budget-details-my-balance">내 잔액</span>
+                </div>
+                <div class="budget-details__counter-wrapper">
+                    <span class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
+                    <span data-translate-id="budget-details-total-sum">총 합계</span>
+                </div>
+            </div>
+            <div class="budget-details__transactions"></div>
+            <div class="budget-details__actions budget-details__actions--invite">
+                <span data-translate-id="budget-details-actions-invite">당신은 참여하도록 초대됩니다</span>
+                <button class="budget-details__action btn-success" id="accept-invite" data-translate-id="budget-details-actions-accept">수용하다</button>
+                <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">감소</button>
+            </div>
+            <div class="budget-details__actions budget-details__actions--ask">
+                <span data-translate-id="budget-details-actions-ask">초대를 요청할 수 있습니다.</span>                
+                <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">요청 보내기</button>
+            </div>
+            <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait">예산 소유자가 귀하의 요청을 승인해야 합니다.</div>
+        </div>
+        <aside class="budget-details__aside">
+            <div class="visible-on-mobile">
+                <a id="participants-list-close-btn" data-translate-id="close">닫아</a>
+            </div>
+            <div class="budget-details__participants"></div>
+            <div class="budget-details__actions budget-details__actions--send-invite">
+                <button id="send-invite" class="budget-details__action button" data-translate-id="budget-details-add-people">사람 추가</button>
+            </div>
+        </aside>
+    </template>
+
+    <template id="transactions-list-template"><div id="transactions-list">
+            <form class="transactions-list__new">
+                <div class="transactions-list__amount-wrapper">
+                    <input type="number" required="" autocomplete="off" placeholder="100,00" step="0.1" min="0" title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount">
+                    <button type="submit" class="transactions-list__ok-btn" data-translate-id="transactions-list-ok">좋아요</button>
+                </div>
+                <input type="text" name="comment" class="transactions-list__comment" placeholder="선택적 설명 추가" data-translate-id="transactions-list-comment" data-translate-prop="placeholder">
+            </form>
+            <div class="transactions-list__items"></div>
+        </div>
+    </template>
+
+    <template id="transactions-list-item-template"><div class="transactions-list-item">
+            <img src="" alt="" class="transactions-list-item__image">
+            <div class="transactions-list-item__name-and-comment">
+                <span class="transactions-list-item__name"></span>
+                <span class="transactions-list-item__comment text-muted"></span>
+            </div>
+            <span class="transactions-list-item__amount"></span>
+        </div>
+    </template>
+
+    <template id="feature-detector__template"><div class="exit-disappear" id="feature-detector">
+            <header data-translate-id="feature-detector-title">특징</header>
+            <p data-translate-id="feature-detector-description">이 앱이 작동하려면 지원해야 하는 기능</p>
+        </div>
+    </template>
+
+    <template id="feature-detector__feature-template"><div class="feature-detector__feature-wrapper">
+            <strong class="feature-detector__feature-name"></strong>
+            <span class="feature-detector__feature-value"></span>
+        </div>
+    </template>
+
+    <template id="menu-template"><nav id="menu" class="paper border-1 background-primary">
+            <a data-translate-id="menu-budgets" href="/" class="menu-item">예산</a>
+            <a data-translate-id="menu-settings" href="/settings" class="menu-item">설정</a>
+            <a data-translate-id="menu-logout" href="#" class="menu-item menu__logout">로그아웃</a>
+        </nav>
+    </template>
+
+    <template id="menu-item-template"></template>
+
+    <template id="layout-login-template"><div id="layout-login">
+            <h1 class="layout-login__prompt" data-translate-id="layout-login-title">로스플라타에 들어가다</h1>
+            <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">공유 예산을 사용하려면 Google 계정으로 로그인하세요.</h2>
+            <button id="login__google" data-translate-id="layout-login-enter">입력하다</button>
+            <script async="" src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
+            <span class="layout-login__version"></span>
+        </div>
+    </template>
+
+    <template id="new-budget-template"><form id="new-budget__form">
+            <div class="new-budget__fields">
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title" data-translate-prop="placeholder">
+                <strong data-translate-id="new-budget-currency">통화 선택</strong>
+                <select name="currency" id="currency">
+                    <option value="RUB" data-translate-id="currency-rub">러시아 루블</option>
+                    <option value="INR" data-translate-id="currency-inr">인도 루피</option>
+                    <option value="USD" data-translate-id="currency-usd">미국 달러</option>
+                    <option value="EUR" data-translate-id="currency-eur">유로</option>
+                    <option value="CNY" data-translate-id="currency-cny">중국 위안</option>
+                    <option value="JRD" data-translate-id="currency-jrd">요르단 디나르</option>
+                </select>
+            </div>
+            <div class="new-budget__buttons">
+                <button type="submit" data-translate-id="new-budget-go">가다</button>
+                <button type="reset" data-translate-id="new-budget-reset">초기화</button>
+            </div>
+        </form>
+    </template>
+
+    <template id="alert-template"><div class="app-alert">
+            <input class="alert-state" id="alert" type="checkbox">
+            <div class="alert dismissible">
+                <span class="app-alert__text"></span>
+                <label class="btn-close" for="alert">X</label>
+            </div>
+        </div>
+    </template>
+
+    <template id="participants-list-template"><div id="participants-list" class="participants-list">
+            <div class="participants-list__items"></div>
+        </div>
+    </template>
+
+    <template id="participants-list-item-template"><div class="participants-list-item">
+            <div class="participants-list-item__info">
+                <span class="participants-list-item__name"></span>
+                <span class="participants-list-item__status"></span>
+            </div>
+            <div class="participants-list-item__actions participants-list-item__actions--status1">
+                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban">반</button>
+            </div>
+            <div class="participants-list-item__actions participants-list-item__actions--status2">
+                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-revert">돌아가는 것</button>
+            </div>
+            <div class="participants-list-item__actions participants-list-item__actions--status5">
+                <button class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-approve">승인하다</button>
+                <button class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban">반</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="invite-dialog-template"><div class="invite-dialog paper border-2">
+            <img src="" alt="QR Code" class="invite-dialog__qr-code">
+            <p data-translate-id="invite-dialog-description">기기에서 이 예산을 열려면 이 QR 코드를 스캔하세요.</p>
+            <button id="send-invite-link" class="button btn-secondary" data-translate-id="invite-dialog-share-link">대신 링크 공유</button>
+        </div>
+    </template>
+</head>
+
+<body>
+    <div id="alerts"></div>
+    <dialog id="modal-window"></dialog>
+    <div id="layout"></div>
+
+    <div id="features-support-checkup">
+        <style>
+            #features-support-checkup {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+                max-width: 400px;
+                margin: 2rem auto;
+            }
+
+            .feature-checkup {
+                margin: 0.5rem 0;
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+        <strong data-translate-id="feature-checkup-title">브라우저가 다음 기능을 지원해야 합니다.</strong>
+        <div class="feature-checkup feature-checkup--dialog">
+            <span class="feature-checkup__name">Dialog element</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--url-pattern">
+            <span class="feature-checkup__name">URL pattern API</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--import-assertion">
+            <span class="feature-checkup__name">Import assertions</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--html-templates">
+            <span class="feature-checkup__name">HTML templates</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--import">
+            <span class="feature-checkup__name">ES6 imports</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--battery">
+            <span class="feature-checkup__name">Battery API</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--matchmedia">
+            <span class="feature-checkup__name">Match media</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--wasm">
+            <span class="feature-checkup__name">WebAssembly</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <div class="feature-checkup feature-checkup--inert">
+            <span class="feature-checkup__name">Inert attribute</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
+        <strong data-translate-id="feature-checkup-description">불편을 드려 죄송합니다. Chrome 또는 Edge에서 이 앱을 열어보세요.</strong>
+        <script type="text/javascript">
+            const checks = [
+                {
+                    modifier: 'dialog',
+                    check: () => 'HTMLDialogElement' in window,
+                },
+                {
+                    modifier: 'url-pattern',
+                    check: () => 'URLPattern' in window,
+                },
+                {
+                    modifier: 'html-templates',
+                    check: () => 'HTMLTemplateElement' in window,
+                },
+                {
+                    modifier: 'import',
+                    check: () => 'noModule' in HTMLScriptElement.prototype,
+                },
+                {
+                    modifier: 'battery',
+                    check: () => 'getBattery' in navigator,
+                },
+                {
+                    modifier: 'matchmedia',
+                    check: () => 'matchMedia' in window,
+                },
+                {
+                    modifier: 'wasm',
+                    check: () => 'WebAssembly' in window,
+                },
+                {
+                    modifier: 'inert',
+                    check: () => 'inert' in document.querySelector('div'),
+                }
+            ]
+            checks.forEach(({ check, modifier }) => {
+                try {
+                    if (check()) {
+                        document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
+                    }
+                } catch (er) {
+                    console.error(modifier, er)
+                }
+            })
+        </script>
+    </div>
+
+
+</body></html>

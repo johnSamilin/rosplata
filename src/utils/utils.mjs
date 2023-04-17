@@ -156,26 +156,25 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
     }
 }
 
-export const currencyFormatters = new Map(CURRENCIES.map(code => (
-    [
-        code,
-        new Intl.NumberFormat(
-            'en-US',
-            {
-                style: 'currency',
-                currency: code,
-                maximumSignificantDigits: 10,
-                currencyDisplay: 'symbol',
-                minimumFractionDigits: 0,
-            }
-        )
-    ]
-)))
-// export const currencyFormatter = (currency) => {
-//     if (!currencyFormatters.has(currency)) {
-//         currencyFormatters.set(
-//             currency,
-//             )
-//     }
-//     return currencyFormatters.get(currency)
-// }
+/**
+ * @type Map<string, Intl.NumberFormat>
+ */
+export let currencyFormatters
+
+export function updateCurrencyFormatters(locale) {
+    currencyFormatters = new Map(CURRENCIES.map(code => (
+        [
+            code,
+            new Intl.NumberFormat(
+                locale === 'system' ? undefined : locale,
+                {
+                    style: 'currency',
+                    currency: code,
+                    maximumSignificantDigits: 10,
+                    currencyDisplay: 'symbol',
+                    minimumFractionDigits: 0,
+                }
+            )
+        ]
+    )))
+}

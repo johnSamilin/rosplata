@@ -1,0 +1,297 @@
+{
+    "page-title": {
+        "value": "Rosplata",
+        "prop": "text",
+        "defaultValue": "Rosplata"
+    },
+    "description": {
+        "value": "রোস্প্লাটা একটি ওপেন সোর্স স্ব হোস্ট সহযোগী ফাইন্যান্স ম্যানেজার. বাজেট তৈরি করুন, বন্ধুদের সাথে ভাগ করুন এবং সহজেই বিলগুলি বিভক্ত করুন",
+        "prop": "content",
+        "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
+    },
+    "keywords": {
+        "value": "ওপেন সোর্স, সহযোগীতা, অর্থ, বাজেট, বিভক্ত, বিল",
+        "prop": "content",
+        "defaultValue": "opensource, collaborative, finance, budget, split, bill"
+    },
+    "feature-checkup-title": {
+        "value": "আপনার ব্রাউজারটি অবশ্যই এই বৈশিষ্ট্যগুলি সমর্থন করবে",
+        "prop": "text",
+        "defaultValue": "Your browser must support these features"
+    },
+    "feature-checkup-description": {
+        "value": "অসুবিধার জন্য দুঃখিত. ক্রোম বা এজ এই অ্যাপ্লিকেশন খোলার চেষ্টা করুন.",
+        "prop": "text",
+        "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
+    },
+    "settings-item-app-version": {
+        "value": "অ্যাপ সংস্করণ",
+        "prop": "text",
+        "defaultValue": "App version"
+    },
+    "settings-item-autologin": {
+        "value": "অটোলজিন",
+        "prop": "text",
+        "defaultValue": "Autologin"
+    },
+    "settings-item-theme": {
+        "value": "রঙ থিম",
+        "prop": "text",
+        "defaultValue": "Theme"
+    },
+    "settings-item-theme-system": {
+        "value": "सिस्टम थीम",
+        "prop": "text",
+        "defaultValue": "System"
+    },
+    "settings-item-theme-light": {
+        "value": "হালকা থিম",
+        "prop": "text",
+        "defaultValue": "Light"
+    },
+    "settings-item-theme-dark": {
+        "value": "অন্ধকার থিম",
+        "prop": "text",
+        "defaultValue": "Dark"
+    },
+    "settings-item-language": {
+        "value": "ভাষা",
+        "prop": "text",
+        "defaultValue": "Language"
+    },
+    "settings-item-language-system": {
+        "value": "ব্রাউজার সিদ্ধান্ত নিতে দিন",
+        "prop": "text",
+        "defaultValue": "Let browser decide"
+    },
+    "settings-item-language-ru": {
+        "value": "Русский",
+        "prop": "text",
+        "defaultValue": "Russian"
+    },
+    "settings-item-language-en": {
+        "value": "Engligh",
+        "prop": "text",
+        "defaultValue": "English"
+    },
+    "settings-item-language-hi": {
+        "value": "हिन्दी",
+        "prop": "text",
+        "defaultValue": "Hindi"
+    },
+    "settings-item-language-bn": {
+        "value": "বাংলা",
+        "prop": "text",
+        "defaultValue": "Bengali"
+    },
+    "settings-item-language-zn": {
+        "value": "中文",
+        "prop": "text",
+        "defaultValue": "Chinese"
+    },
+    "settings-item-language-ar": {
+        "value": "العربية",
+        "prop": "text",
+        "defaultValue": "Arabic"
+    },
+    "settings-item-language-ko": {
+        "value": "한국어",
+        "prop": "text",
+        "defaultValue": "Korean"
+    },
+    "settings-item-language-he": {
+        "value": "עברית",
+        "prop": "text",
+        "defaultValue": "Hebrew"
+    },
+    "budgets-list-new": {
+        "value": "নতুন বাজেট তৈরি করুন",
+        "prop": "text",
+        "defaultValue": "Create new"
+    },
+    "back": {
+        "value": "ফিরে যাও",
+        "prop": "text",
+        "defaultValue": "Back"
+    },
+    "participants-list-button": {
+        "value": "অংশগ্রহণকারী",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "budget-details-my-balance": {
+        "value": "আমার ভারসাম্য",
+        "prop": "text",
+        "defaultValue": "My balance"
+    },
+    "budget-details-total-sum": {
+        "value": "মোট সমষ্টি",
+        "prop": "text",
+        "defaultValue": "Total sum"
+    },
+    "budget-details-actions-invite": {
+        "value": "আপনি অংশগ্রহণের জন্য আমন্ত্রিত",
+        "prop": "text",
+        "defaultValue": "You are invited to participate"
+    },
+    "budget-details-actions-accept": {
+        "value": "গ্রহণ করা",
+        "prop": "text",
+        "defaultValue": "Accept"
+    },
+    "budget-details-actions-decline": {
+        "value": "পতন",
+        "prop": "text",
+        "defaultValue": "Decline"
+    },
+    "budget-details-actions-ask": {
+        "value": "আপনি আমন্ত্রণ জন্য জিজ্ঞাসা করতে পারেন",
+        "prop": "text",
+        "defaultValue": "You can ask for invite"
+    },
+    "budget-details-actions-send-request": {
+        "value": "অনুরোধ পাঠান",
+        "prop": "text",
+        "defaultValue": "Send request"
+    },
+    "budget-details-actions-wait": {
+        "value": "বাজেট মালিক আপনার অনুরোধ অনুমোদন আছে",
+        "prop": "text",
+        "defaultValue": "Budget owner have to approve your request"
+    },
+    "close": {
+        "value": "বন্ধ",
+        "prop": "text",
+        "defaultValue": "Close"
+    },
+    "budget-details-add-people": {
+        "value": "মানুষ যোগ করুন",
+        "prop": "text",
+        "defaultValue": "Add people"
+    },
+    "transactions-list-ok": {
+        "value": "ঠিক আছে",
+        "prop": "text",
+        "defaultValue": "mkay"
+    },
+    "transactions-list-comment": {
+        "value": "ঐচ্ছিক মন্তব্য যোগ করুন",
+        "prop": "placeholder",
+        "defaultValue": "Add optional comment"
+    },
+    "feature-detector-title": {
+        "value": "বৈশিষ্ট্য",
+        "prop": "text",
+        "defaultValue": "Features"
+    },
+    "feature-detector-description": {
+        "value": "এই অ্যাপটি কাজ করার জন্য যে বৈশিষ্ট্যগুলি সমর্থন করা দরকার",
+        "prop": "text",
+        "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "বাজেট",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "সেটিংস",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "লগ আউট",
+        "prop": "text",
+        "defaultValue": "Log out"
+    },
+    "layout-login-title": {
+        "value": "রসপ্লাটা লিখুন",
+        "prop": "text",
+        "defaultValue": "Enter Rosplata"
+    },
+    "layout-login-description": {
+        "value": "ভাগ করা বাজেট ব্যবহার শুরু করতে আপনার গুগল অ্যাকাউন্ট দিয়ে সাইন ইন করুন",
+        "prop": "text",
+        "defaultValue": "Sign in with your google account to start using shared budgets"
+    },
+    "layout-login-enter": {
+        "value": "প্রবেশ করুন",
+        "prop": "text",
+        "defaultValue": "Enter"
+    },
+    "new-budget-title": {
+        "value": "নতুন বাজেট শিরোনাম",
+        "prop": "text",
+        "defaultValue": ""
+    },
+    "new-budget-currency": {
+        "value": "মুদ্রা নির্বাচন করুন",
+        "prop": "text",
+        "defaultValue": "Select currency"
+    },
+    "currency-rub": {
+        "value": "রাশিয়ান রুবেল",
+        "prop": "text",
+        "defaultValue": "Russian Rouble"
+    },
+    "currency-inr": {
+        "value": "ভারতীয় রুপি",
+        "prop": "text",
+        "defaultValue": "Indian Rupee"
+    },
+    "currency-usd": {
+        "value": "মার্কিন ডলার",
+        "prop": "text",
+        "defaultValue": "US Dollar"
+    },
+    "currency-eur": {
+        "value": "ইউরো",
+        "prop": "text",
+        "defaultValue": "Euro"
+    },
+    "currency-cny": {
+        "value": "চীনা ইউয়ান",
+        "prop": "text",
+        "defaultValue": "Chinese Yuan"
+    },
+    "currency-jrd": {
+        "value": "জর্ডানের দিনার",
+        "prop": "text",
+        "defaultValue": "Jordanian Dinar"
+    },
+    "new-budget-go": {
+        "value": "যাও",
+        "prop": "text",
+        "defaultValue": "Go"
+    },
+    "new-budget-reset": {
+        "value": "পুনরায় সেট করুন",
+        "prop": "text",
+        "defaultValue": "Reset"
+    },
+    "participants-list-ban": {
+        "value": "নিষেধাজ্ঞা",
+        "prop": "text",
+        "defaultValue": "Ban"
+    },
+    "participants-list-revert": {
+        "value": "প্রত্যাবর্তন",
+        "prop": "text",
+        "defaultValue": "Revert"
+    },
+    "participants-list-approve": {
+        "value": "অনুমোদন",
+        "prop": "text",
+        "defaultValue": "Approve"
+    },
+    "invite-dialog-description": {
+        "value": "আপনার ডিভাইসে এই বাজেটটি খুলতে এই কিউআর কোডটি স্ক্যান করুন৷",
+        "prop": "text",
+        "defaultValue": "Scan this QR code to open this budget on your device."
+    },
+    "invite-dialog-share-link": {
+        "value": "পরিবর্তে লিঙ্ক শেয়ার করুন",
+        "prop": "text",
+        "defaultValue": "Share link instead"
+    }
+}

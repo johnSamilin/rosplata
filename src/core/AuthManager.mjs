@@ -84,7 +84,6 @@ class CAuthManager {
             this.#gProvider = new GoogleAuthProvider()
             await setPersistence(this.#gAuth, browserSessionPersistence)
             const result = await signInWithPopup(this.#gAuth, this.#gProvider)
-            console.log(result);
             this.#data = {
                 id: result.user.uid,
                 name: result.user.displayName,
@@ -101,7 +100,11 @@ class CAuthManager {
 
     validate() {
         try {
-            UsersApi.post('validate', 'users/validate')
+            UsersApi.post('validate', 'users/validate').then(({ lang }) => {
+                if (SettingsManager.language !== lang) {
+                    SettingsManager.language = lang
+                }
+            })
         } catch (er) {
             this.isLoggedIn = false
             return false
@@ -113,6 +116,7 @@ class CAuthManager {
         this.onLogout()
         this.isLoggedIn = false
         this.#data = null
+        SettingsManager.reset()
         signOut(this.#gAuth)
     }
 

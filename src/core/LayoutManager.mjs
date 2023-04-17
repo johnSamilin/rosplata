@@ -19,7 +19,7 @@ class CLayoutManager {
             this.#layout?.update()
         } else {
             this.#active = newLayout
-            this.#layout?.exterminate()
+            await this.#layout?.exterminate()
             topContainer?.classList.add('loading')
             this.#layout = await this.#getLayout(newLayout)
             this.#layout?.renderTo(topContainer)

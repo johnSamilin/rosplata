@@ -46,7 +46,7 @@ class CRouter {
         }
     }
 
-    #onRouteChange = () => {
+    #onRouteChange = (e) => {
         const activeLayout = this.#routeMatchers.find(({ pattern }) => pattern.test(location.href))
         if (!activeLayout) {
             console.error('Suitable layout not found');

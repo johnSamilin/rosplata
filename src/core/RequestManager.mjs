@@ -36,7 +36,6 @@ export class RequestManager {
                 }
                 const response = await fetch(`/api/${url}`, {
                     method,
-                    credentials: 'omit',
                     headers: {
                         ...headers,
                         ...authHeaders,

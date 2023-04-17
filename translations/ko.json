@@ -1,0 +1,297 @@
+{
+    "page-title": {
+        "value": "Rosplata",
+        "prop": "text",
+        "defaultValue": "Rosplata"
+    },
+    "description": {
+        "value": "Rosplata는 오픈소스 자체 호스팅 협업 재무 관리자입니다. 예산을 만들고 친구와 공유하고 청구서를 쉽게 분할하세요.",
+        "prop": "content",
+        "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
+    },
+    "keywords": {
+        "value": "오픈소스, 협업, 재무, 예산, 분할, 청구서",
+        "prop": "content",
+        "defaultValue": "opensource, collaborative, finance, budget, split, bill"
+    },
+    "feature-checkup-title": {
+        "value": "브라우저가 다음 기능을 지원해야 합니다.",
+        "prop": "text",
+        "defaultValue": "Your browser must support these features"
+    },
+    "feature-checkup-description": {
+        "value": "불편을 드려 죄송합니다. Chrome 또는 Edge에서 이 앱을 열어보세요.",
+        "prop": "text",
+        "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
+    },
+    "settings-item-app-version": {
+        "value": "앱 버전",
+        "prop": "text",
+        "defaultValue": "App version"
+    },
+    "settings-item-autologin": {
+        "value": "자동 로그인",
+        "prop": "text",
+        "defaultValue": "Autologin"
+    },
+    "settings-item-theme": {
+        "value": "색상 테마",
+        "prop": "text",
+        "defaultValue": "Theme"
+    },
+    "settings-item-theme-system": {
+        "value": "시스템 테마",
+        "prop": "text",
+        "defaultValue": "System"
+    },
+    "settings-item-theme-light": {
+        "value": "밝은 테마",
+        "prop": "text",
+        "defaultValue": "Light"
+    },
+    "settings-item-theme-dark": {
+        "value": "어두운 테마",
+        "prop": "text",
+        "defaultValue": "Dark"
+    },
+    "settings-item-language": {
+        "value": "언어",
+        "prop": "text",
+        "defaultValue": "Language"
+    },
+    "settings-item-language-system": {
+        "value": "브라우저 결정",
+        "prop": "text",
+        "defaultValue": "Let browser decide"
+    },
+    "settings-item-language-ru": {
+        "value": "Русский",
+        "prop": "text",
+        "defaultValue": "Russian"
+    },
+    "settings-item-language-en": {
+        "value": "Engligh",
+        "prop": "text",
+        "defaultValue": "English"
+    },
+    "settings-item-language-hi": {
+        "value": "हिन्दी",
+        "prop": "text",
+        "defaultValue": "Hindi"
+    },
+    "settings-item-language-bn": {
+        "value": "বাংলা",
+        "prop": "text",
+        "defaultValue": "Bengali"
+    },
+    "settings-item-language-zn": {
+        "value": "中文",
+        "prop": "text",
+        "defaultValue": "Chinese"
+    },
+    "settings-item-language-ar": {
+        "value": "العربية",
+        "prop": "text",
+        "defaultValue": "Arabic"
+    },
+    "settings-item-language-ko": {
+        "value": "한국어",
+        "prop": "text",
+        "defaultValue": "Korean"
+    },
+    "settings-item-language-he": {
+        "value": "עברית",
+        "prop": "text",
+        "defaultValue": "Hebrew"
+    },
+    "budgets-list-new": {
+        "value": "새 예산 만들기",
+        "prop": "text",
+        "defaultValue": "Create new"
+    },
+    "back": {
+        "value": "돌아가기",
+        "prop": "text",
+        "defaultValue": "Back"
+    },
+    "participants-list-button": {
+        "value": "참가자들",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "budget-details-my-balance": {
+        "value": "내 잔액",
+        "prop": "text",
+        "defaultValue": "My balance"
+    },
+    "budget-details-total-sum": {
+        "value": "총 합계",
+        "prop": "text",
+        "defaultValue": "Total sum"
+    },
+    "budget-details-actions-invite": {
+        "value": "당신은 참여하도록 초대됩니다",
+        "prop": "text",
+        "defaultValue": "You are invited to participate"
+    },
+    "budget-details-actions-accept": {
+        "value": "수용하다",
+        "prop": "text",
+        "defaultValue": "Accept"
+    },
+    "budget-details-actions-decline": {
+        "value": "감소",
+        "prop": "text",
+        "defaultValue": "Decline"
+    },
+    "budget-details-actions-ask": {
+        "value": "초대를 요청할 수 있습니다.",
+        "prop": "text",
+        "defaultValue": "You can ask for invite"
+    },
+    "budget-details-actions-send-request": {
+        "value": "요청 보내기",
+        "prop": "text",
+        "defaultValue": "Send request"
+    },
+    "budget-details-actions-wait": {
+        "value": "예산 소유자가 귀하의 요청을 승인해야 합니다.",
+        "prop": "text",
+        "defaultValue": "Budget owner have to approve your request"
+    },
+    "close": {
+        "value": "닫아",
+        "prop": "text",
+        "defaultValue": "Close"
+    },
+    "budget-details-add-people": {
+        "value": "사람 추가",
+        "prop": "text",
+        "defaultValue": "Add people"
+    },
+    "transactions-list-ok": {
+        "value": "좋아요",
+        "prop": "text",
+        "defaultValue": "mkay"
+    },
+    "transactions-list-comment": {
+        "value": "선택적 설명 추가",
+        "prop": "placeholder",
+        "defaultValue": "Add optional comment"
+    },
+    "feature-detector-title": {
+        "value": "특징",
+        "prop": "text",
+        "defaultValue": "Features"
+    },
+    "feature-detector-description": {
+        "value": "이 앱이 작동하려면 지원해야 하는 기능",
+        "prop": "text",
+        "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "예산",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "설정",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "로그아웃",
+        "prop": "text",
+        "defaultValue": "Log out"
+    },
+    "layout-login-title": {
+        "value": "로스플라타에 들어가다",
+        "prop": "text",
+        "defaultValue": "Enter Rosplata"
+    },
+    "layout-login-description": {
+        "value": "공유 예산을 사용하려면 Google 계정으로 로그인하세요.",
+        "prop": "text",
+        "defaultValue": "Sign in with your google account to start using shared budgets"
+    },
+    "layout-login-enter": {
+        "value": "입력하다",
+        "prop": "text",
+        "defaultValue": "Enter"
+    },
+    "new-budget-title": {
+        "value": "새 예산 제목",
+        "prop": "text",
+        "defaultValue": ""
+    },
+    "new-budget-currency": {
+        "value": "통화 선택",
+        "prop": "text",
+        "defaultValue": "Select currency"
+    },
+    "currency-rub": {
+        "value": "러시아 루블",
+        "prop": "text",
+        "defaultValue": "Russian Rouble"
+    },
+    "currency-inr": {
+        "value": "인도 루피",
+        "prop": "text",
+        "defaultValue": "Indian Rupee"
+    },
+    "currency-usd": {
+        "value": "미국 달러",
+        "prop": "text",
+        "defaultValue": "US Dollar"
+    },
+    "currency-eur": {
+        "value": "유로",
+        "prop": "text",
+        "defaultValue": "Euro"
+    },
+    "currency-cny": {
+        "value": "중국 위안",
+        "prop": "text",
+        "defaultValue": "Chinese Yuan"
+    },
+    "currency-jrd": {
+        "value": "요르단 디나르",
+        "prop": "text",
+        "defaultValue": "Jordanian Dinar"
+    },
+    "new-budget-go": {
+        "value": "가다",
+        "prop": "text",
+        "defaultValue": "Go"
+    },
+    "new-budget-reset": {
+        "value": "초기화",
+        "prop": "text",
+        "defaultValue": "Reset"
+    },
+    "participants-list-ban": {
+        "value": "반",
+        "prop": "text",
+        "defaultValue": "Ban"
+    },
+    "participants-list-revert": {
+        "value": "돌아가는 것",
+        "prop": "text",
+        "defaultValue": "Revert"
+    },
+    "participants-list-approve": {
+        "value": "승인하다",
+        "prop": "text",
+        "defaultValue": "Approve"
+    },
+    "invite-dialog-description": {
+        "value": "기기에서 이 예산을 열려면 이 QR 코드를 스캔하세요.",
+        "prop": "text",
+        "defaultValue": "Scan this QR code to open this budget on your device."
+    },
+    "invite-dialog-share-link": {
+        "value": "대신 링크 공유",
+        "prop": "text",
+        "defaultValue": "Share link instead"
+    }
+}

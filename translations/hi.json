@@ -1,0 +1,297 @@
+{
+    "page-title": {
+        "value": "Rosplata",
+        "prop": "text",
+        "defaultValue": "Rosplata"
+    },
+    "description": {
+        "value": "रोजा प्लाटा एक ओपन सोर्स सेल्फ होस्टेड सहयोगी वित्त प्रबंधक है ।  बजट बनाएं, उन्हें दोस्तों के साथ साझा करें और आसानी से बिलों को विभाजित करें",
+        "prop": "content",
+        "defaultValue": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills"
+    },
+    "keywords": {
+        "value": "खुला स्रोत, सहयोगात्मक, वित्त, बजट, विभाजन, बिल",
+        "prop": "content",
+        "defaultValue": "opensource, collaborative, finance, budget, split, bill"
+    },
+    "feature-checkup-title": {
+        "value": "आपके ब्राउज़र को इन सुविधाओं का समर्थन करना चाहिए",
+        "prop": "text",
+        "defaultValue": "Your browser must support these features"
+    },
+    "feature-checkup-description": {
+        "value": "असुविधा के लिए क्षमा करें ।  इस ऐप को क्रोम या एज में खोलने का प्रयास करें । ",
+        "prop": "text",
+        "defaultValue": "Sorry for inconvenience. Try opening this app in Chrome or Edge."
+    },
+    "settings-item-app-version": {
+        "value": "ऐप संस्करण",
+        "prop": "text",
+        "defaultValue": "App version"
+    },
+    "settings-item-autologin": {
+        "value": "ऑटोलॉगिन",
+        "prop": "text",
+        "defaultValue": "Autologin"
+    },
+    "settings-item-theme": {
+        "value": "रंग विषय",
+        "prop": "text",
+        "defaultValue": "Theme"
+    },
+    "settings-item-theme-system": {
+        "value": "सिस्टम थीम",
+        "prop": "text",
+        "defaultValue": "System"
+    },
+    "settings-item-theme-light": {
+        "value": "लाइट थीम",
+        "prop": "text",
+        "defaultValue": "Light"
+    },
+    "settings-item-theme-dark": {
+        "value": "डार्क थीम",
+        "prop": "text",
+        "defaultValue": "Dark"
+    },
+    "settings-item-language": {
+        "value": "भाषा: हिन्दी",
+        "prop": "text",
+        "defaultValue": "Language"
+    },
+    "settings-item-language-system": {
+        "value": "ब्राउज़र को निर्णय लेने दें",
+        "prop": "text",
+        "defaultValue": "Let browser decide"
+    },
+    "settings-item-language-ru": {
+        "value": "Русский",
+        "prop": "text",
+        "defaultValue": "Russian"
+    },
+    "settings-item-language-en": {
+        "value": "Engligh",
+        "prop": "text",
+        "defaultValue": "English"
+    },
+    "settings-item-language-hi": {
+        "value": "हिन्दी",
+        "prop": "text",
+        "defaultValue": "Hindi"
+    },
+    "settings-item-language-bn": {
+        "value": "বাংলা",
+        "prop": "text",
+        "defaultValue": "Bengali"
+    },
+    "settings-item-language-zn": {
+        "value": "中文",
+        "prop": "text",
+        "defaultValue": "Chinese"
+    },
+    "settings-item-language-ar": {
+        "value": "العربية",
+        "prop": "text",
+        "defaultValue": "Arabic"
+    },
+    "settings-item-language-ko": {
+        "value": "한국어",
+        "prop": "text",
+        "defaultValue": "Korean"
+    },
+    "settings-item-language-he": {
+        "value": "עברית",
+        "prop": "text",
+        "defaultValue": "Hebrew"
+    },
+    "budgets-list-new": {
+        "value": "नया बजट बनाएं",
+        "prop": "text",
+        "defaultValue": "Create new"
+    },
+    "back": {
+        "value": "वापस जाओ",
+        "prop": "text",
+        "defaultValue": "Back"
+    },
+    "participants-list-button": {
+        "value": "प्रतिभागियों",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "budget-details-my-balance": {
+        "value": "मेरा संतुलन",
+        "prop": "text",
+        "defaultValue": "My balance"
+    },
+    "budget-details-total-sum": {
+        "value": "कुल योग",
+        "prop": "text",
+        "defaultValue": "Total sum"
+    },
+    "budget-details-actions-invite": {
+        "value": "आप भाग लेने के लिए आमंत्रित हैं",
+        "prop": "text",
+        "defaultValue": "You are invited to participate"
+    },
+    "budget-details-actions-accept": {
+        "value": "स्वीकार करें",
+        "prop": "text",
+        "defaultValue": "Accept"
+    },
+    "budget-details-actions-decline": {
+        "value": "गिरावट",
+        "prop": "text",
+        "defaultValue": "Decline"
+    },
+    "budget-details-actions-ask": {
+        "value": "आप आमंत्रण के लिए पूछ सकते हैं",
+        "prop": "text",
+        "defaultValue": "You can ask for invite"
+    },
+    "budget-details-actions-send-request": {
+        "value": "अनुरोध भेजें",
+        "prop": "text",
+        "defaultValue": "Send request"
+    },
+    "budget-details-actions-wait": {
+        "value": "बजट स्वामी को आपके अनुरोध को स्वीकार करना होगा",
+        "prop": "text",
+        "defaultValue": "Budget owner have to approve your request"
+    },
+    "close": {
+        "value": "बंद करें",
+        "prop": "text",
+        "defaultValue": "Close"
+    },
+    "budget-details-add-people": {
+        "value": "लोगों को जोड़ें",
+        "prop": "text",
+        "defaultValue": "Add people"
+    },
+    "transactions-list-ok": {
+        "value": "ठीक है।",
+        "prop": "text",
+        "defaultValue": "mkay"
+    },
+    "transactions-list-comment": {
+        "value": "वैकल्पिक टिप्पणी जोड़ें",
+        "prop": "placeholder",
+        "defaultValue": "Add optional comment"
+    },
+    "feature-detector-title": {
+        "value": "विशेषताएं",
+        "prop": "text",
+        "defaultValue": "Features"
+    },
+    "feature-detector-description": {
+        "value": "इस ऐप के काम करने के लिए जिन सुविधाओं का समर्थन करना आवश्यक है",
+        "prop": "text",
+        "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "बजट",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "सेटिंग्स",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "लॉग आउट करें",
+        "prop": "text",
+        "defaultValue": "Log out"
+    },
+    "layout-login-title": {
+        "value": "रोजप्लाटा दर्ज करें",
+        "prop": "text",
+        "defaultValue": "Enter Rosplata"
+    },
+    "layout-login-description": {
+        "value": "साझा बजट का उपयोग शुरू करने के लिए अपने गूगल खाते से साइन इन करें",
+        "prop": "text",
+        "defaultValue": "Sign in with your google account to start using shared budgets"
+    },
+    "layout-login-enter": {
+        "value": "दर्ज करें",
+        "prop": "text",
+        "defaultValue": "Enter"
+    },
+    "new-budget-title": {
+        "value": "नया बजट शीर्षक",
+        "prop": "text",
+        "defaultValue": ""
+    },
+    "new-budget-currency": {
+        "value": "मुद्रा का चयन करें",
+        "prop": "text",
+        "defaultValue": "Select currency"
+    },
+    "currency-rub": {
+        "value": "रूसी रूबल",
+        "prop": "text",
+        "defaultValue": "Russian Rouble"
+    },
+    "currency-inr": {
+        "value": "भारतीय रुपया",
+        "prop": "text",
+        "defaultValue": "Indian Rupee"
+    },
+    "currency-usd": {
+        "value": "अमेरिकी डॉलर",
+        "prop": "text",
+        "defaultValue": "US Dollar"
+    },
+    "currency-eur": {
+        "value": "यूरो",
+        "prop": "text",
+        "defaultValue": "Euro"
+    },
+    "currency-cny": {
+        "value": "चीनी युआन",
+        "prop": "text",
+        "defaultValue": "Chinese Yuan"
+    },
+    "currency-jrd": {
+        "value": "जॉर्डन दीनार",
+        "prop": "text",
+        "defaultValue": "Jordanian Dinar"
+    },
+    "new-budget-go": {
+        "value": "जा।",
+        "prop": "text",
+        "defaultValue": "Go"
+    },
+    "new-budget-reset": {
+        "value": "रीसेट करें",
+        "prop": "text",
+        "defaultValue": "Reset"
+    },
+    "participants-list-ban": {
+        "value": "प्रतिबंध",
+        "prop": "text",
+        "defaultValue": "Ban"
+    },
+    "participants-list-revert": {
+        "value": "वापस लौटें",
+        "prop": "text",
+        "defaultValue": "Revert"
+    },
+    "participants-list-approve": {
+        "value": "स्वीकृति दें",
+        "prop": "text",
+        "defaultValue": "Approve"
+    },
+    "invite-dialog-description": {
+        "value": "इस बजट को अपने डिवाइस पर खोलने के लिए इस क्यूआर कोड को स्कैन करें । ",
+        "prop": "text",
+        "defaultValue": "Scan this QR code to open this budget on your device."
+    },
+    "invite-dialog-share-link": {
+        "value": "इसके बजाय लिंक साझा करें",
+        "prop": "text",
+        "defaultValue": "Share link instead"
+    }
+}
