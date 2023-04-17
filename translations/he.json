@@ -104,11 +104,6 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
-    "settings-item-language-mr": {
-        "value": "",
-        "prop": "text",
-        "defaultValue": "Marathi"
-    },
     "budgets-list-new": {
         "value": "צור תקציב חדש",
         "prop": "text",
@@ -193,6 +188,21 @@
         "value": "תכונות שצריך לתמוך כדי שהאפליקציה הזו תעבוד",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "תקציבים",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "הגדרות",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "התנתק",
+        "prop": "text",
+        "defaultValue": "Log out"
     },
     "layout-login-title": {
         "value": "היכנס לרוספלטה",

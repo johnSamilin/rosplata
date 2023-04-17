@@ -104,11 +104,6 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
-    "settings-item-language-mr": {
-        "value": "",
-        "prop": "text",
-        "defaultValue": "Marathi"
-    },
     "budgets-list-new": {
         "value": "नया बजट बनाएं",
         "prop": "text",
@@ -193,6 +188,21 @@
         "value": "इस ऐप के काम करने के लिए जिन सुविधाओं का समर्थन करना आवश्यक है",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "बजट",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "सेटिंग्स",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "लॉग आउट करें",
+        "prop": "text",
+        "defaultValue": "Log out"
     },
     "layout-login-title": {
         "value": "रोजप्लाटा दर्ज करें",

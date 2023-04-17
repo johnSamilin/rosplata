@@ -104,11 +104,6 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
-    "settings-item-language-mr": {
-        "value": "",
-        "prop": "text",
-        "defaultValue": "Marathi"
-    },
     "budgets-list-new": {
         "value": "নতুন বাজেট তৈরি করুন",
         "prop": "text",
@@ -193,6 +188,21 @@
         "value": "এই অ্যাপটি কাজ করার জন্য যে বৈশিষ্ট্যগুলি সমর্থন করা দরকার",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "বাজেট",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "সেটিংস",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "লগ আউট",
+        "prop": "text",
+        "defaultValue": "Log out"
     },
     "layout-login-title": {
         "value": "রসপ্লাটা লিখুন",

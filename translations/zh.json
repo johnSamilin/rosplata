@@ -104,11 +104,6 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
-    "settings-item-language-mr": {
-        "value": "",
-        "prop": "text",
-        "defaultValue": "Marathi"
-    },
     "budgets-list-new": {
         "value": "创建新预算",
         "prop": "text",
@@ -193,6 +188,21 @@
         "value": "此应用程序需要支持的功能才能正常工作",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "财政预算案",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "设置",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "注销登记",
+        "prop": "text",
+        "defaultValue": "Log out"
     },
     "layout-login-title": {
         "value": "进入罗斯普拉塔",

@@ -73,7 +73,6 @@
                 <option value="ar" data-translate-id="settings-item-language-ar">Arabic</option>
                 <option value="ko" data-translate-id="settings-item-language-ko">Korean</option>
                 <option value="he" data-translate-id="settings-item-language-he">Hebrew</option>
-                <option value="mr" data-translate-id="settings-item-language-mr">Marathi</option>
             </select>
         </div>
     </template>
@@ -199,11 +198,15 @@
     </template>
 
     <template id="menu-template">
-        <nav id="menu" class="paper border-1 background-primary"></nav>
+        <nav id="menu" class="paper border-1 background-primary">
+            <a data-translate-id="menu-budgets" href="/" class="menu-item">Budgets</a>
+            <a data-translate-id="menu-settings" href="/settings" class="menu-item">Settings</a>
+            <a data-translate-id="menu-logout" href="#" class="menu-item menu__logout">Log out</a>
+        </nav>
     </template>
 
     <template id="menu-item-template">
-        <a href="" class="menu-item"></a>
+        
     </template>
 
     <template id="layout-login-template">

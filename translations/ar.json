@@ -104,11 +104,6 @@
         "prop": "text",
         "defaultValue": "Hebrew"
     },
-    "settings-item-language-mr": {
-        "value": "",
-        "prop": "text",
-        "defaultValue": "Marathi"
-    },
     "budgets-list-new": {
         "value": "إنشاء ميزانية جديدة",
         "prop": "text",
@@ -193,6 +188,21 @@
         "value": "الميزات التي يجب دعمها حتى يعمل هذا التطبيق",
         "prop": "text",
         "defaultValue": "That need to be supported for this app to work"
+    },
+    "menu-budgets": {
+        "value": "الميزانيات",
+        "prop": "text",
+        "defaultValue": "Budgets"
+    },
+    "menu-settings": {
+        "value": "الإعدادات",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
+    "menu-logout": {
+        "value": "تسجيل الخروج",
+        "prop": "text",
+        "defaultValue": "Log out"
     },
     "layout-login-title": {
         "value": "أدخل Rosplata",

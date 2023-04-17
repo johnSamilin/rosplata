@@ -6,10 +6,15 @@ const darkThemeMedia = matchMedia('(prefers-color-scheme: dark)')
 
 class CSettingsManager {
     #appVersion = '0.1.3'
+    #animationsEnabled = true
     #autoLoginEnabled = getFromLs('autoLoginEnabled', 'true') === 'true'
     #theme = getFromLs('theme', 'system')
     #language = getFromLs('language')
 
+    get animationsEnabled() {
+        return this.#animationsEnabled
+    }
+    
     get appVersion() {
         return this.#appVersion
     }

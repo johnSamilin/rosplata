@@ -66,7 +66,6 @@
                 <option value="ar" data-translate-id="settings-item-language-ar">العربية</option>
                 <option value="ko" data-translate-id="settings-item-language-ko">한국어</option>
                 <option value="he" data-translate-id="settings-item-language-he">עברית</option>
-                <option value="mr" data-translate-id="settings-item-language-mr"></option>
             </select>
         </div>
     </template>
@@ -173,11 +172,14 @@
         </div>
     </template>
 
-    <template id="menu-template"><nav id="menu" class="paper border-1 background-primary"></nav>
+    <template id="menu-template"><nav id="menu" class="paper border-1 background-primary">
+            <a data-translate-id="menu-budgets" href="/" class="menu-item">বাজেট</a>
+            <a data-translate-id="menu-settings" href="/settings" class="menu-item">সেটিংস</a>
+            <a data-translate-id="menu-logout" href="#" class="menu-item menu__logout">লগ আউট</a>
+        </nav>
     </template>
 
-    <template id="menu-item-template"><a href="" class="menu-item"></a>
-    </template>
+    <template id="menu-item-template"></template>
 
     <template id="layout-login-template"><div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">রসপ্লাটা লিখুন</h1>
