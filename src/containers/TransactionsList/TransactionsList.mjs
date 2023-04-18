@@ -6,6 +6,7 @@ import { ListComponent } from "../../core/ListComponent.mjs";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
+import { mapArrayToObjectId } from "../../utils/utils.mjs";
 
 importStyle('/src/containers/TransactionsList/TransactionsList.css')
 
@@ -22,7 +23,7 @@ export class TransactionsList extends ListComponent {
     }
 
     #onTransactionsChanged = (transactions) => {
-        this.data = transactions
+        this.data = mapArrayToObjectId(transactions)
     }
 
     async show() {
@@ -68,6 +69,7 @@ export class TransactionsList extends ListComponent {
                 user: AuthManager.data,
                 currency,
                 comment: data.get('comment'),
+                deleted: false,
             }
             // @ts-ignore
             this.addItems(new Map([
@@ -86,11 +88,57 @@ export class TransactionsList extends ListComponent {
         }
     }
 
+    #handleClick = async (evt) => {
+        const deleteBtnClicked = evt.target.classList.contains('transactions-list-item__delete')
+        const revertBtnClicked = evt.target.classList.contains('transactions-list-item__revert')
+        if (deleteBtnClicked || revertBtnClicked) {
+            const container = evt.target.parentNode
+            const transactionId = container.getAttribute('id')
+            const isDeleted = deleteBtnClicked ? true : false
+            if (this.data[transactionId] && this.data[transactionId].user.id === AuthManager.data.id) {
+                const budgetId = Store.get('selectedBudgetId')
+                const transactions = Store.get(`budgets.${budgetId}.transactions`)
+                try {
+                    Store.set(`budgets.${budgetId}.transactions`, transactions.map(t => {
+                        if (t.id === transactionId) {
+                            return {
+                                ...t,
+                                deleted: isDeleted
+                            }
+                        }
+
+                        return t
+                    }))
+                    if (deleteBtnClicked) {
+                        await Api.delete(`delete-${transactionId}`, `transactions/${transactionId}`)
+                    } else {
+                        await Api.post(`delete-${transactionId}`, `transactions/${transactionId}/restore`)
+                    }
+                } catch (er) {
+                    Store.set(`budgets[${budgetId}].transactions`, transactions.map(t => {
+                        if (t.id === transactionId) {
+                            t.deleted = !isDeleted
+                        }
+
+                        return t
+                    }))
+                    const { Alert } = await import('../Alert/Alert.mjs')
+                    new Alert('danger', er)
+                }
+            }
+        }
+    }
+
     listeners = new Set([
         {
             selector: 'form.transactions-list__new',
             event: 'submit',
             handler: this.#addTransaction,
-        }
+        },
+        {
+            selector: '.transactions-list__items',
+            event: 'click',
+            handler: this.#handleClick,
+        },
     ])
 }

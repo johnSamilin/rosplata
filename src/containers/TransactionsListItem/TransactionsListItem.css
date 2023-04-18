@@ -3,6 +3,7 @@
     justify-content: space-between;
     margin: 0.25rem 0;
 }
+
 .transactions-list-item__name-and-comment {
     display: flex;
     flex-direction: column;
@@ -10,13 +11,20 @@
     margin-left: 0.25rem;
     align-self: flex-start;
 }
+
+.transactions-list-item--deleted .transactions-list-item__amount {
+    text-decoration: line-through;
+}
+
 .transactions-list-item__comment {
     font-size: 0.75rem;
 }
+
 .transactions-list-item--local {
     margin-left: calc(-10px - 0.25rem);
     opacity: 0.75;
 }
+
 .transactions-list-item--local::before {
     content: '';
     display: inline-block;
@@ -26,10 +34,48 @@
     background-color: brown;
     margin: 10px 10px 10px 0;
 }
-.transactions-list-item__image{
+
+.transactions-list-item__image {
     height: auto;
     min-width: 20px;
     max-height: 20px;
     display: block;
     margin: 0 auto;
+}
+
+.transactions-list-item .transactions-list-item__delete,
+.transactions-list-item .transactions-list-item__revert {
+    align-self: flex-start;
+    background: transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    right: -0.5rem;
+    margin-right: -1rem;
+    display: none;
+    border: none;
+    box-shadow: none;
+    transition: none;
+    flex-shrink: 0;
+}
+
+.transactions-list-item__delete img,
+.transactions-list-item__revert img {
+    width: 1.1rem;
+    height: 1.1rem;
+    border: none;
+    pointer-events: none;
+}
+
+.transactions-list-item__delete:focus {
+    border: none;
+    box-shadow: none;
+    transition: none;
+}
+
+.transactions-list-item .transactions-list-item__delete--shown,
+.transactions-list-item .transactions-list-item__revert--shown {
+    display: inline-block;
 }

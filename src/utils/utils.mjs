@@ -136,9 +136,11 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
     let mySpends = 0
     let participantCount = participants.filter(p => allowedUserStatuses.includes(p.status)).length
     transactions.forEach((t) => {
-        totalBalance += parseFloat(t.amount)
-        if (t.user.id === AuthManager.data.id) {
-            mySpends += parseFloat(t.amount)
+        if (!t.deleted) {
+            totalBalance += parseFloat(t.amount)
+            if (t.user.id === AuthManager.data.id) {
+                mySpends += parseFloat(t.amount)
+            }
         }
     })
     if (participantCount <= 1) {
