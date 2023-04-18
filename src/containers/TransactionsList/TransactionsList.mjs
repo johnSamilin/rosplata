@@ -57,10 +57,10 @@ export class TransactionsList extends ListComponent {
         const budgetId = Store.get('selectedBudgetId')
         const { currency } = Store.get(`budgets.${budgetId}`)
         // @ts-ignore
+        const id = crypto.randomUUID()
         data.append('budgetId', budgetId)
-        data.append('id', crypto.randomUUID())
+        data.append('id', id)
         data.append('currency', currency)
-        const id = Date.now()
         try {
             this.isInProgress = true
             const transaction = {
