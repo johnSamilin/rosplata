@@ -70,7 +70,7 @@
         "defaultValue": "Russian"
     },
     "settings-item-language-en": {
-        "value": "Engligh",
+        "value": "English",
         "prop": "text",
         "defaultValue": "English"
     },
