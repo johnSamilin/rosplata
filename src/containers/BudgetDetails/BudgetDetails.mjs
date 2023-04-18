@@ -51,7 +51,7 @@ export class BudgetDetails extends AnimatedComponent {
     }
 
     #onTransactionsChanged = (transactions) => {
-        transactionsController.data = mapArrayToObjectId(transactions ?? [])
+        this.data.transactions = transactions
         this.update()
     }
 

@@ -12,7 +12,6 @@
     align-self: flex-start;
 }
 
-.transactions-list-item--deleted .transactions-list-item__name-and-comment,
 .transactions-list-item--deleted .transactions-list-item__amount {
     text-decoration: line-through;
 }

@@ -5,10 +5,12 @@
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     max-height: 100vh;
 }
+
 .budget-details__header {
     display: flex;
     justify-content: space-between;
 }
+
 .budget-details__main {
     flex-grow: 1;
     padding: 1rem;
@@ -16,31 +18,37 @@
     display: flex;
     flex-direction: column;
 }
+
 .budget-details__aside {
     display: flex;
     flex-direction: column;
 }
+
 #budget-details.exit,
 #budget-details.hidden {
     transform: translateY(1rem);
     opacity: 0;
 }
+
 .budget-details__counters {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+
 .budget-details__counter-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .budget-details__counter {
     font-size: 4rem;
     padding: 1rem;
     display: flex;
     align-items: flex-end;
 }
+
 .budget-details__counter::before {
     display: inline-block;
     border-radius: 50%;
@@ -51,10 +59,12 @@
     text-align: center;
     margin: 0 0.25rem;
 }
+
 .budget-details__counter--negative::before {
     background-color: indianred;
     content: '-';
 }
+
 .budget-details__counter--positive::before {
     background-color: lightgreen;
     content: '+';
@@ -63,29 +73,36 @@
 .budget-details__transactions {
     flex-grow: 1;
 }
+
 .budget-details__counters,
 .budget-details__transactions {
     max-width: 50%;
     margin: 0 auto;
 }
+
 .budget-details__participants {
     flex-grow: 1;
 }
+
 #budget-details #send-invite {
     width: 100%;
 }
+
 .budget-details__actions {
     justify-content: center;
     align-items: center;
     width: 100%;
     display: none;
 }
+
 .budget-details__actions--visible {
     display: flex;
 }
+
 .budget-details__action {
     margin: 0 0.5rem;
 }
+
 .budget-details__aside {
     max-width: 300px;
     min-width: 100px;
@@ -93,10 +110,12 @@
 }
 
 @media screen and (max-width: 425px) {
+
     .budget-details__counters,
     .budget-details__transactions {
         max-width: 100%;
     }
+
     .budget-details__aside {
         width: 100%;
         max-width: 100%;
@@ -109,7 +128,12 @@
         background-color: beige;
         padding: 1rem;
     }
+
     .budget-details__aside--visible {
         transform: translateX(-100%);
+    }
+
+    .budget-details__counter {
+        font-size: 15vw;
     }
 }

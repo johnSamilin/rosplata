@@ -6,6 +6,7 @@ import { ListComponent } from "../../core/ListComponent.mjs";
 import { RequestManager } from "../../core/RequestManager.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
+import { mapArrayToObjectId } from "../../utils/utils.mjs";
 
 importStyle('/src/containers/TransactionsList/TransactionsList.css')
 
@@ -22,7 +23,7 @@ export class TransactionsList extends ListComponent {
     }
 
     #onTransactionsChanged = (transactions) => {
-        this.data = transactions
+        this.data = mapArrayToObjectId(transactions)
     }
 
     async show() {
@@ -100,7 +101,10 @@ export class TransactionsList extends ListComponent {
                 try {
                     Store.set(`budgets.${budgetId}.transactions`, transactions.map(t => {
                         if (t.id === transactionId) {
-                            t.deleted = isDeleted
+                            return {
+                                ...t,
+                                deleted: isDeleted
+                            }
                         }
 
                         return t
