@@ -68,7 +68,7 @@ export class NewBudget extends Component {
             }
             await Api.put('create', 'budgets', { body: data })
             Store.set('budgets', budgets)
-            form.reset()
+            Router.navigate(`/budgets/${id}`)
         } catch (er) {
             const { Alert } = await import('../Alert/Alert.mjs')
             new Alert('danger', er)
