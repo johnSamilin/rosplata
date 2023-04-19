@@ -10,6 +10,7 @@ import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userS
 import { Alert } from "../Alert/Alert.mjs";
 import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
 import { FeatureDetector } from "../../core/FeatureDetector.mjs";
+import { Router } from '../../core/Router.mjs'
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -48,6 +49,10 @@ export class BudgetDetails extends AnimatedComponent {
         this.data = data
         transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
+
+        if (this.data?.participants.length === 1 && Router.queryParams.has('fresh')) { // only the owner
+            this.showInviteDialog()
+        }
     }
 
     #onTransactionsChanged = (transactions) => {
@@ -196,7 +201,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
     }
 
-    onSendInvite = async () => {
+    showInviteDialog = async () => {
         if (this.isInProgress) {
             return false
         }
@@ -252,7 +257,7 @@ export class BudgetDetails extends AnimatedComponent {
         {
             selector: '#send-invite',
             event: 'click',
-            handler: this.onSendInvite,
+            handler: this.showInviteDialog,
         },
         {
             selector: '#participants-list-btn',
