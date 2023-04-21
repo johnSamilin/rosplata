@@ -18,6 +18,7 @@
                 color: beige;
             }
         }
+
         #telegram-post-rosplata-3 {
             position: relative;
             transform: scale(80%);
@@ -122,7 +123,7 @@
                 <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">衰退</button>
             </div>
             <div class="budget-details__actions budget-details__actions--ask">
-                <span data-translate-id="budget-details-actions-ask">你可以要求邀请</span>                
+                <span data-translate-id="budget-details-actions-ask">你可以要求邀请</span>
                 <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">发送请求</button>
             </div>
             <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait">预算所有者必须批准您的请求</div>
@@ -208,6 +209,13 @@
                     <option value="CNY" data-translate-id="currency-cny">人民币</option>
                     <option value="JRD" data-translate-id="currency-jrd">约旦第纳尔</option>
                 </select>
+                <strong data-translate-id="new-budget-suggested-participants">建议参加者</strong>
+                <div class="new-budget__suggested-participants">
+                    <div class="new-budget__suggested-participants-item">
+                        <label for=""></label>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                </div>
             </div>
             <div class="new-budget__buttons">
                 <button type="submit" data-translate-id="new-budget-go">去</button>

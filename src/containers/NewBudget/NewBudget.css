@@ -22,3 +22,10 @@
     display: inline-block;
     margin: 1rem 0 0.25rem;
 }
+.new-budget__suggested-participants-item {
+    display: flex;
+    justify-content: space-between;
+}
+.new-budget__suggested-participants-item label {
+    flex-grow: 1;
+}

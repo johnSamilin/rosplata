@@ -8,7 +8,8 @@
     <title data-translate-id="page-title">Rosplata</title>
     <meta data-translate-id="description" data-translate-prop="content" name="description"
         content="Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills" />
-    <meta data-translate-id="keywords" data-translate-prop="content" name="keywords" content="opensource, collaborative, finance, budget, split, bill" />
+    <meta data-translate-id="keywords" data-translate-prop="content" name="keywords"
+        content="opensource, collaborative, finance, budget, split, bill" />
     <link rel="canonical" href="https://ros-plata.ru" />
     <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
 
@@ -22,6 +23,7 @@
                 color: beige;
             }
         }
+
         #telegram-post-rosplata-3 {
             position: relative;
             transform: scale(80%);
@@ -50,8 +52,9 @@
             <span class="settings-item__value" id="app-version"></span>
         </div>
         <div class="settings-item">
-            <label class="settings-item__name" for="autologin" data-translate-id="settings-item-autologin">Autologin</label>
-            <input class="settings-item__value" type="checkbox" id="autologin-setting"/>
+            <label class="settings-item__name" for="autologin"
+                data-translate-id="settings-item-autologin">Autologin</label>
+            <input class="settings-item__value" type="checkbox" id="autologin-setting" />
         </div>
         <div class="settings-item">
             <label class="settings-item__name" for="theme-setting" data-translate-id="settings-item-theme">Theme</label>
@@ -62,7 +65,8 @@
             </select>
         </div>
         <div class="settings-item">
-            <label class="settings-item__name" for="language-setting" data-translate-id="settings-item-language">Language</label>
+            <label class="settings-item__name" for="language-setting"
+                data-translate-id="settings-item-language">Language</label>
             <select class="settings-item__value" id="language-setting">
                 <option value="system" data-translate-id="settings-item-language-system">Let browser decide</option>
                 <option value="ru" data-translate-id="settings-item-language-ru">Русский</option>
@@ -79,7 +83,8 @@
 
     <template id="budgets-list-template">
         <div class="budgets-list__actions">
-            <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new">Create new</button>
+            <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new">Create
+                new</button>
             <button id="budgets-list__menu-button"></button>
         </div>
         <div id="budgets-list__items">
@@ -135,14 +140,18 @@
             <div class="budget-details__transactions"></div>
             <div class="budget-details__actions budget-details__actions--invite">
                 <span data-translate-id="budget-details-actions-invite">You are invited to participate</span>
-                <button class="budget-details__action btn-success" id="accept-invite" data-translate-id="budget-details-actions-accept">Accept</button>
-                <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">Decline</button>
+                <button class="budget-details__action btn-success" id="accept-invite"
+                    data-translate-id="budget-details-actions-accept">Accept</button>
+                <button class="budget-details__action btn-warning" id="decline-invite"
+                    data-translate-id="budget-details-actions-decline">Decline</button>
             </div>
             <div class="budget-details__actions budget-details__actions--ask">
-                <span data-translate-id="budget-details-actions-ask">You can ask for invite</span>                
-                <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">Send request</button>
+                <span data-translate-id="budget-details-actions-ask">You can ask for invite</span>
+                <button class="budget-details__action btn-secondary" id="ask-invite"
+                    data-translate-id="budget-details-actions-send-request">Send request</button>
             </div>
-            <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait">
+            <div class="budget-details__actions budget-details__actions--wait"
+                data-translate-id="budget-details-actions-wait">
                 Budget owner have to approve your request
             </div>
         </div>
@@ -152,7 +161,8 @@
             </div>
             <div class="budget-details__participants"></div>
             <div class="budget-details__actions budget-details__actions--send-invite">
-                <button id="send-invite" class="budget-details__action button" data-translate-id="budget-details-add-people">Add people</button>
+                <button id="send-invite" class="budget-details__action button"
+                    data-translate-id="budget-details-add-people">Add people</button>
             </div>
         </aside>
     </template>
@@ -163,10 +173,11 @@
                 <div class="transactions-list__amount-wrapper">
                     <input type="number" required autocomplete="off" placeholder="100,00" step="0.1" min="0"
                         title="Only numbers and a dot" name="amount" id="amount" class="transactions-list__amount" />
-                    <button type="submit" class="transactions-list__ok-btn" data-translate-id="transactions-list-ok">mkay</button>
+                    <button type="submit" class="transactions-list__ok-btn"
+                        data-translate-id="transactions-list-ok">mkay</button>
                 </div>
-                <input type="text" name="comment" class="transactions-list__comment"
-                    placeholder="Add optional comment" data-translate-id="transactions-list-comment" data-translate-prop="placeholder" />
+                <input type="text" name="comment" class="transactions-list__comment" placeholder="Add optional comment"
+                    data-translate-id="transactions-list-comment" data-translate-prop="placeholder" />
             </form>
             <div class="transactions-list__items"></div>
         </div>
@@ -174,7 +185,7 @@
 
     <template id="transactions-list-item-template">
         <div class="transactions-list-item">
-            <img src="" alt="" class="transactions-list-item__image"/>
+            <img src="" alt="" class="transactions-list-item__image" />
             <div class="transactions-list-item__name-and-comment">
                 <span class="transactions-list-item__name"></span>
                 <span class="transactions-list-item__comment text-muted"></span>
@@ -212,15 +223,17 @@
     </template>
 
     <template id="menu-item-template">
-        
+
     </template>
 
     <template id="layout-login-template">
         <div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">Enter Rosplata</h1>
-            <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">Sign in with your google account to start using shared budgets</h2>
+            <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">Sign in with your
+                google account to start using shared budgets</h2>
             <button id="login__google" data-translate-id="layout-login-enter">Enter</button>
-            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
+            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3"
+                data-width="60%"></script>
             <span class="layout-login__version"></span>
         </div>
     </template>
@@ -229,7 +242,8 @@
         <form id="new-budget__form">
             <div class="new-budget__fields">
                 <input type="text" name="name" autocomplete="off" autofocus required minlength="3" maxlength="20"
-                    title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title" data-translate-prop="placeholder" />
+                    title="Only letters, digits and a space" placeholder="Budget's name"
+                    data-translate-id="new-budget-title" data-translate-prop="placeholder" />
                 <strong data-translate-id="new-budget-currency">Select currency</strong>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">Russian Rouble</option>
@@ -239,6 +253,13 @@
                     <option value="CNY" data-translate-id="currency-cny">Chinese Yuan</option>
                     <option value="JRD" data-translate-id="currency-jrd">Jordanian Dinar</option>
                 </select>
+                <strong data-translate-id="new-budget-suggested-participants">Suggested participants</strong>
+                <div class="new-budget__suggested-participants">
+                    <div class="new-budget__suggested-participants-item">
+                        <label for=""></label>
+                        <input type="checkbox" name="" id="" />
+                    </div>
+                </div>
             </div>
             <div class="new-budget__buttons">
                 <button type="submit" data-translate-id="new-budget-go">Go</button>
@@ -271,17 +292,21 @@
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status1">
                 <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban">Ban</button>
+                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger"
+                    data-translate-id="participants-list-ban">Ban</button>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status2">
                 <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-revert">Revert</button>
+                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success"
+                    data-translate-id="participants-list-revert">Revert</button>
             </div>
             <div class="participants-list-item__actions participants-list-item__actions--status5">
                 <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success" data-translate-id="participants-list-approve">Approve</button>
+                    class="button btn-small participants-list-item__action participants-list-item__action--approve btn-success"
+                    data-translate-id="participants-list-approve">Approve</button>
                 <button
-                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger" data-translate-id="participants-list-ban">Ban</button>
+                    class="button btn-small participants-list-item__action participants-list-item__action--ban btn-danger"
+                    data-translate-id="participants-list-ban">Ban</button>
             </div>
         </div>
     </template>
@@ -292,7 +317,8 @@
             <p data-translate-id="invite-dialog-description">
                 Scan this QR code to open this budget on your device.
             </p>
-            <button id="send-invite-link" class="button btn-secondary" data-translate-id="invite-dialog-share-link">Share link instead</button>
+            <button id="send-invite-link" class="button btn-secondary"
+                data-translate-id="invite-dialog-share-link">Share link instead</button>
         </div>
     </template>
 </head>

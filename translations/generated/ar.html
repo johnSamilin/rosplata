@@ -18,6 +18,7 @@
                 color: beige;
             }
         }
+
         #telegram-post-rosplata-3 {
             position: relative;
             transform: scale(80%);
@@ -122,7 +123,7 @@
                 <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">فقد أهميته</button>
             </div>
             <div class="budget-details__actions budget-details__actions--ask">
-                <span data-translate-id="budget-details-actions-ask">يمكنك طلب دعوة</span>                
+                <span data-translate-id="budget-details-actions-ask">يمكنك طلب دعوة</span>
                 <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">ارسل طلب</button>
             </div>
             <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait">يجب على مالك الميزانية الموافقة على طلبك</div>
@@ -208,6 +209,13 @@
                     <option value="CNY" data-translate-id="currency-cny">اليوان الصيني</option>
                     <option value="JRD" data-translate-id="currency-jrd">دينار أردني</option>
                 </select>
+                <strong data-translate-id="new-budget-suggested-participants">المشاركون المقترحون</strong>
+                <div class="new-budget__suggested-participants">
+                    <div class="new-budget__suggested-participants-item">
+                        <label for=""></label>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                </div>
             </div>
             <div class="new-budget__buttons">
                 <button type="submit" data-translate-id="new-budget-go">يخلق</button>
