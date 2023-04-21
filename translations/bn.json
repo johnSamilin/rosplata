@@ -259,6 +259,11 @@
         "prop": "text",
         "defaultValue": "Jordanian Dinar"
     },
+    "new-budget-suggested-participants": {
+        "value": "প্রস্তাবিত অংশগ্রহণকারীরা",
+        "prop": "text",
+        "defaultValue": "Suggested participants"
+    },
     "new-budget-go": {
         "value": "যাও",
         "prop": "text",

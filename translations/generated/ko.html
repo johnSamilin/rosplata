@@ -18,6 +18,7 @@
                 color: beige;
             }
         }
+
         #telegram-post-rosplata-3 {
             position: relative;
             transform: scale(80%);
@@ -122,7 +123,7 @@
                 <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">감소</button>
             </div>
             <div class="budget-details__actions budget-details__actions--ask">
-                <span data-translate-id="budget-details-actions-ask">초대를 요청할 수 있습니다.</span>                
+                <span data-translate-id="budget-details-actions-ask">초대를 요청할 수 있습니다.</span>
                 <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">요청 보내기</button>
             </div>
             <div class="budget-details__actions budget-details__actions--wait" data-translate-id="budget-details-actions-wait">예산 소유자가 귀하의 요청을 승인해야 합니다.</div>
@@ -208,6 +209,13 @@
                     <option value="CNY" data-translate-id="currency-cny">중국 위안</option>
                     <option value="JRD" data-translate-id="currency-jrd">요르단 디나르</option>
                 </select>
+                <strong data-translate-id="new-budget-suggested-participants">추천 참가자</strong>
+                <div class="new-budget__suggested-participants">
+                    <div class="new-budget__suggested-participants-item">
+                        <label for=""></label>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                </div>
             </div>
             <div class="new-budget__buttons">
                 <button type="submit" data-translate-id="new-budget-go">가다</button>
