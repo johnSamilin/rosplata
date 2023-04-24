@@ -6,7 +6,18 @@
 
 </a>
 
-# rosplata
+# Index
+* [Disclaimer](https://github.com/johnSamilin/rosplata#disclaimer)
+* [Demo](https://github.com/johnSamilin/rosplata#demo)
+* [When do you need it](https://github.com/johnSamilin/rosplata#when-would-you-need-it)
+* [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
+* [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
+* [Currencies](https://github.com/johnSamilin/rosplata#currently-available-currencies)
+* [Usage](https://github.com/johnSamilin/rosplata#how-to-use-it)
+* [Self-host](https://github.com/johnSamilin/rosplata#start)
+* [Publications](https://github.com/johnSamilin/rosplata#look-ma-im-on-tv)
+
+## Disclaimer
 This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, no polyfills)
 
 ## Demo
