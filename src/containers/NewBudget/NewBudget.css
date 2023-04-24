@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    min-width: 300px;
+    max-width: 300px;
 }
 .new-budget__fields {
     display: flex;
@@ -18,14 +18,14 @@
 .new-budget__buttons button {
     width: 45%;
 }
-.new-budget__fields strong {
-    display: inline-block;
-    margin: 1rem 0 0.25rem;
+.new-budget__fields h4 {
+    margin-block-end: 0.5rem;
 }
-.new-budget__suggested-participants-item {
+.new-budget__field--checkbox {
     display: flex;
     justify-content: space-between;
 }
-.new-budget__suggested-participants-item label {
+.new-budget__field--checkbox label {
     flex-grow: 1;
+    margin: 0 1rem;
 }

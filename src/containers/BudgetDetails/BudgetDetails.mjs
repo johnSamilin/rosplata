@@ -50,7 +50,7 @@ export class BudgetDetails extends AnimatedComponent {
         transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
 
-        if (this.data?.participants.length === 1 && Router.queryParams.has('fresh')) { // only the owner
+        if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
             this.showInviteDialog()
         }
     }
@@ -122,7 +122,12 @@ export class BudgetDetails extends AnimatedComponent {
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
-        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance)))
+        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance))) 
+        this.addCssClassConditionally(
+            !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
+            'hidden',
+            container.querySelector(`.${this.getCssClass('counter', 'my')}`).parentElement
+        )
         this.addCssClassConditionally(
             myBalance > 0,
             this.getCssClass('counter', 'positive'),
@@ -134,7 +139,13 @@ export class BudgetDetails extends AnimatedComponent {
             container.querySelector(`.${this.getCssClass('counter', 'my')}`)
         )
         this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(totalBalance))
+        this.setAttr(container, `.${this.getCssClass('title')}`, 'textContent', this.data.name)
 
+        this.addCssClassConditionally(
+            !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'isopen')}`)
+        )
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.INVITED,
             this.getCssClass('actions', 'visible'),

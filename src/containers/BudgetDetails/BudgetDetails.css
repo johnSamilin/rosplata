@@ -30,10 +30,15 @@
     opacity: 0;
 }
 
-.budget-details__counters {
+.budget-details__counters,
+.budget-details__title {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.budget-details__title {
+    margin: 0.25rem;
 }
 
 .budget-details__counter-wrapper {
@@ -92,6 +97,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    display: none;
+}
+
+.budget-details__actions--isopen {
+    justify-content: center;
     display: none;
 }
 
