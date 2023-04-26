@@ -18,12 +18,12 @@
 * [Publications](https://github.com/johnSamilin/rosplata#look-ma-im-on-tv)
 
 ## Disclaimer
-This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, no polyfills, almost no 3rd party libs)
+This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, almost no polyfills, almost no 3rd party libs)
 
 ## Demo
 Currently demo can be found [here](https://ros-plata.ru/budgets/f3af9c65-1c82-452d-8469-619480e78490)
 
-**Supported browsers: Chrome, Edge**
+**Supported browsers: Chrome, Edge, Firefox, Safari**
 
 [Drop me a line](mailto:rosplataapp@mail.ru) if you have anything in mind!
 

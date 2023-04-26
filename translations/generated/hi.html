@@ -323,6 +323,10 @@
             <span class="feature-checkup__name">Inert attribute</span>
             <span class="feature-checkup__value">Not supported</span>
         </div>
+        <div class="feature-checkup feature-checkup--connection">
+            <span class="feature-checkup__name">Connection speed estimation</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
         <strong data-translate-id="feature-checkup-description">असुविधा के लिए क्षमा करें ।  इस ऐप को क्रोम या एज में खोलने का प्रयास करें । </strong>
         <script type="text/javascript">
             const checks = [
@@ -357,6 +361,10 @@
                 {
                     modifier: 'inert',
                     check: () => 'inert' in document.querySelector('div'),
+                },
+                {
+                    modifier: 'connection',
+                    check: () => 'connection' in navigator,
                 }
             ]
             checks.forEach(({ check, modifier }) => {
