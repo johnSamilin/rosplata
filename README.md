@@ -16,6 +16,7 @@
 * [Usage](https://github.com/johnSamilin/rosplata#how-to-use-it)
 * [Self-host](https://github.com/johnSamilin/rosplata#start)
 * [Publications](https://github.com/johnSamilin/rosplata#look-ma-im-on-tv)
+* [Support](https://github.com/johnSamilin/rosplata/wiki/Contributing)
 
 ## Disclaimer
 This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, almost no polyfills, almost no 3rd party libs)
