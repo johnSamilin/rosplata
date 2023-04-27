@@ -46,7 +46,7 @@ export class BudgetDetails extends AnimatedComponent {
         transactionsController.data = mapArrayToObjectId(this.data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
-        this.data = data
+        this.data = data    
         transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
 
@@ -117,7 +117,7 @@ export class BudgetDetails extends AnimatedComponent {
             this.addCssClassConditionally(
                 !allowedUserStatuses.includes(this.data?.currentUserStatus),
                 'hidden',
-                container.querySelector('#participants-list-btn')
+                container.querySelector('#settings-btn')
             )
         }
 
@@ -233,7 +233,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
     }
 
-    onShowParticipants = (e) => {
+    onShowSettings = (e) => {
         e.stopPropagation()
         this.addCssClassConditionally(
             isMobile,
@@ -242,7 +242,7 @@ export class BudgetDetails extends AnimatedComponent {
         )
     }
 
-    onHideParticipants = (e) => {
+    onHideSettings = (e) => {
         e.stopPropagation()
         this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)?.classList.remove(
             this.getCssClass('aside', 'visible')
@@ -271,14 +271,14 @@ export class BudgetDetails extends AnimatedComponent {
             handler: this.showInviteDialog,
         },
         {
-            selector: '#participants-list-btn',
+            selector: '#settings-btn',
             event: 'click',
-            handler: this.onShowParticipants,
+            handler: this.onShowSettings,
         },
         {
-            selector: '#participants-list-close-btn',
+            selector: '#settings-close-btn',
             event: 'click',
-            handler: this.onHideParticipants,
+            handler: this.onHideSettings,
         },
     ])
 }

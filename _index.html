@@ -123,7 +123,7 @@
                     <a href="/" data-translate-id="back">Back</a>
                 </div>
                 <div class="visible-on-mobile">
-                    <a id="participants-list-btn" data-translate-id="participants-list-button">Participants</a>
+                    <a id="settings-btn" data-translate-id="settings-button">Settings</a>
                 </div>
             </div>
             <h4 class="budget-details__title"></h4>
@@ -146,7 +146,8 @@
                 <button class="budget-details__action btn-warning" id="decline-invite"
                     data-translate-id="budget-details-actions-decline">Decline</button>
             </div>
-            <p class="text-muted budget-details__actions--isopen" data-translate-id="budget-details-actions-open-notification">
+            <p class="text-muted budget-details__actions--isopen"
+                data-translate-id="budget-details-actions-open-notification">
                 This budget is public. Your request will be automatically approved.
             </p>
             <div class="budget-details__actions budget-details__actions--ask">
@@ -161,12 +162,25 @@
         </div>
         <aside class="budget-details__aside">
             <div class="visible-on-mobile">
-                <a id="participants-list-close-btn" data-translate-id="close">Close</a>
+                <a id="settings-close-btn" data-translate-id="close">Close</a>
             </div>
-            <div class="budget-details__participants"></div>
-            <div class="budget-details__actions budget-details__actions--send-invite">
-                <button id="send-invite" class="budget-details__action button"
-                    data-translate-id="budget-details-add-people">Add people</button>
+            <div class="row flex-spaces tabs">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" data-translate-id="participants-list-button">Participants</label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2" data-translate-id="settings-btn">Settings</label>
+
+                <div class="content" id="content1">
+                    <div class="budget-details__tab-content-wrapper">
+                        <div class="budget-details__participants"></div>
+                        <div class="budget-details__actions budget-details__actions--send-invite">
+                            <button id="send-invite" class="budget-details__action button"
+                                data-translate-id="budget-details-add-people">Add people</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content" id="content2">Settings</div>
             </div>
         </aside>
     </template>
