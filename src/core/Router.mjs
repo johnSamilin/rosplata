@@ -2,7 +2,12 @@
 
 import { BASE_URL, ROUTES } from "../constants/routes.mjs"
 import { AuthManager } from "./AuthManager.mjs"
+import { FeatureDetector } from "./FeatureDetector.mjs"
 import { Store } from "./Store.mjs"
+
+if (!FeatureDetector.UrlPattern) {
+    await import('../utils/polyfills/URLPattern.mjs')
+}
 
 class CRouter {
     #currentRoute
