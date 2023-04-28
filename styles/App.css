@@ -8,6 +8,10 @@ html {
     margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Patrick Hand SC", Neucha, sans-serif;;
+}
+
 html.dark {
     background-color: #41403e;
     color: beige;

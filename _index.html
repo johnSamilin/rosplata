@@ -148,7 +148,7 @@
             </div>
             <p class="text-muted budget-details__actions--isopen"
                 data-translate-id="budget-details-actions-open-notification">
-                This budget is public. Your request will be automatically approved.
+                This budget is open. Your request will be automatically approved.
             </p>
             <div class="budget-details__actions budget-details__actions--ask">
                 <span data-translate-id="budget-details-actions-ask">You can ask for invite</span>
@@ -180,9 +180,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="content" id="content2">Settings</div>
+                <div class="content budget-details__settings" id="content2">
+                </div>
             </div>
         </aside>
+    </template>
+    
+    <template id="budget-settings-template">
+        <form id="budget-settings" class="budget-settings">
+            <div class="budget-settings__fields">
+                <div class="flex col">
+                    <div class="flex row flex-edges">
+                        <label for="opened" data-translate-id="budget-details-settings-open">Open</label>
+                        <input type="checkbox" name="opened" id="opened" />
+                    </div>
+                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">
+                        In open budgets participation requests are being approved automatically. 
+                    </h6>
+                </div>
+            </div>
+            <button class="budget-settings__save-btn button" disabled data-translate-id="budget-settings-save-btn">Save</button>
+        </form>
     </template>
 
     <template id="transactions-list-template">
@@ -278,13 +296,13 @@
                         <label for=""></label>
                     </div>
                 </div>
-                <h4>Budget type</h4>
-                <p class="text-muted">
+                <h4 data-translate-id="new-budget-type">Budget type</h4>
+                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">
                     If you turn this setting on, any participation requests will be automatically approved.
-                </p>
+                </h6>
                 <div class="new-budget__field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen" />
-                    <label for="isOpen" data-translate-id="new-budget-is-open">Make this budget public</label>
+                    <label for="isOpen" data-translate-id="new-budget-is-open">Make this budget open</label>
                 </div>
             </div>
             <div class="new-budget__buttons">

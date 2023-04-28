@@ -11,6 +11,7 @@ import { Alert } from "../Alert/Alert.mjs";
 import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
 import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Router } from '../../core/Router.mjs'
+import { BudgetSettings } from "./components/Settings/BudgetSettings.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -18,6 +19,7 @@ const template = document.querySelector('template#budget-details-template')
 const Api = new RequestManager('budget')
 const transactionsController = new TransactionsList()
 const participantsController = new ParticipantsList()
+const settingsController = new BudgetSettings()
 
 const isMobile = FeatureDetector.isMobile
 
@@ -96,8 +98,9 @@ export class BudgetDetails extends AnimatedComponent {
         const container = template.content.cloneNode(true)
         this.update(container)
         parent.appendChild(container)
-        transactionsController.renderTo(this.getContainer()?.querySelector('.budget-details__transactions'))
-        participantsController.renderTo(this.getContainer()?.querySelector('.budget-details__participants'))
+        transactionsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('transactions')}`))
+        participantsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('participants')}`))
+        settingsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('settings')}`))
     }
 
     update = (target) => {
