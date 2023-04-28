@@ -1,4 +1,5 @@
 import { BASE_URL } from "../constants/routes.mjs"
+import { FeatureDetector } from "../core/FeatureDetector.mjs"
 
 //@ts-check
 export async function importTemplate(filepath) {
@@ -9,9 +10,15 @@ export async function importTemplate(filepath) {
     return html
 }
 
-export function importStyle(filepath) {
-    //@ts-ignore
-    import(BASE_URL + filepath, { assert: { type: 'css' } }).then(Styles => {
-        document.adoptedStyleSheets.push(Styles.default)
-    })
+const adoptedStyleSheets = new Set()
+export async function importStyle(filepath) {
+    if (adoptedStyleSheets.has(filepath)) {
+        return
+    }
+    const { importStyle: importer } = FeatureDetector.importAssertions
+        ? await import("./polyfills/importAssert.mjs")
+        : await import("./polyfills/importLegacy.mjs")
+
+    adoptedStyleSheets.add(filepath)
+    return importer(BASE_URL + filepath)
 }

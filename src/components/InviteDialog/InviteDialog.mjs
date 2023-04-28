@@ -1,4 +1,5 @@
 import { CDialog, Dialog } from '../../containers/Dialog/Dialog.mjs'
+import { FeatureDetector } from '../../core/FeatureDetector.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { importWasm } from '../../utils/importWasm.mjs'
 
@@ -46,10 +47,10 @@ export class CInviteDialog extends CDialog {
             text: this.data.text,
             title: this.data.title
         }
-        if (navigator.canShare(dataToShare)) {
+        if (FeatureDetector.share && navigator.canShare(dataToShare)) {
             navigator.share(dataToShare)
         } else {
-            const { Alert } = await import('../Alert/Alert.mjs')
+            const { Alert } = await import('../../containers/Alert/Alert.mjs')
             new Alert('danger', 'Hmm, seems like you cannot share')
         }
     }

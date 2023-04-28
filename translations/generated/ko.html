@@ -359,6 +359,10 @@
             <span class="feature-checkup__name">Inert attribute</span>
             <span class="feature-checkup__value">Not supported</span>
         </div>
+        <div class="feature-checkup feature-checkup--connection">
+            <span class="feature-checkup__name">Connection speed estimation</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
         <strong data-translate-id="feature-checkup-description">불편을 드려 죄송합니다. Chrome 또는 Edge에서 이 앱을 열어보세요.</strong>
         <script type="text/javascript">
             const checks = [
@@ -393,6 +397,10 @@
                 {
                     modifier: 'inert',
                     check: () => 'inert' in document.querySelector('div'),
+                },
+                {
+                    modifier: 'connection',
+                    check: () => 'connection' in navigator,
                 }
             ]
             checks.forEach(({ check, modifier }) => {

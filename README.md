@@ -6,13 +6,25 @@
 
 </a>
 
-# rosplata
-This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, no polyfills)
+# Index
+* [Disclaimer](https://github.com/johnSamilin/rosplata#disclaimer)
+* [Demo](https://github.com/johnSamilin/rosplata#demo)
+* [When do you need it](https://github.com/johnSamilin/rosplata#when-would-you-need-it)
+* [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
+* [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
+* [Currencies](https://github.com/johnSamilin/rosplata#currently-available-currencies)
+* [Usage](https://github.com/johnSamilin/rosplata#how-to-use-it)
+* [Self-host](https://github.com/johnSamilin/rosplata#start)
+* [Publications](https://github.com/johnSamilin/rosplata#look-ma-im-on-tv)
+* [Support](https://github.com/johnSamilin/rosplata/wiki/Contributing)
+
+## Disclaimer
+This is an experiment on whether you can create relatively big functional web app using only web platform features and ECMAScript standards (no bundling, no babel, almost no polyfills, almost no 3rd party libs)
 
 ## Demo
 Currently demo can be found [here](https://ros-plata.ru/budgets/f3af9c65-1c82-452d-8469-619480e78490)
 
-**Supported browsers: Chrome, Edge**
+**Supported browsers: Chrome, Edge, Firefox, Safari**
 
 [Drop me a line](mailto:rosplataapp@mail.ru) if you have anything in mind!
 
