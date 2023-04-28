@@ -11,6 +11,7 @@ import { Alert } from "../Alert/Alert.mjs";
 import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
 import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Router } from '../../core/Router.mjs'
+import { BudgetSettings } from "./components/Settings/BudgetSettings.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -18,6 +19,7 @@ const template = document.querySelector('template#budget-details-template')
 const Api = new RequestManager('budget')
 const transactionsController = new TransactionsList()
 const participantsController = new ParticipantsList()
+const settingsController = new BudgetSettings()
 
 const isMobile = FeatureDetector.isMobile
 
@@ -46,11 +48,11 @@ export class BudgetDetails extends AnimatedComponent {
         transactionsController.data = mapArrayToObjectId(this.data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
-        this.data = data
+        this.data = data    
         transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
         participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
 
-        if (this.data?.participants.length === 1 && Router.queryParams.has('fresh')) { // only the owner
+        if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
             this.showInviteDialog()
         }
     }
@@ -96,8 +98,9 @@ export class BudgetDetails extends AnimatedComponent {
         const container = template.content.cloneNode(true)
         this.update(container)
         parent.appendChild(container)
-        transactionsController.renderTo(this.getContainer()?.querySelector('.budget-details__transactions'))
-        participantsController.renderTo(this.getContainer()?.querySelector('.budget-details__participants'))
+        transactionsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('transactions')}`))
+        participantsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('participants')}`))
+        settingsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('settings')}`))
     }
 
     update = (target) => {
@@ -117,12 +120,17 @@ export class BudgetDetails extends AnimatedComponent {
             this.addCssClassConditionally(
                 !allowedUserStatuses.includes(this.data?.currentUserStatus),
                 'hidden',
-                container.querySelector('#participants-list-btn')
+                container.querySelector('#settings-btn')
             )
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
-        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance)))
+        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance))) 
+        this.addCssClassConditionally(
+            !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
+            'hidden',
+            container.querySelector(`.${this.getCssClass('counter', 'my')}`).parentElement
+        )
         this.addCssClassConditionally(
             myBalance > 0,
             this.getCssClass('counter', 'positive'),
@@ -134,7 +142,13 @@ export class BudgetDetails extends AnimatedComponent {
             container.querySelector(`.${this.getCssClass('counter', 'my')}`)
         )
         this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(totalBalance))
+        this.setAttr(container, `.${this.getCssClass('title')}`, 'textContent', this.data.name)
 
+        this.addCssClassConditionally(
+            !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
+            this.getCssClass('actions', 'visible'),
+            container.querySelector(`.${this.getCssClass('actions', 'isopen')}`)
+        )
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.INVITED,
             this.getCssClass('actions', 'visible'),
@@ -222,7 +236,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
     }
 
-    onShowParticipants = (e) => {
+    onShowSettings = (e) => {
         e.stopPropagation()
         this.addCssClassConditionally(
             isMobile,
@@ -231,7 +245,7 @@ export class BudgetDetails extends AnimatedComponent {
         )
     }
 
-    onHideParticipants = (e) => {
+    onHideSettings = (e) => {
         e.stopPropagation()
         this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)?.classList.remove(
             this.getCssClass('aside', 'visible')
@@ -260,14 +274,14 @@ export class BudgetDetails extends AnimatedComponent {
             handler: this.showInviteDialog,
         },
         {
-            selector: '#participants-list-btn',
+            selector: '#settings-btn',
             event: 'click',
-            handler: this.onShowParticipants,
+            handler: this.onShowSettings,
         },
         {
-            selector: '#participants-list-close-btn',
+            selector: '#settings-close-btn',
             event: 'click',
-            handler: this.onHideParticipants,
+            handler: this.onHideSettings,
         },
     ])
 }

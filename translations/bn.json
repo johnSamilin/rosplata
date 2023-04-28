@@ -114,10 +114,10 @@
         "prop": "text",
         "defaultValue": "Back"
     },
-    "participants-list-button": {
-        "value": "অংশগ্রহণকারী",
+    "settings-button": {
+        "value": "সেটিংস",
         "prop": "text",
-        "defaultValue": "Participants"
+        "defaultValue": "Settings"
     },
     "budget-details-my-balance": {
         "value": "আমার ভারসাম্য",
@@ -144,6 +144,11 @@
         "prop": "text",
         "defaultValue": "Decline"
     },
+    "budget-details-actions-open-notification": {
+        "value": "এই বাজেট উন্মুক্ত আপনার অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হবে.",
+        "prop": "text",
+        "defaultValue": "This budget is open. Your request will be automatically approved."
+    },
     "budget-details-actions-ask": {
         "value": "আপনি আমন্ত্রণ জন্য জিজ্ঞাসা করতে পারেন",
         "prop": "text",
@@ -164,10 +169,35 @@
         "prop": "text",
         "defaultValue": "Close"
     },
+    "participants-list-button": {
+        "value": "অংশগ্রহণকারী",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "settings-btn": {
+        "value": "সেটিংস",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
     "budget-details-add-people": {
         "value": "মানুষ যোগ করুন",
         "prop": "text",
         "defaultValue": "Add people"
+    },
+    "budget-details-settings-open": {
+        "value": "উন্মুক্ত বাজেট",
+        "prop": "text",
+        "defaultValue": "Open"
+    },
+    "budget-settings-isOpen": {
+        "value": "খোলা বাজেটে অংশগ্রহণের অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হচ্ছে.",
+        "prop": "text",
+        "defaultValue": "In open budgets participation requests are being approved automatically."
+    },
+    "budget-settings-save-btn": {
+        "value": "সংরক্ষণ",
+        "prop": "text",
+        "defaultValue": "Save"
     },
     "transactions-list-ok": {
         "value": "ঠিক আছে",
@@ -221,8 +251,8 @@
     },
     "new-budget-title": {
         "value": "নতুন বাজেট শিরোনাম",
-        "prop": "text",
-        "defaultValue": ""
+        "prop": "placeholder",
+        "defaultValue": "New budget title"
     },
     "new-budget-currency": {
         "value": "মুদ্রা নির্বাচন করুন",
@@ -263,6 +293,21 @@
         "value": "প্রস্তাবিত অংশগ্রহণকারীরা",
         "prop": "text",
         "defaultValue": "Suggested participants"
+    },
+    "new-budget-type": {
+        "value": "বাজেটের ধরন",
+        "prop": "text",
+        "defaultValue": "Budget type"
+    },
+    "new-budget-is-open-notice": {
+        "value": "আপনি এই সেটিং চালু হলে, কোনো অংশগ্রহণ অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হবে.",
+        "prop": "text",
+        "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
+    },
+    "new-budget-is-open": {
+        "value": "এই বাজেটটি খুলুন",
+        "prop": "text",
+        "defaultValue": "Make this budget open"
     },
     "new-budget-go": {
         "value": "যাও",

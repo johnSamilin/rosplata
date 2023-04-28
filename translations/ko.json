@@ -114,10 +114,10 @@
         "prop": "text",
         "defaultValue": "Back"
     },
-    "participants-list-button": {
-        "value": "참가자들",
+    "settings-button": {
+        "value": "설정",
         "prop": "text",
-        "defaultValue": "Participants"
+        "defaultValue": "Settings"
     },
     "budget-details-my-balance": {
         "value": "내 잔액",
@@ -144,6 +144,11 @@
         "prop": "text",
         "defaultValue": "Decline"
     },
+    "budget-details-actions-open-notification": {
+        "value": "이 예산은 열려 있습니다. 귀하의 요청은 자동으로 승인됩니다.",
+        "prop": "text",
+        "defaultValue": "This budget is open. Your request will be automatically approved."
+    },
     "budget-details-actions-ask": {
         "value": "초대를 요청할 수 있습니다.",
         "prop": "text",
@@ -164,10 +169,35 @@
         "prop": "text",
         "defaultValue": "Close"
     },
+    "participants-list-button": {
+        "value": "참가자들",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "settings-btn": {
+        "value": "설정",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
     "budget-details-add-people": {
         "value": "사람 추가",
         "prop": "text",
         "defaultValue": "Add people"
+    },
+    "budget-details-settings-open": {
+        "value": "오픈 예산",
+        "prop": "text",
+        "defaultValue": "Open"
+    },
+    "budget-settings-isOpen": {
+        "value": "공개 예산에서 참여 요청은 자동으로 승인됩니다.",
+        "prop": "text",
+        "defaultValue": "In open budgets participation requests are being approved automatically."
+    },
+    "budget-settings-save-btn": {
+        "value": "저장",
+        "prop": "text",
+        "defaultValue": "Save"
     },
     "transactions-list-ok": {
         "value": "좋아요",
@@ -221,8 +251,8 @@
     },
     "new-budget-title": {
         "value": "새 예산 제목",
-        "prop": "text",
-        "defaultValue": ""
+        "prop": "placeholder",
+        "defaultValue": "New budget title"
     },
     "new-budget-currency": {
         "value": "통화 선택",
@@ -263,6 +293,21 @@
         "value": "추천 참가자",
         "prop": "text",
         "defaultValue": "Suggested participants"
+    },
+    "new-budget-type": {
+        "value": "예산 유형",
+        "prop": "text",
+        "defaultValue": "Budget type"
+    },
+    "new-budget-is-open-notice": {
+        "value": "이 설정을 켜면 모든 참여 요청이 자동으로 승인됩니다.",
+        "prop": "text",
+        "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
+    },
+    "new-budget-is-open": {
+        "value": "이 예산 열기",
+        "prop": "text",
+        "defaultValue": "Make this budget open"
     },
     "new-budget-go": {
         "value": "가다",

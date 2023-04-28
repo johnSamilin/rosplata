@@ -30,10 +30,15 @@
     opacity: 0;
 }
 
-.budget-details__counters {
+.budget-details__counters,
+.budget-details__title {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.budget-details__title {
+    margin: 0.25rem;
 }
 
 .budget-details__counter-wrapper {
@@ -80,8 +85,24 @@
     margin: 0 auto;
 }
 
-.budget-details__participants {
+.budget-details__aside .tabs {
     flex-grow: 1;
+    margin-bottom: 0;
+    width: 100%;
+}
+.budget-details__aside .tabs label {
+    align-self: baseline;
+}
+.budget-details__aside .content {
+    align-self: flex-start;
+    height: 100%;
+}
+
+.budget-details__tab-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 2.75rem);
 }
 
 #budget-details #send-invite {
@@ -92,6 +113,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    display: none;
+}
+
+.budget-details__actions--isopen {
+    justify-content: center;
     display: none;
 }
 

@@ -80,6 +80,7 @@ export class NewBudget extends Component {
             name,
             userId: AuthManager.data.id,
             transactions: [],
+            type: data.get('isOpen') ? 'open' : 'private',
             participants: [{
                 id: AuthManager.data.id,
                 status: PARTICIPANT_STATUSES.OWNER,

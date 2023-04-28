@@ -123,9 +123,10 @@
                     <a href="/" data-translate-id="back">Back</a>
                 </div>
                 <div class="visible-on-mobile">
-                    <a id="participants-list-btn" data-translate-id="participants-list-button">Participants</a>
+                    <a id="settings-btn" data-translate-id="settings-button">Settings</a>
                 </div>
             </div>
+            <h4 class="budget-details__title"></h4>
             <div class="budget-details__counters">
                 <div class="budget-details__counter-wrapper">
                     <span class="budget-details__counter budget-details__counter--my"></span>
@@ -145,6 +146,10 @@
                 <button class="budget-details__action btn-warning" id="decline-invite"
                     data-translate-id="budget-details-actions-decline">Decline</button>
             </div>
+            <p class="text-muted budget-details__actions--isopen"
+                data-translate-id="budget-details-actions-open-notification">
+                This budget is open. Your request will be automatically approved.
+            </p>
             <div class="budget-details__actions budget-details__actions--ask">
                 <span data-translate-id="budget-details-actions-ask">You can ask for invite</span>
                 <button class="budget-details__action btn-secondary" id="ask-invite"
@@ -157,14 +162,45 @@
         </div>
         <aside class="budget-details__aside">
             <div class="visible-on-mobile">
-                <a id="participants-list-close-btn" data-translate-id="close">Close</a>
+                <a id="settings-close-btn" data-translate-id="close">Close</a>
             </div>
-            <div class="budget-details__participants"></div>
-            <div class="budget-details__actions budget-details__actions--send-invite">
-                <button id="send-invite" class="budget-details__action button"
-                    data-translate-id="budget-details-add-people">Add people</button>
+            <div class="row flex-spaces tabs">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" data-translate-id="participants-list-button">Participants</label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2" data-translate-id="settings-btn">Settings</label>
+
+                <div class="content" id="content1">
+                    <div class="budget-details__tab-content-wrapper">
+                        <div class="budget-details__participants"></div>
+                        <div class="budget-details__actions budget-details__actions--send-invite">
+                            <button id="send-invite" class="budget-details__action button"
+                                data-translate-id="budget-details-add-people">Add people</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content budget-details__settings" id="content2">
+                </div>
             </div>
         </aside>
+    </template>
+    
+    <template id="budget-settings-template">
+        <form id="budget-settings" class="budget-settings">
+            <div class="budget-settings__fields">
+                <div class="flex col">
+                    <div class="flex row flex-edges">
+                        <label for="opened" data-translate-id="budget-details-settings-open">Open</label>
+                        <input type="checkbox" name="opened" id="opened" />
+                    </div>
+                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">
+                        In open budgets participation requests are being approved automatically. 
+                    </h6>
+                </div>
+            </div>
+            <button class="budget-settings__save-btn button" disabled data-translate-id="budget-settings-save-btn">Save</button>
+        </form>
     </template>
 
     <template id="transactions-list-template">
@@ -244,7 +280,7 @@
                 <input type="text" name="name" autocomplete="off" autofocus required minlength="3" maxlength="20"
                     title="Only letters, digits and a space" placeholder="Budget's name"
                     data-translate-id="new-budget-title" data-translate-prop="placeholder" />
-                <strong data-translate-id="new-budget-currency">Select currency</strong>
+                <h4 data-translate-id="new-budget-currency">Select currency</h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">Russian Rouble</option>
                     <option value="INR" data-translate-id="currency-inr">Indian Rupee</option>
@@ -253,12 +289,20 @@
                     <option value="CNY" data-translate-id="currency-cny">Chinese Yuan</option>
                     <option value="JRD" data-translate-id="currency-jrd">Jordanian Dinar</option>
                 </select>
-                <strong data-translate-id="new-budget-suggested-participants">Suggested participants</strong>
+                <h4 data-translate-id="new-budget-suggested-participants">Suggested participants</h4>
                 <div class="new-budget__suggested-participants">
-                    <div class="new-budget__suggested-participants-item">
-                        <label for=""></label>
+                    <div class="new-budget__suggested-participants-item new-budget__field--checkbox">
                         <input type="checkbox" name="" id="" />
+                        <label for=""></label>
                     </div>
+                </div>
+                <h4 data-translate-id="new-budget-type">Budget type</h4>
+                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">
+                    If you turn this setting on, any participation requests will be automatically approved.
+                </h6>
+                <div class="new-budget__field--checkbox">
+                    <input type="checkbox" name="isOpen" id="isOpen" />
+                    <label for="isOpen" data-translate-id="new-budget-is-open">Make this budget open</label>
                 </div>
             </div>
             <div class="new-budget__buttons">

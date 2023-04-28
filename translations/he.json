@@ -114,10 +114,10 @@
         "prop": "text",
         "defaultValue": "Back"
     },
-    "participants-list-button": {
-        "value": "משתתפים",
+    "settings-button": {
+        "value": "הגדרות",
         "prop": "text",
-        "defaultValue": "Participants"
+        "defaultValue": "Settings"
     },
     "budget-details-my-balance": {
         "value": "האיזון שלי",
@@ -144,6 +144,11 @@
         "prop": "text",
         "defaultValue": "Decline"
     },
+    "budget-details-actions-open-notification": {
+        "value": "תקציב זה פתוח. בקשתך תאושר אוטומטית.",
+        "prop": "text",
+        "defaultValue": "This budget is open. Your request will be automatically approved."
+    },
     "budget-details-actions-ask": {
         "value": "אתה יכול לבקש הזמנה",
         "prop": "text",
@@ -164,10 +169,35 @@
         "prop": "text",
         "defaultValue": "Close"
     },
+    "participants-list-button": {
+        "value": "משתתפים",
+        "prop": "text",
+        "defaultValue": "Participants"
+    },
+    "settings-btn": {
+        "value": "הגדרות",
+        "prop": "text",
+        "defaultValue": "Settings"
+    },
     "budget-details-add-people": {
         "value": "הוסף אנשים",
         "prop": "text",
         "defaultValue": "Add people"
+    },
+    "budget-details-settings-open": {
+        "value": "תקציב פתוח",
+        "prop": "text",
+        "defaultValue": "Open"
+    },
+    "budget-settings-isOpen": {
+        "value": "בתקציבים פתוחים בקשות השתתפות מאושרות באופן אוטומטי.",
+        "prop": "text",
+        "defaultValue": "In open budgets participation requests are being approved automatically."
+    },
+    "budget-settings-save-btn": {
+        "value": "שמור",
+        "prop": "text",
+        "defaultValue": "Save"
     },
     "transactions-list-ok": {
         "value": "בסדר",
@@ -221,8 +251,8 @@
     },
     "new-budget-title": {
         "value": "כותרת תקציב חדשה",
-        "prop": "text",
-        "defaultValue": ""
+        "prop": "placeholder",
+        "defaultValue": "New budget title"
     },
     "new-budget-currency": {
         "value": "תבחר מדינה",
@@ -263,6 +293,21 @@
         "value": "משתתפים מוצעים",
         "prop": "text",
         "defaultValue": "Suggested participants"
+    },
+    "new-budget-type": {
+        "value": "סוג התקציב",
+        "prop": "text",
+        "defaultValue": "Budget type"
+    },
+    "new-budget-is-open-notice": {
+        "value": "אם תפעיל הגדרה זו, בקשות ההשתתפות יאושרו באופן אוטומטי.",
+        "prop": "text",
+        "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
+    },
+    "new-budget-is-open": {
+        "value": "הפוך את התקציב הזה פתוח",
+        "prop": "text",
+        "defaultValue": "Make this budget open"
     },
     "new-budget-go": {
         "value": "ללכת",

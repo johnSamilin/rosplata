@@ -103,9 +103,10 @@
                     <a href="/" data-translate-id="back">वापस जाओ</a>
                 </div>
                 <div class="visible-on-mobile">
-                    <a id="participants-list-btn" data-translate-id="participants-list-button">प्रतिभागियों</a>
+                    <a id="settings-btn" data-translate-id="settings-button">सेटिंग्स</a>
                 </div>
             </div>
+            <h4 class="budget-details__title"></h4>
             <div class="budget-details__counters">
                 <div class="budget-details__counter-wrapper">
                     <span class="budget-details__counter budget-details__counter--my"></span>
@@ -122,6 +123,7 @@
                 <button class="budget-details__action btn-success" id="accept-invite" data-translate-id="budget-details-actions-accept">स्वीकार करें</button>
                 <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">गिरावट</button>
             </div>
+            <p class="text-muted budget-details__actions--isopen" data-translate-id="budget-details-actions-open-notification">यह बजट खुला है । आपका अनुरोध स्वचालित रूप से अनुमोदित हो जाएगा ।</p>
             <div class="budget-details__actions budget-details__actions--ask">
                 <span data-translate-id="budget-details-actions-ask">आप आमंत्रण के लिए पूछ सकते हैं</span>
                 <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">अनुरोध भेजें</button>
@@ -130,13 +132,41 @@
         </div>
         <aside class="budget-details__aside">
             <div class="visible-on-mobile">
-                <a id="participants-list-close-btn" data-translate-id="close">बंद करें</a>
+                <a id="settings-close-btn" data-translate-id="close">बंद करें</a>
             </div>
-            <div class="budget-details__participants"></div>
-            <div class="budget-details__actions budget-details__actions--send-invite">
-                <button id="send-invite" class="budget-details__action button" data-translate-id="budget-details-add-people">लोगों को जोड़ें</button>
+            <div class="row flex-spaces tabs">
+                <input id="tab1" type="radio" name="tabs" checked="">
+                <label for="tab1" data-translate-id="participants-list-button">प्रतिभागियों</label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2" data-translate-id="settings-btn">सेटिंग्स</label>
+
+                <div class="content" id="content1">
+                    <div class="budget-details__tab-content-wrapper">
+                        <div class="budget-details__participants"></div>
+                        <div class="budget-details__actions budget-details__actions--send-invite">
+                            <button id="send-invite" class="budget-details__action button" data-translate-id="budget-details-add-people">लोगों को जोड़ें</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content budget-details__settings" id="content2">
+                </div>
             </div>
         </aside>
+    </template>
+    
+    <template id="budget-settings-template"><form id="budget-settings" class="budget-settings">
+            <div class="budget-settings__fields">
+                <div class="flex col">
+                    <div class="flex row flex-edges">
+                        <label for="opened" data-translate-id="budget-details-settings-open">खुला बजट</label>
+                        <input type="checkbox" name="opened" id="opened">
+                    </div>
+                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">खुले बजट में भागीदारी अनुरोधों को स्वचालित रूप से अनुमोदित किया जा रहा है ।</h6>
+                </div>
+            </div>
+            <button class="budget-settings__save-btn button" disabled="" data-translate-id="budget-settings-save-btn">सहेजें</button>
+        </form>
     </template>
 
     <template id="transactions-list-template"><div id="transactions-list">
@@ -199,8 +229,8 @@
 
     <template id="new-budget-template"><form id="new-budget__form">
             <div class="new-budget__fields">
-                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title" data-translate-prop="placeholder">
-                <strong data-translate-id="new-budget-currency">मुद्रा का चयन करें</strong>
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="नया बजट शीर्षक" data-translate-id="new-budget-title" data-translate-prop="placeholder">
+                <h4 data-translate-id="new-budget-currency">मुद्रा का चयन करें</h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">रूसी रूबल</option>
                     <option value="INR" data-translate-id="currency-inr">भारतीय रुपया</option>
@@ -209,12 +239,18 @@
                     <option value="CNY" data-translate-id="currency-cny">चीनी युआन</option>
                     <option value="JRD" data-translate-id="currency-jrd">जॉर्डन दीनार</option>
                 </select>
-                <strong data-translate-id="new-budget-suggested-participants">सुझाए गए प्रतिभागी</strong>
+                <h4 data-translate-id="new-budget-suggested-participants">सुझाए गए प्रतिभागी</h4>
                 <div class="new-budget__suggested-participants">
-                    <div class="new-budget__suggested-participants-item">
-                        <label for=""></label>
+                    <div class="new-budget__suggested-participants-item new-budget__field--checkbox">
                         <input type="checkbox" name="" id="">
+                        <label for=""></label>
                     </div>
+                </div>
+                <h4 data-translate-id="new-budget-type">बजट प्रकार</h4>
+                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">यदि आप इस सेटिंग को चालू करते हैं, तो कोई भी भागीदारी अनुरोध स्वचालित रूप से स्वीकृत हो जाएगा ।</h6>
+                <div class="new-budget__field--checkbox">
+                    <input type="checkbox" name="isOpen" id="isOpen">
+                    <label for="isOpen" data-translate-id="new-budget-is-open">इस बजट को खुला रखें</label>
                 </div>
             </div>
             <div class="new-budget__buttons">

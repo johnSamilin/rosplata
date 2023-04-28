@@ -1,0 +1,28 @@
+.budget-settings {
+    min-height: calc(100% - 2.75rem);
+    display: flex;
+    flex-direction: column;
+}
+.budget-settings input {
+    display: initial;
+}
+.budget-settings input:checked + label {
+    border-bottom: 0;
+}
+.budget-settings label {
+    font-size: inherit;
+    font-weight: initial;
+    color: initial;
+    padding: 0;
+    flex-grow: 1;
+    text-align: left;
+}
+html[dir=rtl] .budget-settings label {
+    text-align: right;
+}
+.budget-settings__fields {
+    flex-grow: 1;
+}
+.budget-settings__save-btn {
+    width: 100%;
+}

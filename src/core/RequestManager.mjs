@@ -47,6 +47,9 @@ export class RequestManager {
                     AuthManager.isLoggedIn = false
                 }
                 if (response.status >= 300) {
+                    if (response.status === 404) {
+                        throw new Error('Can\'t find that request...')
+                    }
                     throw new Error((await response.json()).error)
                 } else {
                     return await response.json()
