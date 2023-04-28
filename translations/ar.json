@@ -251,8 +251,8 @@
     },
     "new-budget-title": {
         "value": "عنوان الميزانية الجديد",
-        "prop": "text",
-        "defaultValue": ""
+        "prop": "placeholder",
+        "defaultValue": "New budget title"
     },
     "new-budget-currency": {
         "value": "اختر العملة",

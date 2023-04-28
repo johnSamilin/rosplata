@@ -103,7 +103,7 @@
                     <a href="/" data-translate-id="back">돌아가기</a>
                 </div>
                 <div class="visible-on-mobile">
-                    <a id="settings-btn" data-translate-id="settings-button"></a>
+                    <a id="settings-btn" data-translate-id="settings-button">설정</a>
                 </div>
             </div>
             <h4 class="budget-details__title"></h4>
@@ -123,7 +123,7 @@
                 <button class="budget-details__action btn-success" id="accept-invite" data-translate-id="budget-details-actions-accept">수용하다</button>
                 <button class="budget-details__action btn-warning" id="decline-invite" data-translate-id="budget-details-actions-decline">감소</button>
             </div>
-            <p class="text-muted budget-details__actions--isopen" data-translate-id="budget-details-actions-open-notification"></p>
+            <p class="text-muted budget-details__actions--isopen" data-translate-id="budget-details-actions-open-notification">이 예산은 열려 있습니다. 귀하의 요청은 자동으로 승인됩니다.</p>
             <div class="budget-details__actions budget-details__actions--ask">
                 <span data-translate-id="budget-details-actions-ask">초대를 요청할 수 있습니다.</span>
                 <button class="budget-details__action btn-secondary" id="ask-invite" data-translate-id="budget-details-actions-send-request">요청 보내기</button>
@@ -139,7 +139,7 @@
                 <label for="tab1" data-translate-id="participants-list-button">참가자들</label>
 
                 <input id="tab2" type="radio" name="tabs">
-                <label for="tab2" data-translate-id="settings-btn"></label>
+                <label for="tab2" data-translate-id="settings-btn">설정</label>
 
                 <div class="content" id="content1">
                     <div class="budget-details__tab-content-wrapper">
@@ -159,13 +159,13 @@
             <div class="budget-settings__fields">
                 <div class="flex col">
                     <div class="flex row flex-edges">
-                        <label for="opened" data-translate-id="budget-details-settings-open"></label>
+                        <label for="opened" data-translate-id="budget-details-settings-open">오픈 예산</label>
                         <input type="checkbox" name="opened" id="opened">
                     </div>
-                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen"></h6>
+                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">공개 예산에서 참여 요청은 자동으로 승인됩니다.</h6>
                 </div>
             </div>
-            <button class="budget-settings__save-btn button" disabled="" data-translate-id="budget-settings-save-btn"></button>
+            <button class="budget-settings__save-btn button" disabled="" data-translate-id="budget-settings-save-btn">저장</button>
         </form>
     </template>
 
@@ -229,7 +229,7 @@
 
     <template id="new-budget-template"><form id="new-budget__form">
             <div class="new-budget__fields">
-                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="new-budget-title" data-translate-prop="placeholder">
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="새 예산 제목" data-translate-id="new-budget-title" data-translate-prop="placeholder">
                 <h4 data-translate-id="new-budget-currency">통화 선택</h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">러시아 루블</option>
@@ -246,11 +246,11 @@
                         <label for=""></label>
                     </div>
                 </div>
-                <h4 data-translate-id="new-budget-type"></h4>
-                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice"></h6>
+                <h4 data-translate-id="new-budget-type">예산 유형</h4>
+                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">이 설정을 켜면 모든 참여 요청이 자동으로 승인됩니다.</h6>
                 <div class="new-budget__field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen">
-                    <label for="isOpen" data-translate-id="new-budget-is-open"></label>
+                    <label for="isOpen" data-translate-id="new-budget-is-open">이 예산 열기</label>
                 </div>
             </div>
             <div class="new-budget__buttons">

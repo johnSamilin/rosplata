@@ -251,8 +251,8 @@
     },
     "new-budget-title": {
         "value": "Название бюджета",
-        "prop": "text",
-        "defaultValue": ""
+        "prop": "placeholder",
+        "defaultValue": "New budget title"
     },
     "new-budget-currency": {
         "value": "Валюта",
