@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "open-stats": {
+        "value": "멋진 통계",
+        "prop": "text",
+        "defaultValue": "Some nice-looking stats"
+    },
     "new-budget-title": {
         "value": "새 예산 제목",
         "prop": "placeholder",

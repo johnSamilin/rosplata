@@ -20,9 +20,7 @@
         }
 
         #telegram-post-rosplata-3 {
-            position: relative;
             transform: scale(80%);
-            top: 25vh;
         }
     </style>
 
@@ -222,8 +220,11 @@
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">היכנס לרוספלטה</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">היכנס עם חשבון Google שלך כדי להתחיל להשתמש בתקציבים משותפים</h2>
             <button id="login__google" data-translate-id="layout-login-enter">להיכנס</button>
-            <script async="" src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
-            <span class="layout-login__version"></span>
+            <div class="layout-login__aside">
+                <script async="" src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
+                <span class="layout-login__version"></span>
+                <a href="/about" target="_blank" rel="noopener" data-translate-id="open-stats"></a>
+            </div>
         </div>
     </template>
 
