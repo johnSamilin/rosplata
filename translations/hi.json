@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "open-stats": {
+        "value": "कुछ अच्छे दिखने वाले आँकड़े",
+        "prop": "text",
+        "defaultValue": "Some nice-looking stats"
+    },
     "new-budget-title": {
         "value": "नया बजट शीर्षक",
         "prop": "placeholder",

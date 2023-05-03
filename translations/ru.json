@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "open-stats": {
+        "value": "Красивая статистика",
+        "prop": "text",
+        "defaultValue": "Some nice-looking stats"
+    },
     "new-budget-title": {
         "value": "Название бюджета",
         "prop": "placeholder",

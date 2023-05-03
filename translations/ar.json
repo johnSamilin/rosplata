@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "open-stats": {
+        "value": "بعض الإحصائيات ذات المظهر الجميل",
+        "prop": "text",
+        "defaultValue": "Some nice-looking stats"
+    },
     "new-budget-title": {
         "value": "عنوان الميزانية الجديد",
         "prop": "placeholder",

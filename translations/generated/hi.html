@@ -20,9 +20,7 @@
         }
 
         #telegram-post-rosplata-3 {
-            position: relative;
             transform: scale(80%);
-            top: 25vh;
         }
     </style>
 
@@ -222,8 +220,11 @@
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">रोजप्लाटा दर्ज करें</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">साझा बजट का उपयोग शुरू करने के लिए अपने गूगल खाते से साइन इन करें</h2>
             <button id="login__google" data-translate-id="layout-login-enter">दर्ज करें</button>
-            <script async="" src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
-            <span class="layout-login__version"></span>
+            <div class="layout-login__aside">
+                <script async="" src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="rosplata/3" data-width="60%"></script>
+                <span class="layout-login__version"></span>
+                <a href="/about" target="_blank" rel="noopener" data-translate-id="open-stats">कुछ अच्छे दिखने वाले आँकड़े</a>
+            </div>
         </div>
     </template>
 

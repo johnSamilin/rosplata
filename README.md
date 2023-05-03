@@ -2,7 +2,14 @@
 
 <a href="https://t.me/rosplata/3" target="_blank">
 
-<img src="https://user-images.githubusercontent.com/5821894/228524760-be244e39-aabe-4b0a-ad17-5b8a9abe9d03.PNG" width="500" />
+Telegram channel
+
+</a>
+
+
+<a href="https://ros-plata.ru/about" target="_blank">
+
+Publicly available statistics
 
 </a>
 

@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "open-stats": {
+        "value": "一些漂亮的统计数据",
+        "prop": "text",
+        "defaultValue": "Some nice-looking stats"
+    },
     "new-budget-title": {
         "value": "新预算标题",
         "prop": "placeholder",

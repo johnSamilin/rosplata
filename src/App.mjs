@@ -9,7 +9,7 @@ importStyle('/styles/App.css')
 document.querySelector('#features-support-checkup')?.remove()
 
 document.body.addEventListener('click', (event) => {
-    if (event.target.tagName === 'A') {
+    if (event.target.tagName === 'A' && !event.target.hasAttribute('target')) {
         event.preventDefault()
         event.stopImmediatePropagation()
         let didgoback = true
