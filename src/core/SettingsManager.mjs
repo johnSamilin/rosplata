@@ -1,11 +1,11 @@
 //@ts-check
 
-import { getFromLs, updateCurrencyFormatters } from "../utils/utils.mjs"
+import { getFromLs, updateFormatters } from "../utils/utils.mjs"
 
 const darkThemeMedia = matchMedia('(prefers-color-scheme: dark)')
 
 class CSettingsManager {
-    #appVersion = '0.2.3'
+    #appVersion = '0.2.4'
     #animationsEnabled = true
     #autoLoginEnabled = getFromLs('autoLoginEnabled', 'true') === 'true'
     #theme = getFromLs('theme', 'system')
@@ -33,7 +33,7 @@ class CSettingsManager {
 
     set language(val) {
         this.#language = val
-        updateCurrencyFormatters(Intl.getCanonicalLocales(val))   
+        updateFormatters(Intl.getCanonicalLocales(val))   
     }
 
     async override(name, value) {
@@ -68,7 +68,7 @@ class CSettingsManager {
         } else {
             this.#changeTheme(this.#theme)
         }
-        updateCurrencyFormatters(Intl.getCanonicalLocales(this.#language))  
+        updateFormatters(Intl.getCanonicalLocales(this.#language))  
     }
 
     onSystemThemeChange = () => {

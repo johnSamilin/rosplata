@@ -90,7 +90,10 @@
     </template>
 
     <template id="budgets-list-item-template"><li class="budgets-list-item">
-            <span class="budgets-list-item__title"></span>
+            <div class="budgets-list-item__info">
+                <span class="budgets-list-item__title"></span>
+                <span class="budgets-list-item__participants text-muted"></span>
+            </div>
             <span class="budgets-list-item__my-balance budgets-list-item__counter"></span>
         </li>
     </template>
@@ -364,6 +367,10 @@
             <span class="feature-checkup__name">Connection speed estimation</span>
             <span class="feature-checkup__value">Not supported</span>
         </div>
+        <div class="feature-checkup feature-checkup--intl">
+            <span class="feature-checkup__name">Built-in internationalization</span>
+            <span class="feature-checkup__value">Not supported</span>
+        </div>
         <strong data-translate-id="feature-checkup-description">מצטער על אי הנוחות. נסה לפתוח את האפליקציה הזו בכרום או ב-Edge.</strong>
         <script type="text/javascript">
             const checks = [
@@ -402,6 +409,10 @@
                 {
                     modifier: 'connection',
                     check: () => 'connection' in navigator,
+                },
+                {
+                    modifier: 'intl',
+                    check: () => 'ListFormat' in Intl && 'NumberFormat' in Intl,
                 }
             ]
             checks.forEach(({ check, modifier }) => {

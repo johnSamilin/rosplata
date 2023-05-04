@@ -2,7 +2,7 @@
 import { AnimatedComponent } from '../../core/Component.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
-import { currencyFormatters, getBudgetBalanceFromTransactions } from '../../utils/utils.mjs'
+import { currencyFormatters, getBudgetBalanceFromTransactions, getShortListOfParticipants } from '../../utils/utils.mjs'
 
 importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
@@ -52,6 +52,7 @@ export class BudgetListItem extends AnimatedComponent {
         container?.setAttribute('data-id', this.id)
         this.setAttr(container, null, 'data-status', this.data.currentUserStatus.toString())
         container.style.order = this.data.currentUserStatus
+        this.setAttr(container, `.${this.getCssClass('participants')}`, 'textContent', getShortListOfParticipants(this.data.participants))
     }
 
     #onTransactionsChanged = (transactions) => {

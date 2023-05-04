@@ -162,8 +162,12 @@ export function getBudgetBalanceFromTransactions(transactions = [], participants
  * @type Map<string, Intl.NumberFormat>
  */
 export let currencyFormatters
+/**
+ * @type Intl.ListFormat
+ */
+export let listFormatter
 
-export function updateCurrencyFormatters(locale) {
+export function updateFormatters(locale) {
     currencyFormatters = new Map(CURRENCIES.map(code => (
         [
             code,
@@ -179,4 +183,20 @@ export function updateCurrencyFormatters(locale) {
             )
         ]
     )))
+    listFormatter = new Intl.ListFormat(
+        locale === 'system' ? undefined : locale,
+        { style: 'long', type: 'conjunction' }
+    )
+}
+
+export function getShortListOfParticipants(participants) {
+    const activeParticipants = participants?.filter(({ status }) => allowedUserStatuses.includes(status)).map(({ user }) => user.name)
+    const count = activeParticipants?.length
+    const restCount = count - Math.min(3, count)
+    const list = restCount > 0
+        ? activeParticipants.slice(0, 3).concat(`${restCount} more`)
+        : activeParticipants.slice(0, 3)
+    return count > 1
+        ? listFormatter.format(list)
+        : ''
 }
