@@ -56,7 +56,7 @@ Imagine a situation: you and your friends go to a bar (possibly abroad with no i
 ![msg71066564-89263](https://user-images.githubusercontent.com/5821894/236180875-4fbc4c7c-58d7-4a41-84f5-7c9fd752d11d.jpg)
 
 #### Create a budget
-![msg71066564-89262](https://user-images.githubusercontent.com/5821894/236180938-a500fab5-1ca1-4d07-b6c1-bdb8c3591852.jpg)
+![msg71066564-89261](https://user-images.githubusercontent.com/5821894/236192520-e9bc290d-4e55-47c1-97cb-8d5594ed722e.jpg)
 
 #### Invite people
 Let them scan QR code of just send them the link
