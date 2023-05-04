@@ -18,7 +18,6 @@ Publicly available statistics
 * [Demo](https://github.com/johnSamilin/rosplata#demo)
 * [When do you need it](https://github.com/johnSamilin/rosplata#when-would-you-need-it)
 * [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
-* [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
 * [Currencies](https://github.com/johnSamilin/rosplata#currently-available-currencies)
 * [Usage](https://github.com/johnSamilin/rosplata#how-to-use-it)
 * [Self-host](https://github.com/johnSamilin/rosplata#start)
@@ -54,10 +53,10 @@ Imagine a situation: you and your friends go to a bar (possibly abroad with no i
 
 ## How to use it?
 #### Login
-![msg71066564-85607](https://user-images.githubusercontent.com/5821894/222373663-2d3e7708-c233-4f01-b43e-764f698cbe8f.jpg)
+![msg71066564-89263](https://user-images.githubusercontent.com/5821894/236180875-4fbc4c7c-58d7-4a41-84f5-7c9fd752d11d.jpg)
 
 #### Create a budget
-![msg71066564-85606](https://user-images.githubusercontent.com/5821894/222373689-80378ee3-d180-4256-8858-8b92ccee0d60.jpg)
+![msg71066564-89262](https://user-images.githubusercontent.com/5821894/236180938-a500fab5-1ca1-4d07-b6c1-bdb8c3591852.jpg)
 
 #### Invite people
 Let them scan QR code of just send them the link
@@ -67,8 +66,11 @@ Let them scan QR code of just send them the link
 #### Approve or reject their participation request
 ![msg71066564-85604](https://user-images.githubusercontent.com/5821894/222373740-c72b385a-38e7-4ab2-b8cf-3a3ecb1d38f4.jpg)
 
+#### Manage budget settings
+![msg71066564-89259](https://user-images.githubusercontent.com/5821894/236180999-e215f9d1-d4b7-424b-8009-2864820dd9be.jpg)
+
 #### Add transactions
-![msg71066564-85603](https://user-images.githubusercontent.com/5821894/222373749-17509375-4fc2-49b3-b840-b87e3146b5b5.jpg)
+![msg71066564-89260](https://user-images.githubusercontent.com/5821894/236181039-3f5f7594-53d3-43d5-b52d-9db59c3031ab.jpg)
 
 #### That's all!
 Pay the bill, and no one will have questions how much do they owe you
