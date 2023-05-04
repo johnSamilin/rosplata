@@ -10,6 +10,7 @@
     border-bottom-color: black;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .budgets-list-item.exit {
