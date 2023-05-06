@@ -103,3 +103,5 @@ https://github.com/johnSamilin/rosplata/wiki
 [How do I work on opensource project Rosplata](https://www.linkedin.com/posts/asaltykov_github-johnsamilinrosplata-opensource-activity-7046472455246225408-LZ9H)
 
 [Philosophic questions of webapps internationalization](https://medium.com/p/7738a964152e)
+
+[AlternativeTo](https://alternativeto.net/software/rosplata/)
