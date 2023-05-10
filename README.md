@@ -18,7 +18,6 @@ Publicly available statistics
 * [Demo](https://github.com/johnSamilin/rosplata#demo)
 * [When do you need it](https://github.com/johnSamilin/rosplata#when-would-you-need-it)
 * [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
-* [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
 * [Currencies](https://github.com/johnSamilin/rosplata#currently-available-currencies)
 * [Usage](https://express.adobe.com/page/XiWR4wcPLBYfH/)
 * [Self-host](https://github.com/johnSamilin/rosplata#start)
@@ -80,3 +79,5 @@ https://github.com/johnSamilin/rosplata/wiki
 [How do I work on opensource project Rosplata](https://www.linkedin.com/posts/asaltykov_github-johnsamilinrosplata-opensource-activity-7046472455246225408-LZ9H)
 
 [Philosophic questions of webapps internationalization](https://medium.com/p/7738a964152e)
+
+[AlternativeTo](https://alternativeto.net/software/rosplata/)
