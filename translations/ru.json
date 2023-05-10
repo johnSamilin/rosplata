@@ -249,10 +249,10 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
-    "open-stats": {
-        "value": "Красивая статистика",
+    "landing-page": {
+        "value": "Что такое Росплата?",
         "prop": "text",
-        "defaultValue": "Some nice-looking stats"
+        "defaultValue": "What is Rosplata?"
     },
     "new-budget-title": {
         "value": "Название бюджета",

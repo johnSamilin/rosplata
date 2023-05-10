@@ -249,10 +249,10 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
-    "open-stats": {
-        "value": "कुछ अच्छे दिखने वाले आँकड़े",
+    "landing-page": {
+        "value": "रोजप्लाटा क्या है?",
         "prop": "text",
-        "defaultValue": "Some nice-looking stats"
+        "defaultValue": "What is Rosplata?"
     },
     "new-budget-title": {
         "value": "नया बजट शीर्षक",

@@ -249,10 +249,10 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
-    "open-stats": {
-        "value": "بعض الإحصائيات ذات المظهر الجميل",
+    "landing-page": {
+        "value": "ما هو روزبلاتا?",
         "prop": "text",
-        "defaultValue": "Some nice-looking stats"
+        "defaultValue": "What is Rosplata?"
     },
     "new-budget-title": {
         "value": "عنوان الميزانية الجديد",

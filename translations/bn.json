@@ -249,10 +249,10 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
-    "open-stats": {
-        "value": "কিছু সুন্দর চেহারার পরিসংখ্যান",
+    "landing-page": {
+        "value": "রোসপ্লাটা কী?",
         "prop": "text",
-        "defaultValue": "Some nice-looking stats"
+        "defaultValue": "What is Rosplata?"
     },
     "new-budget-title": {
         "value": "নতুন বাজেট শিরোনাম",

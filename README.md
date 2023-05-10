@@ -20,7 +20,7 @@ Publicly available statistics
 * [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
 * [Alternatives](https://github.com/johnSamilin/rosplata#alternatives)
 * [Currencies](https://github.com/johnSamilin/rosplata#currently-available-currencies)
-* [Usage](https://github.com/johnSamilin/rosplata#how-to-use-it)
+* [Usage](https://express.adobe.com/page/XiWR4wcPLBYfH/)
 * [Self-host](https://github.com/johnSamilin/rosplata#start)
 * [Publications](https://github.com/johnSamilin/rosplata#look-ma-im-on-tv)
 * [Support](https://github.com/johnSamilin/rosplata/wiki/Contributing)
@@ -51,27 +51,6 @@ Imagine a situation: you and your friends go to a bar (possibly abroad with no i
 *  Euro
 *  Chinese Yuan
 *  Jordanian Dinar
-
-## How to use it?
-#### Login
-![msg71066564-85607](https://user-images.githubusercontent.com/5821894/222373663-2d3e7708-c233-4f01-b43e-764f698cbe8f.jpg)
-
-#### Create a budget
-![msg71066564-85606](https://user-images.githubusercontent.com/5821894/222373689-80378ee3-d180-4256-8858-8b92ccee0d60.jpg)
-
-#### Invite people
-Let them scan QR code of just send them the link
-
-![msg71066564-85605](https://user-images.githubusercontent.com/5821894/222373714-27a832d7-eb9c-4ba6-8786-59cdc5c7a9a2.jpg)
-
-#### Approve or reject their participation request
-![msg71066564-85604](https://user-images.githubusercontent.com/5821894/222373740-c72b385a-38e7-4ab2-b8cf-3a3ecb1d38f4.jpg)
-
-#### Add transactions
-![msg71066564-85603](https://user-images.githubusercontent.com/5821894/222373749-17509375-4fc2-49b3-b840-b87e3146b5b5.jpg)
-
-#### That's all!
-Pay the bill, and no one will have questions how much do they owe you
 
 ## Dependencies
 There are several features that your browser must support to run the demo:
