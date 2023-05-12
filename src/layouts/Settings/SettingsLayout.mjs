@@ -58,7 +58,9 @@ export class SettingsLayout extends AnimatedComponent {
                 menuController.exterminate(),
             ])
         } catch (er) {
-            console.error(er);
+            import('/src/core/CrisisManager.mjs').then(({ CrisisManager }) => {
+                CrisisManager.logError(er)
+            })
         } finally {
             super.exterminate()
         }
