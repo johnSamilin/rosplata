@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "demo-login": {
+        "value": "डेमो लॉगिन",
+        "prop": "text",
+        "defaultValue": "Demo login"
+    },
     "landing-page": {
         "value": "रोजप्लाटा क्या है?",
         "prop": "text",

@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "demo-login": {
+        "value": "데모 로그인",
+        "prop": "text",
+        "defaultValue": "Demo login"
+    },
     "landing-page": {
         "value": "로스플라타 란?",
         "prop": "text",

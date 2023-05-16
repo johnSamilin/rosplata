@@ -222,7 +222,10 @@
     <template id="layout-login-template"><div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">היכנס לרוספלטה</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">היכנס עם חשבון Google שלך כדי להתחיל להשתמש בתקציבים משותפים</h2>
-            <button id="login__google" data-translate-id="layout-login-enter">להיכנס</button>
+                <div class="layout-login__variants">
+                    <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">להיכנס</button>
+                    <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login"></a>
+                </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
                 <a href="https://express.adobe.com/page/XiWR4wcPLBYfH/" target="_blank" rel="noopener" data-translate-id="landing-page"></a>

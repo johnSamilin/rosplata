@@ -222,7 +222,10 @@
     <template id="layout-login-template"><div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">أدخل Rosplata</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">قم بتسجيل الدخول باستخدام حساب جوجل الخاص بك لبدء استخدام الميزانيات المشتركة</h2>
-            <button id="login__google" data-translate-id="layout-login-enter">يدخل</button>
+                <div class="layout-login__variants">
+                    <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">يدخل</button>
+                    <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">تسجيل الدخول التجريبي</a>
+                </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
                 <a href="https://express.adobe.com/page/XiWR4wcPLBYfH/" target="_blank" rel="noopener" data-translate-id="landing-page">ما هو روزبلاتا?</a>

@@ -8,6 +8,7 @@ import { Router } from '../../core/Router.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { FeatureDetector } from '../../core/FeatureDetector.mjs'
 import { NewBudget } from '../../containers/NewBudget/NewBudget.mjs'
+import { AuthManager } from '../../core/AuthManager.mjs'
 
 importStyle('/src/layouts/Main/MainLayout.css')
 
@@ -19,6 +20,14 @@ const template = document.querySelector('template#layout-main-template')
 
 export class MainLayout extends AnimatedComponent {
     containerId = 'layout-main'
+
+    constructor() {
+        const params = Router.routeParams
+        if (params[0] === 'demo') {
+            AuthManager.requestDemoAccess()
+        }
+        super()
+    }
 
     renderTo(parent) {
         budgetListController = new BudgetList()
