@@ -155,7 +155,7 @@
             </div>
         </aside>
     </template>
-    
+
     <template id="budget-settings-template"><form id="budget-settings" class="budget-settings">
             <div class="budget-settings__fields">
                 <div class="flex col">
@@ -417,13 +417,19 @@
                     check: () => 'ListFormat' in Intl && 'NumberFormat' in Intl,
                 }
             ]
+            const clientId = crypto.randomUUID()
             checks.forEach(({ check, modifier }) => {
-                try {
-                    if (check()) {
-                        document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
-                    }
-                } catch (er) {
-                    console.error(modifier, er)
+                if (check()) {
+                    document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
+                } else {
+                    fetch('/api/stats/error', {
+                        headers: { 'Content-Type': 'application/json' },
+                        method: 'post',
+                        body: JSON.stringify({
+                            error: `Initial check: ${modifier} failed`,
+                            clientId,
+                        })
+                    })
                 }
             })
         </script>
