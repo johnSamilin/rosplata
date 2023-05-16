@@ -56,7 +56,9 @@ export class RequestManager {
                 }
             } catch (er) {
                 if (er.name !== 'AbortError') {
-                    console.error('Request failed', er);
+                    import('/src/core/CrisisManager.mjs').then(({ CrisisManager }) => {
+                        CrisisManager.logError(er)
+                    })
                     throw er.message;
                 }
             }

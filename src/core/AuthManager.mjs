@@ -23,7 +23,7 @@ class CAuthManager {
             picture: string;
         }}
      */
-    #data
+    #data = {}
 
     #gApp
     #gAuth

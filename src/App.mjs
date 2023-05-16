@@ -29,3 +29,14 @@ window.addEventListener('load', async () => {
         Router.start()
     }
 })
+
+const errorHandler = (error) => {
+    import('./src/core/CrisisManager.mjs').then(({ CrisisManager }) => {
+        CrisisManager.logError(error)
+    })
+}
+
+window.onerror = (event, source, line, col, error) => errorHandler(error)
+window.addEventListener('error', (event) => {
+    errorHandler(event.error)
+})

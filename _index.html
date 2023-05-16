@@ -186,7 +186,7 @@
             </div>
         </aside>
     </template>
-    
+
     <template id="budget-settings-template">
         <form id="budget-settings" class="budget-settings">
             <div class="budget-settings__fields">
@@ -196,11 +196,12 @@
                         <input type="checkbox" name="opened" id="opened" />
                     </div>
                     <h6 class="text-muted" data-translate-id="budget-settings-isOpen">
-                        In open budgets participation requests are being approved automatically. 
+                        In open budgets participation requests are being approved automatically.
                     </h6>
                 </div>
             </div>
-            <button class="budget-settings__save-btn button" disabled data-translate-id="budget-settings-save-btn">Save</button>
+            <button class="budget-settings__save-btn button" disabled
+                data-translate-id="budget-settings-save-btn">Save</button>
         </form>
     </template>
 
@@ -271,7 +272,8 @@
             <button id="login__google" data-translate-id="layout-login-enter">Enter</button>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
-                <a href="https://express.adobe.com/page/XiWR4wcPLBYfH/" target="_blank" rel="noopener" data-translate-id="landing-page">What is Rosplata?</a>
+                <a href="https://express.adobe.com/page/XiWR4wcPLBYfH/" target="_blank" rel="noopener"
+                    data-translate-id="landing-page">What is Rosplata?</a>
             </div>
         </div>
     </template>
@@ -482,13 +484,19 @@
                     check: () => 'ListFormat' in Intl && 'NumberFormat' in Intl,
                 }
             ]
+            const clientId = crypto.randomUUID()
             checks.forEach(({ check, modifier }) => {
-                try {
-                    if (check()) {
-                        document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
-                    }
-                } catch (er) {
-                    console.error(modifier, er)
+                if (check()) {
+                    document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
+                } else {
+                    fetch('/api/stats/error', {
+                        headers: { 'Content-Type': 'application/json' },
+                        method: 'post',
+                        body: JSON.stringify({
+                            error: `Initial check: ${modifier} failed`,
+                            clientId,
+                        })
+                    })
                 }
             })
         </script>
