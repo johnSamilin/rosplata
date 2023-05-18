@@ -29,8 +29,6 @@ window.URLPattern = function (options) {
         }
     })
 
-    console.log(urlParts, pathname)
-
     function test(url) {
         const relativePath = url.split(baseUrl)[1].split('/')
         let isMatching = false
