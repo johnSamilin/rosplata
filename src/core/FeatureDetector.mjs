@@ -1,7 +1,5 @@
 //@ts-check
 
-import { Store } from "./Store.mjs"
-
 let instance
 
 const mobileMediaQuery = window.matchMedia('(max-width: 425px)')
@@ -50,7 +48,8 @@ class CFeatureDetector {
         mobileMediaQuery.addEventListener('change', this.#updateIsMobile)
     }
 
-    #updateIsMobile = (evt) => {
+    #updateIsMobile = async (evt) => {
+        const { Store } = await import('./Store.mjs')
         this.#isMobile = evt.matches
         Store.set('isMobile', this.#isMobile)
     }
