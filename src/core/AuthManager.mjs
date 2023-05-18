@@ -79,6 +79,15 @@ class CAuthManager {
         })
     }
 
+    requestDemoAccess() {
+        this.isLoggedIn = true
+        this.#data = {
+            id: 'rosplataapp',
+            name: 'Demo Account',
+            token: 'demoaccount',
+        }
+    }
+
     login = async () => {
         try {
             this.#gProvider = new GoogleAuthProvider()

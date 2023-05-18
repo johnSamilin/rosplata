@@ -8,7 +8,7 @@
     <link rel="canonical" href="https://ros-plata.ru">
     <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" async="" href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css">
+    <link rel="stylesheet" async="" href="/styles/paper.min.css">
     <script src="/src/App.mjs" type="module"></script>
 
     <style type="text/css">
@@ -222,7 +222,10 @@
     <template id="layout-login-template"><div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">로스플라타에 들어가다</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">공유 예산을 사용하려면 Google 계정으로 로그인하세요.</h2>
-            <button id="login__google" data-translate-id="layout-login-enter">입력하다</button>
+                <div class="layout-login__variants">
+                    <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">입력하다</button>
+                    <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">데모 로그인</a>
+                </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
                 <a href="https://express.adobe.com/page/XiWR4wcPLBYfH/" target="_blank" rel="noopener" data-translate-id="landing-page">로스플라타 란?</a>

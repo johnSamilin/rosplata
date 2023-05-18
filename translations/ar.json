@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "demo-login": {
+        "value": "تسجيل الدخول التجريبي",
+        "prop": "text",
+        "defaultValue": "Demo login"
+    },
     "landing-page": {
         "value": "ما هو روزبلاتا?",
         "prop": "text",

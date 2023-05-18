@@ -1,12 +1,23 @@
 window.URLPattern = function (options) {
     const { pathname, baseUrl } = options
 
+    let enumsCount = 0
+
     const urlParts = pathname.split('/').map(part => {
-        let type = 'part', mandatory = false, name
-        if (part.startsWith(':')) {
-            type = 'variable'
-            mandatory = part.endsWith('?')
-            name = part.substring(1, mandatory ? part.length - 1 : part.length)
+        let type = 'part', mandatory = false, name, values
+        const isVariable = part.startsWith(':')
+        const isEnum = part.startsWith('(')
+        if (isVariable || isEnum) {
+            mandatory = !part.endsWith('?')
+            if (isVariable) {
+                type = 'variable'
+                name = part.substring(1, mandatory ? part.length : part.length - 1)
+            } else {
+                type = 'enum'
+                name = enumsCount
+                enumsCount++
+                values = part.replace(/[\(\)?]*/g, '').split('|')
+            }
         } else {
             name = part.substring(0, part.length)
         }
@@ -14,6 +25,7 @@ window.URLPattern = function (options) {
             type,
             mandatory,
             name,
+            values,
         }
     })
 
@@ -36,6 +48,15 @@ window.URLPattern = function (options) {
                 isMatching = true
                 continue
             }
+            if (uPart.type === 'enum') {
+                if (uPart.mandatory) {
+                    isMatching = uPart.values.includes(part)
+                    continue
+                }
+                
+                isMatching = part.length > 0
+                continue
+            }
 
             isMatching = relativePath[index] === uPart.name
         }
@@ -47,7 +68,7 @@ window.URLPattern = function (options) {
         const groups = {}
         const relativePath = url.split(baseUrl)[1].split('/')
         relativePath.forEach((part, index) => {
-            if (urlParts[index]?.type === 'variable') {
+            if (urlParts[index]?.type === 'variable' || urlParts[index]?.type === 'enum') {
                 groups[urlParts[index].name] = part
             }
         })

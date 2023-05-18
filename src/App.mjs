@@ -25,6 +25,9 @@ document.body.addEventListener('click', (event) => {
 
 window.addEventListener('load', async () => {
     await AuthManager.start()
+    if (location.pathname === '/demo') {
+        AuthManager.requestDemoAccess()
+    }
     if (await AuthManager.validate()) {
         Router.start()
     }

@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "demo-login": {
+        "value": "התחברות הדגמה",
+        "prop": "text",
+        "defaultValue": "Demo login"
+    },
     "landing-page": {
         "value": "מה זה רוספלטה?",
         "prop": "text",

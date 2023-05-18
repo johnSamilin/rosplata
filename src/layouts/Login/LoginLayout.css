@@ -26,6 +26,13 @@
     color: darkslategray;
     font-size: 1.75vh;
 }
+.layout-login__variants {
+    display: flex;
+    flex-direction: column;
+}
+.layout-login__variant--demo {
+    margin: 1rem;
+}
 
 @media screen and (max-width: 425px) {
     #layout-login {

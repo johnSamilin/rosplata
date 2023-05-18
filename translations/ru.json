@@ -249,6 +249,11 @@
         "prop": "text",
         "defaultValue": "Enter"
     },
+    "demo-login": {
+        "value": "Демонстрационный вход в систему",
+        "prop": "text",
+        "defaultValue": "Demo login"
+    },
     "landing-page": {
         "value": "Что такое Росплата?",
         "prop": "text",
