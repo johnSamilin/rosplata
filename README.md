@@ -6,12 +6,10 @@ Telegram channel
 
 </a>
 
+DomDig XSS scan result:
 
-<a href="https://ros-plata.ru/about" target="_blank">
+![image](https://github.com/johnSamilin/rosplata/assets/5821894/a2fed969-7493-4a01-b174-4117c8cf6c58)
 
-Publicly available statistics
-
-</a>
 
 # Index
 * [Disclaimer](https://github.com/johnSamilin/rosplata#disclaimer)
