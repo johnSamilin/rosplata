@@ -8,6 +8,7 @@ import { Router } from "../../core/Router.mjs"
 import DOMPurify from 'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js'
 import { AuthManager } from "../../core/AuthManager.mjs"
 import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs"
+import { BudgetForm } from "../../components/BudgetForm/BudgetForm.mjs"
 
 importStyle('/src/containers/NewBudget/NewBudget.css')
 
@@ -17,15 +18,23 @@ const Api = new RequestManager('new-budget')
 
 export class NewBudget extends Component {
     containerId = 'create-form'
+    form
+
+    constructor() {
+        super()
+        this.form = new BudgetForm(this.handleSubmit, this.handleReset)
+    }
 
     renderTo(parent) {
         //@ts-ignore
-        const container = template.content.cloneNode(true)
+        const container = template.content.firstElementChild.cloneNode(true)
         parent.appendChild(container)
+        this.form.renderTo(container)
     }
     
     async show() {
         await super.show()
+        this.form.show()
         this.attachListeners()
         Store.subscribe('budgets', this.updateParticipantsList)
         this.updateParticipantsList()
@@ -34,41 +43,30 @@ export class NewBudget extends Component {
 
     async hide() {
         Store.subscribe('budgets', this.updateParticipantsList)
+        this.form.hide()
         await super.hide()
         this.stopListeners()
     }
 
     updateParticipantsList = () => {
-        const tpl = template.content.querySelector('.new-budget__suggested-participants')
         this.suggestedParticipants = new Map(
             Object.values(Store.get('budgets'))
-                .map(budget => budget.participants)
-                .flat()
-                .map(participant => [participant.userId, participant.user])
-            )
-        const parentContainer = this.getContainer()?.querySelector('.new-budget__suggested-participants')
-        parentContainer?.querySelector('.new-budget__suggested-participants-item')?.remove()
-        for (const participant of this.suggestedParticipants) {
-            if (participant[0] === AuthManager.data.id || !participant[0]) {
-                continue
-            }
-            const container = tpl.cloneNode(true)
-            this.setAttr(container, 'label', 'for', `participant-${participant[0]}`)
-            this.setAttr(container, 'label', 'textContent', participant[1].name)
-            this.setAttr(container, 'input', 'name', `participant-${participant[0]}`)
-            this.setAttr(container, 'input', 'id', `participant-${participant[0]}`)
-            this.setAttr(container, 'input', 'value', participant[1].id)
-            parentContainer?.appendChild(container)
-        }
+            .map(budget => budget.participants)
+            .flat()
+            .filter(({ userId }) => userId === AuthManager.data.id)
+            .map(participant => [participant.userId, participant.user])
+        )
+        this.form.data.suggestedParticipants = this.suggestedParticipants
+        this.form.update()
     }
 
     handleSubmit = async (event) => {
+        debugger
         event.preventDefault()
         if (this.isInProgress) {
             return false
         }
-        const form = this.getContainer()?.querySelector('form#new-budget__form')
-        const data = new FormData(form)
+        const data = this.form.getData()
         const id = crypto.randomUUID()
         const name = DOMPurify.sanitize(data.get('name'))
         const currency = data.get('currency')
@@ -92,7 +90,7 @@ export class NewBudget extends Component {
             currentUserStatus: PARTICIPANT_STATUSES.OWNER,
             currency,
         }
-        for (const participant of this.suggestedParticipants) {
+        for (const participant of this.suggestedParticipants ?? new Map()) {
             if (data.get(`participant-${participant[0]}`) === 'on') {
                 data.append('suggestedParticipants[]', participant[0])
                 budgets[id].participants.push({
@@ -110,9 +108,6 @@ export class NewBudget extends Component {
             this.isInProgress = true
             await Api.put('create', 'budgets', { body: data })
             Store.set('budgets', budgets)
-            this.stopListeners()
-            form.reset()
-            this.resetParticipants()
             Router.navigate(`/budgets/${id}?fresh`)
         } catch (er) {
             const { Alert } = await import('../Alert/Alert.mjs')
@@ -126,22 +121,4 @@ export class NewBudget extends Component {
     handleReset = () => {
         Router.navigate('/')
     }
-
-    resetParticipants() {
-        const parentContainer = this.getContainer()?.querySelector('.new-budget__suggested-participants')
-        parentContainer.innerHTML = ''
-    }
-
-    listeners = new Set([
-        {
-            selector: 'form#new-budget__form',
-            event: 'submit',
-            handler: this.handleSubmit,
-        },
-        {
-            selector: 'form#new-budget__form',
-            event: 'reset',
-            handler: this.handleReset,
-        },
-    ])
 }

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rosplata open statistics</title>
+    <title>What is Rosplata</title>
     <title data-translate-id="page-title">Rosplata</title>
     <meta data-translate-id="description" data-translate-prop="content" name="description"
         content="Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills" />
@@ -13,70 +14,110 @@
     <link rel="canonical" href="https://ros-plata.ru" />
     <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" async href="https://unpkg.com/papercss@1.9.0/dist/paper.min.css" />
+    <link rel="stylesheet" async href="/styles/paper.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style type="text/css">
-        body, html {
-            margin: auto;
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        #stats {
             max-width: 500px;
-            background: beige;
+            margin: auto;
+        }
+
+        #welcome {
+            background: linear-gradient(#aacdfc, beige);
+            background-size: contain;
+            height: 80vh;
             padding: 0 1rem;
+        }
+
+        #welcome h1 {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 10vw;
+        }
+
+        #welcome h1 .dash {
+            flex-grow: 1;
+            border-bottom: 1vw solid white;
+            position: relative;
+            top: -2vw;
+            font-size: medium;
         }
     </style>
 </head>
+
 <body>
-    <h3>Lanugages</h3>
-    <p>The most popular language among our users is <strong id="toplang"></strong></p>
-    <p>Besides, there are others: <span id="langs"></span></p>
-    <h3>Operating systems</h3>
-    <p>Most of you use <strong id="topos"></strong>. But also <span id="os"></span></p>
-    <h3>Browsers</h3>
-    <p>It's worth noting that <strong id="topbrowser"></strong> most widely-spread. Of course, <span id="browsers"></span> are used as well.</p>
-    <script>
-        fetch('/api/stats')
-            .then(res => res.json())
-            .then(data => {
-                let topLang = '';
-                let topLangOccurancies = 0;
-                const langs = [];
-                Object.entries(data.langsMap).forEach(([lang, count]) => {
-                    if (topLangOccurancies < count) {
-                        topLang = lang;
-                        topLangOccurancies = count;
-                    }
-                    langs.push(lang);
-                });
-                document.querySelector('#toplang').textContent = topLang;
-                document.querySelector('#langs').textContent = langs.join(', ');
-                
-                let topOs;
-                let topBrowser;
-                let topOsOccurancies = 0;
-                let topBrowserOccurancies = 0;
-                const os = [];
-                const browsers = [];
-                Object.entries(data.uasMap.os).forEach(([name, versions]) => {
-                    Object.entries(versions).forEach(([version, count]) => {
-                        if (topOsOccurancies < count) {
-                            topOs = `${name} ${version}`;
-                            topOsOccurancies = count;
+    <section id="welcome">
+        <h1>Ros <span class="dash"></span>plata</h1>
+    </section>
+    <section id="stats">
+        <h3>Lanugages</h3>
+        <p>The most popular language among our users is <strong id="toplang"></strong></p>
+        <p>Besides, there are others: <span id="langs"></span></p>
+        <h3>Operating systems</h3>
+        <p>Most of you use <strong id="topos"></strong>. But also <span id="os"></span></p>
+        <h3>Browsers</h3>
+        <p>It's worth noting that <strong id="topbrowser"></strong> most widely-spread. Of course, <span
+                id="browsers"></span> are used as well.</p>
+        <script>
+            fetch('/api/stats')
+                .then(res => res.json())
+                .then(data => {
+                    let topLang = '';
+                    let topLangOccurancies = 0;
+                    const langs = [];
+                    Object.entries(data.langsMap).forEach(([lang, count]) => {
+                        if (topLangOccurancies < count) {
+                            topLang = lang;
+                            topLangOccurancies = count;
                         }
-                        os.push(`${name} ${version}`);
-                    })
-                });
-                Object.entries(data.uasMap.browser).forEach(([name, versions]) => {
-                    Object.entries(versions).forEach(([version, count]) => {
-                        if (topBrowserOccurancies < count) {
-                            topBrowser = `${name} ${version}`;
-                            topBrowserOccurancies = count;
-                        }
-                        browsers.push(`${name} ${version}`);
-                    })
-                });
-                document.querySelector('#topos').textContent = topOs;
-                document.querySelector('#os').textContent = os.join(', ');
-                document.querySelector('#topbrowser').textContent = topBrowser;
-                document.querySelector('#browsers').textContent = browsers.join(', ');
-            })
-    </script>
+                        langs.push(lang);
+                    });
+                    document.querySelector('#toplang').textContent = topLang;
+                    document.querySelector('#langs').textContent = langs.join(', ');
+
+                    let topOs;
+                    let topBrowser;
+                    let topOsOccurancies = 0;
+                    let topBrowserOccurancies = 0;
+                    const os = [];
+                    const browsers = [];
+                    Object.entries(data.uasMap.os).forEach(([name, versions]) => {
+                        Object.entries(versions).forEach(([version, count]) => {
+                            if (topOsOccurancies < count) {
+                                topOs = `${name} ${version}`;
+                                topOsOccurancies = count;
+                            }
+                            os.push(`${name} ${version}`);
+                        })
+                    });
+                    Object.entries(data.uasMap.browser).forEach(([name, versions]) => {
+                        Object.entries(versions).forEach(([version, count]) => {
+                            if (topBrowserOccurancies < count) {
+                                topBrowser = `${name} ${version}`;
+                                topBrowserOccurancies = count;
+                            }
+                            browsers.push(`${name} ${version}`);
+                        })
+                    });
+                    document.querySelector('#topos').textContent = topOs;
+                    document.querySelector('#os').textContent = os.join(', ');
+                    document.querySelector('#topbrowser').textContent = topBrowser;
+                    document.querySelector('#browsers').textContent = browsers.join(', ');
+                })
+        </script>
+    </section>
 </body>
+
 </html>
