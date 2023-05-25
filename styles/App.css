@@ -114,6 +114,11 @@ button:hover {
     box-shadow: none;
 }
 
+input:disabled, select:disabled {
+    border: none;
+    padding: 0;
+}
+
 @media screen and (max-width: 425px) {
     .visible-on-mobile {
         display: initial;

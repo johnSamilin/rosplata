@@ -12,6 +12,7 @@ import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
 import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Router } from '../../core/Router.mjs'
 import { BudgetSettings } from "./components/Settings/BudgetSettings.mjs";
+import { filterBannedUserTransactions } from "../../utils/transactionsUtils.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -40,16 +41,30 @@ export class BudgetDetails extends AnimatedComponent {
         if (this.data) {
             Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
             Store.unsubscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
+            Store.unsubscribe(`budgets.${this.data.id}`, this.redraw)
         }
         Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
         Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
+        Store.subscribe(`budgets.${id}`, this.redraw)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
-        transactionsController.data = mapArrayToObjectId(this.data?.transactions ?? [])
+        transactionsController.data = mapArrayToObjectId(
+            filterBannedUserTransactions(
+                this.data?.transactions,
+                this.data?.participants,
+                this.data.bannedUserTransactionsAction === 'ignore'
+            ) ?? []
+        )
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
-        this.data = data    
-        transactionsController.data = mapArrayToObjectId(data?.transactions ?? [])
+        this.data = data
+        transactionsController.data = mapArrayToObjectId(
+            filterBannedUserTransactions(
+                data?.transactions,
+                data?.participants,
+                data.bannedUserTransactionsAction === 'ignore'
+            ) ?? []
+        )
         participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
 
         if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
@@ -64,6 +79,12 @@ export class BudgetDetails extends AnimatedComponent {
 
     #onParticipantsChanged = (participants) => {
         this.data.participants = participants
+        this.data.transactions = filterBannedUserTransactions(
+            this.data?.transactions,
+            participants,
+            this.data.bannedUserTransactionsAction === 'ignore'
+        )
+        transactionsController.data = this.data.transactions
         this.update()
     }
 
@@ -89,7 +110,8 @@ export class BudgetDetails extends AnimatedComponent {
     exterminate() {
         Store.unsubscribe('selectedBudgetId', this.sync)
         Store.unsubscribe(`budgets.${this.data?.id}.transactions`, this.#onTransactionsChanged)
-        Store.subscribe(`budgets.${this.data?.id}.participants`, this.#onParticipantsChanged)
+        Store.unsubscribe(`budgets.${this.data?.id}.participants`, this.#onParticipantsChanged)
+        Store.unsubscribe(`budgets.${this.data.id}`, this.redraw)
         return super.exterminate()
     }
 
@@ -101,6 +123,10 @@ export class BudgetDetails extends AnimatedComponent {
         transactionsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('transactions')}`))
         participantsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('participants')}`))
         settingsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('settings')}`))
+    }
+
+    redraw = (newData) => {
+        this.data = newData
     }
 
     update = (target) => {
@@ -125,7 +151,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
-        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance))) 
+        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance)))
         this.addCssClassConditionally(
             !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
             'hidden',

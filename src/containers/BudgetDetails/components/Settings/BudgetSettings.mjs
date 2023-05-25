@@ -1,4 +1,5 @@
 // @ts-check
+import { BudgetForm } from '../../../../components/BudgetForm/BudgetForm.mjs'
 import { AuthManager } from '../../../../core/AuthManager.mjs'
 import { Component } from '../../../../core/Component.mjs'
 import { RequestManager } from '../../../../core/RequestManager.mjs'
@@ -15,20 +16,7 @@ export class BudgetSettings extends Component {
     containerId = 'budget-settings'
     id
     budgetId
-    #isDirty = false
-    #state = new Map([
-        ['opened', false]
-    ])
-
-    set isDirty(val) {
-        if (!val) {
-            this.setAttr(this.getContainer(), `.${this.getCssClass('save-btn')}`, 'disabled', 'disabled')
-        } else {
-            this.getContainer()?.querySelector(`.${this.getCssClass('save-btn')}`)?.removeAttribute('disabled')
-        }
-
-        this.#isDirty = val
-    }
+    form
 
     constructor() {
         super()
@@ -37,6 +25,7 @@ export class BudgetSettings extends Component {
         }
         this.budgetId = Store.get('selectedBudgetId')
         Store.subscribe('selectedBudgetId', this.onSelectBudget)
+        this.form = new BudgetForm(this.#handleSubmit, this.#handleReset)
     }
 
     renderTo(container) {
@@ -45,6 +34,7 @@ export class BudgetSettings extends Component {
         container.appendChild(content)
         Store.subscribe('selectedBudgetId', this.update)
         Store.subscribe('budgets', this.onSelectBudget)
+        this.form.renderTo(this.getContainer())
     }
 
     async exterminate() {
@@ -66,67 +56,41 @@ export class BudgetSettings extends Component {
         if (!budget) {
             return
         }
-        this.stopListeners()
-        if (budget.userId === AuthManager.data.id) {
-            this.attachListeners()
+        this.form.values = {
+            name: budget.name,
+            currency: budget.currency,
+            isOpen: budget.type === 'open',
+            suggestedParticipants: new Map(),
+            bannedUserTransactionsAction: budget.bannedUserTransactionsAction,
         }
-        this.getContainer()?.reset()
-        this.#state = new Map([
-            ['opened', budget.type === 'open'],
-        ])
-        if (this.#state.get('opened')) {
-            this.setAttr(this.getContainer(), 'input[name="opened"]', 'checked', 'checked')
-        } else {
-            this.getContainer()?.querySelector('input[name="opened"]')?.removeAttribute('checked')
-        }
-        this.isDirty = false
+        this.form.editable = budget.userId === AuthManager.data.id
     }
 
-    #handleChange = (e) => {
-        const fieldName = e.target.getAttribute('name')
-        const value = e.target.checked
-        this.isDirty = this.#state.get(fieldName) !== value
-    }
-
-    #handleSave = async (e) => {
+    #handleSubmit = async (e) => {
         e.preventDefault()
-        if (!this.#isDirty || this.isInProgress) {
+        if (this.isInProgress) {
             return
         }
         this.isInProgress = true
-        const oldState = new Map([ ...this.#state.entries() ])
+        const budget = Store.get(`budgets.${this.budgetId}`)
         try {
-            const fd = new FormData(this.getContainer())
-            this.#state.forEach((value, key) => {
-                if (fd.has(key)) {
-                    this.#state.set(key, fd.get(key))
-                } else {
-                    this.#state.set(key, false)
-                }
-            })
-            this.isDirty = false
+            const fd = this.form.getFormData()
             await Api.post('save', `budgets/${this.budgetId}/settings`, { body: fd })
+            Store.set(`budgets.${this.budgetId}`, {
+                ...budget,
+                name: fd.get('name'),
+                currency: fd.get('currency'),
+                type: fd.get('isOpen') === 'on' ? 'open' : 'private'
+            })
         } catch (er) {
             const { Alert } = await import('../../../Alert/Alert.mjs')
             new Alert('danger', er)
-            this.#state = oldState
-            this.isDirty = true
+            console.error(er)
         } finally {
             this.isInProgress = false
-            Store.set(`budgets.${this.budgetId}.type`, this.#state.get('opened') ? 'open' : 'private')
+            // Store.set(`budgets.${this.budgetId}.type`, this.#state.get('opened') ? 'open' : 'private')
         }
     }
 
-    listeners = new Set([
-        {
-            selector: '.budget-settings__save-btn',
-            event: 'click',
-            handler: this.#handleSave,
-        },
-        {
-            selector: 'input',
-            event: 'change',
-            handler: this.#handleChange,
-        }
-    ])
+    #handleReset = () => {}
 }

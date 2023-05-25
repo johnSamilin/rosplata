@@ -56,8 +56,10 @@ export class NewBudget extends Component {
             .filter(({ userId }) => userId === AuthManager.data.id)
             .map(participant => [participant.userId, participant.user])
         )
-        this.form.data.suggestedParticipants = this.suggestedParticipants
-        this.form.update()
+        this.form.values = {
+            ...this.form.values,
+            suggestedParticipants: this.suggestedParticipants
+        }
     }
 
     handleSubmit = async (event) => {
@@ -66,7 +68,7 @@ export class NewBudget extends Component {
         if (this.isInProgress) {
             return false
         }
-        const data = this.form.getData()
+        const data = this.form.getFormData()
         const id = crypto.randomUUID()
         const name = DOMPurify.sanitize(data.get('name'))
         const currency = data.get('currency')
