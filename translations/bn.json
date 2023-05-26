@@ -245,12 +245,12 @@
         "defaultValue": "What is Rosplata?"
     },
     "budget-form-title": {
-        "value": "",
+        "value": "বাজেটের নাম",
         "prop": "placeholder",
         "defaultValue": "Budget's name"
     },
     "budget-form-currency": {
-        "value": "",
+        "value": "মুদ্রা",
         "prop": "text",
         "defaultValue": "Currency"
     },
@@ -285,47 +285,47 @@
         "defaultValue": "Jordanian Dinar"
     },
     "budget-form-suggested-participants": {
-        "value": "",
+        "value": "প্রস্তাবিত অংশগ্রহণকারীদের",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
     "budget-form-type": {
-        "value": "",
+        "value": "বাজেটের ধরন",
         "prop": "text",
         "defaultValue": "Budget type"
     },
     "budget-form-is-open-notice": {
-        "value": "",
+        "value": "আপনি এই সেটিং চালু করলে, অংশগ্রহণের যেকোনো অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হবে।",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
     "budget-form-is-open": {
-        "value": "",
+        "value": "এই বাজেট উন্মুক্ত",
         "prop": "text",
         "defaultValue": "This budget is open"
     },
     "budget-form-banned-user-transactions-action": {
-        "value": "",
+        "value": "নিষিদ্ধ ব্যবহারকারীর লেনদেনের সাথে কী করবেন?",
         "prop": "text",
         "defaultValue": "What to do with transactions of banned user?"
     },
     "banned-user-transactions-keep": {
-        "value": "",
+        "value": "কিছুই না",
         "prop": "text",
         "defaultValue": "Keep"
     },
     "banned-user-transactions-ignore": {
-        "value": "",
+        "value": "উপেক্ষা করুন",
         "prop": "text",
         "defaultValue": "Ignore"
     },
     "budget-form-go": {
-        "value": "",
+        "value": "এগিয়ে যান",
         "prop": "text",
         "defaultValue": "Go"
     },
     "budget-form-reset": {
-        "value": "",
+        "value": "রিসেট",
         "prop": "text",
         "defaultValue": "Reset"
     },
