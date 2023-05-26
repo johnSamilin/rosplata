@@ -184,21 +184,6 @@
         "prop": "text",
         "defaultValue": "Add people"
     },
-    "budget-details-settings-open": {
-        "value": "Открытый бюджет",
-        "prop": "text",
-        "defaultValue": "Open"
-    },
-    "budget-settings-isOpen": {
-        "value": "В открытых бюджетах заявки на участие утверждаются автоматически.",
-        "prop": "text",
-        "defaultValue": "In open budgets participation requests are being approved automatically."
-    },
-    "budget-settings-save-btn": {
-        "value": "Сохранить",
-        "prop": "text",
-        "defaultValue": "Save"
-    },
     "transactions-list-ok": {
         "value": "ок",
         "prop": "text",
@@ -259,15 +244,15 @@
         "prop": "text",
         "defaultValue": "What is Rosplata?"
     },
-    "new-budget-title": {
-        "value": "Название бюджета",
+    "budget-form-title": {
+        "value": "",
         "prop": "placeholder",
-        "defaultValue": "New budget title"
+        "defaultValue": "Budget's name"
     },
-    "new-budget-currency": {
-        "value": "Валюта",
+    "budget-form-currency": {
+        "value": "",
         "prop": "text",
-        "defaultValue": "Select currency"
+        "defaultValue": "Currency"
     },
     "currency-rub": {
         "value": "Российский рубль",
@@ -299,33 +284,48 @@
         "prop": "text",
         "defaultValue": "Jordanian Dinar"
     },
-    "new-budget-suggested-participants": {
-        "value": "Предлагаемые участники",
+    "budget-form-suggested-participants": {
+        "value": "",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
-    "new-budget-type": {
-        "value": "Тип бюджета",
+    "budget-form-type": {
+        "value": "",
         "prop": "text",
         "defaultValue": "Budget type"
     },
-    "new-budget-is-open-notice": {
-        "value": "Если вы включите этот параметр, любые заявки на участие будут автоматически одобрены.",
+    "budget-form-is-open-notice": {
+        "value": "",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
-    "new-budget-is-open": {
-        "value": "Сделайте этот бюджет открытым",
+    "budget-form-is-open": {
+        "value": "",
         "prop": "text",
-        "defaultValue": "Make this budget open"
+        "defaultValue": "This budget is open"
     },
-    "new-budget-go": {
-        "value": "Поехали",
+    "budget-form-banned-user-transactions-action": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "What to do with transactions of banned user?"
+    },
+    "banned-user-transactions-keep": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Keep"
+    },
+    "banned-user-transactions-ignore": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Ignore"
+    },
+    "budget-form-go": {
+        "value": "",
         "prop": "text",
         "defaultValue": "Go"
     },
-    "new-budget-reset": {
-        "value": "Сбросить",
+    "budget-form-reset": {
+        "value": "",
         "prop": "text",
         "defaultValue": "Reset"
     },

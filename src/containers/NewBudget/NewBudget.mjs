@@ -30,31 +30,29 @@ export class NewBudget extends Component {
         const container = template.content.firstElementChild.cloneNode(true)
         parent.appendChild(container)
         this.form.renderTo(container)
+        this.form.editable = true
     }
-    
+
     async show() {
         await super.show()
         this.form.show()
-        this.attachListeners()
         Store.subscribe('budgets', this.updateParticipantsList)
         this.updateParticipantsList()
-        this.getContainer()?.querySelector('input[name="name"]')?.focus()
     }
 
     async hide() {
         Store.subscribe('budgets', this.updateParticipantsList)
         this.form.hide()
         await super.hide()
-        this.stopListeners()
     }
 
     updateParticipantsList = () => {
         this.suggestedParticipants = new Map(
             Object.values(Store.get('budgets'))
-            .map(budget => budget.participants)
-            .flat()
-            .filter(({ userId }) => userId === AuthManager.data.id)
-            .map(participant => [participant.userId, participant.user])
+                .map(budget => budget.participants)
+                .flat()
+                .filter(({ userId }) => userId === AuthManager.data.id)
+                .map(participant => [participant.userId, participant.user])
         )
         this.form.values = {
             ...this.form.values,
@@ -63,7 +61,6 @@ export class NewBudget extends Component {
     }
 
     handleSubmit = async (event) => {
-        debugger
         event.preventDefault()
         if (this.isInProgress) {
             return false

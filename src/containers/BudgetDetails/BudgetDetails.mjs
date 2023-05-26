@@ -41,11 +41,11 @@ export class BudgetDetails extends AnimatedComponent {
         if (this.data) {
             Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
             Store.unsubscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
-            Store.unsubscribe(`budgets.${this.data.id}`, this.redraw)
+            Store.unsubscribe(`budgets.${this.data.id}`, this.onBudgetUpdated)
         }
         Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
         Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
-        Store.subscribe(`budgets.${id}`, this.redraw)
+        Store.subscribe(`budgets.${id}`, this.onBudgetUpdated)
         const budget = Store.get(`budgets.${id}`)
         this.data = budget
         transactionsController.data = mapArrayToObjectId(
@@ -57,15 +57,7 @@ export class BudgetDetails extends AnimatedComponent {
         )
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
-        this.data = data
-        transactionsController.data = mapArrayToObjectId(
-            filterBannedUserTransactions(
-                data?.transactions,
-                data?.participants,
-                data.bannedUserTransactionsAction === 'ignore'
-            ) ?? []
-        )
-        participantsController.data = mapArrayToObjectId(data?.participants ?? [], ({ userId }) => userId)
+        Store.set(`budgets.${id}`, data)
 
         if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
             this.showInviteDialog()
@@ -78,13 +70,15 @@ export class BudgetDetails extends AnimatedComponent {
     }
 
     #onParticipantsChanged = (participants) => {
-        this.data.participants = participants
-        this.data.transactions = filterBannedUserTransactions(
+        const transactions = filterBannedUserTransactions(
             this.data?.transactions,
             participants,
             this.data.bannedUserTransactionsAction === 'ignore'
-        )
-        transactionsController.data = this.data.transactions
+        ) ?? []
+        transactionsController.data = mapArrayToObjectId(transactions)
+        participantsController.data = mapArrayToObjectId(participants, ({ userId }) => userId)
+        this.data.participants = participants
+        this.data.transactions = transactions
         this.update()
     }
 
@@ -111,7 +105,7 @@ export class BudgetDetails extends AnimatedComponent {
         Store.unsubscribe('selectedBudgetId', this.sync)
         Store.unsubscribe(`budgets.${this.data?.id}.transactions`, this.#onTransactionsChanged)
         Store.unsubscribe(`budgets.${this.data?.id}.participants`, this.#onParticipantsChanged)
-        Store.unsubscribe(`budgets.${this.data.id}`, this.redraw)
+        Store.unsubscribe(`budgets.${this.data.id}`, this.onBudgetUpdated)
         return super.exterminate()
     }
 
@@ -125,8 +119,17 @@ export class BudgetDetails extends AnimatedComponent {
         settingsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('settings')}`))
     }
 
-    redraw = (newData) => {
-        this.data = newData
+    onBudgetUpdated = (data) => {
+        const transactions = filterBannedUserTransactions(
+            data.transactions,
+            data.participants,
+            data.bannedUserTransactionsAction === 'ignore'
+        ) ?? []
+        transactionsController.data = mapArrayToObjectId(transactions)
+        this.data = {
+            ...data,
+            transactions,
+        }
     }
 
     update = (target) => {

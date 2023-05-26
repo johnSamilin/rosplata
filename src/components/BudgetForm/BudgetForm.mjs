@@ -77,6 +77,10 @@ export class BudgetForm extends Component {
     getFormData = () => {
         return new FormData(this.getContainer())
     }
+    
+    reset() {
+        this.getContainer().reset()
+    }
 
     setFieldValue = (container, value, type) => {
         if (!this.#editable) {
@@ -112,7 +116,6 @@ export class BudgetForm extends Component {
 
     update = (target) => {
         const container = target ?? this.getContainer()
-        container.reset()
 
         this.fields.forEach((field) => {
             const fContainer = container.querySelector(`[name=${field.name}]`)

@@ -24,8 +24,8 @@ export class BudgetSettings extends Component {
             throw new Error('#budget-settings-template must be present in the HTML!')
         }
         this.budgetId = Store.get('selectedBudgetId')
-        Store.subscribe('selectedBudgetId', this.onSelectBudget)
         this.form = new BudgetForm(this.#handleSubmit, this.#handleReset)
+        Store.subscribe('selectedBudgetId', this.onSelectBudget)
     }
 
     renderTo(container) {
@@ -45,6 +45,7 @@ export class BudgetSettings extends Component {
 
     onSelectBudget = () => {
         const newId = Store.get('selectedBudgetId')
+        this.form.reset()
         Store.unsubscribe('selectedBudgetId', this.update)
         Store.subscribe(`budgets.${newId}`, this.update)
         this.budgetId = newId
@@ -80,7 +81,8 @@ export class BudgetSettings extends Component {
                 ...budget,
                 name: fd.get('name'),
                 currency: fd.get('currency'),
-                type: fd.get('isOpen') === 'on' ? 'open' : 'private'
+                type: fd.get('isOpen') === 'on' ? 'open' : 'private',
+                bannedUserTransactionsAction: fd.get('bannedUserTransactionsAction'),
             })
         } catch (er) {
             const { Alert } = await import('../../../Alert/Alert.mjs')
@@ -88,7 +90,6 @@ export class BudgetSettings extends Component {
             console.error(er)
         } finally {
             this.isInProgress = false
-            // Store.set(`budgets.${this.budgetId}.type`, this.#state.get('opened') ? 'open' : 'private')
         }
     }
 
