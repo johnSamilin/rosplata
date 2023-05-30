@@ -245,12 +245,12 @@
         "defaultValue": "What is Rosplata?"
     },
     "budget-form-title": {
-        "value": "",
+        "value": "Название",
         "prop": "placeholder",
         "defaultValue": "Budget's name"
     },
     "budget-form-currency": {
-        "value": "",
+        "value": "Валюта",
         "prop": "text",
         "defaultValue": "Currency"
     },
@@ -285,47 +285,47 @@
         "defaultValue": "Jordanian Dinar"
     },
     "budget-form-suggested-participants": {
-        "value": "",
+        "value": "Предполагаемые участники",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
     "budget-form-type": {
-        "value": "",
+        "value": "Тип бюджета",
         "prop": "text",
         "defaultValue": "Budget type"
     },
     "budget-form-is-open-notice": {
-        "value": "",
+        "value": "Если включить эту опцию, то все заявки на участие будут автоматически подтверждаться",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
     "budget-form-is-open": {
-        "value": "",
+        "value": "Открытый бюджет",
         "prop": "text",
         "defaultValue": "This budget is open"
     },
     "budget-form-banned-user-transactions-action": {
-        "value": "",
+        "value": "Что делать с транзакциями забаненного пользователя?",
         "prop": "text",
         "defaultValue": "What to do with transactions of banned user?"
     },
     "banned-user-transactions-keep": {
-        "value": "",
+        "value": "Ничего",
         "prop": "text",
         "defaultValue": "Keep"
     },
     "banned-user-transactions-ignore": {
-        "value": "",
+        "value": "Игнорировать",
         "prop": "text",
         "defaultValue": "Ignore"
     },
     "budget-form-go": {
-        "value": "",
+        "value": "Погнали",
         "prop": "text",
         "defaultValue": "Go"
     },
     "budget-form-reset": {
-        "value": "",
+        "value": "Сбросить",
         "prop": "text",
         "defaultValue": "Reset"
     },

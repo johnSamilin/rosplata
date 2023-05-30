@@ -245,12 +245,12 @@
         "defaultValue": "What is Rosplata?"
     },
     "budget-form-title": {
-        "value": "",
+        "value": "اسم الميزانية",
         "prop": "placeholder",
         "defaultValue": "Budget's name"
     },
     "budget-form-currency": {
-        "value": "",
+        "value": "عملة",
         "prop": "text",
         "defaultValue": "Currency"
     },
@@ -285,47 +285,47 @@
         "defaultValue": "Jordanian Dinar"
     },
     "budget-form-suggested-participants": {
-        "value": "",
+        "value": "اقترح المشاركون",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
     "budget-form-type": {
-        "value": "",
+        "value": "نوع الميزانية",
         "prop": "text",
         "defaultValue": "Budget type"
     },
     "budget-form-is-open-notice": {
-        "value": "",
+        "value": "إذا قمت بتشغيل هذا الإعداد ، فستتم الموافقة على أي طلبات مشاركة تلقائيًا.",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
     "budget-form-is-open": {
-        "value": "",
+        "value": "هذه الميزانية مفتوحة",
         "prop": "text",
         "defaultValue": "This budget is open"
     },
     "budget-form-banned-user-transactions-action": {
-        "value": "",
+        "value": "ماذا تفعل مع معاملات المستخدم المحظور؟",
         "prop": "text",
         "defaultValue": "What to do with transactions of banned user?"
     },
     "banned-user-transactions-keep": {
-        "value": "",
+        "value": "لا شئ",
         "prop": "text",
         "defaultValue": "Keep"
     },
     "banned-user-transactions-ignore": {
-        "value": "",
+        "value": "يتجاهل",
         "prop": "text",
         "defaultValue": "Ignore"
     },
     "budget-form-go": {
-        "value": "",
+        "value": "يتابع",
         "prop": "text",
         "defaultValue": "Go"
     },
     "budget-form-reset": {
-        "value": "",
+        "value": "إعادة ضبط",
         "prop": "text",
         "defaultValue": "Reset"
     },

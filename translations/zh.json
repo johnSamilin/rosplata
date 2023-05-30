@@ -245,12 +245,12 @@
         "defaultValue": "What is Rosplata?"
     },
     "budget-form-title": {
-        "value": "",
+        "value": "预算名称",
         "prop": "placeholder",
         "defaultValue": "Budget's name"
     },
     "budget-form-currency": {
-        "value": "",
+        "value": "货币",
         "prop": "text",
         "defaultValue": "Currency"
     },
@@ -285,47 +285,47 @@
         "defaultValue": "Jordanian Dinar"
     },
     "budget-form-suggested-participants": {
-        "value": "",
+        "value": "建议参与者",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
     "budget-form-type": {
-        "value": "",
+        "value": "预算类型",
         "prop": "text",
         "defaultValue": "Budget type"
     },
     "budget-form-is-open-notice": {
-        "value": "",
+        "value": "如果您打开此设置，任何参与请求都将自动获得批准。",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
     "budget-form-is-open": {
-        "value": "",
+        "value": "这个预算是开放的",
         "prop": "text",
         "defaultValue": "This budget is open"
     },
     "budget-form-banned-user-transactions-action": {
-        "value": "",
+        "value": "被禁用户的交易怎么办？",
         "prop": "text",
         "defaultValue": "What to do with transactions of banned user?"
     },
     "banned-user-transactions-keep": {
-        "value": "",
+        "value": "没有什么",
         "prop": "text",
         "defaultValue": "Keep"
     },
     "banned-user-transactions-ignore": {
-        "value": "",
+        "value": "忽略",
         "prop": "text",
         "defaultValue": "Ignore"
     },
     "budget-form-go": {
-        "value": "",
+        "value": "继续",
         "prop": "text",
         "defaultValue": "Go"
     },
     "budget-form-reset": {
-        "value": "",
+        "value": "重置",
         "prop": "text",
         "defaultValue": "Reset"
     },
