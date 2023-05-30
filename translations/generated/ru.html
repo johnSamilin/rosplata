@@ -228,8 +228,8 @@
 
     <template id="budget-form-template"><form id="budget-form">
             <div class="budget-form__fields">
-                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="Budget's name" data-translate-id="budget-form-title" data-translate-prop="placeholder">
-                <h4 data-translate-id="budget-form-currency">Currency</h4>
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="" data-translate-id="budget-form-title" data-translate-prop="placeholder">
+                <h4 data-translate-id="budget-form-currency"></h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">Российский рубль</option>
                     <option value="INR" data-translate-id="currency-inr">Индийская рупия</option>
@@ -239,7 +239,7 @@
                     <option value="JRD" data-translate-id="currency-jrd">Иорданский динар</option>
                 </select>
                 <div class="budget-form__participants">
-                    <h4 data-translate-id="budget-form-suggested-participants">Suggested participants</h4>
+                    <h4 data-translate-id="budget-form-suggested-participants"></h4>
                     <div class="budget-form__suggested-participants">
                         <div class="budget-form__suggested-participants-item budget-form__field--checkbox">
                             <input type="checkbox" name="" id="">
@@ -247,25 +247,21 @@
                         </div>
                     </div>
                 </div>
-                <h4 data-translate-id="budget-form-type">Budget type</h4>
-                <h6 class="text-muted" data-translate-id="budget-form-is-open-notice">
-                    If you turn this setting on, any participation requests will be automatically approved.
-                </h6>
+                <h4 data-translate-id="budget-form-type"></h4>
+                <h6 class="text-muted" data-translate-id="budget-form-is-open-notice"></h6>
                 <div class="budget-form__field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen">
-                    <label for="isOpen" data-translate-id="budget-form-is-open">This budget is open</label>
+                    <label for="isOpen" data-translate-id="budget-form-is-open"></label>
                 </div>
-                <h4 data-translate-id="budget-form-banned-user-transactions-action">
-                    What to do with transactions of banned user?
-                </h4>
+                <h4 data-translate-id="budget-form-banned-user-transactions-action"></h4>
                 <select name="bannedUserTransactionsAction" id="bannedUserTransactionsAction">
-                    <option value="keep" data-translate-id="banned-user-transactions-keep">Keep</option>
-                    <option value="ignore" data-translate-id="banned-user-transactions-ignore">Ignore</option>
+                    <option value="keep" data-translate-id="banned-user-transactions-keep"></option>
+                    <option value="ignore" data-translate-id="banned-user-transactions-ignore"></option>
                 </select>
             </div>
             <div class="budget-form__buttons">
-                <button type="submit" data-translate-id="budget-form-go">Go</button>
-                <button type="reset" data-translate-id="budget-form-reset">Reset</button>
+                <button type="submit" data-translate-id="budget-form-go"></button>
+                <button type="reset" data-translate-id="budget-form-reset"></button>
             </div>
         </form>
     </template>
