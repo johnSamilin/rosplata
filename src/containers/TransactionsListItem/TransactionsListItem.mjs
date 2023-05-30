@@ -52,7 +52,7 @@ export class TransactionsListItem extends Component {
             container?.querySelector(`.${this.getCssClass('revert')}`)
         )
         this.addCssClassConditionally(
-            this.data.deleted,
+            this.data.deleted || this.data.banned,
             this.getCssClass(undefined, 'deleted'),
             container
         )

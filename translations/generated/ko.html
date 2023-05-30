@@ -156,18 +156,8 @@
         </aside>
     </template>
 
-    <template id="budget-settings-template"><form id="budget-settings" class="budget-settings">
-            <div class="budget-settings__fields">
-                <div class="flex col">
-                    <div class="flex row flex-edges">
-                        <label for="opened" data-translate-id="budget-details-settings-open">오픈 예산</label>
-                        <input type="checkbox" name="opened" id="opened">
-                    </div>
-                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">공개 예산에서 참여 요청은 자동으로 승인됩니다.</h6>
-                </div>
-            </div>
-            <button class="budget-settings__save-btn button" disabled="" data-translate-id="budget-settings-save-btn">저장</button>
-        </form>
+    <template id="budget-settings-template"><div id="budget-settings" class="budget-settings">
+        </div>
     </template>
 
     <template id="transactions-list-template"><div id="transactions-list">
@@ -222,10 +212,10 @@
     <template id="layout-login-template"><div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">로스플라타에 들어가다</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">공유 예산을 사용하려면 Google 계정으로 로그인하세요.</h2>
-                <div class="layout-login__variants">
-                    <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">입력하다</button>
-                    <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">데모 로그인</a>
-                </div>
+            <div class="layout-login__variants">
+                <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">입력하다</button>
+                <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">데모 로그인</a>
+            </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
                 <a href="/about" target="_blank" rel="noopener" data-translate-id="landing-page">로스플라타 란?</a>
@@ -233,10 +223,13 @@
         </div>
     </template>
 
-    <template id="new-budget-template"><form id="new-budget__form">
-            <div class="new-budget__fields">
-                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="새 예산 제목" data-translate-id="new-budget-title" data-translate-prop="placeholder">
-                <h4 data-translate-id="new-budget-currency">통화 선택</h4>
+    <template id="new-budget-template"><div class="new-budget"></div>
+    </template>
+
+    <template id="budget-form-template"><form id="budget-form">
+            <div class="budget-form__fields">
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="" data-translate-id="budget-form-title" data-translate-prop="placeholder">
+                <h4 data-translate-id="budget-form-currency"></h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">러시아 루블</option>
                     <option value="INR" data-translate-id="currency-inr">인도 루피</option>
@@ -245,23 +238,30 @@
                     <option value="CNY" data-translate-id="currency-cny">중국 위안</option>
                     <option value="JRD" data-translate-id="currency-jrd">요르단 디나르</option>
                 </select>
-                <h4 data-translate-id="new-budget-suggested-participants">추천 참가자</h4>
-                <div class="new-budget__suggested-participants">
-                    <div class="new-budget__suggested-participants-item new-budget__field--checkbox">
-                        <input type="checkbox" name="" id="">
-                        <label for=""></label>
+                <div class="budget-form__participants">
+                    <h4 data-translate-id="budget-form-suggested-participants"></h4>
+                    <div class="budget-form__suggested-participants">
+                        <div class="budget-form__suggested-participants-item budget-form__field--checkbox">
+                            <input type="checkbox" name="" id="">
+                            <label for=""></label>
+                        </div>
                     </div>
                 </div>
-                <h4 data-translate-id="new-budget-type">예산 유형</h4>
-                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">이 설정을 켜면 모든 참여 요청이 자동으로 승인됩니다.</h6>
-                <div class="new-budget__field--checkbox">
+                <h4 data-translate-id="budget-form-type"></h4>
+                <h6 class="text-muted" data-translate-id="budget-form-is-open-notice"></h6>
+                <div class="budget-form__field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen">
-                    <label for="isOpen" data-translate-id="new-budget-is-open">이 예산 열기</label>
+                    <label for="isOpen" data-translate-id="budget-form-is-open"></label>
                 </div>
+                <h4 data-translate-id="budget-form-banned-user-transactions-action"></h4>
+                <select name="bannedUserTransactionsAction" id="bannedUserTransactionsAction">
+                    <option value="keep" data-translate-id="banned-user-transactions-keep"></option>
+                    <option value="ignore" data-translate-id="banned-user-transactions-ignore"></option>
+                </select>
             </div>
-            <div class="new-budget__buttons">
-                <button type="submit" data-translate-id="new-budget-go">가다</button>
-                <button type="reset" data-translate-id="new-budget-reset">초기화</button>
+            <div class="budget-form__buttons">
+                <button type="submit" data-translate-id="budget-form-go"></button>
+                <button type="reset" data-translate-id="budget-form-reset"></button>
             </div>
         </form>
     </template>

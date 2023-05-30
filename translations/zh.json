@@ -184,21 +184,6 @@
         "prop": "text",
         "defaultValue": "Add people"
     },
-    "budget-details-settings-open": {
-        "value": "公开预算",
-        "prop": "text",
-        "defaultValue": "Open"
-    },
-    "budget-settings-isOpen": {
-        "value": "在公开预算中，参与请求将被自动批准。",
-        "prop": "text",
-        "defaultValue": "In open budgets participation requests are being approved automatically."
-    },
-    "budget-settings-save-btn": {
-        "value": "储蓄",
-        "prop": "text",
-        "defaultValue": "Save"
-    },
     "transactions-list-ok": {
         "value": "好的",
         "prop": "text",
@@ -259,15 +244,15 @@
         "prop": "text",
         "defaultValue": "What is Rosplata?"
     },
-    "new-budget-title": {
-        "value": "新预算标题",
+    "budget-form-title": {
+        "value": "预算名称",
         "prop": "placeholder",
-        "defaultValue": "New budget title"
+        "defaultValue": "Budget's name"
     },
-    "new-budget-currency": {
-        "value": "选择货币",
+    "budget-form-currency": {
+        "value": "货币",
         "prop": "text",
-        "defaultValue": "Select currency"
+        "defaultValue": "Currency"
     },
     "currency-rub": {
         "value": "俄罗斯卢布",
@@ -299,32 +284,47 @@
         "prop": "text",
         "defaultValue": "Jordanian Dinar"
     },
-    "new-budget-suggested-participants": {
-        "value": "建议参加者",
+    "budget-form-suggested-participants": {
+        "value": "建议参与者",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
-    "new-budget-type": {
+    "budget-form-type": {
         "value": "预算类型",
         "prop": "text",
         "defaultValue": "Budget type"
     },
-    "new-budget-is-open-notice": {
-        "value": "如果您打开此设置，任何参与请求将被自动批准。",
+    "budget-form-is-open-notice": {
+        "value": "如果您打开此设置，任何参与请求都将自动获得批准。",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
-    "new-budget-is-open": {
-        "value": "让这个预算开放",
+    "budget-form-is-open": {
+        "value": "这个预算是开放的",
         "prop": "text",
-        "defaultValue": "Make this budget open"
+        "defaultValue": "This budget is open"
     },
-    "new-budget-go": {
-        "value": "去",
+    "budget-form-banned-user-transactions-action": {
+        "value": "被禁用户的交易怎么办？",
+        "prop": "text",
+        "defaultValue": "What to do with transactions of banned user?"
+    },
+    "banned-user-transactions-keep": {
+        "value": "没有什么",
+        "prop": "text",
+        "defaultValue": "Keep"
+    },
+    "banned-user-transactions-ignore": {
+        "value": "忽略",
+        "prop": "text",
+        "defaultValue": "Ignore"
+    },
+    "budget-form-go": {
+        "value": "继续",
         "prop": "text",
         "defaultValue": "Go"
     },
-    "new-budget-reset": {
+    "budget-form-reset": {
         "value": "重置",
         "prop": "text",
         "defaultValue": "Reset"

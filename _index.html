@@ -188,21 +188,8 @@
     </template>
 
     <template id="budget-settings-template">
-        <form id="budget-settings" class="budget-settings">
-            <div class="budget-settings__fields">
-                <div class="flex col">
-                    <div class="flex row flex-edges">
-                        <label for="opened" data-translate-id="budget-details-settings-open">Open</label>
-                        <input type="checkbox" name="opened" id="opened" />
-                    </div>
-                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">
-                        In open budgets participation requests are being approved automatically.
-                    </h6>
-                </div>
-            </div>
-            <button class="budget-settings__save-btn button" disabled
-                data-translate-id="budget-settings-save-btn">Save</button>
-        </form>
+        <div id="budget-settings" class="budget-settings">
+        </div>
     </template>
 
     <template id="transactions-list-template">
@@ -269,10 +256,11 @@
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">Enter Rosplata</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">Sign in with your
                 google account to start using shared budgets</h2>
-                <div class="layout-login__variants">
-                    <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">Enter</button>
-                    <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">Demo login</a>
-                </div>
+            <div class="layout-login__variants">
+                <button class="layout-login__variant--google" id="login__google"
+                    data-translate-id="layout-login-enter">Enter</button>
+                <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">Demo login</a>
+            </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
                 <a href="/about" target="_blank" rel="noopener"
@@ -282,12 +270,16 @@
     </template>
 
     <template id="new-budget-template">
-        <form id="new-budget__form">
-            <div class="new-budget__fields">
+        <div class="new-budget"></div>
+    </template>
+
+    <template id="budget-form-template">
+        <form id="budget-form">
+            <div class="budget-form__fields">
                 <input type="text" name="name" autocomplete="off" autofocus required minlength="3" maxlength="20"
                     title="Only letters, digits and a space" placeholder="Budget's name"
-                    data-translate-id="new-budget-title" data-translate-prop="placeholder" />
-                <h4 data-translate-id="new-budget-currency">Select currency</h4>
+                    data-translate-id="budget-form-title" data-translate-prop="placeholder" />
+                <h4 data-translate-id="budget-form-currency">Currency</h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">Russian Rouble</option>
                     <option value="INR" data-translate-id="currency-inr">Indian Rupee</option>
@@ -296,25 +288,34 @@
                     <option value="CNY" data-translate-id="currency-cny">Chinese Yuan</option>
                     <option value="JRD" data-translate-id="currency-jrd">Jordanian Dinar</option>
                 </select>
-                <h4 data-translate-id="new-budget-suggested-participants">Suggested participants</h4>
-                <div class="new-budget__suggested-participants">
-                    <div class="new-budget__suggested-participants-item new-budget__field--checkbox">
-                        <input type="checkbox" name="" id="" />
-                        <label for=""></label>
+                <div class="budget-form__participants">
+                    <h4 data-translate-id="budget-form-suggested-participants">Suggested participants</h4>
+                    <div class="budget-form__suggested-participants">
+                        <div class="budget-form__suggested-participants-item budget-form__field--checkbox">
+                            <input type="checkbox" name="" id="" />
+                            <label for=""></label>
+                        </div>
                     </div>
                 </div>
-                <h4 data-translate-id="new-budget-type">Budget type</h4>
-                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">
+                <h4 data-translate-id="budget-form-type">Budget type</h4>
+                <h6 class="text-muted" data-translate-id="budget-form-is-open-notice">
                     If you turn this setting on, any participation requests will be automatically approved.
                 </h6>
-                <div class="new-budget__field--checkbox">
+                <div class="budget-form__field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen" />
-                    <label for="isOpen" data-translate-id="new-budget-is-open">Make this budget open</label>
+                    <label for="isOpen" data-translate-id="budget-form-is-open">This budget is open</label>
                 </div>
+                <h4 data-translate-id="budget-form-banned-user-transactions-action">
+                    What to do with transactions of banned user?
+                </h4>
+                <select name="bannedUserTransactionsAction" id="bannedUserTransactionsAction">
+                    <option value="keep" data-translate-id="banned-user-transactions-keep">Keep</option>
+                    <option value="ignore" data-translate-id="banned-user-transactions-ignore">Ignore</option>
+                </select>
             </div>
-            <div class="new-budget__buttons">
-                <button type="submit" data-translate-id="new-budget-go">Go</button>
-                <button type="reset" data-translate-id="new-budget-reset">Reset</button>
+            <div class="budget-form__buttons">
+                <button type="submit" data-translate-id="budget-form-go">Go</button>
+                <button type="reset" data-translate-id="budget-form-reset">Reset</button>
             </div>
         </form>
     </template>

@@ -184,21 +184,6 @@
         "prop": "text",
         "defaultValue": "Add people"
     },
-    "budget-details-settings-open": {
-        "value": "উন্মুক্ত বাজেট",
-        "prop": "text",
-        "defaultValue": "Open"
-    },
-    "budget-settings-isOpen": {
-        "value": "খোলা বাজেটে অংশগ্রহণের অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হচ্ছে.",
-        "prop": "text",
-        "defaultValue": "In open budgets participation requests are being approved automatically."
-    },
-    "budget-settings-save-btn": {
-        "value": "সংরক্ষণ",
-        "prop": "text",
-        "defaultValue": "Save"
-    },
     "transactions-list-ok": {
         "value": "ঠিক আছে",
         "prop": "text",
@@ -259,15 +244,15 @@
         "prop": "text",
         "defaultValue": "What is Rosplata?"
     },
-    "new-budget-title": {
-        "value": "নতুন বাজেট শিরোনাম",
+    "budget-form-title": {
+        "value": "বাজেটের নাম",
         "prop": "placeholder",
-        "defaultValue": "New budget title"
+        "defaultValue": "Budget's name"
     },
-    "new-budget-currency": {
-        "value": "মুদ্রা নির্বাচন করুন",
+    "budget-form-currency": {
+        "value": "মুদ্রা",
         "prop": "text",
-        "defaultValue": "Select currency"
+        "defaultValue": "Currency"
     },
     "currency-rub": {
         "value": "রাশিয়ান রুবেল",
@@ -299,33 +284,48 @@
         "prop": "text",
         "defaultValue": "Jordanian Dinar"
     },
-    "new-budget-suggested-participants": {
-        "value": "প্রস্তাবিত অংশগ্রহণকারীরা",
+    "budget-form-suggested-participants": {
+        "value": "প্রস্তাবিত অংশগ্রহণকারীদের",
         "prop": "text",
         "defaultValue": "Suggested participants"
     },
-    "new-budget-type": {
+    "budget-form-type": {
         "value": "বাজেটের ধরন",
         "prop": "text",
         "defaultValue": "Budget type"
     },
-    "new-budget-is-open-notice": {
-        "value": "আপনি এই সেটিং চালু হলে, কোনো অংশগ্রহণ অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হবে.",
+    "budget-form-is-open-notice": {
+        "value": "আপনি এই সেটিং চালু করলে, অংশগ্রহণের যেকোনো অনুরোধ স্বয়ংক্রিয়ভাবে অনুমোদিত হবে।",
         "prop": "text",
         "defaultValue": "If you turn this setting on, any participation requests will be automatically approved."
     },
-    "new-budget-is-open": {
-        "value": "এই বাজেটটি খুলুন",
+    "budget-form-is-open": {
+        "value": "এই বাজেট উন্মুক্ত",
         "prop": "text",
-        "defaultValue": "Make this budget open"
+        "defaultValue": "This budget is open"
     },
-    "new-budget-go": {
-        "value": "যাও",
+    "budget-form-banned-user-transactions-action": {
+        "value": "নিষিদ্ধ ব্যবহারকারীর লেনদেনের সাথে কী করবেন?",
+        "prop": "text",
+        "defaultValue": "What to do with transactions of banned user?"
+    },
+    "banned-user-transactions-keep": {
+        "value": "কিছুই না",
+        "prop": "text",
+        "defaultValue": "Keep"
+    },
+    "banned-user-transactions-ignore": {
+        "value": "উপেক্ষা করুন",
+        "prop": "text",
+        "defaultValue": "Ignore"
+    },
+    "budget-form-go": {
+        "value": "এগিয়ে যান",
         "prop": "text",
         "defaultValue": "Go"
     },
-    "new-budget-reset": {
-        "value": "পুনরায় সেট করুন",
+    "budget-form-reset": {
+        "value": "রিসেট",
         "prop": "text",
         "defaultValue": "Reset"
     },

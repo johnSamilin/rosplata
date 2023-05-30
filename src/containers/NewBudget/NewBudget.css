@@ -1,34 +1,3 @@
-#new-budget__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+.new-budget {    
     max-width: 300px;
-}
-.new-budget__fields {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    padding: 0.5rem;
-}
-.new-budget__buttons {
-    display: flex;
-    justify-content: space-between;
-}
-.new-budget__buttons button {
-    width: 45%;
-}
-.new-budget__fields h4 {
-    margin-block-end: 0.5rem;
-}
-.new-budget__fields h6 {
-    margin: -0.5rem 0 1rem;
-}
-.new-budget__field--checkbox {
-    display: flex;
-    justify-content: space-between;
-}
-.new-budget__field--checkbox label {
-    flex-grow: 1;
-    margin: 0 1rem;
 }
