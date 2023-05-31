@@ -51,7 +51,7 @@ export class NewBudget extends Component {
             Object.values(Store.get('budgets'))
                 .map(budget => budget.participants)
                 .flat()
-                .filter(({ userId }) => userId === AuthManager.data.id)
+                .filter(({ userId }) => userId !== AuthManager.data.id)
                 .map(participant => [participant.userId, participant.user])
         )
         this.form.values = {
