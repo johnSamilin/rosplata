@@ -157,18 +157,8 @@
         </aside>
     </template>
 
-    <template id="budget-settings-template"><form id="budget-settings" class="budget-settings">
-            <div class="budget-settings__fields">
-                <div class="flex col">
-                    <div class="flex row flex-edges">
-                        <label for="opened" data-translate-id="budget-details-settings-open">खुला बजट</label>
-                        <input type="checkbox" name="opened" id="opened">
-                    </div>
-                    <h6 class="text-muted" data-translate-id="budget-settings-isOpen">खुले बजट में भागीदारी अनुरोधों को स्वचालित रूप से अनुमोदित किया जा रहा है ।</h6>
-                </div>
-            </div>
-            <button class="budget-settings__save-btn button" disabled="" data-translate-id="budget-settings-save-btn">सहेजें</button>
-        </form>
+    <template id="budget-settings-template"><div id="budget-settings" class="budget-settings">
+        </div>
     </template>
 
     <template id="transactions-list-template"><div id="transactions-list">
@@ -223,10 +213,10 @@
     <template id="layout-login-template"><div id="layout-login">
             <h1 class="layout-login__prompt" data-translate-id="layout-login-title">रोजप्लाटा दर्ज करें</h1>
             <h2 class="layout-login__prompt-detail" data-translate-id="layout-login-description">साझा बजट का उपयोग शुरू करने के लिए अपने गूगल खाते से साइन इन करें</h2>
-                <div class="layout-login__variants">
-                    <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">दर्ज करें</button>
-                    <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">डेमो लॉगिन</a>
-                </div>
+            <div class="layout-login__variants">
+                <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">दर्ज करें</button>
+                <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">डेमो लॉगिन</a>
+            </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
                 <a href="/about" target="_blank" rel="noopener" data-translate-id="landing-page">रोजप्लाटा क्या है?</a>
@@ -234,10 +224,13 @@
         </div>
     </template>
 
-    <template id="new-budget-template"><form id="new-budget__form">
-            <div class="new-budget__fields">
-                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="नया बजट शीर्षक" data-translate-id="new-budget-title" data-translate-prop="placeholder">
-                <h4 data-translate-id="new-budget-currency">मुद्रा का चयन करें</h4>
+    <template id="new-budget-template"><div class="new-budget"></div>
+    </template>
+
+    <template id="budget-form-template"><form id="budget-form">
+            <div class="budget-form__fields">
+                <input type="text" name="name" autocomplete="off" autofocus="" required="" minlength="3" maxlength="20" title="Only letters, digits and a space" placeholder="" data-translate-id="budget-form-title" data-translate-prop="placeholder">
+                <h4 data-translate-id="budget-form-currency"></h4>
                 <select name="currency" id="currency">
                     <option value="RUB" data-translate-id="currency-rub">रूसी रूबल</option>
                     <option value="INR" data-translate-id="currency-inr">भारतीय रुपया</option>
@@ -246,23 +239,30 @@
                     <option value="CNY" data-translate-id="currency-cny">चीनी युआन</option>
                     <option value="JRD" data-translate-id="currency-jrd">जॉर्डन दीनार</option>
                 </select>
-                <h4 data-translate-id="new-budget-suggested-participants">सुझाए गए प्रतिभागी</h4>
-                <div class="new-budget__suggested-participants">
-                    <div class="new-budget__suggested-participants-item new-budget__field--checkbox">
-                        <input type="checkbox" name="" id="">
-                        <label for=""></label>
+                <div class="budget-form__participants">
+                    <h4 data-translate-id="budget-form-suggested-participants"></h4>
+                    <div class="budget-form__suggested-participants">
+                        <div class="budget-form__suggested-participants-item budget-form__field--checkbox">
+                            <input type="checkbox" name="" id="">
+                            <label for=""></label>
+                        </div>
                     </div>
                 </div>
-                <h4 data-translate-id="new-budget-type">बजट प्रकार</h4>
-                <h6 class="text-muted" data-translate-id="new-budget-is-open-notice">यदि आप इस सेटिंग को चालू करते हैं, तो कोई भी भागीदारी अनुरोध स्वचालित रूप से स्वीकृत हो जाएगा ।</h6>
-                <div class="new-budget__field--checkbox">
+                <h4 data-translate-id="budget-form-type"></h4>
+                <h6 class="text-muted" data-translate-id="budget-form-is-open-notice"></h6>
+                <div class="budget-form__field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen">
-                    <label for="isOpen" data-translate-id="new-budget-is-open">इस बजट को खुला रखें</label>
+                    <label for="isOpen" data-translate-id="budget-form-is-open"></label>
                 </div>
+                <h4 data-translate-id="budget-form-banned-user-transactions-action"></h4>
+                <select name="bannedUserTransactionsAction" id="bannedUserTransactionsAction">
+                    <option value="keep" data-translate-id="banned-user-transactions-keep"></option>
+                    <option value="ignore" data-translate-id="banned-user-transactions-ignore"></option>
+                </select>
             </div>
-            <div class="new-budget__buttons">
-                <button type="submit" data-translate-id="new-budget-go">जा।</button>
-                <button type="reset" data-translate-id="new-budget-reset">रीसेट करें</button>
+            <div class="budget-form__buttons">
+                <button type="submit" data-translate-id="budget-form-go"></button>
+                <button type="reset" data-translate-id="budget-form-reset"></button>
             </div>
         </form>
     </template>
