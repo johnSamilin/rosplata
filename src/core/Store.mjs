@@ -1,5 +1,6 @@
 //@ts-check
 
+import { isEqual } from "../utils/utils.mjs"
 import { FeatureDetector } from "./FeatureDetector.mjs"
 
 class CStore {
@@ -64,9 +65,11 @@ class CStore {
         return true
     }
 
-    set(fieldName, value) {
+    set(fieldName, value, bypassEqualityCheck = false) {
         const accessors = fieldName.split('.')
-        if (this.has(fieldName)) {
+        const oldValue = this.get(fieldName)
+        const isValueChanged = !isEqual(oldValue, value)
+        if (isValueChanged || bypassEqualityCheck) {
             const last = accessors.pop()
             if (accessors.length > 0) {
                 // @ts-ignore

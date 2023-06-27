@@ -40,14 +40,14 @@ class CRouter {
             pattern: new URLPattern({ pathname: matcher.pattern, baseUrl: origin })
         }))
         AuthManager.onLogin = this.#onRouteChange
-        AuthManager.onLogout = () => Store.set('layout', 'login')
+        AuthManager.onLogout = () => Store.set('layout', 'login', true)
     }
 
     start() {
         if (AuthManager.isLoggedIn) {
             this.#onRouteChange()
         } else {
-            Store.set('layout', 'login')
+            Store.set('layout', 'login', true)
         }
     }
 
@@ -62,7 +62,7 @@ class CRouter {
         this.#queryParams = new Map(location.search.replace('?', '').split('&').map(param => param.split('=')))
         this.#routeParams = { ...activeLayout.pattern.exec(location.href).pathname.groups, ...additionalParams }
         this.#hash = location.hash
-        Store.set('layout', activeLayout.layout)
+        Store.set('layout', activeLayout.layout, true)
     }
 
     navigate(url, force = false) {

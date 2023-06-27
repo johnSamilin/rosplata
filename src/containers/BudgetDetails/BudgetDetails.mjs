@@ -52,12 +52,14 @@ export class BudgetDetails extends AnimatedComponent {
             filterBannedUserTransactions(
                 this.data?.transactions,
                 this.data?.participants,
-                this.data.bannedUserTransactionsAction === 'ignore'
+                this.data?.bannedUserTransactionsAction === 'ignore'
             ) ?? []
         )
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
         const data = await Api.get('details', `budgets/${id}`)
-        Store.set(`budgets.${id}`, data)
+        if (data !== undefined) {
+            Store.set(`budgets.${id}`, data)
+        }
 
         if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
             this.showInviteDialog()
@@ -105,7 +107,7 @@ export class BudgetDetails extends AnimatedComponent {
         Store.unsubscribe('selectedBudgetId', this.sync)
         Store.unsubscribe(`budgets.${this.data?.id}.transactions`, this.#onTransactionsChanged)
         Store.unsubscribe(`budgets.${this.data?.id}.participants`, this.#onParticipantsChanged)
-        Store.unsubscribe(`budgets.${this.data.id}`, this.onBudgetUpdated)
+        Store.unsubscribe(`budgets.${this.data?.id}`, this.onBudgetUpdated)
         return super.exterminate()
     }
 

@@ -1,6 +1,6 @@
 import { allowedUserStatuses } from "../constants/userStatuses.mjs"
 
-export function filterBannedUserTransactions(transactions, users, shouldIgnore) {
+export function filterBannedUserTransactions(transactions = [], users = [], shouldIgnore) {
     const bannedUsers = new Set(
         users
             .filter(user => !allowedUserStatuses.includes(user.status))

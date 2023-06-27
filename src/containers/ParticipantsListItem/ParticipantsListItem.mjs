@@ -44,7 +44,7 @@ export class ParticipantsListItem extends Component {
 
     update = async () => {
         const container = this.getContainer()
-        if (!this.data) {
+        if (!this.data || !container) {
             return
         }
         const selectedBudgetId = Store.get('selectedBudgetId')

@@ -90,19 +90,22 @@
     margin-bottom: 0;
     width: 100%;
 }
+
 .budget-details__aside .tabs label {
     align-self: baseline;
 }
+
 .budget-details__aside .content {
     align-self: flex-start;
-    height: 100%;
+    height: calc(100% - 55px);
 }
 
 .budget-details__tab-content-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100% - 2.75rem);
+    height: 100%;
+    overflow: auto;
 }
 
 #budget-details #send-invite {
@@ -161,5 +164,18 @@
 
     .budget-details__counter {
         font-size: 15vw;
+    }
+}
+
+@media all and (prefers-color-scheme: dark) {
+    .budget-details__aside {
+        background-color: #41403e;
+        color: beige;
+    }
+}
+html.dark {
+    .budget-details__aside {
+        background-color: #41403e;
+        color: beige;
     }
 }

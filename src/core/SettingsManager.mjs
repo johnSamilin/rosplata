@@ -5,7 +5,7 @@ import { getFromLs, updateFormatters } from "../utils/utils.mjs"
 const darkThemeMedia = matchMedia('(prefers-color-scheme: dark)')
 
 class CSettingsManager {
-    #appVersion = '0.3.0'
+    #appVersion = '0.3.1'
     #animationsEnabled = true
     #autoLoginEnabled = getFromLs('autoLoginEnabled', 'true') === 'true'
     #theme = getFromLs('theme', 'system')

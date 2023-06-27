@@ -37,7 +37,7 @@ export class BudgetList extends ListComponent {
     }
 
     #handleCreateBudget = async (event) => {
-        event.preventDefault()        
+        event.preventDefault()
         Router.navigate('/create')
     }
 
@@ -67,9 +67,14 @@ export class BudgetList extends ListComponent {
         parent.appendChild(container)
         this.attachListeners()
 
+        const budgets = Store.get('budgets')
+        this.data = budgets
+
         try {
             const data = await Api.get('list', 'budgets')
-            Store.set('budgets', mapArrayToObjectId(data))
+            if (data !== undefined) {
+                Store.set('budgets', mapArrayToObjectId(data))
+            }
         } catch (er) {
             console.error(er)
         } finally {

@@ -116,6 +116,9 @@ export class BudgetForm extends Component {
 
     update = (target) => {
         const container = target ?? this.getContainer()
+        if (!container) {
+            return false
+        }
 
         this.fields.forEach((field) => {
             const fContainer = container.querySelector(`[name=${field.name}]`)
