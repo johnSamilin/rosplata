@@ -14,7 +14,7 @@
     <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" async href="/styles/paper.min.css" />
-    <link rel="stylesheet" href="/styles/generated/sizes.css" />
+    <!-- <link rel="stylesheet" href="/styles/generated/sizes.css" /> -->
     <script src="/src/App.mjs" type="module"></script>
 
     <style type="text/css">
@@ -119,8 +119,8 @@
     </template>
 
     <template id="budget-details-template">
-        <div class="budget-details__main">
-            <div class="budget-details__header">
+        <div class="budget-details main">
+            <div class="header">
                 <div class="visible-on-mobile">
                     <a href="/" data-translate-id="back">Back</a>
                 </div>
@@ -128,41 +128,41 @@
                     <a id="settings-btn" data-translate-id="settings-button">Settings</a>
                 </div>
             </div>
-            <h4 class="budget-details__title"></h4>
-            <div class="budget-details__counters">
-                <div class="budget-details__counter-wrapper">
-                    <span class="budget-details__counter budget-details__counter--my"></span>
+            <h4 class="title"></h4>
+            <div class="counters">
+                <div class="counter-wrapper">
+                    <span class="counter counter--my"></span>
                     <span data-translate-id="budget-details-my-balance">My balance</span>
                 </div>
-                <div class="budget-details__counter-wrapper">
+                <div class="counter-wrapper">
                     <span
-                        class="budget-details__counter budget-details__counter--total budget-details__counter--zero"></span>
+                        class="counter counter--total counter--zero"></span>
                     <span data-translate-id="budget-details-total-sum">Total sum</span>
                 </div>
             </div>
-            <div class="budget-details__transactions"></div>
-            <div class="budget-details__actions budget-details__actions--invite">
+            <div class="transactions"></div>
+            <div class="actions actions--invite">
                 <span data-translate-id="budget-details-actions-invite">You are invited to participate</span>
-                <button class="budget-details__action btn-success" id="accept-invite"
+                <button class="action btn-success" id="accept-invite"
                     data-translate-id="budget-details-actions-accept">Accept</button>
-                <button class="budget-details__action btn-warning" id="decline-invite"
+                <button class="action btn-warning" id="decline-invite"
                     data-translate-id="budget-details-actions-decline">Decline</button>
             </div>
-            <p class="text-muted budget-details__actions--isopen"
+            <p class="text-muted actions--isopen"
                 data-translate-id="budget-details-actions-open-notification">
                 This budget is open. Your request will be automatically approved.
             </p>
-            <div class="budget-details__actions budget-details__actions--ask">
+            <div class="actions actions--ask">
                 <span data-translate-id="budget-details-actions-ask">You can ask for invite</span>
-                <button class="budget-details__action btn-secondary" id="ask-invite"
+                <button class="action btn-secondary" id="ask-invite"
                     data-translate-id="budget-details-actions-send-request">Send request</button>
             </div>
-            <div class="budget-details__actions budget-details__actions--wait"
+            <div class="actions actions--wait"
                 data-translate-id="budget-details-actions-wait">
                 Budget owner have to approve your request
             </div>
         </div>
-        <aside class="budget-details__aside">
+        <aside class="aside">
             <div class="visible-on-mobile">
                 <a id="settings-close-btn" data-translate-id="close">Close</a>
             </div>
@@ -174,15 +174,15 @@
                 <label for="tab2" data-translate-id="settings-btn">Settings</label>
 
                 <div class="content" id="content1">
-                    <div class="budget-details__tab-content-wrapper">
-                        <div class="budget-details__participants"></div>
-                        <div class="budget-details__actions budget-details__actions--send-invite">
-                            <button id="send-invite" class="budget-details__action button"
+                    <div class="tab-content-wrapper">
+                        <div class="participants"></div>
+                        <div class="actions actions--send-invite">
+                            <button id="send-invite" class="action button"
                                 data-translate-id="budget-details-add-people">Add people</button>
                         </div>
                     </div>
                 </div>
-                <div class="content budget-details__settings" id="content2">
+                <div class="content settings" id="content2">
                 </div>
             </div>
         </aside>

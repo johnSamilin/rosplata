@@ -73,11 +73,13 @@
     flex-direction: column;
     align-items: center;
 }
-.budget-details__counter {
-    font-size: 4rem;
-    padding: 1rem;
-    display: flex;
-    align-items: flex-end;
+.budget-details {
+    & counter {
+        font-size: 4rem;
+        padding: 1rem;
+        display: flex;
+        align-items: flex-end;
+    }
 }
 .budget-details__counter::before {
     display: inline-block;

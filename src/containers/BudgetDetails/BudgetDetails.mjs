@@ -116,9 +116,9 @@ export class BudgetDetails extends AnimatedComponent {
         const container = template.content.cloneNode(true)
         this.update(container)
         parent.appendChild(container)
-        transactionsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('transactions')}`))
-        participantsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('participants')}`))
-        settingsController.renderTo(this.getContainer()?.querySelector(`.${this.getCssClass('settings')}`))
+        transactionsController.renderTo(this.getContainer()?.querySelector('.transactions'))
+        participantsController.renderTo(this.getContainer()?.querySelector('.participants'))
+        settingsController.renderTo(this.getContainer()?.querySelector('.settings'))
     }
 
     onBudgetUpdated = (data) => {
@@ -156,49 +156,49 @@ export class BudgetDetails extends AnimatedComponent {
         }
 
         const { myBalance, totalBalance } = getBudgetBalanceFromTransactions(this.data.transactions, this.data.participants)
-        this.setAttr(container, `.${this.getCssClass('counter', 'my')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance)))
+        this.setAttr(container, '.counter--my', 'textContent', currencyFormatters.get(this.data.currency)?.format(Math.abs(myBalance)))
         this.addCssClassConditionally(
             !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
             'hidden',
-            container.querySelector(`.${this.getCssClass('counter', 'my')}`).parentElement
+            container.querySelector('.counter--my').parentElement
         )
         this.addCssClassConditionally(
             myBalance > 0,
-            this.getCssClass('counter', 'positive'),
-            container.querySelector(`.${this.getCssClass('counter', 'my')}`)
+            'counter--positive',
+            container.querySelector('.counter--my')
         )
         this.addCssClassConditionally(
             myBalance < 0,
-            this.getCssClass('counter', 'negative'),
-            container.querySelector(`.${this.getCssClass('counter', 'my')}`)
+            'counter--negative',
+            container.querySelector('.counter--my')
         )
-        this.setAttr(container, `.${this.getCssClass('counter', 'total')}`, 'textContent', currencyFormatters.get(this.data.currency)?.format(totalBalance))
-        this.setAttr(container, `.${this.getCssClass('title')}`, 'textContent', this.data.name)
+        this.setAttr(container, '.counter--total', 'textContent', currencyFormatters.get(this.data.currency)?.format(totalBalance))
+        this.setAttr(container, '.title', 'textContent', this.data.name)
 
         this.addCssClassConditionally(
             !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
-            this.getCssClass('actions', 'visible'),
-            container.querySelector(`.${this.getCssClass('actions', 'isopen')}`)
+            'actions--visible',
+            container.querySelector('.actions--isopen')
         )
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.INVITED,
-            this.getCssClass('actions', 'visible'),
-            container.querySelector(`.${this.getCssClass('actions', 'invite')}`)
+            'actions--visible',
+            container.querySelector('.actions--invite')
         )
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.UNKNOWN,
-            this.getCssClass('actions', 'visible'),
-            container.querySelector(`.${this.getCssClass('actions', 'ask')}`)
+            'actions--visible',
+            container.querySelector('.actions--ask')
         )
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.WAIT_APPROVAL,
-            this.getCssClass('actions', 'visible'),
-            container.querySelector(`.${this.getCssClass('actions', 'wait')}`)
+            'actions--visible',
+            container.querySelector('.actions--wait')
         )
         this.addCssClassConditionally(
             this.data?.currentUserStatus === PARTICIPANT_STATUSES.OWNER,
-            this.getCssClass('actions', 'visible'),
-            container.querySelector(`.${this.getCssClass('actions', 'send-invite')}`)
+            'actions--visible',
+            container.querySelector('.actions--send-invite')
         )
     }
 
@@ -271,15 +271,15 @@ export class BudgetDetails extends AnimatedComponent {
         e.stopPropagation()
         this.addCssClassConditionally(
             isMobile,
-            this.getCssClass('aside', 'visible'),
-            this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)
+            'aside--visible',
+            this.getContainer()?.querySelector('.aside')
         )
     }
 
     onHideSettings = (e) => {
         e.stopPropagation()
-        this.getContainer()?.querySelector(`.${this.getCssClass('aside')}`)?.classList.remove(
-            this.getCssClass('aside', 'visible')
+        this.getContainer()?.querySelector('.aside')?.classList.remove(
+            'aside--visible',
         )
     }
 

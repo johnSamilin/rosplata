@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column-reverse;
 }
+
 .budgets-list--empty #budgets-list__items::before {
     display: flex;
     align-items: center;
@@ -21,29 +22,40 @@
     color: gray;
     z-index: 1;
 }
-#budgets-list__items {    
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    position: relative;
-    overflow: auto;
-}
-.budgets-list__items-container::before {
-    display: block;
-    padding: 2.5rem 0.75rem 0;
-    font-size: 1.2rem;
-}
-.budgets-list__items-container--empty {
-    display: none;
-}
-.budgets-list__items-container--status0::before {
-    content: "You are invited:";
-}
-.budgets-list__items-container--status2::before {
-    content: "You are banned:";
-}
-.budgets-list__items-container--status5::before {
-    content: "Waiting for approval:";
+
+.budgets-list {
+    &__items {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: relative;
+        overflow: auto;
+
+        &-container {
+            &::before {
+                display: block;
+                padding: 2.5rem 0.75rem 0;
+                font-size: 1.2rem;
+            }
+
+            &--empty {
+                display: none;
+            }
+
+            
+            &--status4::before {
+                content: "You are invited:";
+            }
+
+            &--status2::before {
+                content: "You are banned:";
+            }
+
+            &--status5::before {
+                content: "Waiting for approval:";
+            }
+        }
+    }
 }
 
 #budgets-list.exit,
@@ -51,16 +63,20 @@
     transform: translateX(-1rem);
     opacity: 0;
 }
+
 #budgets-list.hidden {
     display: none;
 }
+
 .budgets-list__actions {
     display: flex;
     width: 100%;
 }
+
 #budgets-list__create-button {
     flex-grow: 1;
 }
+
 #budgets-list__menu-button {
     background: none;
     width: 1.5rem;
@@ -74,6 +90,7 @@
     position: relative;
     align-self: center;
 }
+
 #budgets-list__menu-button::after {
     display: block;
     content: '';
@@ -83,12 +100,14 @@
     left: -0.75rem;
     background: black;
 }
+
 #budgets-list__menu-button.loading-rotate {
     opacity: 0.5;
 }
+
 #budgets-list__menu-button.loading-rotate::before {
     position: absolute;
-    left: -0.25rem;    
+    left: -0.25rem;
     width: 0.75rem;
     height: 0.75rem;
 }
@@ -102,6 +121,7 @@
         right: 0;
         height: 100%;
     }
+
     .budgets-list--empty #budgets-list__items::after {
         width: 50%;
         left: 25%;
