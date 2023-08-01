@@ -25,6 +25,7 @@
         html {
             margin: 0;
             padding: 0;
+            position: relative;
         }
 
         #stats {
@@ -34,13 +35,51 @@
 
         .stats__block {
             display: flex;
+            animation: reveal-left linear;
+            animation-timeline: scroll(block root);
+            animation-range: 0 100vh;
+        }
+
+        .stats__block:nth-child(2) {
+            animation-name: reveal-right;
+        }
+        
+        @keyframes reveal-left {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes reveal-right {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         #welcome {
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem;
+        }
+        
+        #welcome::after {
+            content: '';
+            z-index: -1;
             background: linear-gradient(#aacdfc, beige, transparent);
             background-size: contain;
             height: 80vh;
-            padding: 0 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
 
         #welcome h1 {
@@ -65,6 +104,21 @@
             position: relative;
             top: -2vw;
             font-size: medium;
+        }
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            .stats__block {
+                flex-direction: column;
+                overflow: auto;
+            }
+
+            #stats {
+                max-width: 100%;
+            }
+
+            #welcome p {
+                max-width: 80%;
+            }
         }
     </style>
 </head>
