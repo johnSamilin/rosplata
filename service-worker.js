@@ -1,6 +1,9 @@
 const commonPreloadMap = [
     '',
     '/',
+    '/images/favicons/icon.svg',
+    '/images/history-check-svgrepo-com.svg',
+    '/images/trash-1-svgrepo-com.svg',
     'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js',
     'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js',
     'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js',

@@ -23,7 +23,7 @@ export class MainLayout extends AnimatedComponent {
 
     constructor() {
         const params = Router.routeParams
-        if (params[0] === 'demo') {
+        if (params && params[0] === 'demo') {
             AuthManager.requestDemoAccess()
         }
         super()
@@ -45,7 +45,7 @@ export class MainLayout extends AnimatedComponent {
     }
 
     update() {
-        const { id, create } = Router.routeParams
+        const { id, create } = Router.routeParams ?? {}
         const selectedBudgetId = id ? id : -1
         Store.set('selectedBudgetId', selectedBudgetId)
         if (FeatureDetector.isMobile && (

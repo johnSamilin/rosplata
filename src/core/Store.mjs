@@ -3,16 +3,21 @@
 import { isEqual } from "../utils/utils.mjs"
 import { FeatureDetector } from "./FeatureDetector.mjs"
 
+const defaultState = {
+    selectedBudgetId: -1,
+    budgets: {},
+    layout: '',
+    isMobile: FeatureDetector.isMobile,
+}
+
 class CStore {
     #listeners = new Map()
 
-    // TODO: use proxy
-    data = {
-        selectedBudgetId: -1,
-        budgets: {},
-        layout: '',
-        isMobile: FeatureDetector.isMobile,
+    constructor() {
+        this.data = JSON.parse(localStorage.getItem('data') ?? JSON.stringify(defaultState));
     }
+
+    data = defaultState
 
     subscribe(field, callback) {
         if (!this.#listeners.has(field)) {
@@ -78,6 +83,7 @@ class CStore {
                 // @ts-ignore
                 this.data[last] = value
             }
+            localStorage.setItem('data', JSON.stringify(this.data))
             this.#notify(fieldName, value)
         }
     }
@@ -95,6 +101,7 @@ class CStore {
                 finalValue = this.data[last].concat(value)
                 this.data[last] = finalValue
             }
+            localStorage.setItem('data', JSON.stringify(this.data))
             this.#notify(fieldName, finalValue)
         }
     }
