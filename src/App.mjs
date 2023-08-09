@@ -29,6 +29,7 @@ window.addEventListener('load', async () => {
         if (SettingsManager.offlineModeEnabled) {
             const url = '/service-worker.js'
             let registration = await navigator.serviceWorker.getRegistration(url)
+            console.log(registration)
             if (!registration) {
                 registration = await navigator.serviceWorker.register(
                     url,
