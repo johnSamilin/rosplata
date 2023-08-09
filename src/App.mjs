@@ -2,6 +2,7 @@
 import { AuthManager } from "./core/AuthManager.mjs"
 import { LayoutManager } from "./core/LayoutManager.mjs"
 import { Router } from "./core/Router.mjs"
+import { SettingsManager } from "./core/SettingsManager.mjs"
 import { importStyle } from "./utils/imports.js"
 
 importStyle('/styles/App.css')
@@ -24,12 +25,30 @@ document.body.addEventListener('click', (event) => {
 })
 
 window.addEventListener('load', async () => {
-    await AuthManager.start()
-    if (location.pathname === '/demo') {
-        AuthManager.requestDemoAccess()
-    }
-    if (await AuthManager.validate()) {
-        Router.start()
+    try {
+        if (SettingsManager.offlineModeEnabled) {
+            const url = '/service-worker.js'
+            let registration = await navigator.serviceWorker.getRegistration(url)
+            if (!registration) {
+                registration = await navigator.serviceWorker.register(
+                    url,
+                    { type: 'module', updateViaCache: 'all' }
+                )
+            }
+
+            registration.active?.postMessage({ appVersion: SettingsManager.appVersion })
+        }
+    } catch (er) {
+        console.error(er)
+        SettingsManager.offlineModeEnabled = false
+    } finally {
+        await AuthManager.start()
+        if (location.pathname === '/demo') {
+            AuthManager.requestDemoAccess()
+        }
+        if (await AuthManager.validate()) {
+            Router.start()
+        }
     }
 })
 
@@ -43,3 +62,4 @@ window.onerror = (event, source, line, col, error) => errorHandler(error)
 window.addEventListener('error', (event) => {
     errorHandler(event.error)
 })
+
