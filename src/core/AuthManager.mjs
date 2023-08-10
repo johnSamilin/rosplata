@@ -2,6 +2,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebas
 import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, setPersistence, browserSessionPersistence } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import { RequestManager } from './RequestManager.mjs';
 import { SettingsManager } from './SettingsManager.mjs';
+import { Store } from './Store.mjs';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCpPz_8duNVNfVhWp81BV6HHORussPUPLg",
@@ -28,6 +29,13 @@ class CAuthManager {
     #gApp
     #gAuth
     #gProvider
+
+    constructor() {
+        if (SettingsManager.offlineMode) {
+            this.#isLoggedIn = true
+            this.#data = Store.get('user')
+        }
+    }
 
     get isLoggedIn() {
         return this.#isLoggedIn
@@ -70,6 +78,7 @@ class CAuthManager {
                             name: this.#gAuth.currentUser.displayName,
                             token: await this.#gAuth.currentUser.getIdToken(),
                         }
+                        Store.set('user', this.#data)
                     }
                     resolve()
                 })
@@ -86,6 +95,7 @@ class CAuthManager {
             name: 'Demo Account',
             token: 'demoaccount',
         }
+        Store.set('user', this.#data)
     }
 
     login = async () => {
@@ -99,6 +109,7 @@ class CAuthManager {
                 token: result.user.accessToken,
                 picture: result.user.photoURL,
             }
+            Store.set('user', this.#data)
             if (await this.validate()) {
                 this.isLoggedIn = true
             }
@@ -108,6 +119,9 @@ class CAuthManager {
     }
 
     validate() {
+        if (SettingsManager.offlineMode) {
+            return true
+        }
         try {
             UsersApi.post('validate', 'users/validate').then(({ lang }) => {
                 if (SettingsManager.language !== lang) {
@@ -127,6 +141,7 @@ class CAuthManager {
         this.#data = null
         SettingsManager.reset()
         signOut(this.#gAuth)
+        Store.set('token', '')
     }
 
 }

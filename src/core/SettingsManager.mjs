@@ -10,7 +10,8 @@ class CSettingsManager {
     #autoLoginEnabled = getFromLs('autoLoginEnabled', 'true') === 'true'
     #theme = getFromLs('theme', 'system')
     #language = getFromLs('language')
-    #offlineModeEnabled = 'serviceWorker' in navigator
+    #offlineModeEnabled = 'serviceWorker' in navigator && 'onLine' in navigator
+    #offlineMode = this.offlineModeEnabled && !navigator.onLine
 
     get animationsEnabled() {
         return this.#animationsEnabled
@@ -43,6 +44,10 @@ class CSettingsManager {
 
     set offlineModeEnabled(val) {
         this.#offlineModeEnabled = val
+    }
+
+    get offlineMode() {
+        return this.#offlineMode
     }
 
     async override(name, value) {
@@ -78,6 +83,10 @@ class CSettingsManager {
             this.#changeTheme(this.#theme)
         }
         updateFormatters(Intl.getCanonicalLocales(this.#language))
+        if (this.#offlineModeEnabled) {
+            document.addEventListener('online', () => this.#offlineMode = false)
+            document.addEventListener('offline', () => this.#offlineMode = true)
+        }
     }
 
     onSystemThemeChange = () => {

@@ -1,4 +1,5 @@
 import { AuthManager } from "./AuthManager.mjs"
+import { SettingsManager } from "./SettingsManager.mjs"
 
 export class RequestManager {
     // deduping
@@ -56,6 +57,9 @@ export class RequestManager {
                 }
             } catch (er) {
                 if (er.name !== 'AbortError') {
+                    if (er.message === 'Failed to fetch' && SettingsManager.offlineMode) {
+                        return;
+                    }
                     import('/src/core/CrisisManager.mjs').then(({ CrisisManager }) => {
                         CrisisManager.logError(er)
                     })

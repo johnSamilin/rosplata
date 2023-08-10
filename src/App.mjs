@@ -7,6 +7,10 @@ import { importStyle } from "./utils/imports.js"
 
 importStyle('/styles/App.css')
 
+if (SettingsManager.offlineMode) {
+    console.log('We\'re in offline mode')
+}
+
 document.querySelector('#features-support-checkup')?.remove()
 
 document.body.addEventListener('click', (event) => {
@@ -29,7 +33,15 @@ window.addEventListener('load', async () => {
         if (SettingsManager.offlineModeEnabled) {
             const url = '/service-worker.js'
             let registration = await navigator.serviceWorker.getRegistration(url)
-            console.log(registration)
+            let latestVersion
+            let shouldUpdateCache = true
+            try {
+                latestVersion = await (await fetch('/version')).json()
+                shouldUpdateCache = SettingsManager.appVersion !== latestVersion.version
+            } catch (er) {
+                console.error('Skipping cache update', er)
+                shouldUpdateCache = false
+            }
             if (!registration) {
                 registration = await navigator.serviceWorker.register(
                     url,
@@ -37,7 +49,7 @@ window.addEventListener('load', async () => {
                 )
             }
 
-            registration.active?.postMessage({ appVersion: SettingsManager.appVersion })
+            registration.active?.postMessage({ shouldUpdateCache })
         }
     } catch (er) {
         console.error(er)

@@ -7,9 +7,7 @@ const commonPreloadMap = [
     'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js',
     'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js',
     'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js',
-    'https://fonts.gstatic.com/s/patrickhandsc/v13/0nkwC9f7MfsBiWcLtY65AWDK873ljiK7.woff2',
-    'https://fonts.gstatic.com/s/neucha/v17/q5uGsou0JOdh94bfvQlt.woff2',
-    'https://fonts.gstatic.com/s/neucha/v17/q5uGsou0JOdh94bfuQltOxU.woff2',
+    'https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand+SC&display=swap',
     '/src/components/BudgetForm/BudgetForm.css',
     '/src/components/BudgetForm/BudgetForm.mjs',
     '/src/components/InviteDialog/InviteDialog.css',
@@ -84,17 +82,12 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(self.clients.claim())
     event.waitUntil(self.registration?.navigationPreload.enable())
     console.log('Service worker is activated')
-    fetch('/version')
-        .then(res => res.json())
-        .then(({ version }) => {
-            console.log('Latest version is', version)
-            start(version)
-        })
+    start()
 })
 
 self.addEventListener('message', (context) => {
-    const appVersion = context.data.appVersion
-    start(appVersion)
+    const shouldUpdateCache = context.data.shouldUpdateCache
+    start(shouldUpdateCache)
 })
 
 self.addEventListener('fetch', (event) => {
@@ -117,24 +110,16 @@ self.addEventListener('fetch', (event) => {
         }))
 })
 
-async function start(appVersion) {
-    console.log('App version is', appVersion)
+async function start(shouldUpdateCache = false) {
     const cache = await caches.open('rosplatacache')
-    const storedCacheVersion = await cache.match('/cacheVersion')
-    let cacheVersion
-    try {
-        cacheVersion = await fetch('/version')
-    } catch (er) {}
-    let cacheVersionsMatch = true
-    try {
-        const json = await (cacheVersion.clone()).json()
-        cacheVersionsMatch = appVersion === json.version
-    } catch (er) { }
-    if (storedCacheVersion instanceof Response && cacheVersionsMatch) {
+    if (shouldUpdateCache) {
+        console.log('Updating cached source code')
+        commonPreloadMap.forEach(resource => {
+            cache.delete(resource)
+        });
+        cache.addAll(commonPreloadMap)
+    } else {
         // ...
         console.log('OK GO')
-    } else {
-        cacheVersion && cache.put('/cacheVersion', cacheVersion)
-        cache.addAll(commonPreloadMap)
     }
 }
