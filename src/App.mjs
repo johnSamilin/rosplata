@@ -48,6 +48,20 @@ window.addEventListener('load', async () => {
                     { type: 'module', updateViaCache: 'all' }
                 )
             }
+            registration.addEventListener('updatefound', event => {
+                const newSW = registration.installing;
+                newSW.addEventListener('statechange', event => {
+                  if (newSW.state == "installed") {
+                     if (confirm('Would you like to update the app?')) {
+                         registration.unregister()
+                     }
+                  }
+                })
+                navigator.serviceWorker.addEventListener("controllerchange", async event => {
+                    const { Alert } = await import('./components/Alert/Alert.mjs')
+                    new Alert('success', 'Rosplata successfully updated. Enjoy!')
+                })
+              })
 
             registration.active?.postMessage({ shouldUpdateCache })
         }
