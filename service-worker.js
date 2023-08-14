@@ -53,6 +53,7 @@ const commonPreloadMap = [
     '/src/core/Router.mjs',
     '/src/core/SettingsManager.mjs',
     '/src/core/Store.mjs',
+    '/src/core/OfflineManager.mjs',
     '/src/layouts/Login/LoginLayout.css',
     '/src/layouts/Login/LoginLayout.mjs',
     '/src/layouts/Main/MainLayout.css',
