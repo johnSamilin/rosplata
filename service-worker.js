@@ -83,7 +83,7 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(self.clients.claim())
     event.waitUntil(self.registration?.navigationPreload.enable())
     console.log('Service worker is activated')
-    event.waitUntil(start())
+    event.waitUntil(start(true))
 })
 
 self.addEventListener('message', (event) => {
