@@ -30,7 +30,7 @@ export class CInviteDialog extends CDialog {
             await importWasm('/src/utils/go-qr-code-generator.wasm')
             this.setAttr(container, `.${this.getCssClass('qr-code')}`, 'src', `data:image/png;base64,${window.generateQrCode(this.data.url)}`)
         } catch (er) {
-            const { Alert } = await import('../../containers/Alert/Alert.mjs')
+            const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('danger', 'Hmm, seems like you cannot share')
             console.error(er)
         }
@@ -50,7 +50,7 @@ export class CInviteDialog extends CDialog {
         if (FeatureDetector.share && navigator.canShare(dataToShare)) {
             navigator.share(dataToShare)
         } else {
-            const { Alert } = await import('../../containers/Alert/Alert.mjs')
+            const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('danger', 'Hmm, seems like you cannot share')
         }
     }

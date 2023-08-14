@@ -79,7 +79,7 @@ export class ParticipantsList extends ListComponent {
             })
             Store.set(`budgets.${budgetId}.participants`, newParticipants)
         } catch (er) {
-            const { Alert } = await import('../Alert/Alert.mjs')
+            const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('danger', 'Hmm, seems like you cannot do this')
             console.error(er)
         } finally {

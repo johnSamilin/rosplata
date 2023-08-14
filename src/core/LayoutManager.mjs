@@ -29,6 +29,7 @@ class CLayoutManager {
 
     async #getLayout(name) {
         let layout
+        try {
         switch (name) {
             case 'main':
                 const { MainLayout } = await import('../layouts/Main/MainLayout.mjs')
@@ -43,6 +44,9 @@ class CLayoutManager {
                 layout = new LoginLayout()
                 break
         }
+    } catch(er) {
+        console.error(er)
+    }
 
         return layout
     }

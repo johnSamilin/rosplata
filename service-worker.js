@@ -15,8 +15,8 @@ const commonPreloadMap = [
     '/src/constants/currencies.mjs',
     '/src/constants/routes.mjs',
     '/src/constants/userStatuses.mjs',
-    '/src/containers/Alert/Alert.css',
-    '/src/containers/Alert/Alert.mjs',
+    '/src/components/Alert/Alert.css',
+    '/src/components/Alert/Alert.mjs',
     '/src/containers/BudgetDetails/BudgetDetails.css',
     '/src/containers/BudgetDetails/BudgetDetails.mjs',
     '/src/containers/BudgetDetails/components/Settings/BudgetSettings.css',
@@ -82,12 +82,12 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(self.clients.claim())
     event.waitUntil(self.registration?.navigationPreload.enable())
     console.log('Service worker is activated')
-    start()
+    event.waitUntil(start())
 })
 
-self.addEventListener('message', (context) => {
-    const shouldUpdateCache = context.data.shouldUpdateCache
-    start(shouldUpdateCache)
+self.addEventListener('message', (event) => {
+    const shouldUpdateCache = event.data.shouldUpdateCache
+    event.waitUntil(start(shouldUpdateCache))
 })
 
 self.addEventListener('fetch', (event) => {
@@ -114,9 +114,7 @@ async function start(shouldUpdateCache = false) {
     const cache = await caches.open('rosplatacache')
     if (shouldUpdateCache) {
         console.log('Updating cached source code')
-        commonPreloadMap.forEach(resource => {
-            cache.delete(resource)
-        });
+        await Promise.all(commonPreloadMap.map(resource => cache.delete(resource)))
         cache.addAll(commonPreloadMap)
     } else {
         // ...

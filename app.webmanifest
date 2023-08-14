@@ -1,0 +1,25 @@
+{
+  "id": "rosplata",
+  "name": "Rosplata",
+  "description": "Rosplata is an opensource self hosted collaborative finance manager. Create budgets, share them with friends and easily split the bills",
+  "start_url": "/",
+  "lang": "en-US",
+  "theme_color": "#f5f5dc",
+  "display": "standalone",
+  "screenshots": [
+    {
+      "url": "/create",
+      "name": "Create new budget",
+      "short_name": "Constructor"
+    }
+  ],
+  "shortcuts": [
+    {
+      "url": "/settings"
+    },
+    {
+      "name": "Settings",
+      "short_name": "Settings"
+    }
+  ]
+}

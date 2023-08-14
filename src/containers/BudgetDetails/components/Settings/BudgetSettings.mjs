@@ -85,7 +85,7 @@ export class BudgetSettings extends Component {
                 bannedUserTransactionsAction: fd.get('bannedUserTransactionsAction'),
             })
         } catch (er) {
-            const { Alert } = await import('../../../Alert/Alert.mjs')
+            const { Alert } = await import('../../../../components/Alert/Alert.mjs')
             new Alert('danger', er)
             console.error(er)
         } finally {

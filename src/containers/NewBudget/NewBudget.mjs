@@ -109,7 +109,7 @@ export class NewBudget extends Component {
             Store.set('budgets', budgets)
             Router.navigate(`/budgets/${id}?fresh`)
         } catch (er) {
-            const { Alert } = await import('../Alert/Alert.mjs')
+            const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('danger', er)
             console.error('Can\'t create budget', { er })
         } finally {

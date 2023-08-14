@@ -7,7 +7,7 @@ import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
 import { currencyFormatters, getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
 import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
-import { Alert } from "../Alert/Alert.mjs";
+import { Alert } from "../../components/Alert/Alert.mjs";
 import { ParticipantsList } from "../ParticipantsList/ParticipantsList.mjs";
 import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Router } from '../../core/Router.mjs'

@@ -2,7 +2,7 @@
 import { Component } from '../../core/Component.mjs'
 import { importStyle } from '../../utils/imports.js'
 
-importStyle('/src/containers/Alert/Alert.css')
+importStyle('/src/components/Alert/Alert.css')
 
 const template = document.querySelector('template#alert-template')
 const types = ['primary', 'secondary', 'success', 'warning', 'danger']

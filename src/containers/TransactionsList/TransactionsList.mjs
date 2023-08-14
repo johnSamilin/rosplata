@@ -81,7 +81,7 @@ export class TransactionsList extends ListComponent {
         } catch (er) {
             console.error('Can\'t create transaction', { er })
             this.children.get(id).syncronized = false
-            const { Alert } = await import('../Alert/Alert.mjs')
+            const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('warning', er)
         } finally {
             this.isInProgress = false
@@ -122,7 +122,7 @@ export class TransactionsList extends ListComponent {
 
                         return t
                     }))
-                    const { Alert } = await import('../Alert/Alert.mjs')
+                    const { Alert } = await import('../../components/Alert/Alert.mjs')
                     new Alert('danger', er)
                 }
             }
