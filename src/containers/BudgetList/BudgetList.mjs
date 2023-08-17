@@ -1,17 +1,15 @@
 // @ts-check
-import { getListDataDiff, mapArrayToObjectId } from '../../utils/utils.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
-import { RequestManager } from '../../core/RequestManager.mjs'
 import { Router } from '../../core/Router.mjs'
 import { PARTICIPANT_STATUSES } from '../../constants/userStatuses.mjs'
 import { ListComponent } from '../../core/ListComponent.mjs'
+import { BudgetsStoreAdapter } from '../../Adapters/BudgetsStoreAdapter.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
 const template = document.querySelector('template#budgets-list-template')
-
-const Api = new RequestManager('budgets')
+const adapter = new BudgetsStoreAdapter()
 
 export class BudgetList extends ListComponent {
     containerId = 'budgets-list'
@@ -66,15 +64,10 @@ export class BudgetList extends ListComponent {
         this.isInProgress = true
         parent.appendChild(container)
         this.attachListeners()
-
-        const budgets = Store.get('budgets')
-        this.data = budgets
+        this.data = adapter.getList()
 
         try {
-            const data = await Api.get('list', 'budgets')
-            if (data !== undefined) {
-                Store.set('budgets', mapArrayToObjectId(data))
-            }
+            await adapter.request()
         } catch (er) {
             console.error(er)
         } finally {

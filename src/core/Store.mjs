@@ -6,15 +6,30 @@ import { FeatureDetector } from "./FeatureDetector.mjs"
 const defaultState = {
     selectedBudgetId: -1,
     budgets: {},
+    transactions: {},
+    users: {},
+    participants: {},
     layout: '',
     isMobile: FeatureDetector.isMobile,
 }
+
+const unpersistableStateItems = new Set(['selectedBudgetId', 'layout', 'isMobile'])
 
 class CStore {
     #listeners = new Map()
 
     constructor() {
         this.data = JSON.parse(localStorage.getItem('data') ?? JSON.stringify(defaultState));
+    }
+
+    #persist() {
+        const cleanData = {}
+        for (const key in this.data) {
+            if (!unpersistableStateItems.has(key)) {
+                cleanData[key] = this.data[key]
+            }
+        }
+        localStorage.setItem('data', JSON.stringify(cleanData))
     }
 
     data = defaultState
@@ -83,7 +98,7 @@ class CStore {
                 // @ts-ignore
                 this.data[last] = value
             }
-            localStorage.setItem('data', JSON.stringify(this.data))
+            this.#persist()
             this.#notify(fieldName, value)
         }
     }
@@ -101,7 +116,7 @@ class CStore {
                 finalValue = this.data[last].concat(value)
                 this.data[last] = finalValue
             }
-            localStorage.setItem('data', JSON.stringify(this.data))
+            this.#persist()
             this.#notify(fieldName, finalValue)
         }
     }

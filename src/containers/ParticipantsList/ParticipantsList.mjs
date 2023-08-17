@@ -2,14 +2,14 @@
 
 import { ListComponent } from "../../core/ListComponent.mjs";
 import { importStyle } from "../../utils/imports.js";
-import { RequestManager } from "../../core/RequestManager.mjs";
 import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 import { Store } from "../../core/Store.mjs";
+import { ParticipantsStoreAdapter } from "../../Adapters/ParticipantsStoreAdapter.mjs";
 
 importStyle('/src/containers/ParticipantsList/ParticipantsList.css')
 
 const template = document.querySelector('template#participants-list-template')
-const Api = new RequestManager('participants')
+const participantsAdapter = new ParticipantsStoreAdapter()
 
 export class ParticipantsList extends ListComponent {
     containerId = 'participants-list'
@@ -57,27 +57,7 @@ export class ParticipantsList extends ListComponent {
             if (isApproveBtn) {
                 status = PARTICIPANT_STATUSES.ACTIVE
             }
-            await Api.post(
-                'changeStatus',
-                `budgets/${budgetId}/participant/${targetUserId}`,
-                {
-                    body: {
-                        status,
-                    }
-                }
-            )
-            this.data[targetUserId] = {
-                ...this.data[targetUserId],
-                status,
-            }
-            this.update()
-            const newParticipants = (Store.get(`budgets.${budgetId}.participants`) ?? []).map(p => {
-                if (p.userId === targetUserId) {
-                    p.status = status
-                }
-                return p
-            })
-            Store.set(`budgets.${budgetId}.participants`, newParticipants)
+            participantsAdapter.updateItem(budgetId, targetUserId, { status })
         } catch (er) {
             const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('danger', 'Hmm, seems like you cannot do this')

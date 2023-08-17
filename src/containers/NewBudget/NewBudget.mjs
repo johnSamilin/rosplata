@@ -3,18 +3,20 @@
 import { Component } from "../../core/Component.mjs"
 import { Store } from "../../core/Store.mjs"
 import { importStyle } from "../../utils/imports.js"
-import { RequestManager } from "../../core/RequestManager.mjs"
 import { Router } from "../../core/Router.mjs"
 import DOMPurify from 'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js'
 import { AuthManager } from "../../core/AuthManager.mjs"
 import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs"
 import { BudgetForm } from "../../components/BudgetForm/BudgetForm.mjs"
+import { BudgetsStoreAdapter } from "../../Adapters/BudgetsStoreAdapter.mjs"
+import { ParticipantsStoreAdapter } from "../../Adapters/ParticipantsStoreAdapter.mjs"
 
 importStyle('/src/containers/NewBudget/NewBudget.css')
 
 const template = document.querySelector('template#new-budget-template')
 
-const Api = new RequestManager('new-budget')
+const budgetsAdapter = new BudgetsStoreAdapter()
+const participantsAdapter = new ParticipantsStoreAdapter()
 
 export class NewBudget extends Component {
     containerId = 'create-form'
@@ -48,8 +50,7 @@ export class NewBudget extends Component {
 
     updateParticipantsList = () => {
         this.suggestedParticipants = new Map(
-            Object.values(Store.get('budgets'))
-                .map(budget => budget.participants)
+            Object.values(participantsAdapter.getList())
                 .flat()
                 .filter(({ userId }) => userId !== AuthManager.data.id)
                 .map(participant => [participant.userId, participant.user])
@@ -69,30 +70,26 @@ export class NewBudget extends Component {
         const id = crypto.randomUUID()
         const name = DOMPurify.sanitize(data.get('name'))
         const currency = data.get('currency')
-        data.set('name', name)
-        data.set('id', id)
-        const budgets = Store.get('budgets') ?? {}
-        budgets[id] = {
+        const budget = {
             id,
             name,
             userId: AuthManager.data.id,
             transactions: [],
             type: data.get('isOpen') ? 'open' : 'private',
-            participants: [{
-                id: AuthManager.data.id,
-                status: PARTICIPANT_STATUSES.OWNER,
-                user: {
-                    id: AuthManager.data.id,
-                    name: AuthManager.data.name,
-                }
-            }],
             currentUserStatus: PARTICIPANT_STATUSES.OWNER,
             currency,
         }
+        const participants = [{
+            id: AuthManager.data.id,
+            status: PARTICIPANT_STATUSES.OWNER,
+            user: {
+                id: AuthManager.data.id,
+                name: AuthManager.data.name,
+            }
+        }]
         for (const participant of this.suggestedParticipants ?? new Map()) {
             if (data.get(`participant-${participant[0]}`) === 'on') {
-                data.append('suggestedParticipants[]', participant[0])
-                budgets[id].participants.push({
+                participants.push({
                     id: participant[0],
                     status: PARTICIPANT_STATUSES.INVITED,
                     user: {
@@ -101,12 +98,11 @@ export class NewBudget extends Component {
                     }
                 })
             }
-            data.delete(`participant-${participant[0]}`)
         }
         try {
             this.isInProgress = true
-            await Api.put('create', 'budgets', { body: data })
-            Store.set('budgets', budgets)
+            budgetsAdapter.store(budget)
+            participantsAdapter.store(id, participants)
             Router.navigate(`/budgets/${id}?fresh`)
         } catch (er) {
             const { Alert } = await import('../../components/Alert/Alert.mjs')

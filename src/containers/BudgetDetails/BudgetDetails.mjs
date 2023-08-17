@@ -3,7 +3,6 @@
 import { AnimatedComponent } from "../../core/Component.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
-import { RequestManager } from "../../core/RequestManager.mjs";
 import { TransactionsList } from "../TransactionsList/TransactionsList.mjs";
 import { currencyFormatters, getBudgetBalanceFromTransactions, mapArrayToObjectId } from "../../utils/utils.mjs";
 import { allowedUserStatuses, PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
@@ -13,16 +12,21 @@ import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Router } from '../../core/Router.mjs'
 import { BudgetSettings } from "./components/Settings/BudgetSettings.mjs";
 import { filterBannedUserTransactions } from "../../utils/transactionsUtils.mjs";
+import { BudgetsStoreAdapter } from "../../Adapters/BudgetsStoreAdapter.mjs";
+import { TransactionsStoreAdapter } from "../../Adapters/TransactionsStoreAdapter.mjs";
+import { ParticipantsStoreAdapter } from "../../Adapters/ParticipantsStoreAdapter.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
 const template = document.querySelector('template#budget-details-template')
-const Api = new RequestManager('budget')
 const transactionsController = new TransactionsList()
 const participantsController = new ParticipantsList()
 const settingsController = new BudgetSettings()
 
 const isMobile = FeatureDetector.isMobile
+const budgetsAdapter = new BudgetsStoreAdapter()
+const transactionsAdapter = new TransactionsStoreAdapter()
+const participantsAdapter = new ParticipantsStoreAdapter()
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
@@ -39,15 +43,18 @@ export class BudgetDetails extends AnimatedComponent {
             return
         }
         if (this.data) {
-            Store.unsubscribe(`budgets.${this.data.id}.transactions`, this.#onTransactionsChanged)
-            Store.unsubscribe(`budgets.${this.data.id}.participants`, this.#onParticipantsChanged)
+            Store.unsubscribe(`transactions.${this.data.id}`, this.#onTransactionsChanged)
+            Store.unsubscribe(`participants${this.data.id}`, this.#onParticipantsChanged)
             Store.unsubscribe(`budgets.${this.data.id}`, this.onBudgetUpdated)
         }
-        Store.subscribe(`budgets.${id}.transactions`, this.#onTransactionsChanged)
-        Store.subscribe(`budgets.${id}.participants`, this.#onParticipantsChanged)
+        Store.subscribe(`transactions.${id}`, this.#onTransactionsChanged)
+        Store.subscribe(`participants.${id}`, this.#onParticipantsChanged)
         Store.subscribe(`budgets.${id}`, this.onBudgetUpdated)
-        const budget = Store.get(`budgets.${id}`)
-        this.data = budget
+        this.data = {
+            ...budgetsAdapter.getItem(id),
+            participants: participantsAdapter.getList(id),
+            transactions: transactionsAdapter.getList(id)
+        }
         transactionsController.data = mapArrayToObjectId(
             filterBannedUserTransactions(
                 this.data?.transactions,
@@ -56,11 +63,7 @@ export class BudgetDetails extends AnimatedComponent {
             ) ?? []
         )
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
-        const data = await Api.get('details', `budgets/${id}`)
-        if (data !== undefined) {
-            Store.set(`budgets.${id}`, data)
-        }
-
+        
         if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
             this.showInviteDialog()
         }
@@ -105,8 +108,8 @@ export class BudgetDetails extends AnimatedComponent {
 
     exterminate() {
         Store.unsubscribe('selectedBudgetId', this.sync)
-        Store.unsubscribe(`budgets.${this.data?.id}.transactions`, this.#onTransactionsChanged)
-        Store.unsubscribe(`budgets.${this.data?.id}.participants`, this.#onParticipantsChanged)
+        Store.unsubscribe(`transactions.${this.data?.id}`, this.#onTransactionsChanged)
+        Store.unsubscribe(`participants.${this.data?.id}`, this.#onParticipantsChanged)
         Store.unsubscribe(`budgets.${this.data?.id}`, this.onBudgetUpdated)
         return super.exterminate()
     }

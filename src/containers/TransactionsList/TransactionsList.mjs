@@ -1,9 +1,8 @@
 //@ts-check
 
-import { allowedUserStatuses } from "../../constants/userStatuses.mjs";
+import { TransactionsStoreAdapter } from "../../Adapters/TransactionsStoreAdapter.mjs";
 import { AuthManager } from "../../core/AuthManager.mjs";
 import { ListComponent } from "../../core/ListComponent.mjs";
-import { RequestManager } from "../../core/RequestManager.mjs";
 import { Store } from "../../core/Store.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { mapArrayToObjectId } from "../../utils/utils.mjs";
@@ -11,7 +10,7 @@ import { mapArrayToObjectId } from "../../utils/utils.mjs";
 importStyle('/src/containers/TransactionsList/TransactionsList.css')
 
 const template = document.querySelector('template#transactions-list-template')
-const Api = new RequestManager('transactions')
+const transactionsAdapter = new TransactionsStoreAdapter()
 
 export class TransactionsList extends ListComponent {
     containerId = 'transactions-list'
@@ -29,14 +28,14 @@ export class TransactionsList extends ListComponent {
     async show() {
         const budgetId = Store.get('selectedBudgetId')
         this.attachListeners()
-        Store.subscribe(`budgets.${budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.subscribe(`transactions.${budgetId}`, this.#onTransactionsChanged)
         super.show()
     }
 
     async hide() {
         const budgetId = Store.get('selectedBudgetId')
         this.stopListeners()
-        Store.unsubscribe(`budgets.${budgetId}.transactions`, this.#onTransactionsChanged)
+        Store.unsubscribe(`transactions.${budgetId}`, this.#onTransactionsChanged)
         super.hide()
     }
 
@@ -58,9 +57,6 @@ export class TransactionsList extends ListComponent {
         const { currency } = Store.get(`budgets.${budgetId}`)
         // @ts-ignore
         const id = crypto.randomUUID()
-        data.append('budgetId', budgetId)
-        data.append('id', id)
-        data.append('currency', currency)
         try {
             this.isInProgress = true
             const transaction = {
@@ -76,11 +72,9 @@ export class TransactionsList extends ListComponent {
                 [id, transaction]
             ]))
             form.reset()
-            await Api.post('create', 'transactions', { body: data })
-            Store.push(`budgets.${budgetId}.transactions`, transaction)
+            transactionsAdapter.storeItem(budgetId, transaction)
         } catch (er) {
             console.error('Can\'t create transaction', { er })
-            this.children.get(id).syncronized = false
             const { Alert } = await import('../../components/Alert/Alert.mjs')
             new Alert('warning', er)
         } finally {
@@ -94,34 +88,17 @@ export class TransactionsList extends ListComponent {
         if (deleteBtnClicked || revertBtnClicked) {
             const container = evt.target.parentNode
             const transactionId = container.getAttribute('id')
-            const isDeleted = deleteBtnClicked ? true : false
+            const isDeleted = deleteBtnClicked
             if (this.data[transactionId] && this.data[transactionId].user.id === AuthManager.data.id) {
                 const budgetId = Store.get('selectedBudgetId')
-                const transactions = Store.get(`budgets.${budgetId}.transactions`)
                 try {
-                    Store.set(`budgets.${budgetId}.transactions`, transactions.map(t => {
-                        if (t.id === transactionId) {
-                            return {
-                                ...t,
-                                deleted: isDeleted
-                            }
-                        }
-
-                        return t
-                    }))
-                    if (deleteBtnClicked) {
-                        await Api.delete(`delete-${transactionId}`, `transactions/${transactionId}`)
-                    } else {
-                        await Api.post(`delete-${transactionId}`, `transactions/${transactionId}/restore`)
-                    }
+                    transactionsAdapter.updateItem(
+                        budgetId,
+                        transactionId,
+                        {
+                            deleted: isDeleted,
+                        })
                 } catch (er) {
-                    Store.set(`budgets[${budgetId}].transactions`, transactions.map(t => {
-                        if (t.id === transactionId) {
-                            t.deleted = !isDeleted
-                        }
-
-                        return t
-                    }))
                     const { Alert } = await import('../../components/Alert/Alert.mjs')
                     new Alert('danger', er)
                 }

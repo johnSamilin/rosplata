@@ -1,7 +1,6 @@
 //@ts-check
 
 import { importStyle } from "../../utils/imports.js";
-import { RequestManager } from "../../core/RequestManager.mjs";
 import { Component } from "../../core/Component.mjs";
 import { PARTICIPANT_STATUSES, PARTICIPANT_STATUSES_NAMES } from "../../constants/userStatuses.mjs";
 import { Store } from "../../core/Store.mjs";
@@ -10,7 +9,6 @@ import { AuthManager } from "../../core/AuthManager.mjs";
 importStyle('/src/containers/ParticipantsListItem/ParticipantsListItem.css')
 
 const template = document.querySelector('template#participants-list-item-template')
-const Api = new RequestManager('participants')
 
 export class ParticipantsListItem extends Component {
     baseCssClass = 'participants-list-item'

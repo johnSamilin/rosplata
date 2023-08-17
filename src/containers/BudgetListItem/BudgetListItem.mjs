@@ -1,4 +1,5 @@
 //@ts-check
+import { ParticipantsStoreAdapter } from '../../Adapters/ParticipantsStoreAdapter.mjs'
 import { AnimatedComponent } from '../../core/Component.mjs'
 import { Store } from '../../core/Store.mjs'
 import { importStyle } from '../../utils/imports.js'
@@ -7,6 +8,7 @@ import { currencyFormatters, getBudgetBalanceFromTransactions, getShortListOfPar
 importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
 const template = document.querySelector('template#budgets-list-item-template')
+const participantsAdapter = new ParticipantsStoreAdapter()
 
 export class BudgetListItem extends AnimatedComponent {
     baseCssClass = 'budgets-list-item'
@@ -19,9 +21,11 @@ export class BudgetListItem extends AnimatedComponent {
         this.isReady = true
         this.containerId = `budget-${this.data.id}`
         this.id = data.id
+        this.data.participants = participantsAdapter.getList(data.id)
         Store.subscribe('selectedBudgetId', this.updateSelectedState)
-        Store.subscribe(`budgets.${data.id}.transactions`, this.#onTransactionsChanged)
-        Store.subscribe(`budgets.${data.id}.participants`, this.#onParticipantsChanged)
+        Store.subscribe(`budgets.${data.id}`, this.#onBudgetChanged)
+        Store.subscribe(`transactions.${data.id}`, this.#onTransactionsChanged)
+        Store.subscribe(`participants.${data.id}`, this.#onParticipantsChanged)
     }
 
     renderTo(parent) {
@@ -68,6 +72,10 @@ export class BudgetListItem extends AnimatedComponent {
             participants,
         }
     }
+    
+    #onBudgetChanged = (data) => {
+        this.data = data
+    }
 
     updateSelectedState = (selectedBudgetId) => {
         this.addCssClassConditionally(this.id === selectedBudgetId, this.getCssClass(null, 'selected'))
@@ -75,6 +83,7 @@ export class BudgetListItem extends AnimatedComponent {
 
     exterminate = async () => {
         Store.unsubscribe('selectedBudgetId', this.updateSelectedState)
+        Store.unsubscribe(`budgets.${this.id}`, this.#onBudgetChanged)
         Store.unsubscribe(`budgets.${this.id}.transactions`, this.#onTransactionsChanged)
         Store.unsubscribe(`budgets.${this.id}.participants`, this.#onParticipantsChanged)
         await super.exterminate()

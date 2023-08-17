@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
-import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, setPersistence, browserSessionPersistence } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
+import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import { RequestManager } from './RequestManager.mjs';
 import { SettingsManager } from './SettingsManager.mjs';
 import { Store } from './Store.mjs';
@@ -102,7 +102,7 @@ class CAuthManager {
     login = async () => {
         try {
             this.#gProvider = new GoogleAuthProvider()
-            await setPersistence(this.#gAuth, browserSessionPersistence)
+            await setPersistence(this.#gAuth, browserLocalPersistence)
             const result = await signInWithPopup(this.#gAuth, this.#gProvider)
             this.#data = {
                 id: result.user.uid,
