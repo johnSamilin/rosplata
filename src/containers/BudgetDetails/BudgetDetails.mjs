@@ -12,9 +12,7 @@ import { FeatureDetector } from "../../core/FeatureDetector.mjs";
 import { Router } from '../../core/Router.mjs'
 import { BudgetSettings } from "./components/Settings/BudgetSettings.mjs";
 import { filterBannedUserTransactions } from "../../utils/transactionsUtils.mjs";
-import { BudgetsStoreAdapter } from "../../Adapters/BudgetsStoreAdapter.mjs";
-import { TransactionsStoreAdapter } from "../../Adapters/TransactionsStoreAdapter.mjs";
-import { ParticipantsStoreAdapter } from "../../Adapters/ParticipantsStoreAdapter.mjs";
+import { MapStoreAdapter, StoreAdapter } from "../../core/StoreAdapter.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -24,9 +22,9 @@ const participantsController = new ParticipantsList()
 const settingsController = new BudgetSettings()
 
 const isMobile = FeatureDetector.isMobile
-const budgetsAdapter = new BudgetsStoreAdapter()
-const transactionsAdapter = new TransactionsStoreAdapter()
-const participantsAdapter = new ParticipantsStoreAdapter()
+const budgetsAdapter = new MapStoreAdapter('budgets')
+const transactionsAdapter = new StoreAdapter('transactions')
+const participantsAdapter = new StoreAdapter('participants')
 
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
@@ -126,8 +124,8 @@ export class BudgetDetails extends AnimatedComponent {
 
     onBudgetUpdated = (data) => {
         const transactions = filterBannedUserTransactions(
-            data.transactions,
-            data.participants,
+            transactionsAdapter.getList(data.id),
+            participantsAdapter.getList(data.id),
             data.bannedUserTransactionsAction === 'ignore'
         ) ?? []
         transactionsController.data = mapArrayToObjectId(transactions)

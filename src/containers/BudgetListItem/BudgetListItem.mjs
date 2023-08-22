@@ -1,14 +1,14 @@
 //@ts-check
-import { ParticipantsStoreAdapter } from '../../Adapters/ParticipantsStoreAdapter.mjs'
 import { AnimatedComponent } from '../../core/Component.mjs'
 import { Store } from '../../core/Store.mjs'
+import { StoreAdapter } from '../../core/StoreAdapter.mjs'
 import { importStyle } from '../../utils/imports.js'
 import { currencyFormatters, getBudgetBalanceFromTransactions, getShortListOfParticipants } from '../../utils/utils.mjs'
 
 importStyle('/src/containers/BudgetListItem/BudgetListItem.css')
 
 const template = document.querySelector('template#budgets-list-item-template')
-const participantsAdapter = new ParticipantsStoreAdapter()
+const participantsAdapter = new StoreAdapter('participants')
 
 export class BudgetListItem extends AnimatedComponent {
     baseCssClass = 'budgets-list-item'

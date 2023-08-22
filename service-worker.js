@@ -73,6 +73,7 @@ const commonPreloadMap = [
     '/styles/generated/sizes.css',
     '/styles/App.css',
     '/styles/paper.min.css',
+    '/src/core/StoreAdapter.mjs'
 ]
 
 self.addEventListener('install', (event) => {

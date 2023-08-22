@@ -8,15 +8,14 @@ import DOMPurify from 'https://unpkg.com/dompurify@3.0.0/dist/purify.es.js'
 import { AuthManager } from "../../core/AuthManager.mjs"
 import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs"
 import { BudgetForm } from "../../components/BudgetForm/BudgetForm.mjs"
-import { BudgetsStoreAdapter } from "../../Adapters/BudgetsStoreAdapter.mjs"
-import { ParticipantsStoreAdapter } from "../../Adapters/ParticipantsStoreAdapter.mjs"
+import { MapStoreAdapter, StoreAdapter } from "../../core/StoreAdapter.mjs"
 
 importStyle('/src/containers/NewBudget/NewBudget.css')
 
 const template = document.querySelector('template#new-budget-template')
 
-const budgetsAdapter = new BudgetsStoreAdapter()
-const participantsAdapter = new ParticipantsStoreAdapter()
+const budgetsAdapter = new MapStoreAdapter('budgets')
+const participantsAdapter = new StoreAdapter('participants')
 
 export class NewBudget extends Component {
     containerId = 'create-form'
@@ -74,7 +73,6 @@ export class NewBudget extends Component {
             id,
             name,
             userId: AuthManager.data.id,
-            transactions: [],
             type: data.get('isOpen') ? 'open' : 'private',
             currentUserStatus: PARTICIPANT_STATUSES.OWNER,
             currency,
@@ -101,8 +99,8 @@ export class NewBudget extends Component {
         }
         try {
             this.isInProgress = true
-            budgetsAdapter.store(budget)
-            participantsAdapter.store(id, participants)
+            await budgetsAdapter.store(budget)
+            await participantsAdapter.store(id, participants)
             Router.navigate(`/budgets/${id}?fresh`)
         } catch (er) {
             const { Alert } = await import('../../components/Alert/Alert.mjs')

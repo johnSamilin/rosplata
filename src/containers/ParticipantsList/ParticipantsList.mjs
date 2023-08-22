@@ -4,12 +4,12 @@ import { ListComponent } from "../../core/ListComponent.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { PARTICIPANT_STATUSES } from "../../constants/userStatuses.mjs";
 import { Store } from "../../core/Store.mjs";
-import { ParticipantsStoreAdapter } from "../../Adapters/ParticipantsStoreAdapter.mjs";
+import { StoreAdapter } from "../../core/StoreAdapter.mjs";
 
 importStyle('/src/containers/ParticipantsList/ParticipantsList.css')
 
 const template = document.querySelector('template#participants-list-template')
-const participantsAdapter = new ParticipantsStoreAdapter()
+const participantsAdapter = new StoreAdapter('participants')
 
 export class ParticipantsList extends ListComponent {
     containerId = 'participants-list'

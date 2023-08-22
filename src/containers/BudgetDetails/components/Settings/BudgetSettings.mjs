@@ -1,16 +1,16 @@
 // @ts-check
-import { BudgetsStoreAdapter } from '../../../../Adapters/BudgetsStoreAdapter.mjs'
 import { BudgetForm } from '../../../../components/BudgetForm/BudgetForm.mjs'
 import { AuthManager } from '../../../../core/AuthManager.mjs'
 import { Component } from '../../../../core/Component.mjs'
 import { Store } from '../../../../core/Store.mjs'
+import { MapStoreAdapter } from '../../../../core/StoreAdapter.mjs'
 import { importStyle } from '../../../../utils/imports.js'
 
 importStyle('/src/containers/BudgetDetails/components/Settings/BudgetSettings.css')
 
 const template = document.querySelector('template#budget-settings-template')
 
-const budgetsAdapter = new BudgetsStoreAdapter()
+const budgetsAdapter = new MapStoreAdapter('budgets')
 
 export class BudgetSettings extends Component {
     containerId = 'budget-settings'
@@ -76,7 +76,7 @@ export class BudgetSettings extends Component {
         const budget = budgetsAdapter.getItem(this.budgetId)
         try {
             const fd = this.form.getFormData()
-            budgetsAdapter.updateItem(this.budgetId, {
+            await budgetsAdapter.updateItem(this.budgetId, {
                 ...budget,
                 name: fd.get('name'),
                 currency: fd.get('currency'),

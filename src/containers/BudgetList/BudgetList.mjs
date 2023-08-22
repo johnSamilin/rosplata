@@ -4,12 +4,12 @@ import { importStyle } from '../../utils/imports.js'
 import { Router } from '../../core/Router.mjs'
 import { PARTICIPANT_STATUSES } from '../../constants/userStatuses.mjs'
 import { ListComponent } from '../../core/ListComponent.mjs'
-import { BudgetsStoreAdapter } from '../../Adapters/BudgetsStoreAdapter.mjs'
+import { MapStoreAdapter } from '../../core/StoreAdapter.mjs'
 
 importStyle('/src/containers/BudgetList/BudgetList.css')
 
 const template = document.querySelector('template#budgets-list-template')
-const adapter = new BudgetsStoreAdapter()
+const adapter = new MapStoreAdapter('budgets')
 
 export class BudgetList extends ListComponent {
     containerId = 'budgets-list'
@@ -67,7 +67,7 @@ export class BudgetList extends ListComponent {
         this.data = adapter.getList()
 
         try {
-            await adapter.request()
+            // await adapter.request()
         } catch (er) {
             console.error(er)
         } finally {

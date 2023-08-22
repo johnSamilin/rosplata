@@ -1,16 +1,16 @@
 //@ts-check
 
-import { TransactionsStoreAdapter } from "../../Adapters/TransactionsStoreAdapter.mjs";
 import { AuthManager } from "../../core/AuthManager.mjs";
 import { ListComponent } from "../../core/ListComponent.mjs";
 import { Store } from "../../core/Store.mjs";
+import { StoreAdapter } from "../../core/StoreAdapter.mjs";
 import { importStyle } from "../../utils/imports.js";
 import { mapArrayToObjectId } from "../../utils/utils.mjs";
 
 importStyle('/src/containers/TransactionsList/TransactionsList.css')
 
 const template = document.querySelector('template#transactions-list-template')
-const transactionsAdapter = new TransactionsStoreAdapter()
+const transactionsAdapter = new StoreAdapter('transactions')
 
 export class TransactionsList extends ListComponent {
     containerId = 'transactions-list'
@@ -66,13 +66,14 @@ export class TransactionsList extends ListComponent {
                 currency,
                 comment: data.get('comment'),
                 deleted: false,
+                budgetId,
             }
             // @ts-ignore
             this.addItems(new Map([
                 [id, transaction]
             ]))
             form.reset()
-            transactionsAdapter.storeItem(budgetId, transaction)
+            await transactionsAdapter.storeItem(budgetId, transaction)
         } catch (er) {
             console.error('Can\'t create transaction', { er })
             const { Alert } = await import('../../components/Alert/Alert.mjs')
