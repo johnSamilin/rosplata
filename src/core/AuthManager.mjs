@@ -33,7 +33,6 @@ class CAuthManager {
     constructor() {
         if (SettingsManager.offlineMode) {
             this.#isLoggedIn = true
-            debugger
             this.#data = Store.get('user')
         }
     }

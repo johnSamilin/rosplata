@@ -1,3 +1,5 @@
+const appVersion = '0.3.1' // duplicating version just to simplify reinstalling process
+
 const commonPreloadMap = [
     '',
     '/',

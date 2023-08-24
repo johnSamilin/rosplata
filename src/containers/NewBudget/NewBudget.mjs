@@ -99,7 +99,7 @@ export class NewBudget extends Component {
         }
         try {
             this.isInProgress = true
-            await budgetsAdapter.store(budget)
+            await budgetsAdapter.storeItem(budget)
             await participantsAdapter.store(id, participants)
             Router.navigate(`/budgets/${id}?fresh`)
         } catch (er) {
