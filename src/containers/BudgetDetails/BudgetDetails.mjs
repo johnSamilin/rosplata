@@ -13,6 +13,7 @@ import { Router } from '../../core/Router.mjs'
 import { BudgetSettings } from "./components/Settings/BudgetSettings.mjs";
 import { filterBannedUserTransactions } from "../../utils/transactionsUtils.mjs";
 import { MapStoreAdapter, StoreAdapter } from "../../core/StoreAdapter.mjs";
+import { DEFAULT_BUDGET } from "../../constants/budget.mjs";
 
 importStyle('/src/containers/BudgetDetails/BudgetDetails.css')
 
@@ -26,13 +27,21 @@ const budgetsAdapter = new MapStoreAdapter('budgets')
 const transactionsAdapter = new StoreAdapter('transactions')
 const participantsAdapter = new StoreAdapter('participants')
 
+let Api
+async function getApi() {
+    if (!Api) {
+        const { RequestManager } = await import('../../core/RequestManager.mjs')
+        Api = new RequestManager('budgets')
+    }
+    return Api
+}
+
 export class BudgetDetails extends AnimatedComponent {
     containerId = 'budget-details'
     baseCssClass = 'budget-details'
 
-    constructor(data) {
+    constructor() {
         super()
-        this.data = data
         Store.subscribe('selectedBudgetId', this.sync)
     }
 
@@ -48,8 +57,10 @@ export class BudgetDetails extends AnimatedComponent {
         Store.subscribe(`transactions.${id}`, this.#onTransactionsChanged)
         Store.subscribe(`participants.${id}`, this.#onParticipantsChanged)
         Store.subscribe(`budgets.${id}`, this.onBudgetUpdated)
+        const budget = budgetsAdapter.getItem(id) ?? DEFAULT_BUDGET
         this.data = {
-            ...budgetsAdapter.getItem(id),
+            ...budget,
+            id,
             participants: participantsAdapter.getList(id),
             transactions: transactionsAdapter.getList(id)
         }
@@ -61,7 +72,7 @@ export class BudgetDetails extends AnimatedComponent {
             ) ?? []
         )
         participantsController.data = mapArrayToObjectId(this.data?.participants ?? [], ({ userId }) => userId)
-        
+
         if (this.data?.participants?.length === 1 && Router.queryParams.has('fresh')) { // only the owner
             this.showInviteDialog()
         }
@@ -79,14 +90,12 @@ export class BudgetDetails extends AnimatedComponent {
             this.data.bannedUserTransactionsAction === 'ignore'
         ) ?? []
         transactionsController.data = mapArrayToObjectId(transactions)
-        participantsController.data = mapArrayToObjectId(participants, ({ userId }) => userId)
         this.data.participants = participants
         this.data.transactions = transactions
         this.update()
     }
 
     #onUserStatusChanged = (userStatus) => {
-        this.data.currentUserStatus = userStatus
         if (allowedUserStatuses.includes(userStatus)) {
             this.sync(this.data.id)
         } else {
@@ -177,6 +186,11 @@ export class BudgetDetails extends AnimatedComponent {
         this.setAttr(container, `.${this.getCssClass('title')}`, 'textContent', this.data.name)
 
         this.addCssClassConditionally(
+            !!budgetsAdapter.getItem(this.data.id),
+            this.getCssClass('hidden'),
+            container.querySelector(`.${this.getCssClass('locality-note')}`)
+        )
+        this.addCssClassConditionally(
             !allowedUserStatuses.includes(this.data?.currentUserStatus) && this.data?.type === 'open',
             this.getCssClass('actions', 'visible'),
             container.querySelector(`.${this.getCssClass('actions', 'isopen')}`)
@@ -209,7 +223,7 @@ export class BudgetDetails extends AnimatedComponent {
         }
         this.isInProgress = true
         try {
-            const { newStatus } = await Api.post('accept-invite', `budgets/${this.data.id}/participant/invite`)
+            const { newStatus } = (await getApi()).post('accept-invite', `budgets/${this.data.id}/participant/invite`)
             this.#onUserStatusChanged(newStatus)
         } catch (er) {
             new Alert('warning', er)
@@ -223,7 +237,7 @@ export class BudgetDetails extends AnimatedComponent {
             return false;
         }
         try {
-            const { newStatus } = await Api.delete('decline-invite', `budgets/${this.data.id}/participant/invite`)
+            const { newStatus } = (await getApi()).delete('decline-invite', `budgets/${this.data.id}/participant/invite`)
             this.#onUserStatusChanged(newStatus)
         } catch (er) {
             new Alert('warning', er)
@@ -237,9 +251,34 @@ export class BudgetDetails extends AnimatedComponent {
             return false;
         }
         try {
-            const { newStatus } = await Api.put('ask-invite', `budgets/${this.data.id}/participant/invite`)
+            const { SettingsManager } = await import('../../core/SettingsManager.mjs')
+            const { AuthManager } = await import('../../core/AuthManager.mjs')
+            let newStatus = PARTICIPANT_STATUSES.ACTIVE
+            // if in offline mode, assuming this budget is open. anyway, we'll solve this situation in Sync event callback
+            if (!SettingsManager.offlineMode) {
+                const response = (await getApi()).put('ask-invite', `budgets/${this.data.id}/participant/invite`)
+                newStatus = response.newStatus
+            }
+            budgetsAdapter.storeItem(
+                {
+                    ...this.data,
+                    currentUserStatus: newStatus,
+                },
+                true
+            )
+            participantsAdapter.storeItem(
+                this.data.id,
+                {
+                    userId: AuthManager.data.id,
+                    budgetId: this.data.id,
+                    status: newStatus,
+                    user: {
+                        id: AuthManager.data.id,
+                        name: AuthManager.data.name,
+                    },
+                }
+            )
             this.#onUserStatusChanged(newStatus)
-            this.update()
         } catch (er) {
             new Alert('warning', er)
         } finally {

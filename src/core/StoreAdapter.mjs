@@ -18,7 +18,7 @@ export class StoreAdapter {
     store(parentEntityId, entities) {
         Store.set(`${this.tag}.${parentEntityId}`, entities)
     }
-    
+
     async storeItem(parentEntityId, entity, isLocalOnly = false) {
         const field = `${this.tag}.${parentEntityId}`
         if (!Store.has(field)) {
@@ -75,7 +75,7 @@ export class MapStoreAdapter extends StoreAdapter {
         return item
     }
 
-    async storeItem(entity) {
+    async storeItem(entity, isLocalOnly = false) {
         Store.set(this.tag, {
             ...this.getList(),
             [entity.id]: {
@@ -84,10 +84,12 @@ export class MapStoreAdapter extends StoreAdapter {
             }
         })
 
-        return this.storeItemHook(entity)
+        if (!isLocalOnly) {
+            return this.storeItemHook(entity)
+        }
     }
-    
-    async updateItem(entityId, patch) {
+
+    async updateItem(entityId, patch, isLocalOnly = false) {
         const field = `${this.tag}.${entityId}`
         const entityToUpdate = {
             ...Store.get(field),
@@ -95,6 +97,8 @@ export class MapStoreAdapter extends StoreAdapter {
             isLocal: true
         }
         Store.set(field, entityToUpdate)
-        await this.storeItemHook(entityToUpdate)
+        if (!isLocalOnly) {
+            await this.storeItemHook(entityToUpdate)
+        }
     }
 }
