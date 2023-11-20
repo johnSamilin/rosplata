@@ -119,6 +119,11 @@
         "prop": "text",
         "defaultValue": "Settings"
     },
+    "budget-details-locality-note": {
+        "value": "Возможно, владелец еще не в сети. Но вы можете добавлять траты, они создадутся как только будет создан бюджет.",
+        "prop": "text",
+        "defaultValue": "Owner of this budget is probably offline. You can still add transactions, we'll sync them as soon as this budget is created."
+    },
     "budget-details-my-balance": {
         "value": "Мой баланс",
         "prop": "text",

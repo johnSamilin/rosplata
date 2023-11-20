@@ -5,16 +5,16 @@ import { SettingsManager } from './SettingsManager.mjs'
 class COfflineManager {
     #reg
     #shouldUpdate = true
+    #url = '/service-worker.js'
 
     async start() {
         try {
             if (SettingsManager.offlineModeEnabled) {
-                const url = '/service-worker.js'
-                this.#reg = await navigator.serviceWorker.getRegistration(url)
+                this.#reg = await navigator.serviceWorker.getRegistration(this.#url)
                 this.#watchUpdate()
                 if (!this.#reg) {
                     this.#reg = await navigator.serviceWorker.register(
-                        url,
+                        this.#url,
                         { type: 'module', updateViaCache: 'all' }
                     )
                 } else {
@@ -27,6 +27,13 @@ class COfflineManager {
                     }
                     this.#reg.active?.postMessage({ shouldUpdateCache: this.#shouldUpdate })
                 }
+
+            } else {
+                // remove all existing registrations if feature is somehow turned off
+                const registrations = await navigator.serviceWorker.getRegistrations()
+                registrations.forEach((reg) => {
+                    reg.unregister()
+                })
 
             }
         } catch (er) {

@@ -10,8 +10,9 @@ class CSettingsManager {
     #autoLoginEnabled = getFromLs('autoLoginEnabled', 'true') === 'true'
     #theme = getFromLs('theme', 'system')
     #language = getFromLs('language')
-    #offlineModeEnabled = 'serviceWorker' in navigator && 'onLine' in navigator
-    #offlineMode = this.offlineModeEnabled && !navigator.onLine
+    // TODO: issue-64
+    #offlineModeEnabled = false // 'serviceWorker' in navigator && 'onLine' in navigator
+    #offlineMode = false // this.offlineModeEnabled && !navigator.onLine
 
     get animationsEnabled() {
         return this.#animationsEnabled

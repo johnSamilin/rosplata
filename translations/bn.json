@@ -119,6 +119,11 @@
         "prop": "text",
         "defaultValue": "Settings"
     },
+    "budget-details-locality-note": {
+        "value": "",
+        "prop": "text",
+        "defaultValue": "Owner of this budget is probably offline. You can still add transactions, we'll sync them as soon as this budget is created."
+    },
     "budget-details-my-balance": {
         "value": "আমার ভারসাম্য",
         "prop": "text",
