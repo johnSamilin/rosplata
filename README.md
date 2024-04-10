@@ -80,3 +80,8 @@ https://github.com/johnSamilin/rosplata/wiki
 [Philosophic questions of webapps internationalization](https://medium.com/p/7738a964152e)
 
 [AlternativeTo](https://alternativeto.net/software/rosplata/)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=johnSamilin/rosplata&type=Date)](https://star-history.com/#johnSamilin/rosplata&Date)
+
