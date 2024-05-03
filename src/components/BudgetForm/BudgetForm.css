@@ -1,40 +1,49 @@
-.budget-form__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.budget-form {
     height: 100%;
-}
-
-.budget-form__fields {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    padding: 0.5rem;
-}
 
-.budget-form__fields h4 {
-    margin-block-end: 0.5rem;
-}
+    & .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
 
-.budget-form__fields h6 {
-    margin: -0.5rem 0 1rem;
-}
+    & .fields {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 0.5rem;
+        overflow: auto;
 
-.budget-form__field--checkbox {
-    display: flex;
-    justify-content: space-between;
-}
+        & h4 {
+            margin-block-end: 0.5rem;
+        }
 
-.budget-form__field--checkbox label {
-    flex-grow: 1;
-    margin: 0 1rem;
-}
+        & h6 {
+            margin: -0.5rem 0 1rem;
+        }
+    }
 
-.budget-form__buttons {
-    display: flex;
-    justify-content: space-between;
-}
 
-.budget-form__buttons button {
-    width: 45%;
+    & .field--checkbox {
+        display: flex;
+        justify-content: space-between;
+
+        & label {
+            flex-grow: 1;
+            margin: 0 1rem;
+        }
+    }
+
+    & .buttons {
+        display: flex;
+        justify-content: space-between;
+
+        & button {
+            width: 45%;
+        }
+    }
+
 }

@@ -1,9 +1,13 @@
 .invite-dialog {
     text-align: center;
+
+    & .qr-code {
+        margin: auto;
+    }
 }
-html.dark .invite-dialog {
-    color: beige;
-}
-.invite-dialog__qr-code {
-    margin: auto;
+
+@scope (html.dark) {
+    .invite-dialog {
+        color: beige;
+    }
 }

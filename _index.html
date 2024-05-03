@@ -14,7 +14,7 @@
     <link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" async href="/styles/paper.min.css" />
-    <link rel="stylesheet" href="/styles/generated/sizes.css" />
+    <!-- <link rel="stylesheet" href="/styles/generated/sizes.css" /> -->
     <script src="/src/App.mjs" type="module"></script>
 
     <style type="text/css">
@@ -81,40 +81,40 @@
     </template>
 
     <template id="budgets-list-template">
-        <div class="budgets-list__actions">
-            <button id="budgets-list__create-button" class="button" data-translate-id="budgets-list-new">Create
+        <div class="budgets-list actions">
+            <button id="create-button" class="button" data-translate-id="budgets-list-new">Create
                 new</button>
-            <button id="budgets-list__menu-button"></button>
+            <button id="menu-button"></button>
         </div>
-        <div id="budgets-list__items">
+        <div id="items">
             <div
-                class="budgets-list__items-container budgets-list__items-container--status1 budgets-list__items-container--empty child-borders">
+                class="items-container items-container--status1 items-container--empty child-borders">
             </div>
             <div
-                class="budgets-list__items-container budgets-list__items-container--status4 budgets-list__items-container--empty child-borders">
+                class="items-container items-container--status4 items-container--empty child-borders">
             </div>
             <div
-                class="budgets-list__items-container budgets-list__items-container--status5 budgets-list__items-container--empty child-borders">
+                class="items-container items-container--status5 items-container--empty child-borders">
             </div>
             <div
-                class="budgets-list__items-container budgets-list__items-container--status0 budgets-list__items-container--empty child-borders">
+                class="items-container items-container--status0 items-container--empty child-borders">
             </div>
             <div
-                class="budgets-list__items-container budgets-list__items-container--status2 budgets-list__items-container--empty child-borders">
+                class="items-container items-container--status2 items-container--empty child-borders">
             </div>
             <div
-                class="budgets-list__items-container budgets-list__items-container--status3 budgets-list__items-container--empty child-borders">
+                class="items-container items-container--status3 items-container--empty child-borders">
             </div>
         </div>
     </template>
 
     <template id="budgets-list-item-template">
         <li class="budgets-list-item">
-            <div class="budgets-list-item__info">
-                <span class="budgets-list-item__title"></span>
-                <span class="budgets-list-item__participants text-muted"></span>
+            <div class="info">
+                <span class="title"></span>
+                <span class="participants text-muted"></span>
             </div>
-            <span class="budgets-list-item__my-balance budgets-list-item__counter"></span>
+            <span class="my-balance counter"></span>
         </li>
     </template>
 
@@ -275,8 +275,8 @@
     </template>
 
     <template id="budget-form-template">
-        <form id="budget-form" class="budget-form__form">
-            <div class="budget-form__fields">
+        <form id="budget-form" class="budget-form form">
+            <div class="fields">
                 <input type="text" name="name" autocomplete="off" autofocus required minlength="3" maxlength="20"
                     title="Only letters, digits and a space" placeholder="Budget's name"
                     data-translate-id="budget-form-title" data-translate-prop="placeholder" />
@@ -289,10 +289,10 @@
                     <option value="CNY" data-translate-id="currency-cny">Chinese Yuan</option>
                     <option value="JRD" data-translate-id="currency-jrd">Jordanian Dinar</option>
                 </select>
-                <div class="budget-form__participants">
+                <div class="participants">
                     <h4 data-translate-id="budget-form-suggested-participants">Suggested participants</h4>
-                    <div class="budget-form__suggested-participants">
-                        <div class="budget-form__suggested-participants-item budget-form__field--checkbox">
+                    <div class="suggested-participants">
+                        <div class="suggested-participants-item field--checkbox">
                             <input type="checkbox" name="" id="" />
                             <label for=""></label>
                         </div>
@@ -302,7 +302,7 @@
                 <h6 class="text-muted" data-translate-id="budget-form-is-open-notice">
                     If you turn this setting on, any participation requests will be automatically approved.
                 </h6>
-                <div class="budget-form__field--checkbox">
+                <div class="field--checkbox">
                     <input type="checkbox" name="isOpen" id="isOpen" />
                     <label for="isOpen" data-translate-id="budget-form-is-open">This budget is open</label>
                 </div>
@@ -314,7 +314,7 @@
                     <option value="ignore" data-translate-id="banned-user-transactions-ignore">Ignore</option>
                 </select>
             </div>
-            <div class="budget-form__buttons">
+            <div class="buttons">
                 <button type="submit" data-translate-id="budget-form-go">Go</button>
                 <button type="reset" data-translate-id="budget-form-reset">Reset</button>
             </div>
@@ -366,7 +366,7 @@
 
     <template id="invite-dialog-template">
         <div class="invite-dialog paper border-2">
-            <img src="" alt="QR Code" class="invite-dialog__qr-code" />
+            <img src="" alt="QR Code" class="qr-code" />
             <p data-translate-id="invite-dialog-description">
                 Scan this QR code to open this budget on your device.
             </p>

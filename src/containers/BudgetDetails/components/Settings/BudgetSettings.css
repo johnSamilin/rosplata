@@ -4,27 +4,37 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+
+    & input {
+        display: initial;
+    }
+
+    & input:checked+label {
+        border-bottom: 0;
+    }
+
+    & label {
+        font-size: inherit;
+        font-weight: initial;
+        color: initial;
+        padding: 0;
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    & .fields {
+        flex-grow: 1;
+    }
+
+    & .save-btn {
+        width: 100%;
+    }
 }
-.budget-settings input {
-    display: initial;
-}
-.budget-settings input:checked + label {
-    border-bottom: 0;
-}
-.budget-settings label {
-    font-size: inherit;
-    font-weight: initial;
-    color: initial;
-    padding: 0;
-    flex-grow: 1;
-    text-align: left;
-}
-html[dir=rtl] .budget-settings label {
-    text-align: right;
-}
-.budget-settings__fields {
-    flex-grow: 1;
-}
-.budget-settings__save-btn {
-    width: 100%;
+
+@scope (html[dir=rtl]) {
+    .budget-settings {
+        & label {
+            text-align: right;
+        }
+    }
 }
