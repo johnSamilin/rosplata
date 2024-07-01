@@ -11,14 +11,26 @@ export async function importTemplate(filepath) {
 }
 
 const adoptedStyleSheets = new Set()
+
+async function importLegacy(filepath) {
+    const { importStyle: legacyImporter } = await import("./polyfills/importLegacy.mjs")
+    console.log('Failed to use CSS modules. Fallback to legacy approach')
+    await legacyImporter(BASE_URL + filepath)
+}
+
 export async function importStyle(filepath) {
     if (adoptedStyleSheets.has(filepath)) {
         return
     }
-    const { importStyle: importer } = FeatureDetector.importAssertions
-        ? await import("./polyfills/importAssert.mjs")
-        : await import("./polyfills/importLegacy.mjs")
+
+    let importer
+    if (!FeatureDetector.importAssertions) {
+        importer = importLegacy
+    } else {
+       const { importStyle: assert } = await import("./polyfills/importAssert.mjs")
+       importer = assert
+    }
 
     adoptedStyleSheets.add(filepath)
-    return importer(BASE_URL + filepath)
+    await importer(BASE_URL + filepath).catch(() => importLegacy(filepath))
 }
