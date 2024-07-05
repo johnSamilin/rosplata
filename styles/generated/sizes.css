@@ -391,8 +391,8 @@ html[dir=rtl] .budget-settings label {
     display: none;
     flex-shrink: 0;
 }
-.transactions-list-item__delete img,
-.transactions-list-item__revert img {
+.transactions-list-item__delete svg,
+.transactions-list-item__revert svg {
     width: 1.1rem;
     height: 1.1rem;
 }

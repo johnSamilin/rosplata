@@ -89,10 +89,10 @@ export class TransactionsList extends ListComponent {
     }
 
     #handleClick = async (evt) => {
-        const deleteBtnClicked = evt.target.classList.contains('transactions-list-item__delete')
-        const revertBtnClicked = evt.target.classList.contains('transactions-list-item__revert')
+        const deleteBtnClicked = evt.target.closest('.transactions-list-item__delete')
+        const revertBtnClicked = evt.target.closest('.transactions-list-item__revert')
         if (deleteBtnClicked || revertBtnClicked) {
-            const container = evt.target.parentNode
+            const container =  deleteBtnClicked ? deleteBtnClicked.parentNode : revertBtnClicked.parentNode
             const transactionId = container.getAttribute('id')
             const isDeleted = deleteBtnClicked ? true : false
             if (this.data[transactionId] && this.data[transactionId].user.id === AuthManager.data.id) {
