@@ -15,6 +15,10 @@ h1, h2, h3, h4, h5, h6 {
 html.dark {
     background-color: #41403e;
     color: beige;
+    & svg path{
+        stroke: beige
+    }
+
 }
 
 @media all and (prefers-color-scheme: dark) {
