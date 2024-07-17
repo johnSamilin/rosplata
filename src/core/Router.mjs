@@ -44,17 +44,17 @@ class CRouter {
     }
 
     start() {
-        if (AuthManager.isLoggedIn) {
-            this.#onRouteChange()
-        } else {
-            Store.set('layout', 'login', true)
-        }
+        this.#onRouteChange()
     }
 
     #onRouteChange = (e) => {
         const activeLayout = this.#routeMatchers.find(({ pattern }) => pattern.test(location.href))
         if (!activeLayout) {
             console.error('Suitable layout not found');
+            return false
+        }
+        if (activeLayout.isPrivate && !AuthManager.isLoggedIn) {
+            Store.set('layout', 'login', true)
             return false
         }
         const additionalParams = activeLayout.params ?? {}

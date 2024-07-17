@@ -5,20 +5,20 @@ import { Store } from './Store.mjs'
 const topContainer = document.querySelector('#layout')
 
 class CLayoutManager {
-    #active
+    activeLayout
     #layout
 
     constructor() {
         Store.subscribe('layout', this.#onChange)
-        Store.subscribe('isMobile', () => this.#onChange(this.#active))
+        Store.subscribe('isMobile', () => this.#onChange(this.activeLayout))
         this.#onChange(Store.get('layout'))
     }
 
     #onChange = async (newLayout) => {
-        if (newLayout === this.#active) {
+        if (newLayout === this.activeLayout) {
             this.#layout?.update()
         } else {
-            this.#active = newLayout
+            this.activeLayout = newLayout
             await this.#layout?.exterminate()
             topContainer?.classList.add('loading')
             this.#layout = await this.#getLayout(newLayout)
@@ -41,6 +41,10 @@ class CLayoutManager {
             case 'login':
                 const { LoginLayout } = await import('../layouts/Login/LoginLayout.mjs')
                 layout = new LoginLayout()
+                break
+            case 'uikit':
+                const { UikitLayout } = await import('../layouts/Uikit/UikitLayout.mjs')
+                layout = new UikitLayout()
                 break
         }
 
