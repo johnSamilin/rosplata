@@ -497,15 +497,6 @@
             checks.forEach(({ check, modifier }) => {
                 if (check()) {
                     document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
-                } else {
-                    fetch('/api/stats/error', {
-                        headers: { 'Content-Type': 'application/json' },
-                        method: 'post',
-                        body: JSON.stringify({
-                            error: `Initial check: ${modifier} failed`,
-                            clientId,
-                        })
-                    })
                 }
             })
         </script>
