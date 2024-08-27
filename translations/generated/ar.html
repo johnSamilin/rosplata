@@ -181,10 +181,14 @@
             </div>
             <span class="transactions-list-item__amount"></span>
             <button class="transactions-list-item__delete btn-small shadow-none">
-                <img src="/images/trash-1-svgrepo-com.svg" alt="Delete">
+                <svg width="1.1rem" height="1.1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.99997 8H6.5M6.5 8V18C6.5 19.1046 7.39543 20 8.5 20H15.5C16.6046 20 17.5 19.1046 17.5 18V8M6.5 8H17.5M17.5 8H19M9 5H15M9.99997 11.5V16.5M14 11.5V16.5" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
             </button>
             <button class="transactions-list-item__revert btn-small shadow-none">
-                <img src="/images/history-check-svgrepo-com.svg" alt="Revert">
+                <svg width="1.1rem" height="1.1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.6873 14.2222C19.8909 13.5167 20 12.7711 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.3413 20 16.4476 18.9943 17.9106 17.3912M19.6873 14.2222L19 13M19.6873 14.2222L20.75 13.25M9 12L11 14L15 10" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
             </button>
         </div>
     </template>
@@ -216,6 +220,16 @@
             <div class="layout-login__variants">
                 <button class="layout-login__variant--google" id="login__google" data-translate-id="layout-login-enter">يدخل</button>
                 <a class="layout-login__variant--demo" href="/demo" data-translate-id="demo-login">تسجيل الدخول التجريبي</a>
+            </div>
+            <div class="layout-login__languages">
+                <a href="/lang/ru" target="_blank" data-translate-id="settings-item-language-ru">Русский</a>
+                <a href="/lang/en" target="_blank" data-translate-id="settings-item-language-en">English</a>
+                <a href="/lang/hi" target="_blank" data-translate-id="settings-item-language-hi">हिन्दी</a>
+                <a href="/lang/bn" target="_blank" data-translate-id="settings-item-language-bn">বাংলা</a>
+                <a href="/lang/zh" target="_blank" data-translate-id="settings-item-language-zn">中文</a>
+                <a href="/lang/ar" target="_blank" data-translate-id="settings-item-language-ar">العربية</a>
+                <a href="/lang/ko" target="_blank" data-translate-id="settings-item-language-ko">한국어</a>
+                <a href="/lang/he" target="_blank" data-translate-id="settings-item-language-he">עברית</a>
             </div>
             <div class="layout-login__aside">
                 <span class="layout-login__version"></span>
@@ -422,15 +436,6 @@
             checks.forEach(({ check, modifier }) => {
                 if (check()) {
                     document.querySelector('#features-support-checkup .feature-checkup--' + modifier + ' .feature-checkup__value').textContent = 'Supported'
-                } else {
-                    fetch('/api/stats/error', {
-                        headers: { 'Content-Type': 'application/json' },
-                        method: 'post',
-                        body: JSON.stringify({
-                            error: `Initial check: ${modifier} failed`,
-                            clientId,
-                        })
-                    })
                 }
             })
         </script>
