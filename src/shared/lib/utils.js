@@ -200,3 +200,5 @@ export function getShortListOfParticipants(participants) {
         ? listFormatter.format(list)
         : ''
 }
+
+export { currencyFormatters }
