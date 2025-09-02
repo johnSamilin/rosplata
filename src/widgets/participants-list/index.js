@@ -1,0 +1,1 @@
+export { ParticipantsListWidget } from './ui/participants-list-widget'

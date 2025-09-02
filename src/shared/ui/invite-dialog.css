@@ -1,0 +1,9 @@
+.invite-dialog {
+    text-align: center;
+}
+html.dark .invite-dialog {
+    color: beige;
+}
+.invite-dialog__qr-code {
+    margin: auto;
+}

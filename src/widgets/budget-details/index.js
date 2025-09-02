@@ -1,0 +1,1 @@
+export { BudgetDetailsWidget } from './ui/budget-details-widget'

@@ -1,0 +1,19 @@
+#menu {
+    padding: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+#menu .menu-item {
+    white-space: pre;
+    border: none;
+}
+
+@media screen and (max-width: 425px) {
+    #menu {
+        width: fit-content;
+    }
+
+    #menu .menu-item {
+        white-space: pre;
+    }
+}

@@ -1,0 +1,132 @@
+html {
+    font-family: Neucha, sans-serif;
+    min-height: 1px;
+    height: 100%;
+    background-color: beige;
+    color: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Patrick Hand SC", Neucha, sans-serif;;
+}
+
+html.dark {
+    background-color: #41403e;
+    color: beige;
+    & svg path{
+        stroke: beige
+    }
+
+}
+
+@media all and (prefers-color-scheme: dark) {
+    html:not(.theme-selected) {
+        background-color: #41403e;
+        color: beige;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.no-animations * {
+    transition: none !important;
+    animation: none !important;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+body,
+#layout {
+    height: 100%;
+    min-height: 100vh;
+}
+
+.loading-rotate::before {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    border-left: 5px solid burlywood;
+    border-bottom: 5px solid burlywood;
+    border-bottom-left-radius: 85%;
+    animation: rotate 1s linear 0s infinite;
+    transform-origin: right top;
+}
+
+@keyframes loading {
+	0% {
+		background-position: left;
+	}
+	50% {
+		background-position: right;
+	}
+}
+
+.loading {
+    position: relative;
+}
+
+.loading::before {
+    content: '';
+    display: flex;
+    position: absolute;
+    height: 3px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, #23a6d5, transparent);
+	background-size: 200% 200%;
+	animation: loading 1s ease 0s infinite;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.exit-disappear {
+    transition: opacity 0.1s ease;
+    opacity: 1;
+}
+
+.exit-disappear.exit {
+    opacity: 0;
+}
+
+.visible-on-mobile {
+    display: none;
+}
+button {
+    box-shadow: none;
+    margin: 0;
+}
+button:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+input:disabled, select:disabled {
+    border: none;
+    padding: 0;
+}
+
+@media screen and (max-width: 425px) {
+    .visible-on-mobile {
+        display: initial;
+    }
+}
